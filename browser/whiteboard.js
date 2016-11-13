@@ -3,26 +3,11 @@
 window.whiteboard = new window.EventEmitter();
 
 (function () {
+    var clickers = [].slice.call(document.querySelectorAll('.clicker'));
 
-    // Ultimately, the color of our stroke;
-    var color;
-
-    // The color selection elements on the DOM.
-    var colorElements = [].slice.call(document.querySelectorAll('.marker'));
-
-    colorElements.forEach(function (el) {
-
-        // Set the background color of this element
-        // to its id (purple, red, blue, etc).
-        el.style.backgroundColor = el.id;
-
-        // Attach a click handler that will set our color variable to
-        // the elements id, remove the selected class from all colors,
-        // and then add the selected class to the clicked color.
+    clickers.forEach(function (el) {
         el.addEventListener('click', function () {
-            color = this.id;
-            document.querySelector('.selected').classList.remove('selected');
-            this.classList.add('selected');
+            whiteboard.emit('clicked');
         });
 
     });
@@ -34,66 +19,19 @@ window.whiteboard = new window.EventEmitter();
     canvas.width = parseInt(sketchStyle.getPropertyValue('width'));
     canvas.height = parseInt(sketchStyle.getPropertyValue('height'));
 
-    var ctx = canvas.getContext('2d');
 
-    ctx.lineWidth = 5;
-    ctx.lineJoin = 'round';
-    ctx.lineCap = 'round';
-
-    var currentMousePosition = {
-        x: 0,
-        y: 0
+    whiteboard.drawAction = function () {
+        console.log("adding image to canvas!");
+        let clap = document.createElement('img');
+        clap.setAttribute('src','High_Five_Emoji.png');
+        clap.style.position = "absolute";
+        clap.style.top = Math.random() * canvas.height;
+        clap.style.left = Math.random() * canvas.height; 
+        clap.height = "40";
+        clap.width = "40";
+        document.body.appendChild(clap);
     };
 
-    var lastMousePosition = {
-        x: 0,
-        y: 0
-    };
 
-    var drawing = false;
-
-    canvas.addEventListener('mousedown', function (e) {
-        drawing = true;
-        currentMousePosition.x = e.pageX - this.offsetLeft;
-        currentMousePosition.y = e.pageY - this.offsetTop;
-    });
-
-    canvas.addEventListener('mouseup', function () {
-        drawing = false;
-    });
-
-    canvas.addEventListener('mousemove', function (e) {
-
-        if (!drawing) return;
-
-        lastMousePosition.x = currentMousePosition.x;
-        lastMousePosition.y = currentMousePosition.y;
-
-        currentMousePosition.x = e.pageX - this.offsetLeft;
-        currentMousePosition.y = e.pageY - this.offsetTop;
-
-        whiteboard.draw(lastMousePosition, currentMousePosition, color, true);
-
-    });
-
-    whiteboard.draw = function (start, end, strokeColor, shouldBroadcast) {
-
-        // Draw the line between the start and end positions
-        // that is colored with the given color.
-        ctx.beginPath();
-        ctx.strokeStyle = strokeColor || 'black';
-        ctx.moveTo(start.x, start.y);
-        ctx.lineTo(end.x, end.y);
-        ctx.closePath();
-        ctx.stroke();
-
-        // If shouldBroadcast is truthy, we will emit a draw event to listeners
-        // with the start, end and color data.
-        if (shouldBroadcast) {
-            // this event we emit is caught by the whiteboard object in app.js
-            whiteboard.emit('draw', start, end, strokeColor);
-        }
-        
-    };
 
 })();

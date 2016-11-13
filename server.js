@@ -38,52 +38,18 @@ io.on('connection', function(socket){
 
   // server is receiving draw data from the client here 
   // so we want to broadcast that data to all other connected clients 
-  socket.on('imDrawing', function(start, end, color){
-    console.log('catching the draw event here')
+  socket.on('registerAction', function(){
+    console.log('catching the iClicked event here')
 
     // we need to emit an event all sockets except the socket that originally emitted the 
     // the draw data to the server 
     // broadcasting means sending a message to everyone else except for the 
     // the socket that starts it 
-    socket.broadcast.emit('otherDraw', start, end, color); 
+    socket.emit('showAction'); 
   }); 
 
 
 })
-
-/*
-ROOMS: 
-*/
-
-// var drawHistory = {};
-
-// io.on('connection', function (socket) {
-
-//     // scope issues 
-//     var room = null;
-
-//     // listens to 37 emit 
-//     socket.on('wantToJoinRoomPlox', function (roomName) {
-//         room = roomName;
-//         socket.join(roomName);
-
-
-//         if (!drawHistory[roomName]) {
-//             drawHistory[roomName] = [];
-//         }
-
-//         // console.log('drawhistory: ', drawHistory)
-//         socket.emit('drawHistory', drawHistory[roomName]);
-//     });
-
-//     socket.on('newDraw', function (start, end, color) {
-//         // data
-//         console.log('new draw', start, end, color)
-//         drawHistory[room].push({ start: start, end: end, color: color });
-//         socket.broadcast.to(room).emit('someoneElseDrew', start, end, color);
-//     });
-
-// });
 
 
 app.use(express.static(path.join(__dirname, 'browser')));
