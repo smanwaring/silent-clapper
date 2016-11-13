@@ -1,0 +1,193 @@
+body, html {
+	height:100%;
+}
+
+#buttons-bottom {
+	width: 50%;
+    margin: 0 auto; 
+    bottom: 0;
+}
+
+div.wrap {
+	height:100%; 
+	overflow:hidden;
+}
+
+div.hearts-0 {
+	width: 200px;
+	height: 600px;
+	position: absolute;
+	bottom: 0;
+	left: 10%;
+	margin-left: -50px;
+}
+
+div.hearts-1 {
+	width: 200px;
+	height: 600px;
+	position: absolute;
+	bottom: 0;
+	left: 25%;
+}
+
+div.hearts-2 {
+	width: 200px;
+	height: 600px;
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+}
+
+div.hearts-3 {
+	width: 200px;
+	height: 600px;
+	position: absolute;
+	bottom: 0;
+	left: 70%;
+
+}
+
+div.heart {
+	width: 30px;
+	height: 30px;
+	opacity: 1;
+	position: absolute;
+	bottom: 0;
+	display: none;
+}
+
+div.heart i {
+	position: absolute;
+	left: 0;
+	top: 0;
+	opacity: .9;
+}
+
+.colOne {
+	color: #fce473;
+}
+
+.colTwo {
+	color: #f68b39;
+}
+
+.colThree {
+	color: #ed6c63;
+}
+
+.colFour {
+	color: #847bb9;
+}
+
+.colFive {
+	color: #97cd76;
+}
+
+.colSix {
+	color: #35b1d1;
+}
+
+@keyframes flowOne {
+	0% {
+		opacity: 0;
+		bottom: 0;
+		left: 14%
+	}
+	40% {
+		opacity: .8;
+	}
+
+	50% {
+		opacity: 1;
+		left: 0;
+	}
+	60% {
+		opacity: .2;
+	}
+	80% {
+		bottom: 80%}
+	100% {
+		opacity: 0;
+		bottom: 100%;
+		left: 18%}
+}
+
+@keyframes flowTwo {
+	0% {
+		opacity: 0;
+		bottom: 0;
+		left: 0;
+	}
+	40% {
+		opacity: .8;
+	}
+	50% {
+		opacity: 1;
+		left: 11%}
+	60% {
+		opacity: .2;
+	}
+	80% {
+		bottom: 60%}
+	100% {
+		opacity: 0;
+		bottom: 80%;
+		left: 0;
+	}
+}
+
+@keyframes flowThree {
+	0% {
+		opacity: 0;
+		bottom: 0;
+		left: 0;
+	}
+	40% {
+			opacity: .8;
+	}
+	50% {
+			opacity: 1;
+	left: 30%}
+	60% {
+			opacity: .2;
+	}
+	80% {
+			bottom: 70%}
+	100% {
+			opacity: 0;
+			bottom: 90%;
+			left: 0;
+	}
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 50%;
+}
+.btn-circle.btn-lg {
+  width: 50px;
+  height: 50px;
+  padding: 10px 16px;
+  font-size: 18px;
+  line-height: 1.33;
+}
+.btn-circle.btn-xl {
+  width: 70px;
+  height: 70px;
+  padding: 10px 16px;
+  font-size: 24px;
+  line-height: 1.33;
+}
+
+/*#buttons-bottom {
+   position:absolute; 
+   margin-left:-50px;
+   left:50%;
+   bottom:0px;
+}
+*/

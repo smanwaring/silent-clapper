@@ -38,14 +38,14 @@ io.on('connection', function(socket){
 
   // server is receiving draw data from the client here 
   // so we want to broadcast that data to all other connected clients 
-  socket.on('registerAction', function(){
+  socket.on('registerAction', function(icon){
     console.log('catching the iClicked event here')
 
     // we need to emit an event all sockets except the socket that originally emitted the 
     // the draw data to the server 
     // broadcasting means sending a message to everyone else except for the 
     // the socket that starts it 
-    socket.emit('showAction'); 
+    io.sockets.emit('showAction', icon); 
   }); 
 
 

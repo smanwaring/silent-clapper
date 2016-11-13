@@ -1,16 +1,40 @@
 <html>
     <body>
+        <div class="wrap">
+
+         <link href="style.css" type="text/css" rel="stylesheet"/>
+         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
         <div id="sketch">
             <canvas id="paint"></canvas>
-            <button class="clicker">Clap</button>
+
+            <div id="buttons-bottom">
+                <button type="button" class="btn btn-default btn-circle btn-xl"><i class="glyphicon glyphicon-ok"></i></button>
+                <button type="button" class="btn btn-primary btn-circle btn-xl"><i class="glyphicon glyphicon-list"></i></button>
+                <button type="button" class="btn btn-success btn-circle btn-xl"><i class="glyphicon glyphicon-link"></i></button>
+                <button type="button" class="btn btn-info btn-circle btn-xl"><i class="glyphicon glyphicon-ok"></i></button>
+                <button type="button" class="btn btn-warning btn-circle btn-xl"><i class="glyphicon glyphicon-remove"></i></button>
+                <button type="button" class="btn btn-danger btn-circle btn-xl"><i class="glyphicon glyphicon-heart"></i></button>
+            </div>
+            
+            <button class="clicker" data-icon="fa fa-thumbs-o-up"><i class="fa fa-thumbs-o-up"></i></button>
+            <button class="clicker" data-icon="fa fa-fire"><i class="fa fa-fire"></i></button>
+            
+            <div class="hearts hearts-0"></div>
+            <div class="hearts hearts-1"></div>
+            <div class="hearts hearts-2"></div>
+            <div class="hearts hearts-3"></div>
+
         </div>
 
         <script src="socket.io/socket.io.js"></script>
         <script src="event-emitter.js"></script>
-        <script src="whiteboard.js"></script>
+        <script src="clapboard.js"></script>
         <script src="app.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+        </div>
     </body>
 
 </html>

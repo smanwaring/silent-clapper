@@ -8,14 +8,14 @@ socket.on('connect', function(){
   
 
   // the draw event is emitted in whiteboard.js and caught here
-  whiteboard.on('clicked', function toBeRunOnclick(){
+  clapboard.on('clicked', function toBeRunOnclick(icon){
   	  console.log('whiteboard.on clicked')
-      socket.emit('registerAction')
+      socket.emit('registerAction', icon)
   })
 
-  socket.on('showAction', function(){
+  socket.on('showAction', function(icon){
   	console.log("socket.on other showAction")
-    whiteboard.drawAction()
+    clapboard.drawAction(icon)
   })
   
 })
