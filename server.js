@@ -21,6 +21,7 @@ server.on('request', app);
 // HTTP requests 
 var io = socketio(server);
 
+var host;
 
 // // use socket server as an event emitter in order to listen for new connctions
 io.on('connection', function(socket){
@@ -30,16 +31,19 @@ io.on('connection', function(socket){
   //called for each browser that connects to our server
   console.log('A new client has connected')
   console.log('socket id: ', socket.id)
+  var count = (io.engine.clientsCount);
+  io.sockets.emit('connectionEvent', count);
 
   //event that runs anytime a socket disconnects
   socket.on('disconnect', function(){
-    console.log('socket id ' + socket.id + ' has disconnected. : ('); 
+    console.log('socket id ' + socket.id + ' has disconnected. : (');
+    count = (io.engine.clientsCount - 1)
+    io.sockets.emit('connectionEvent', count) 
   })
 
   // server is receiving draw data from the client here 
   // so we want to broadcast that data to all other connected clients 
   socket.on('registerAction', function(icon){
-    console.log('catching the iClicked event here')
 
     // we need to emit an event all sockets except the socket that originally emitted the 
     // the draw data to the server 

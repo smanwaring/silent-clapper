@@ -1,17 +1,43 @@
+/*
+* 
+* Page alignment
+*
+*/
+
 body, html {
 	height:100%;
+	overflow: hidden;
+	font-family: 'Roboto Condensed', sans-serif;
 }
 
-#buttons-bottom {
-	width: 50%;
-    margin: 0 auto; 
-    bottom: 0;
+#wrap {
+	height:100%;
+	margin-bottom: -180px;
 }
 
-div.wrap {
-	height:100%; 
-	overflow:hidden;
+#wrap:after {
+  content: "";
+  display: block;
 }
+
+#button-wrap, #wrap:after {
+	height: 180px;
+}
+
+.btn, .btn:focus, .btn:hover, .btn:active, .btn:target, .btn:visited {
+  outline: none !important;
+}
+
+#num-players {
+  text-align: center;
+}
+
+
+/*
+*
+* Heart containers
+*
+*/
 
 div.hearts-0 {
 	width: 200px;
@@ -20,6 +46,7 @@ div.hearts-0 {
 	bottom: 0;
 	left: 10%;
 	margin-left: -50px;
+	z-index: -1;
 }
 
 div.hearts-1 {
@@ -28,6 +55,7 @@ div.hearts-1 {
 	position: absolute;
 	bottom: 0;
 	left: 25%;
+	z-index: -1;
 }
 
 div.hearts-2 {
@@ -36,6 +64,7 @@ div.hearts-2 {
 	position: absolute;
 	bottom: 0;
 	left: 50%;
+	z-index: -1;
 }
 
 div.hearts-3 {
@@ -44,6 +73,7 @@ div.hearts-3 {
 	position: absolute;
 	bottom: 0;
 	left: 70%;
+	z-index: -1;
 
 }
 
@@ -62,6 +92,12 @@ div.heart i {
 	top: 0;
 	opacity: .9;
 }
+
+/*
+*
+* Heart styling
+*
+*/
 
 .colOne {
 	color: #fce473;
@@ -160,6 +196,12 @@ div.heart i {
 	}
 }
 
+/*
+*
+* Circle buttons
+*
+*/
+
 .btn-circle {
   width: 30px;
   height: 30px;
@@ -169,25 +211,112 @@ div.heart i {
   line-height: 1.428571429;
   border-radius: 50%;
 }
-.btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  padding: 10px 16px;
-  font-size: 18px;
-  line-height: 1.33;
-}
 .btn-circle.btn-xl {
   width: 70px;
   height: 70px;
   padding: 10px 16px;
-  font-size: 24px;
+  font-size: 32px;
   line-height: 1.33;
 }
 
-/*#buttons-bottom {
-   position:absolute; 
-   margin-left:-50px;
-   left:50%;
-   bottom:0px;
+.red, .red:focus {
+	color: #fff;
+    background-color: #d9534f;
 }
-*/
+
+.red:hover {
+	color: #fff;
+    background-color: #c9302c;
+}
+
+.blue, .blue:focus {	
+	color: #fff;
+    background-color: #5bc0de;
+}
+
+.blue:hover {
+	color: #fff;
+    background-color: #31b0d5;
+}
+
+.gray, .gray:focus {	
+	color: #1F1F1F;
+    background-color: #c0c0c0;
+}
+
+.gray:hover {
+	color: #1F1F1F;
+    background-color: #A6A6A6;
+}
+
+.yellow, .yellow:focus {	
+	color: #fff;
+    background-color: #F6E646;
+}
+
+.yellow:hover {
+	color: #fff;
+    background-color: #EADA42;
+}
+
+.dark-blue, .dark-blue:focus {	
+    color: #fff;
+    background-color: #337ab7;
+}
+
+.dark-blue:hover {
+	color: #fff;
+    background-color: #286090;
+}
+
+.green, .green:focus {	
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+.green:hover {
+	color: #fff;
+    background-color: #449d44;
+}
+
+.purple, .purple:focus {	
+    color: #fff;
+    background-color: #9379F0;
+}
+
+.purple:hover {
+	color: #fff;
+    background-color: #836CD6;
+}
+
+.pink, .pink:focus {	
+    color: #fff;
+    background-color: #FF88CC;
+}
+
+.pink:hover {
+	color: #fff;
+    background-color: #E57AB7;
+}
+
+.orange, .orange:focus{	
+    color: #fff;
+    background-color: #FF8C4A;
+}
+
+.orange:hover {
+	color: #fff;
+    background-color: #E57E43;
+}
+
+.mint-green, .mint-green:focus {	
+    color: #1F1F1F;
+    background-color: #A2FFC5;
+}
+
+.mint-green:hover {
+	color: #1F1F1F;
+    background-color: #82CC9E;
+}
+
+

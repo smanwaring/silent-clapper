@@ -1,40 +1,72 @@
 <html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- Android Header Color -->
+        <meta name="theme-color" content="#FB8BFC" />
+        
+        <!-- Font Awesome -->
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <!-- Custom -->
+        <link href="style.css" type="text/css" rel="stylesheet"/>
+        <!-- Google Fonts -->
+        <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
+        <!-- Favicon -->
+        <link rel="icon" type="image/png" href="http://pix.iemoji.com/images/emoji/apple/ios-9/256/clapping-hands-sign.png" />
+    </head>
     <body>
-        <div class="wrap">
-
-         <link href="style.css" type="text/css" rel="stylesheet"/>
-         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css" rel="stylesheet"/>
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-        <div id="sketch">
-            <canvas id="paint"></canvas>
-
-            <div id="buttons-bottom">
-                <button type="button" class="btn btn-default btn-circle btn-xl"><i class="glyphicon glyphicon-ok"></i></button>
-                <button type="button" class="btn btn-primary btn-circle btn-xl"><i class="glyphicon glyphicon-list"></i></button>
-                <button type="button" class="btn btn-success btn-circle btn-xl"><i class="glyphicon glyphicon-link"></i></button>
-                <button type="button" class="btn btn-info btn-circle btn-xl"><i class="glyphicon glyphicon-ok"></i></button>
-                <button type="button" class="btn btn-warning btn-circle btn-xl"><i class="glyphicon glyphicon-remove"></i></button>
-                <button type="button" class="btn btn-danger btn-circle btn-xl"><i class="glyphicon glyphicon-heart"></i></button>
+        <div id="wrap" style="text-align: center">
+            <h1> Silent Salutations </h1>
+             <div id="num-players">
+                <span>audience connecting...</span>
             </div>
-            
-            <button class="clicker" data-icon="fa fa-thumbs-o-up"><i class="fa fa-thumbs-o-up"></i></button>
-            <button class="clicker" data-icon="fa fa-fire"><i class="fa fa-fire"></i></button>
-            
+            <canvas id="paint"></canvas>
             <div class="hearts hearts-0"></div>
             <div class="hearts hearts-1"></div>
             <div class="hearts hearts-2"></div>
             <div class="hearts hearts-3"></div>
-
+        </div>
+        <div id="button-wrap" style="text-align: center">
+            <button class="btn blue btn-circle btn-xl clicker" data-icon="fa fa-sign-language">
+                <i class="fa fa-sign-language"></i>
+            </button>
+            <button class="btn red btn-circle btn-xl clicker" data-icon="fa fa-frown-o">
+                <i class="fa fa-frown-o"></i>
+            </button>
+            <button class="btn gray btn-circle btn-xl clicker" data-icon="fa fa-empire">
+                <i class="fa fa-empire"></i>
+            </button>
+            <button class="btn dark-blue btn-circle btn-xl clicker" data-icon="fa fa-heart-o">
+                <i class="fa fa-heart-o"></i>
+            </button>
+            <button class="btn green btn-circle btn-xl clicker" data-icon="fa fa-money fa-spin">
+                <i class="fa fa-money"></i>
+            </button>
+            <button class="btn pink btn-circle btn-xl clicker" data-icon="fa fa-smile-o">
+                <i class="fa fa-smile-o"></i>
+            </button>
+            <button class="btn yellow btn-circle btn-xl clicker" data-icon="fa fa-question">
+                <i class="fa fa-question"></i>
+            </button>
+            <button class="btn mint-green btn-circle btn-xl clicker" data-icon="fa fa-thumbs-o-up">
+                <i class="fa fa-thumbs-o-up"></i>
+            </button>
+            <button class="btn orange btn-circle btn-xl clicker" data-icon="fa fa-rebel">
+                <i class="fa fa-rebel"></i>
+            </button>
+            <button class="btn purple btn-circle btn-xl clicker" data-icon="fa fa-bomb fa-spin">
+                <i class="fa fa-bomb"></i>
+            </button>
         </div>
 
-        <script src="socket.io/socket.io.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
         <script src="event-emitter.js"></script>
+        <script src="socket.io/socket.io.js"></script>
         <script src="clapboard.js"></script>
         <script src="app.js"></script>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
-        </div>
     </body>
 
 </html>

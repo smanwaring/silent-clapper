@@ -12,20 +12,11 @@ window.clapboard = new window.EventEmitter();
                 icon: el.dataset.icon
             });
         });
-
     });
-
-    var canvas = document.querySelector('#paint');
-    var sketch = document.querySelector('#sketch');
-    var sketchStyle = getComputedStyle(sketch);
-
-    canvas.width = parseInt(sketchStyle.getPropertyValue('width'));
-    canvas.height = parseInt(sketchStyle.getPropertyValue('height'));
 
 
     clapboard.drawAction = function (icon) {
-        console.log("adding image to canvas!");
-        addClaps();
+        // addClaps();
         addIcons(icon.icon);
     };
 
@@ -52,7 +43,7 @@ window.clapboard = new window.EventEmitter();
             return toReturn;
         }
         
-        $('<div class="heart part-' + b + " " + a[Math.floor((Math.random() * 6))] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 22) + 'px;"><i class="' + icon + '"></i></div>')
+        $('<div class="heart part-' + b + " " + a[Math.floor((Math.random() * 6))] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>')
             .appendTo(randomHeartsContainer()).css({
                 animation: "" + d[Math.floor((Math.random() * 3))] + " " + c + "s linear"
             });
