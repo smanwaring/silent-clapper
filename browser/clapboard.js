@@ -21,7 +21,7 @@ window.clapboard = new window.EventEmitter();
 
     //initiates animations
     function addIcons(icon) {
-        var lowRange = 1.0,
+        var lowRange = 1.2,
             highRange = 1.6,
             uniqueIdentifier = Math.floor((Math.random() * 100) + 1),
             flowArray = ["flowOne", "flowTwo", "flowThree"],
@@ -32,11 +32,13 @@ window.clapboard = new window.EventEmitter();
             var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
             return toReturn;
         }
-        
+
+        //creates icon element with necessary styling classes + icon that was passed in
         $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor((Math.random() * 6))] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>')
             .appendTo(randomColumnContainer()).css({
                 animation: "" + flowArray[Math.floor((Math.random() * 3))] + " " + speed + "s linear"
             });
+
 
         $(".part-" + uniqueIdentifier).show();
         
