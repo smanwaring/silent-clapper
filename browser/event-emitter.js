@@ -1,4 +1,4 @@
-// Here is our constructor function, available globally (set to the window object!)
+// Here is our constructor function, available globally (set to the window object)
 window.EventEmitter = function () {
     this.subscribers = {};
 };
