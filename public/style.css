@@ -257,6 +257,7 @@ div.column i {
     background-color: #5bc0de;
 }
 
+
 .blue:hover {
 	color: #fff;
     background-color: #31b0d5;
@@ -471,5 +472,5 @@ div.column i {
 .pick-body {
 	margin-left: 40px;
 	margin-bottom: 20px;
-	margin-top: 20px;
+	margin-top: 10px;
 }

@@ -1,14 +1,6 @@
 import React from 'react';
 import {combineReducers} from 'redux';
-import {SET_INTERVAL, SET_BOARDID, SET_CURRENT_BOARD, PICKED_BUTTON, REMOVED_BUTTON} from './actions';
-
-const timeReducer = function(state="", action){
-	switch(action.type){
-		case SET_INTERVAL: 
-			return action.payload;
-		default: return state;
-	}
-}
+import { SET_BOARDID, SET_CURRENT_BOARD, PICKED_BUTTON, REMOVED_BUTTON} from './actions';
 
 const boardReducer = function(state="", action){
 	switch(action.type){
@@ -36,10 +28,7 @@ const iconsPickedReducer = function(state=[], action){
 	}
 }
 
-
-
 const rootReducer = combineReducers({
-	interval: timeReducer,
 	boardId: boardReducer,
 	currentBoard: currentBoardReducer,
 	buttonsPicked: iconsPickedReducer

@@ -9,9 +9,6 @@ import Homepage from './containers/Homepage';
 import Root from './components/Root';
 import Room from './containers/Room';
 
-// function onEnterJoinRoom(nextState){
-// 	this.socket.emit('wantToJoinRoom', nextState.params.roomId);
-// }
 
 ReactDOM.render(
   <Provider store={store}>

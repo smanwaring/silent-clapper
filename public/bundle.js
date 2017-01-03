@@ -66,19 +66,15 @@
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _Root = __webpack_require__(278);
+	var _Root = __webpack_require__(292);
 	
 	var _Root2 = _interopRequireDefault(_Root);
 	
-	var _Room = __webpack_require__(279);
+	var _Room = __webpack_require__(293);
 	
 	var _Room2 = _interopRequireDefault(_Room);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	// function onEnterJoinRoom(nextState){
-	// 	this.socket.emit('wantToJoinRoom', nextState.params.roomId);
-	// }
 	
 	_reactDom2.default.render(_react2.default.createElement(
 			_reactRedux.Provider,
@@ -23775,18 +23771,6 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
-	var timeReducer = function timeReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _actions.SET_INTERVAL:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-	
 	var boardReducer = function boardReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
 		var action = arguments[1];
@@ -23828,7 +23812,6 @@
 	};
 	
 	var rootReducer = (0, _redux.combineReducers)({
-		interval: timeReducer,
 		boardId: boardReducer,
 		currentBoard: currentBoardReducer,
 		buttonsPicked: iconsPickedReducer
@@ -23846,20 +23829,12 @@
 		value: true
 	});
 	/* ------ action variables ----- */
-	var SET_INTERVAL = exports.SET_INTERVAL = "SET_INTERVAL";
 	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
 	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
 	var PICKED_BUTTON = exports.PICKED_BUTTON = "PICKED_BUTTON";
 	var REMOVED_BUTTON = exports.REMOVED_BUTTON = "REMOVED_BUTTON";
 	
 	/* ------ action creaters ------*/
-	var setInterval = exports.setInterval = function setInterval(time) {
-		return {
-			type: SET_INTERVAL,
-			payload: time
-		};
-	};
-	
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
 		return {
 			type: SET_BOARDID,
@@ -28969,11 +28944,11 @@
 	
 	var _reactRouter = __webpack_require__(220);
 	
-	var _PickButtons = __webpack_require__(295);
+	var _PickButtons = __webpack_require__(277);
 	
 	var _PickButtons2 = _interopRequireDefault(_PickButtons);
 	
-	var _reactAddonsCssTransitionGroup = __webpack_require__(281);
+	var _reactAddonsCssTransitionGroup = __webpack_require__(279);
 	
 	var _reactAddonsCssTransitionGroup2 = _interopRequireDefault(_reactAddonsCssTransitionGroup);
 	
@@ -29174,7 +29149,45 @@
 	exports.default = HomeForm;
 
 /***/ },
-/* 277 */,
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _PickButtons = __webpack_require__(278);
+	
+	var _PickButtons2 = _interopRequireDefault(_PickButtons);
+	
+	var _actions = __webpack_require__(218);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function mapStateToProps(state) {
+		return {
+			picked: state.buttonsPicked
+		};
+	}
+	
+	function mapDispatchToProps(dispatch) {
+		return {
+			addButton: function addButton(icon) {
+				dispatch((0, _actions.pickedButton)(icon));
+			},
+			removeButton: function removeButton(icon) {
+				dispatch((0, _actions.removedButton)(icon));
+			}
+		};
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PickButtons2.default);
+
+/***/ },
 /* 278 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -29190,94 +29203,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Root = function (_Component) {
-	    _inherits(Root, _Component);
-	
-	    function Root() {
-	        _classCallCheck(this, Root);
-	
-	        return _possibleConstructorReturn(this, (Root.__proto__ || Object.getPrototypeOf(Root)).apply(this, arguments));
-	    }
-	
-	    _createClass(Root, [{
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                this.props.children
-	            );
-	        }
-	    }]);
-	
-	    return Root;
-	}(_react.Component);
-	
-	exports.default = Root;
-
-/***/ },
-/* 279 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _reactRedux = __webpack_require__(178);
-	
-	var _Room = __webpack_require__(280);
-	
-	var _Room2 = _interopRequireDefault(_Room);
-	
-	var _actions = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function mapStateToProps(state) {
-		return {
-			boardId: state.boardId,
-			currentBoard: state.currentBoard
-		};
-	}
-	
-	function mapDispatchToProps(dispatch) {
-		return {
-			setBoardId: function setBoardId(boardId) {
-				dispatch((0, _actions.stateBoardId)(boardId));
-			}
-		};
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Room2.default);
-
-/***/ },
-/* 280 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(220);
-	
 	var _HomeForm = __webpack_require__(275);
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
@@ -29290,161 +29215,91 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Room = function (_React$Component) {
-	    _inherits(Room, _React$Component);
+	var PickButtons = function (_React$Component) {
+	    _inherits(PickButtons, _React$Component);
 	
-	    function Room(props) {
-	        _classCallCheck(this, Room);
+	    function PickButtons(props) {
+	        _classCallCheck(this, PickButtons);
 	
-	        var _this = _possibleConstructorReturn(this, (Room.__proto__ || Object.getPrototypeOf(Room)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (PickButtons.__proto__ || Object.getPrototypeOf(PickButtons)).call(this, props));
 	
 	        _this.handleIconClick = _this.handleIconClick.bind(_this);
-	        _this.drawAction = _this.drawAction.bind(_this);
-	        _this.addIcons = _this.addIcons.bind(_this);
 	        return _this;
 	    }
 	
-	    _createClass(Room, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var component = this;
-	            // initialize client socket
-	            this.socket = io.connect();
-	            //join room
-	            this.socket.emit('wantToJoinRoom', component.props.currentBoard.toString() || component.props.boardId.toString());
-	            // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
-	            this.socket.on('showAction', function (icon) {
-	                // hey, someone else clicked an icon and we found out from the server
-	                component.drawAction(icon);
-	            });
-	            //emitted from server, caught here with the current num of people connected
-	            this.socket.on('connectionEvent', function (numPeople) {
-	                var audience = "person";
-	                if (numPeople > 1) {
-	                    audience = "people";
-	                }
-	                if (numPeople > 0) {
-	                    $('#num-people span').text(numPeople + " " + audience + ' connected');
-	                }
-	            });
-	        }
-	    }, {
+	    _createClass(PickButtons, [{
 	        key: 'handleIconClick',
 	        value: function handleIconClick(evt) {
-	            this.socket.emit('registerAction', { icon: evt.currentTarget.dataset.icon });
-	        }
-	    }, {
-	        key: 'drawAction',
-	        value: function drawAction(icon) {
-	            this.addIcons(icon.icon);
-	        }
-	    }, {
-	        key: 'addIcons',
-	        value: function addIcons(icon) {
-	            var columns = [].slice.call(document.querySelectorAll('.columns'));
-	            var lowRange = 1.2,
-	                highRange = 1.6,
-	                uniqueIdentifier = Math.floor(Math.random() * 100 + 1),
-	                flowArray = ["flowOne", "flowTwo", "flowThree"],
-	                colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
-	                speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
-	
-	            function randomColumnContainer() {
-	                var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
-	                return toReturn;
+	            var icon = evt.currentTarget.dataset.icon;
+	            if (this.props.picked.indexOf(icon) > -1) {
+	                this.props.addButton(icon);
+	            } else {
+	                this.props.removeButton(icon);
 	            }
-	
-	            //creates icon element with necessary styling classes + icon that was passed in
-	            $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor(Math.random() * 6)] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>').appendTo(randomColumnContainer()).css({
-	                animation: "" + flowArray[Math.floor(Math.random() * 3)] + " " + speed + "s linear"
-	            });
-	
-	            $(".part-" + uniqueIdentifier).show();
-	
-	            setTimeout(function () {
-	                $(".part-" + uniqueIdentifier).remove();
-	            }, speed * 900);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
+	            var addRemove = this.handleIconClick;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'wrap' },
-	                    _react2.default.createElement(
-	                        'h1',
-	                        null,
-	                        ' Silent Salutations '
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { id: 'num-people' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            'audience connecting...'
-	                        )
-	                    ),
-	                    _react2.default.createElement('div', { className: 'columns column-0' }),
-	                    _react2.default.createElement('div', { className: 'columns column-1' }),
-	                    _react2.default.createElement('div', { className: 'columns column-2' }),
-	                    _react2.default.createElement('div', { className: 'columns column-3' }),
-	                    _react2.default.createElement('div', { className: 'columns column-4' })
+	                    'h4',
+	                    null,
+	                    'Pick your buttons'
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { id: 'button-wrap', className: 'center-icons' },
+	                    { className: 'col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body' },
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn blue btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-sign-language' },
+	                        { className: 'btn blue btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-sign-language' },
 	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn red btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-frown-o' },
+	                        { className: 'btn red btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-frown-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn gray btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-empire' },
+	                        { className: 'btn gray btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-empire' },
 	                        _react2.default.createElement('i', { className: 'fa fa-empire', 'data-icon': 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn dark-blue btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-heart-o' },
+	                        { className: 'btn dark-blue btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-heart-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-heart-o', 'data-icon': 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn green btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-money fa-spin' },
+	                        { className: 'btn green btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-money fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-money', 'data-icon': 'fa fa-money fa-spin' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn pink btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-smile-o' },
+	                        { className: 'btn pink btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-smile-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-smile-o', 'data-icon': 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn yellow btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-question' },
+	                        { className: 'btn yellow btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-question' },
 	                        _react2.default.createElement('i', { className: 'fa fa-question', 'data-icon': 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn mint-green btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-thumbs-o-up' },
+	                        { className: 'btn mint-green btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-thumbs-o-up' },
 	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'data-icon': 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn orange btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-rebel' },
+	                        { className: 'btn orange btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-rebel' },
 	                        _react2.default.createElement('i', { className: 'fa fa-rebel', 'data-icon': 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: 'btn purple btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-bomb fa-spin' },
+	                        { className: 'btn purple btn-circle btn-xl', onClick: addRemove, 'data-icon': 'fa fa-bomb fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-bomb', 'data-icon': 'fa fa-bomb fa-spin' })
 	                    )
 	                )
@@ -29452,19 +29307,19 @@
 	        }
 	    }]);
 	
-	    return Room;
+	    return PickButtons;
 	}(_react2.default.Component);
 	
-	exports.default = Room;
+	exports.default = PickButtons;
 
 /***/ },
-/* 281 */
+/* 279 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(282);
+	module.exports = __webpack_require__(280);
 
 /***/ },
-/* 282 */
+/* 280 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -29489,8 +29344,8 @@
 	
 	var React = __webpack_require__(2);
 	
-	var ReactTransitionGroup = __webpack_require__(283);
-	var ReactCSSTransitionGroupChild = __webpack_require__(291);
+	var ReactTransitionGroup = __webpack_require__(281);
+	var ReactCSSTransitionGroupChild = __webpack_require__(289);
 	
 	function createTransitionTimeoutPropValidator(transitionType) {
 	  var timeoutPropName = 'transition' + transitionType + 'Timeout';
@@ -29573,7 +29428,7 @@
 	module.exports = ReactCSSTransitionGroup;
 
 /***/ },
-/* 283 */
+/* 281 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -29597,8 +29452,8 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var React = __webpack_require__(2);
-	var ReactAddonsDOMDependencies = __webpack_require__(284);
-	var ReactTransitionChildMapping = __webpack_require__(289);
+	var ReactAddonsDOMDependencies = __webpack_require__(282);
+	var ReactTransitionChildMapping = __webpack_require__(287);
 	
 	var emptyFunction = __webpack_require__(12);
 	
@@ -29828,7 +29683,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 284 */
+/* 282 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -29855,8 +29710,8 @@
 	};
 	
 	if (process.env.NODE_ENV !== 'production') {
-	  var ReactPerf = __webpack_require__(285);
-	  var ReactTestUtils = __webpack_require__(286);
+	  var ReactPerf = __webpack_require__(283);
+	  var ReactTestUtils = __webpack_require__(284);
 	
 	  exports.getReactPerf = function () {
 	    return ReactPerf;
@@ -29869,7 +29724,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 285 */
+/* 283 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30375,7 +30230,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 286 */
+/* 284 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -30393,7 +30248,7 @@
 	var _prodInvariant = __webpack_require__(35),
 	    _assign = __webpack_require__(4);
 	
-	var EventConstants = __webpack_require__(287);
+	var EventConstants = __webpack_require__(285);
 	var EventPluginHub = __webpack_require__(42);
 	var EventPluginRegistry = __webpack_require__(43);
 	var EventPropagators = __webpack_require__(41);
@@ -30404,7 +30259,7 @@
 	var ReactInstanceMap = __webpack_require__(116);
 	var ReactUpdates = __webpack_require__(56);
 	var SyntheticEvent = __webpack_require__(53);
-	var ReactShallowRenderer = __webpack_require__(288);
+	var ReactShallowRenderer = __webpack_require__(286);
 	
 	var findDOMNode = __webpack_require__(172);
 	var invariant = __webpack_require__(8);
@@ -30792,7 +30647,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 287 */
+/* 285 */
 /***/ function(module, exports) {
 
 	/**
@@ -30888,7 +30743,7 @@
 	module.exports = EventConstants;
 
 /***/ },
-/* 288 */
+/* 286 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -31028,7 +30883,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 289 */
+/* 287 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -31043,7 +30898,7 @@
 	
 	'use strict';
 	
-	var flattenChildren = __webpack_require__(290);
+	var flattenChildren = __webpack_require__(288);
 	
 	var ReactTransitionChildMapping = {
 	  /**
@@ -31136,7 +30991,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 290 */
+/* 288 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {/**
@@ -31217,7 +31072,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 291 */
+/* 289 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31233,10 +31088,10 @@
 	'use strict';
 	
 	var React = __webpack_require__(2);
-	var ReactAddonsDOMDependencies = __webpack_require__(284);
+	var ReactAddonsDOMDependencies = __webpack_require__(282);
 	
-	var CSSCore = __webpack_require__(292);
-	var ReactTransitionEvents = __webpack_require__(293);
+	var CSSCore = __webpack_require__(290);
+	var ReactTransitionEvents = __webpack_require__(291);
 	
 	var onlyChild = __webpack_require__(31);
 	
@@ -31388,7 +31243,7 @@
 	module.exports = ReactCSSTransitionGroupChild;
 
 /***/ },
-/* 292 */
+/* 290 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
@@ -31515,7 +31370,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
 
 /***/ },
-/* 293 */
+/* 291 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -31592,6 +31447,92 @@
 	module.exports = ReactTransitionEvents;
 
 /***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Root = function (_Component) {
+	    _inherits(Root, _Component);
+	
+	    function Root() {
+	        _classCallCheck(this, Root);
+	
+	        return _possibleConstructorReturn(this, (Root.__proto__ || Object.getPrototypeOf(Root)).apply(this, arguments));
+	    }
+	
+	    _createClass(Root, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                this.props.children
+	            );
+	        }
+	    }]);
+	
+	    return Root;
+	}(_react.Component);
+	
+	exports.default = Root;
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _Room = __webpack_require__(294);
+	
+	var _Room2 = _interopRequireDefault(_Room);
+	
+	var _actions = __webpack_require__(218);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function mapStateToProps(state) {
+		return {
+			boardId: state.boardId,
+			currentBoard: state.currentBoard
+		};
+	}
+	
+	function mapDispatchToProps(dispatch) {
+		return {
+			setBoardId: function setBoardId(boardId) {
+				dispatch((0, _actions.stateBoardId)(boardId));
+			}
+		};
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Room2.default);
+
+/***/ },
 /* 294 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31621,43 +31562,113 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var PickButtons = function (_React$Component) {
-	    _inherits(PickButtons, _React$Component);
+	var Room = function (_React$Component) {
+	    _inherits(Room, _React$Component);
 	
-	    function PickButtons(props) {
-	        _classCallCheck(this, PickButtons);
+	    function Room(props) {
+	        _classCallCheck(this, Room);
 	
-	        var _this = _possibleConstructorReturn(this, (PickButtons.__proto__ || Object.getPrototypeOf(PickButtons)).call(this, props));
+	        var _this = _possibleConstructorReturn(this, (Room.__proto__ || Object.getPrototypeOf(Room)).call(this, props));
 	
 	        _this.handleIconClick = _this.handleIconClick.bind(_this);
+	        _this.drawAction = _this.drawAction.bind(_this);
+	        _this.addIcons = _this.addIcons.bind(_this);
 	        return _this;
 	    }
 	
-	    _createClass(PickButtons, [{
+	    _createClass(Room, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            var component = this;
+	            // initialize client socket
+	            this.socket = io.connect();
+	            //join room
+	            this.socket.emit('wantToJoinRoom', component.props.currentBoard.toString() || component.props.boardId.toString());
+	            // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
+	            this.socket.on('showAction', function (icon) {
+	                // hey, someone else clicked an icon and we found out from the server
+	                component.drawAction(icon);
+	            });
+	            //emitted from server, caught here with the current num of people connected
+	            this.socket.on('connectionEvent', function (numPeople) {
+	                var audience = "person";
+	                if (numPeople > 1) {
+	                    audience = "people";
+	                }
+	                if (numPeople > 0) {
+	                    $('#num-people span').text(numPeople + " " + audience + ' connected');
+	                }
+	            });
+	        }
+	    }, {
 	        key: 'handleIconClick',
 	        value: function handleIconClick(evt) {
-	            var icon = evt.currentTarget.dataset.icon;
-	            if (this.props.picked.indexOf(icon) === -1) {
-	                this.props.addButton(icon);
-	            } else {
-	                this.props.removeButton(icon);
+	            this.socket.emit('registerAction', { icon: evt.currentTarget.dataset.icon });
+	        }
+	    }, {
+	        key: 'drawAction',
+	        value: function drawAction(icon) {
+	            this.addIcons(icon.icon);
+	        }
+	    }, {
+	        key: 'addIcons',
+	        value: function addIcons(icon) {
+	            var columns = [].slice.call(document.querySelectorAll('.columns'));
+	            var lowRange = 1.2,
+	                highRange = 1.6,
+	                uniqueIdentifier = Math.floor(Math.random() * 100 + 1),
+	                flowArray = ["flowOne", "flowTwo", "flowThree"],
+	                colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
+	                speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
+	
+	            function randomColumnContainer() {
+	                var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
+	                return toReturn;
 	            }
+	
+	            //creates icon element with necessary styling classes + icon that was passed in
+	            $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor(Math.random() * 6)] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>').appendTo(randomColumnContainer()).css({
+	                animation: "" + flowArray[Math.floor(Math.random() * 3)] + " " + speed + "s linear"
+	            });
+	
+	            $(".part-" + uniqueIdentifier).show();
+	
+	            setTimeout(function () {
+	                $(".part-" + uniqueIdentifier).remove();
+	            }, speed * 900);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            console.log(this.props.picked);
 	            return _react2.default.createElement(
 	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    'h4',
-	                    null,
-	                    'Pick your buttons'
+	                    'div',
+	                    { id: 'wrap' },
+	                    _react2.default.createElement(
+	                        'h1',
+	                        null,
+	                        ' Silent Salutations '
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { id: 'num-people' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            null,
+	                            'audience connecting...'
+	                        )
+	                    ),
+	                    _react2.default.createElement('div', { className: 'columns column-0' }),
+	                    _react2.default.createElement('div', { className: 'columns column-1' }),
+	                    _react2.default.createElement('div', { className: 'columns column-2' }),
+	                    _react2.default.createElement('div', { className: 'columns column-3' }),
+	                    _react2.default.createElement('div', { className: 'columns column-4' })
 	                ),
 	                _react2.default.createElement(
 	                    'div',
-	                    { className: 'col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body' },
+	                    { id: 'button-wrap', className: 'center-icons' },
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: 'btn blue btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-sign-language' },
@@ -31713,49 +31724,10 @@
 	        }
 	    }]);
 	
-	    return PickButtons;
+	    return Room;
 	}(_react2.default.Component);
 	
-	exports.default = PickButtons;
-
-/***/ },
-/* 295 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _reactRedux = __webpack_require__(178);
-	
-	var _PickButtons = __webpack_require__(294);
-	
-	var _PickButtons2 = _interopRequireDefault(_PickButtons);
-	
-	var _actions = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function mapStateToProps(state) {
-		return {
-			picked: state.buttonsPicked
-		};
-	}
-	
-	function mapDispatchToProps(dispatch) {
-		return {
-			addButton: function addButton(icon) {
-				dispatch((0, _actions.pickedButton)(icon));
-			},
-			removeButton: function removeButton(icon) {
-				dispatch((0, _actions.removedButton)(icon));
-			}
-		};
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PickButtons2.default);
+	exports.default = Room;
 
 /***/ }
 /******/ ]);
