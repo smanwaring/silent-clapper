@@ -28,17 +28,24 @@ class HomeForm extends React.Component {
     }
 
     generateBoardId(){
-        //generate random 5 digit number
         let boardId = Math.floor(Math.random()*89999+10000);
-        //dispatch boardID via action
-        this.props.setBoardId(boardId);
+        let details = {
+            path: boardId,
+            buttons: this.props.buttons
+        }
+        this.props.addBoard(details);
     }
 
-    handleSubmitJoinBoard(evt){
+    componentDidUpdate(){
+        if (this.props.foundBoard) {
+            hashHistory.push(`/${this.props.foundBoard}`);
+        }
+    }
+
+    confirmRoomExists(evt){
         evt.preventDefault();
-        let board = evt.target.boardId.value.toString()
-        this.props.setCurrentBoard(board);
-        hashHistory.push('/' + evt.target.boardId.value);
+        let boardId = evt.target.boardId.value.toString()
+        this.props.confirmRoom(boardId);
     }
 
   render () {
@@ -65,10 +72,11 @@ class HomeForm extends React.Component {
                             <div className="row">
                                 <div className="col-lg-12">
 
-                                    <form  onSubmit={(evt) => this.handleSubmitJoinBoard(evt)} id="login-form" role="form" style={{display: this.state.showLogin ? 'block' : 'none' }}>
+                                    <form  onSubmit={(evt) => this.confirmRoomExists(evt)} id="login-form" role="form" style={{display: this.state.showLogin ? 'block' : 'none' }}>
                                         <div className="form-group">
                                             <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
                                         </div>
+                                            {this.props.roomNotFound ? <div>Oops! We couldn't find that room</div> : ''}
                                         <div className="form-group">
                                             <div className="row">
                                                 <div className="col-sm-6 col-sm-offset-3">

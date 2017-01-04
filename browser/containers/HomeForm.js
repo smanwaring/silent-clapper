@@ -1,10 +1,14 @@
 import {connect} from 'react-redux';
 import HomeForm from '../components/HomeForm';
-import { setInterval, stateBoardId, stateCurrentBoard } from '../actions';
+import { setInterval, stateBoardId, stateCurrentBoard, addRoom, loadRoom } from '../actions';
 
 function mapStateToProps(state){
 	return {
-		boardId: state.boardId
+		boardId: state.generatedBoard,
+		buttons: state.buttonsPicked,
+		roomNotFound: state.roomNotFound,
+		buttonsToLoad: state.buttonsToLoad,
+		foundBoard: state.currentBoard
 	};
 }
 
@@ -15,6 +19,12 @@ function mapDispatchToProps(dispatch){
 		},
 		setCurrentBoard: function(boardId){
 			dispatch(stateCurrentBoard(boardId));
+		},
+		addBoard: function(details){
+			dispatch( addRoom(details));
+		},
+		confirmRoom: function(boardId) {
+			dispatch ( loadRoom(boardId) );
 		}
 	};
 

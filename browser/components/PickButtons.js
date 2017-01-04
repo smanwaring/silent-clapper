@@ -8,10 +8,12 @@ class PickButtons extends React.Component {
 		this.handleIconClick = this.handleIconClick.bind(this);
 	}
 
-    handleIconClick(evt) {
+    handleIconClick(evt, color) {
+        evt.preventDefault();
         let icon = evt.currentTarget.dataset.icon;
-        if (this.props.picked.indexOf(icon) > -1){
-            this.props.addButton(icon);
+        let data = {icon: icon, color: color};
+        if(this.props.picked.map(data => data.icon).indexOf(icon) < 0) {
+            this.props.addButton(data);
         } else {
             this.props.removeButton(icon);
         }
@@ -23,34 +25,34 @@ class PickButtons extends React.Component {
       <div>
         <h4>Pick your buttons</h4>
         <div className="col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body">
-            <button className="btn blue btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-sign-language">
+            <button className="btn blue btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'blue')} data-icon="fa fa-sign-language">
                 <i className="fa fa-sign-language"></i>
             </button>
-            <button className="btn red btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-frown-o">
+            <button className="btn red btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'red')} data-icon="fa fa-frown-o">
                 <i className="fa fa-frown-o"></i>
             </button>
-            <button className="btn gray btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-empire">
+            <button className="btn gray btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'gray')} data-icon="fa fa-empire">
                 <i className="fa fa-empire" data-icon="fa fa-empire"></i>
             </button>
-            <button className="btn dark-blue btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-heart-o">
+            <button className="btn dark-blue btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'dark-blue')} data-icon="fa fa-heart-o">
                 <i className="fa fa-heart-o" data-icon="fa fa-heart-o"></i>
             </button>
-            <button className="btn green btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-money fa-spin">
+            <button className="btn green btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'green')} data-icon="fa fa-money fa-spin">
                 <i className="fa fa-money" data-icon="fa fa-money fa-spin"></i>
             </button>
-            <button className="btn pink btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-smile-o">
+            <button className="btn pink btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'pink')} data-icon="fa fa-smile-o">
                 <i className="fa fa-smile-o" data-icon="fa fa-smile-o"></i>
             </button>
-            <button className="btn yellow btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-question">
+            <button className="btn yellow btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'yellow')} data-icon="fa fa-question">
                 <i className="fa fa-question" data-icon="fa fa-question"></i>
             </button>
-            <button className="btn mint-green btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-thumbs-o-up">
+            <button className="btn mint-green btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'mint-green')} data-icon="fa fa-thumbs-o-up">
                 <i className="fa fa-thumbs-o-up" data-icon="fa fa-thumbs-o-up"></i>
             </button>
-            <button className="btn orange btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-rebel">
+            <button className="btn orange btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'orange')} data-icon="fa fa-rebel">
                 <i className="fa fa-rebel" data-icon="fa fa-rebel"></i>
             </button>
-            <button className="btn purple btn-circle btn-xl" onClick={addRemove} data-icon="fa fa-bomb fa-spin">
+            <button className="btn purple btn-circle btn-xl" onClick={(evt) => addRemove(evt, 'purple')} data-icon="fa fa-bomb fa-spin">
                 <i className="fa fa-bomb" data-icon="fa fa-bomb fa-spin"></i>
             </button>
         </div>

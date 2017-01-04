@@ -4,7 +4,7 @@ import { setInterval, stateBoardId } from '../actions';
 
 function mapStateToProps(state){
 	return {
-		boardId: state.boardId
+		boardId: state.generatedBoard
 	};
 }
 

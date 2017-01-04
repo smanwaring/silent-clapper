@@ -1,6 +1,6 @@
 import React from 'react';
 import {combineReducers} from 'redux';
-import { SET_BOARDID, SET_CURRENT_BOARD, PICKED_BUTTON, REMOVED_BUTTON} from './actions';
+import { SET_BOARDID, SET_CURRENT_BOARD, PICKED_BUTTON, REMOVED_BUTTON, ROOM_NOT_FOUND, LOAD_BUTTONS} from './actions';
 
 const boardReducer = function(state="", action){
 	switch(action.type){
@@ -28,10 +28,28 @@ const iconsPickedReducer = function(state=[], action){
 	}
 }
 
+const foundRoomReducer = function(state=false, action){
+	switch(action.type){
+		case ROOM_NOT_FOUND: 
+			return action.payload;
+		default: return state;
+	}
+}
+
+const roomButtonsReducer = function(state=[], action){
+	switch(action.type){
+		case LOAD_BUTTONS: 
+			return [...state, ...action.payload];
+		default: return state;
+	}
+}
+
 const rootReducer = combineReducers({
-	boardId: boardReducer,
+	generatedBoard: boardReducer,
 	currentBoard: currentBoardReducer,
-	buttonsPicked: iconsPickedReducer
+	buttonsPicked: iconsPickedReducer,
+	roomNotFound: foundRoomReducer,
+	buttonsToLoad:  roomButtonsReducer
 })
 
 export default rootReducer;

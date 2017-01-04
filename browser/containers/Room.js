@@ -4,8 +4,9 @@ import { setInterval, stateBoardId } from '../actions';
 
 function mapStateToProps(state){
 	return {
-		boardId: state.boardId,
-		currentBoard: state.currentBoard
+		boardId: state.generatedBoard,
+		currentBoard: state.currentBoard,
+		buttons: state.buttonsToLoad
 	};
 }
 

@@ -8,14 +8,18 @@ import {Router, Route, hashHistory, IndexRedirect, browserHistory, IndexRoute} f
 import Homepage from './containers/Homepage';
 import Root from './components/Root';
 import Room from './containers/Room';
+import { enterRoom } from './actions';
 
+function onEnterConfirmRoom(nextState) {
+	store.dispatch( enterRoom (nextState.params.roomId) );
+}
 
 ReactDOM.render(
   <Provider store={store}>
 	    <Router history={hashHistory}> 
 	    	<Route component={Root}>
 				<Route path="/" component={Homepage}/>
-				<Route path="/:roomId" component={Room}/>
+				<Route path="/:roomId" component={Room} onEnter={onEnterConfirmRoom}/>
 				<IndexRoute component={Homepage}/>
 			</Route>
 	  	</Router>
