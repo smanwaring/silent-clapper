@@ -9,6 +9,9 @@ const app = express(); //invoke router as app
 const server = http.createServer();
 const socketio = require('socket.io');
 const routes = require('./routes') ;
+const db = require('../db');
+
+require('../db/models');
 
 server.on('request', app);
 
@@ -24,7 +27,6 @@ app
   .use(bodyParser.json())
   .use(morgan('dev'))   
   .use('/api', routes) 
-
 
 // default routing
 app.get('/*', function(req, res){
@@ -78,9 +80,16 @@ io.on('connection', function(socket){
 
 })
 
+
 server.listen(1337, function () {
     console.log('The server is listening on port 1337!');
+    db.sync({force: true})
+      .then(function () {
+      console.log('Oh and btw the postgres server is totally connected, too');
+  });
 });
+
+
 
 // export app and socket.io server
 module.exports = app
