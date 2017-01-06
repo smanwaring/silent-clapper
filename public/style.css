@@ -233,6 +233,8 @@ div.column i {
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 50%;
+  color: white;
+
 }
 .btn-circle.btn-xl {
   width: 70px;
@@ -265,12 +267,12 @@ div.column i {
 
 .gray, .gray:focus {	
 	color: #1F1F1F;
-    background-color: #c0c0c0;
+    background-color: #A4C7D1;
 }
 
 .gray:hover {
 	color: #1F1F1F;
-    background-color: #A6A6A6;
+    background-color: #94B4BD;
 }
 
 .yellow, .yellow:focus {	
@@ -474,3 +476,4 @@ div.column i {
 	margin-bottom: 20px;
 	margin-top: 10px;
 }
+

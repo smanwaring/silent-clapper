@@ -6,10 +6,6 @@ const Board = db.define('board', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    // buttons: {
-    //     type: Sequelize.ARRAY(Sequelize.TEXT),
-    //     allowNull: false
-    // }
 });
 
 const Button = db.define("button", {
@@ -23,7 +19,7 @@ const Button = db.define("button", {
     }
 })
 
-Board.hasMany(Button); // button << board_id // board.getPatients/setPatients
+Board.hasMany(Button); // button << board_id // board.getButton/setButton
 
 
 module.exports = {

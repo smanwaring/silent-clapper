@@ -1,6 +1,32 @@
 import React from 'react';
 import {combineReducers} from 'redux';
-import { SET_BOARDID, SET_CURRENT_BOARD, PICKED_BUTTON, REMOVED_BUTTON, ROOM_NOT_FOUND, LOAD_BUTTONS} from './actions';
+import { 
+	SET_BOARDID, SET_CURRENT_BOARD, PICKED_BUTTON, REMOVED_BUTTON, ROOM_NOT_FOUND, 
+	LOAD_BUTTONS,
+	TOGGLE_CLAP, 
+	TOGGLE_FROWN, 
+	TOGGLE_EMPIRE, 
+	TOGGLE_HEART, 
+	TOGGLE_MONEY, 
+	TOGGLE_SMILE, 
+	TOGGLE_QUESTION, 
+	TOGGLE_THUMB, 
+	TOGGLE_RESISTANCE, 
+	TOGGLE_BOMB } from './actions';
+
+const initialButtonState = {
+	    clap: false,
+		frown: false,
+		empire: false,
+		heart: false,
+		money: false,
+		smile: false,
+		question: false,
+		thumb: false,
+		resistance: false,
+		bomb: false
+}
+
 
 const boardReducer = function(state="", action){
 	switch(action.type){
@@ -23,7 +49,7 @@ const iconsPickedReducer = function(state=[], action){
 		case PICKED_BUTTON: 
 			return [...state, action.payload];
 		case REMOVED_BUTTON:
-			return state.filter(icon => icon !== action.payload);
+			return state.filter(buttonInfo => buttonInfo.icon !== action.payload.icon);
 		default: return state;
 	}
 }
@@ -44,12 +70,41 @@ const roomButtonsReducer = function(state=[], action){
 	}
 }
 
+const selectButtonReducer = function(state=initialButtonState, action){
+	switch(action.type){
+		case TOGGLE_CLAP: 
+			return Object.assign({}, state, {clap: action.payload});
+		case TOGGLE_FROWN: 
+			return Object.assign({}, state, {frown: action.payload});
+		case TOGGLE_EMPIRE: 
+			return Object.assign({}, state, {empire: action.payload});
+		case TOGGLE_HEART: 
+			return Object.assign({}, state, {heart: action.payload});
+		case TOGGLE_MONEY: 
+			return Object.assign({}, state, {money: action.payload});
+		case TOGGLE_SMILE: 
+			return Object.assign({}, state, {smile: action.payload});
+		case TOGGLE_QUESTION: 
+			return Object.assign({}, state, {question: action.payload});
+		case TOGGLE_THUMB: 
+			return Object.assign({}, state, {thumb: action.payload});
+		case TOGGLE_BOMB: 
+			return Object.assign({}, state, {bomb: action.payload});
+		case TOGGLE_RESISTANCE: 
+			return Object.assign({}, state, {resistance: action.payload});
+		default: return state;
+	}
+}
+
+
+
 const rootReducer = combineReducers({
 	generatedBoard: boardReducer,
 	currentBoard: currentBoardReducer,
 	buttonsPicked: iconsPickedReducer,
 	roomNotFound: foundRoomReducer,
-	buttonsToLoad:  roomButtonsReducer
+	buttonsToLoad:  roomButtonsReducer,
+	buttonSelected: selectButtonReducer
 })
 
 export default rootReducer;

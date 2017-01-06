@@ -27,7 +27,8 @@ class HomeForm extends React.Component {
         this.setState({createBoardClass: '', joinBoardClass: 'active', showCreate: false, showLogin: true});
     }
 
-    generateBoardId(){
+    generateBoardId(evt){
+        evt.preventDefault();
         let boardId = Math.floor(Math.random()*89999+10000);
         let details = {
             path: boardId,

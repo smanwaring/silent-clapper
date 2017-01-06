@@ -1,21 +1,39 @@
 // init router
 const router = require('express').Router();
-const Board = require('../../db/models/board');
+const Board = require('../../db/models').Board;
+const Button = require('../../db/models').Button;
 
 
+router.param('boardId', function(req, res, next, theId){
+	//findById returns a promise
+    Board.findOne({ 
+        where: { 
+            path: theId
+        }
+    })
+	.then(function(foundBoard){
+		req.board = foundBoard;
+		next(); // !!! --> you must call next here so the middleware knows to go to the next router!!!
+	})
+	.catch(next) //don't forget your error handler
+})
+
+
+//post a newlly created board link
 router.post('/', (req, res, next) => {
+    let buttons = req.body.buttons
     Board.create({
         path: req.body.path,
-        buttons: req.body.buttons
+        buttons: buttons
+    }, {
+        include: [ Button ]
     })
-    .then(createdBoard => {
-        console.log("CREATED BOARD", createdBoard)
-        res.send(createdBoard)
-    })
+    .then(createdBoard => res.send(createdBoard))
     .catch(next);
 });
 
 
+//get the board if it exists
 router.get('/:boardId', (req, res, next) => {
     Board.findOne({
         where: {
@@ -33,21 +51,20 @@ router.get('/:boardId', (req, res, next) => {
     .catch(next);
 });
 
+
+//get the buttons for a particular room
 router.get('/enter/:boardId', (req, res, next) => {
-    Board.findOne({
-        where: {
-            path: req.params.boardId
-        }
-    })
-    .then(foundBoard => {
-        if (!foundBoard){
-             res.status(404).end();
-        } else {
-            console.log(foundBoard.buttons)
-            res.send(foundBoard.buttons);
-        }
-    })
-    .catch(next);
+    if (!req.board){
+        res.sendStatus(404);
+    } else {
+        Button.findAll({
+            where: {
+                boardId: req.board.id
+            }
+         })
+        .then(foundButtons => res.send(foundButtons))
+        .catch(next);
+    }
 });
 
 

@@ -83,9 +83,7 @@ class Room extends React.Component {
             <div className="columns column-2"></div>
             <div className="columns column-3"></div>
             <div className="columns column-4"></div>
-            
         </div>
-
         <div id="button-wrap" className="center-icons">
             {this.props.buttons && this.props.buttons.map((button, i) => {
                 return (
@@ -98,38 +96,6 @@ class Room extends React.Component {
       </div>
     )
   }
-}
+};
 
 export default Room;
-
-
-    //    <button className="btn blue btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-sign-language">
-    //             <i className="fa fa-sign-language"></i>
-    //         </button>
-    //         <button className="btn red btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-frown-o">
-    //             <i className="fa fa-frown-o"></i>
-    //         </button>
-    //         <button className="btn gray btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-empire">
-    //             <i className="fa fa-empire"></i>
-    //         </button>
-    //         <button className="btn dark-blue btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-heart-o">
-    //             <i className="fa fa-heart-o"></i>
-    //         </button>
-    //         <button className="btn green btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-money fa-spin">
-    //             <i className="fa fa-money"></i>
-    //         </button>
-    //         <button className="btn pink btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-smile-o">
-    //             <i className="fa fa-smile-o"></i>
-    //         </button>
-    //         <button className="btn yellow btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-question">
-    //             <i className="fa fa-question"></i>
-    //         </button>
-    //         <button className="btn mint-green btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-thumbs-o-up">
-    //             <i className="fa fa-thumbs-o-up"></i>
-    //         </button>
-    //         <button className="btn orange btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-rebel">
-    //             <i className="fa fa-rebel"></i>
-    //         </button>
-    //         <button className="btn purple btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-bomb fa-spin">
-    //             <i className="fa fa-bomb"></i>
-    //         </button>
