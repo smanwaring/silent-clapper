@@ -7,6 +7,15 @@ class PickButtons extends React.Component {
 		super(props);
 		this.handleIconClick = this.handleIconClick.bind(this);
         this.handleClapClick = this.handleClapClick.bind(this);
+        this.handleFrownClick = this.handleFrownClick.bind(this);
+        this.handleEmpireClick = this.handleEmpireClick.bind(this);
+        this.handleHeartClick = this.handleHeartClick.bind(this);
+        this.handleMoneyClick = this.handleMoneyClick.bind(this);
+        this.handleSmileClick = this.handleSmileClick.bind(this);
+        this.handleQuestionClick = this.handleQuestionClick.bind(this);
+        this.handleThumbClick = this.handleThumbClick.bind(this);
+        this.handleResistanceClick = this.handleResistanceClick.bind(this);
+        this.handleBombClick = this.handleBombClick.bind(this);
 	}
 
     handleIconClick(evt, color) {
@@ -54,7 +63,7 @@ class PickButtons extends React.Component {
   render () {
       let addRemove = this.handleIconClick;
       let handleClapClick = this.handleClapClick;
-      let basicClass = "btn btn-circle btn-xl";
+      let basicClass = "btn btn-circle btn-xl btn-hover";
       let clapClass = "btn btn-circle btn-xl blue";
       let frownClass = "btn btn-circle btn-xl red";
       let empireClass = "btn btn-circle btn-xl gray";
@@ -67,7 +76,7 @@ class PickButtons extends React.Component {
       let bombClass = "btn btn-circle btn-xl purple";
     return (
       <div>
-        <h4>Pick your buttons</h4>
+        <h4 className="pick-no-margin">Pick your buttons</h4>
         <div className="col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body">
             <button className={this.props.buttonClass.clap ? clapClass : basicClass} onClick={(evt) => {addRemove(evt, 'blue'); this.handleClapClick()}} data-icon="fa fa-sign-language">
                 <i className="fa fa-sign-language"></i>

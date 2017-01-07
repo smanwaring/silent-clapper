@@ -4,21 +4,42 @@
 *
 */
 
-body, html {
-	height:100%;
+html {
+	position: relative;
+    min-height: 100%;
+}
+
+body {
+	/*min-height:100%;*/
 	overflow: hidden;
 	font-family: 'Roboto Condensed', sans-serif;
+	/*display: flex;
+	flex-direction: column;*/
+	margin: 0 0 180px
+}
+
+footer {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 100px;
+    width: 100%;
+}
+
+.content{
+	flex: 10;
+	padding: 20px;
 }
 
 #wrap {
-	height:100%;
-	margin-bottom: -180px;
+	/*height:100%;*/
+	/*margin-bottom: -180px;*/
 	text-align: center;
 }
 
 #wrap:after {
-  content: "";
-  display: block;
+  /*content: "";*/
+  /*display: block;*/
 }
 
 #button-wrap{
@@ -26,7 +47,9 @@ body, html {
 }
 
 #button-wrap, #wrap:after {
-	height: 180px;
+	height: auto;
+	margin-bottom: 30px;
+
 }
 
 .btn, .btn:focus, .btn:hover, .btn:active, .btn:target, .btn:visited {
@@ -38,9 +61,16 @@ body, html {
 }
 
 .center-icons{
-	text-align: center;
+  text-align: center;
+  /*position: relative;*/
 }
 
+.invis{
+	position: relative;
+	width: 100%;
+	height: 10px;
+	background-color: red;
+}
 
 /*
 *
@@ -56,6 +86,7 @@ div.column-0 {
 	left: 10%;
 	z-index: -1;
 }
+
 
 div.column-1 {
 	width: 200px;
@@ -244,6 +275,14 @@ div.column i {
   line-height: 1.33;
 }
 
+.btn-hover:hover {
+	color: #fff;
+}
+
+.btn-hover:focus {
+	color: #fff;
+}
+
 .red, .red:focus {
 	color: #fff;
     background-color: #d9534f;
@@ -397,6 +436,7 @@ div.column i {
 	transition: all 0.1s linear;
 }
 
+
 /*.panel-border input:hover,
 .panel-border input:focus {
 	outline:none;
@@ -477,3 +517,55 @@ div.column i {
 	margin-top: 10px;
 }
 
+.pick-no-margin{
+	margin-top: 0px;
+}
+
+
+.boxforicons{
+	height: 200px;
+}
+
+.wontgoabove {
+	background-color: red;
+	height: 100%;
+	width: 100%;
+	position: relative; 
+	z-index: -1;
+}
+
+.parent {
+  width:100%;
+  height:250px;
+  background-color:#CCCCCC;
+  position:relative;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.child {
+  /*width:100px;
+  height:100px;
+  background-color:#999999;*/
+  position:absolute;
+  /*bottom:0px;
+  right:0px;*/
+}
+ 
+ .no-margin{
+	 margin: 0px !important;
+ }
+
+ .no-padding{
+	 padding: 0px 0px 5px 0px;
+ }
+ 
+ .yes-padding{
+	 padding: 0px 10px 0px 10px !important;
+ }
+
+ .paddingLR{
+	 padding-left: 10px;
+	 padding-right: 10px;
+ }

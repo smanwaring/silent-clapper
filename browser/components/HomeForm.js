@@ -53,7 +53,7 @@ class HomeForm extends React.Component {
     return (
         <div className="container">
             <div className="row">
-                <div className="col-md-6 col-md-offset-3">
+                <div className="col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3 col-sm-10 col-sm-offset-1 col-xs-12">
                     <div className="panel panel-border">
                         <div className="panel-heading"> {/* panel heading start*/}
                             
@@ -73,15 +73,15 @@ class HomeForm extends React.Component {
                             <div className="row">
                                 <div className="col-lg-12">
 
-                                    <form  onSubmit={(evt) => this.confirmRoomExists(evt)} id="login-form" role="form" style={{display: this.state.showLogin ? 'block' : 'none' }}>
-                                        <div className="form-group">
+                                    <form onSubmit={(evt) => this.confirmRoomExists(evt)} id="login-form" role="form" style={{display: this.state.showLogin ? 'block' : 'none' }}>
+                                        <div className="form-groupZ">
                                             <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
                                         </div>
                                             {this.props.roomNotFound ? <div>Oops! We couldn't find that room</div> : ''}
                                         <div className="form-group">
                                             <div className="row">
-                                                <div className="col-sm-6 col-sm-offset-3">
-                                                    <button type="submit" tabIndex="4" className="form-control btn btn-login">Join</button>
+                                                <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                                                    <button type="submit" tabIndex="4" className="form-control btn btn-login paddingLR">Join</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -99,7 +99,7 @@ class HomeForm extends React.Component {
                                                 <div className="form-group">
                                                     <PickButtons/>
                                                     <div className="row">
-                                                        <div className="col-sm-6 col-sm-offset-3">
+                                                        <div>
                                                             <button id="register-submit" tabIndex="4" className="form-control btn btn-register" onClick={this.generateBoardId}> Generate My Board Link </button>
                                                         </div>
                                                     </div>
