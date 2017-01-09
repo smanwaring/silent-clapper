@@ -45,7 +45,7 @@ const boardReducer = function(state="", action){
 	}
 }
 
-const currentBoardReducer = function(state="", action){
+const currentBoardReducer = function(state=false, action){
 	switch(action.type){
 		case SET_CURRENT_BOARD: 
 			return action.payload;

@@ -91,6 +91,10 @@
 		_store2.default.dispatch((0, _actions.roomNotFound)(false));
 	}
 	
+	function onEnterResetCurrentBoard() {
+		_store2.default.dispatch((0, _actions.stateCurrentBoard)(false));
+	}
+	
 	_reactDom2.default.render(_react2.default.createElement(
 		_reactRedux.Provider,
 		{ store: _store2.default },
@@ -100,7 +104,7 @@
 			_react2.default.createElement(
 				_reactRouter.Route,
 				{ component: _Root2.default },
-				_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Homepage2.default }),
+				_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Homepage2.default, onEnter: onEnterResetCurrentBoard }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/:roomId', component: _Room2.default, onEnter: onEnterConfirmRoom }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/pageNotFound/error', component: _EmptyPage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/hometest/home', component: _HomeFormTest2.default }),
@@ -23818,7 +23822,7 @@
 	};
 	
 	var currentBoardReducer = function currentBoardReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 		var action = arguments[1];
 	
 		switch (action.type) {
@@ -23980,8 +23984,6 @@
 	var HIDE_CREATE = exports.HIDE_CREATE = "HIDE_CREATE";
 	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
 	var HIDE_JOIN = exports.HIDE_JOIN = "HIDE_JOIN";
-	// export const CLEAR_ROOM_NOT_FOUND = "CLEAR_ROOM_NOT_FOUND";
-	
 	
 	/* ------ action creaters ------*/
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
@@ -24025,13 +24027,6 @@
 			payload: bool
 		};
 	};
-	
-	// export const clearRoomNotFound = () => {
-	// 	return {
-	// 		type: CLEAR_ROOM_NOT_FOUND,
-	// 		payload: false
-	// 	};
-	// };
 	
 	var toggleClap = exports.toggleClap = function toggleClap(bool) {
 		return {
