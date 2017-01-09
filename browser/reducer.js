@@ -1,7 +1,11 @@
 import React from 'react';
 import {combineReducers} from 'redux';
 import { 
-	SET_BOARDID, SET_CURRENT_BOARD, PICKED_BUTTON, REMOVED_BUTTON, ROOM_NOT_FOUND, 
+	SET_BOARDID, 
+	SET_CURRENT_BOARD, 
+	PICKED_BUTTON, 
+	REMOVED_BUTTON, 
+	ROOM_NOT_FOUND, 
 	LOAD_BUTTONS,
 	TOGGLE_CLAP, 
 	TOGGLE_FROWN, 
@@ -13,10 +17,11 @@ import {
 	TOGGLE_THUMB, 
 	TOGGLE_RESISTANCE, 
 	TOGGLE_BOMB,
-SHOW_CREATE,
-HIDE_CREATE,
-SHOW_JOIN,
-HIDE_JOIN } from './actions';
+	SHOW_CREATE,
+	HIDE_CREATE,
+	SHOW_JOIN,
+	HIDE_JOIN,
+ } from './actions';
 
 const initialButtonState = {
 	    clap: false,
@@ -69,7 +74,7 @@ const foundRoomReducer = function(state=false, action){
 const roomButtonsReducer = function(state=[], action){
 	switch(action.type){
 		case LOAD_BUTTONS: 
-			return [...state, ...action.payload];
+			return action.payload;
 		default: return state;
 	}
 }
@@ -94,7 +99,6 @@ const showJoinBoardTabReducer= function(state=true, action){
 		default: return state;
 	}
 }
-
 
 
 const selectButtonReducer = function(state=initialButtonState, action){

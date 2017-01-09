@@ -22,6 +22,7 @@ export const SHOW_CREATE = "SHOW_CREATE";
 export const HIDE_CREATE = "HIDE_CREATE";
 export const SHOW_JOIN = "SHOW_JOIN";
 export const HIDE_JOIN = "HIDE_JOIN";
+// export const CLEAR_ROOM_NOT_FOUND = "CLEAR_ROOM_NOT_FOUND";
 
 
 /* ------ action creaters ------*/
@@ -62,12 +63,19 @@ export const foundRoom = (buttons) => {
 };
 
 
-export const roomNotFound = () => {
+export const roomNotFound = (bool) => {
 	return {
 		type: ROOM_NOT_FOUND,
-		payload: true
+		payload: bool
 	};
 };
+
+// export const clearRoomNotFound = () => {
+// 	return {
+// 		type: CLEAR_ROOM_NOT_FOUND,
+// 		payload: false
+// 	};
+// };
 
 export const toggleClap = (bool) => {
 	return {
@@ -181,7 +189,7 @@ export const loadRoom = (roomId) => {
 			.then(res => res.json())
 			.then(room => { 
 				if (room.message){
-					dispatch(roomNotFound())
+					dispatch(roomNotFound(true))
 				} else {
 					dispatch(stateCurrentBoard(room) ); 
 				}

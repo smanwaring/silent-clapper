@@ -88,6 +88,7 @@
 	
 	function onEnterConfirmRoom(nextState) {
 		_store2.default.dispatch((0, _actions.enterRoom)(nextState.params.roomId));
+		_store2.default.dispatch((0, _actions.roomNotFound)(false));
 	}
 	
 	_reactDom2.default.render(_react2.default.createElement(
@@ -23862,7 +23863,7 @@
 	
 		switch (action.type) {
 			case _actions.LOAD_BUTTONS:
-				return [].concat(_toConsumableArray(state), _toConsumableArray(action.payload));
+				return action.payload;
 			default:
 				return state;
 		}
@@ -23979,6 +23980,8 @@
 	var HIDE_CREATE = exports.HIDE_CREATE = "HIDE_CREATE";
 	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
 	var HIDE_JOIN = exports.HIDE_JOIN = "HIDE_JOIN";
+	// export const CLEAR_ROOM_NOT_FOUND = "CLEAR_ROOM_NOT_FOUND";
+	
 	
 	/* ------ action creaters ------*/
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
@@ -24016,12 +24019,19 @@
 		};
 	};
 	
-	var roomNotFound = exports.roomNotFound = function roomNotFound() {
+	var roomNotFound = exports.roomNotFound = function roomNotFound(bool) {
 		return {
 			type: ROOM_NOT_FOUND,
-			payload: true
+			payload: bool
 		};
 	};
+	
+	// export const clearRoomNotFound = () => {
+	// 	return {
+	// 		type: CLEAR_ROOM_NOT_FOUND,
+	// 		payload: false
+	// 	};
+	// };
 	
 	var toggleClap = exports.toggleClap = function toggleClap(bool) {
 		return {
@@ -24129,7 +24139,7 @@
 				return res.json();
 			}).then(function (room) {
 				if (room.message) {
-					dispatch(roomNotFound());
+					dispatch(roomNotFound(true));
 				} else {
 					dispatch(stateCurrentBoard(room));
 				}
@@ -31605,6 +31615,9 @@
 			},
 			hideJoinTab: function hideJoinTab(bool) {
 				dispatch((0, _actions.hideJoin)(bool));
+			},
+			clearRoomNotFound: function clearRoomNotFound(bool) {
+				dispatch((0, _actions.roomNotFound)(bool));
 			}
 		};
 	}
@@ -31685,6 +31698,14 @@
 	    }, {
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate() {
+	            var self = this;
+	            if (this.props.roomNotFound) {
+	                setTimeout(function () {
+	                    self.props.clearRoomNotFound(false);
+	                }, 3000);
+	            }
+	
+	            console.log("HEY REDIRECTING AND I SHOULDN'T!!!");
 	            if (this.props.foundBoard) {
 	                _reactRouter.hashHistory.push('/' + this.props.foundBoard);
 	            }
@@ -32039,6 +32060,8 @@
 	        value: function render() {
 	            var _this2 = this;
 	
+	            var buttonClass = this.props.buttonClass;
+	
 	            var addRemove = this.handleIconClick;
 	            var handleClapClick = this.handleClapClick;
 	            var basicClass = "btn btn-circle btn-xl btn-hover";
@@ -32065,70 +32088,70 @@
 	                    { className: 'col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body' },
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.clap ? clapClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.clap ? clapClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'blue');_this2.handleClapClick();
 	                            }, 'data-icon': 'fa fa-sign-language' },
 	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.frown ? frownClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.frown ? frownClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'red');_this2.handleFrownClick();
 	                            }, 'data-icon': 'fa fa-frown-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.empire ? empireClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.empire ? empireClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'gray');_this2.handleEmpireClick();
 	                            }, 'data-icon': 'fa fa-empire' },
 	                        _react2.default.createElement('i', { className: 'fa fa-empire', 'data-icon': 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.heart ? heartClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.heart ? heartClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'dark-blue');_this2.handleHeartClick();
 	                            }, 'data-icon': 'fa fa-heart-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-heart-o', 'data-icon': 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.money ? moneyClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.money ? moneyClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'green');_this2.handleMoneyClick();
 	                            }, 'data-icon': 'fa fa-money fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-money', 'data-icon': 'fa fa-money fa-spin' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.smile ? smileClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.smile ? smileClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'pink');_this2.handleSmileClick();
 	                            }, 'data-icon': 'fa fa-smile-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-smile-o', 'data-icon': 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.question ? questionClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.question ? questionClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'yellow');_this2.handleQuestionClick();
 	                            }, 'data-icon': 'fa fa-question' },
 	                        _react2.default.createElement('i', { className: 'fa fa-question', 'data-icon': 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'mint-green');_this2.handleThumbClick();
 	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
 	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'data-icon': 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'orange');_this2.handleResistanceClick();
 	                            }, 'data-icon': 'fa fa-rebel' },
 	                        _react2.default.createElement('i', { className: 'fa fa-rebel', 'data-icon': 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: this.props.buttonClass.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonClass.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'purple');_this2.handleBombClick();
 	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-bomb', 'data-icon': 'fa fa-bomb fa-spin' })

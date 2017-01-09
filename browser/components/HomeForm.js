@@ -34,6 +34,14 @@ class HomeForm extends React.Component {
     }
 
     componentDidUpdate(){
+        const self = this;
+        if(this.props.roomNotFound){
+          setTimeout(function() {
+          self.props.clearRoomNotFound(false);
+           }, 3000)
+        }
+
+        console.log("HEY REDIRECTING AND I SHOULDN'T!!!")
         if (this.props.foundBoard) {
             hashHistory.push(`/${this.props.foundBoard}`);
         }
@@ -93,7 +101,7 @@ class HomeForm extends React.Component {
                                                         <Link to={`/${this.props.boardId}`}><button type="submit" tabIndex="4" className="form-control btn btn-register">GO TO MY BOARD</button></Link>
                                                     </div>
                                                 </div>
-                                                    :
+                                                     :
                                                 <div className="form-group">
                                                     <PickButtons/>
                                                     <div className="row">
@@ -104,7 +112,6 @@ class HomeForm extends React.Component {
                                                 </div> 
                                                 } 
                                     </form>
-                        
                             </div>
                         </div>
                     </div>

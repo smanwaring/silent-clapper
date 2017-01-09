@@ -61,6 +61,7 @@ class PickButtons extends React.Component {
     }
 
   render () {
+      const { buttonClass } = this.props;
       let addRemove = this.handleIconClick;
       let handleClapClick = this.handleClapClick;
       let basicClass = "btn btn-circle btn-xl btn-hover";
@@ -78,34 +79,34 @@ class PickButtons extends React.Component {
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>
         <div className="col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body">
-            <button className={this.props.buttonClass.clap ? clapClass : basicClass} onClick={(evt) => {addRemove(evt, 'blue'); this.handleClapClick()}} data-icon="fa fa-sign-language">
+            <button className={buttonClass.clap ? clapClass : basicClass} onClick={(evt) => {addRemove(evt, 'blue'); this.handleClapClick()}} data-icon="fa fa-sign-language">
                 <i className="fa fa-sign-language"></i>
             </button>
-            <button className={this.props.buttonClass.frown ? frownClass : basicClass} onClick={(evt) => {addRemove(evt, 'red'); this.handleFrownClick()}} data-icon="fa fa-frown-o">
+            <button className={buttonClass.frown ? frownClass : basicClass} onClick={(evt) => {addRemove(evt, 'red'); this.handleFrownClick()}} data-icon="fa fa-frown-o">
                 <i className="fa fa-frown-o"></i>
             </button>
-            <button className={this.props.buttonClass.empire ? empireClass : basicClass} onClick={(evt) => {addRemove(evt, 'gray'); this.handleEmpireClick()}} data-icon="fa fa-empire">
+            <button className={buttonClass.empire ? empireClass : basicClass} onClick={(evt) => {addRemove(evt, 'gray'); this.handleEmpireClick()}} data-icon="fa fa-empire">
                 <i className="fa fa-empire" data-icon="fa fa-empire"></i>
             </button>
-            <button className={this.props.buttonClass.heart ? heartClass : basicClass} onClick={(evt) => {addRemove(evt, 'dark-blue'); this.handleHeartClick()}} data-icon="fa fa-heart-o">
+            <button className={buttonClass.heart ? heartClass : basicClass} onClick={(evt) => {addRemove(evt, 'dark-blue'); this.handleHeartClick()}} data-icon="fa fa-heart-o">
                 <i className="fa fa-heart-o" data-icon="fa fa-heart-o"></i>
             </button>
-            <button className={this.props.buttonClass.money ? moneyClass : basicClass} onClick={(evt) => {addRemove(evt, 'green'); this.handleMoneyClick()} } data-icon="fa fa-money fa-spin">
+            <button className={buttonClass.money ? moneyClass : basicClass} onClick={(evt) => {addRemove(evt, 'green'); this.handleMoneyClick()} } data-icon="fa fa-money fa-spin">
                 <i className="fa fa-money" data-icon="fa fa-money fa-spin"></i>
             </button>
-            <button className={this.props.buttonClass.smile ? smileClass : basicClass} onClick={(evt) => {addRemove(evt, 'pink'); this.handleSmileClick()}  } data-icon="fa fa-smile-o">
+            <button className={buttonClass.smile ? smileClass : basicClass} onClick={(evt) => {addRemove(evt, 'pink'); this.handleSmileClick()}  } data-icon="fa fa-smile-o">
                 <i className="fa fa-smile-o" data-icon="fa fa-smile-o"></i>
             </button>
-            <button className={this.props.buttonClass.question ? questionClass : basicClass} onClick={(evt) => {addRemove(evt, 'yellow'); this.handleQuestionClick()}  } data-icon="fa fa-question">
+            <button className={buttonClass.question ? questionClass : basicClass} onClick={(evt) => {addRemove(evt, 'yellow'); this.handleQuestionClick()}  } data-icon="fa fa-question">
                 <i className="fa fa-question" data-icon="fa fa-question"></i>
             </button>
-            <button className={this.props.buttonClass.thumb ? thumbClass : basicClass} onClick={(evt) => {addRemove(evt, 'mint-green'); this.handleThumbClick()}  } data-icon="fa fa-thumbs-o-up">
+            <button className={buttonClass.thumb ? thumbClass : basicClass} onClick={(evt) => {addRemove(evt, 'mint-green'); this.handleThumbClick()}  } data-icon="fa fa-thumbs-o-up">
                 <i className="fa fa-thumbs-o-up" data-icon="fa fa-thumbs-o-up"></i>
             </button>
-            <button className={this.props.buttonClass.resistance ? resistanceClass : basicClass} onClick={(evt) => {addRemove(evt, 'orange'); this.handleResistanceClick() }} data-icon="fa fa-rebel">
+            <button className={buttonClass.resistance ? resistanceClass : basicClass} onClick={(evt) => {addRemove(evt, 'orange'); this.handleResistanceClick() }} data-icon="fa fa-rebel">
                 <i className="fa fa-rebel" data-icon="fa fa-rebel"></i>
             </button>
-            <button className={this.props.buttonClass.bomb ? bombClass : basicClass} onClick={(evt) => {addRemove(evt, 'purple'); this.handleBombClick()}} data-icon="fa fa-bomb fa-spin">
+            <button className={buttonClass.bomb ? bombClass : basicClass} onClick={(evt) => {addRemove(evt, 'purple'); this.handleBombClick()}} data-icon="fa fa-bomb fa-spin">
                 <i className="fa fa-bomb" data-icon="fa fa-bomb fa-spin"></i>
             </button>
         </div>

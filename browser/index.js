@@ -8,12 +8,13 @@ import {Router, Route, hashHistory, IndexRedirect, browserHistory, IndexRoute} f
 import Homepage from './containers/Homepage';
 import Root from './components/Root';
 import Room from './containers/Room';
-import { enterRoom } from './actions';
+import { enterRoom, roomNotFound } from './actions';
 import EmptyPage from './components/EmptyPage';
 import HomeFormTest from './components/HomeFormTest';
 
 function onEnterConfirmRoom(nextState) {
 	store.dispatch( enterRoom (nextState.params.roomId) );
+	store.dispatch( roomNotFound(false) );
 }
 
 ReactDOM.render(

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import HomeForm from '../components/HomeForm';
-import { setInterval, stateBoardId, stateCurrentBoard, addRoom, loadRoom, showCreate, hideCreate, showJoin, hideJoin } from '../actions';
+import { setInterval, stateBoardId, stateCurrentBoard, addRoom, loadRoom, showCreate, hideCreate, showJoin, hideJoin, roomNotFound } from '../actions';
 
 function mapStateToProps(state){
 	return {
@@ -39,6 +39,9 @@ function mapDispatchToProps(dispatch){
 		},
 		hideJoinTab: function(bool) {
 			dispatch ( hideJoin(bool) );
+		},
+		clearRoomNotFound: function(bool){
+			dispatch (  roomNotFound(bool) ); 
 		}
 	};
 
