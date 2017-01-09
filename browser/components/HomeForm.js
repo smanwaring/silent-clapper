@@ -7,12 +7,6 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 class HomeForm extends React.Component {
     constructor(props){
         super(props);
-        this.state = {
-            joinBoardClass: 'active',
-            createBoardClass: '',
-            showLogin: true,
-            showCreate: false,
-        }
         this.generateBoardId = this.generateBoardId.bind(this);
         this.handleCreateBoardClick= this.handleCreateBoardClick.bind(this);
         this.handleJoinBoardClick = this.handleJoinBoardClick.bind(this);
@@ -20,11 +14,13 @@ class HomeForm extends React.Component {
 
 
     handleCreateBoardClick( ) {
-        this.setState({createBoardClass: 'active', joinBoardClass: '', showCreate: true, showLogin: false});
+        this.props.showCreateTab(true);
+        this.props.hideJoinTab(false);
     }
 
     handleJoinBoardClick() {
-        this.setState({createBoardClass: '', joinBoardClass: 'active', showCreate: false, showLogin: true});
+        this.props.showJoinTab(true);
+        this.props.hideCreateTab(false);
     }
 
     generateBoardId(evt){
@@ -50,6 +46,8 @@ class HomeForm extends React.Component {
     }
 
   render () {
+      const { showJoin, showCreate, roomNotFound, boardId } = this.props;
+
     return (
         <div className="container">
             <div className="row">
@@ -59,10 +57,10 @@ class HomeForm extends React.Component {
                             
                             <div className="row"> {/* panel headings text start */}
                                 <div className="col-xs-6">
-                                    <a href="#" onClick={this.handleJoinBoardClick} className={this.state.joinBoardClass}>Join a Board</a>
+                                    <a href="#" onClick={this.handleJoinBoardClick} className={showJoin ? 'active': ''}>Join a Board</a>
                                 </div>
                                 <div className="col-xs-6">
-                                    <a href="#" onClick={this.handleCreateBoardClick} className={this.state.createBoardClass}>Create a Board</a>
+                                    <a href="#" onClick={this.handleCreateBoardClick} className={showCreate ? 'active' : ''}>Create a Board</a>
                                 </div>
                             </div>{/* panel headings text end */}
 
@@ -73,22 +71,22 @@ class HomeForm extends React.Component {
                             <div className="row">
                                 <div className="col-lg-12">
 
-                                    <form onSubmit={(evt) => this.confirmRoomExists(evt)} id="login-form" role="form" style={{display: this.state.showLogin ? 'block' : 'none' }}>
-                                        <div className="form-groupZ">
+                                    <form onSubmit={(evt) => this.confirmRoomExists(evt)} id="login-form" role="form" style={{display: showJoin ? 'block' : 'none' }}>
+                                        <div className="form-group">
                                             <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
                                         </div>
-                                            {this.props.roomNotFound ? <div>Oops! We couldn't find that room</div> : ''}
+                                            {roomNotFound ? <div>Oops! We couldn't find that room</div> : ''}
                                         <div className="form-group">
                                             <div className="row">
                                                 <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                                    <button type="submit" tabIndex="4" className="form-control btn btn-login paddingLR">Join</button>
+                                                    <button type="submit" tabIndex="4" className="form-control btn btn-login">Join</button>
                                                 </div>
                                             </div>
                                         </div>
                                     </form>
 
-                                    <form role="form" style={{display: this.state.showCreate ? 'block' : 'none' }}>                 
-                                        {this.props && this.props.boardId ? 
+                                    <form role="form" style={{display: showCreate ? 'block' : 'none' }}>                 
+                                        {this.props && boardId ? 
                                                     <div>
                                                     <h4>{`Here is your board #: ${this.props.boardId}`}</h4>
                                                     <div className="col-sm-6 col-sm-offset-3">

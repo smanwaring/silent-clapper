@@ -10,6 +10,7 @@ import Root from './components/Root';
 import Room from './containers/Room';
 import { enterRoom } from './actions';
 import EmptyPage from './components/EmptyPage';
+import HomeFormTest from './components/HomeFormTest';
 
 function onEnterConfirmRoom(nextState) {
 	store.dispatch( enterRoom (nextState.params.roomId) );
@@ -22,6 +23,7 @@ ReactDOM.render(
 				<Route path="/" component={Homepage}/>
 				<Route path="/:roomId" component={Room} onEnter={onEnterConfirmRoom}/>
 				<Route path="/pageNotFound/error" component={EmptyPage}/>
+				<Route path="/hometest/home" component={HomeFormTest}/>
 				<IndexRoute component={Homepage}/>
 			</Route>
 	  	</Router>

@@ -80,6 +80,10 @@
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
+	var _HomeFormTest = __webpack_require__(327);
+	
+	var _HomeFormTest2 = _interopRequireDefault(_HomeFormTest);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function onEnterConfirmRoom(nextState) {
@@ -98,6 +102,7 @@
 				_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Homepage2.default }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/:roomId', component: _Room2.default, onEnter: onEnterConfirmRoom }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/pageNotFound/error', component: _EmptyPage2.default }),
+				_react2.default.createElement(_reactRouter.Route, { path: '/hometest/home', component: _HomeFormTest2.default }),
 				_react2.default.createElement(_reactRouter.IndexRoute, { component: _Homepage2.default })
 			)
 		)
@@ -23863,6 +23868,34 @@
 		}
 	};
 	
+	var showCreateTabReducer = function showCreateTabReducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _actions.SHOW_CREATE:
+				return action.payload;
+			case _actions.HIDE_CREATE:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
+	var showJoinBoardTabReducer = function showJoinBoardTabReducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _actions.SHOW_JOIN:
+				return action.payload;
+			case _actions.HIDE_JOIN:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
 	var selectButtonReducer = function selectButtonReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialButtonState;
 		var action = arguments[1];
@@ -23899,7 +23932,9 @@
 		buttonsPicked: iconsPickedReducer,
 		roomNotFound: foundRoomReducer,
 		buttonsToLoad: roomButtonsReducer,
-		buttonSelected: selectButtonReducer
+		buttonSelected: selectButtonReducer,
+		showCreateTab: showCreateTabReducer,
+		showJoinTab: showJoinBoardTabReducer
 	});
 	
 	exports.default = rootReducer;
@@ -23913,7 +23948,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.enterRoom = exports.addRoom = exports.loadRoom = exports.toggleBomb = exports.toggleResistance = exports.toggleThumb = exports.toggleQuestion = exports.toggleSmile = exports.toggleMoney = exports.toggleHeart = exports.toggleEmpire = exports.toggleFrown = exports.toggleClap = exports.roomNotFound = exports.foundRoom = exports.removedButton = exports.pickedButton = exports.stateCurrentBoard = exports.stateBoardId = exports.TOGGLE_BOMB = exports.TOGGLE_RESISTANCE = exports.TOGGLE_THUMB = exports.TOGGLE_QUESTION = exports.TOGGLE_SMILE = exports.TOGGLE_MONEY = exports.TOGGLE_HEART = exports.TOGGLE_EMPIRE = exports.TOGGLE_FROWN = exports.TOGGLE_CLAP = exports.ROOM_NOT_FOUND = exports.LOAD_BUTTONS = exports.REMOVED_BUTTON = exports.PICKED_BUTTON = exports.SET_CURRENT_BOARD = exports.SET_BOARDID = undefined;
+	exports.enterRoom = exports.addRoom = exports.loadRoom = exports.hideJoin = exports.showJoin = exports.hideCreate = exports.showCreate = exports.toggleBomb = exports.toggleResistance = exports.toggleThumb = exports.toggleQuestion = exports.toggleSmile = exports.toggleMoney = exports.toggleHeart = exports.toggleEmpire = exports.toggleFrown = exports.toggleClap = exports.roomNotFound = exports.foundRoom = exports.removedButton = exports.pickedButton = exports.stateCurrentBoard = exports.stateBoardId = exports.HIDE_JOIN = exports.SHOW_JOIN = exports.HIDE_CREATE = exports.SHOW_CREATE = exports.TOGGLE_BOMB = exports.TOGGLE_RESISTANCE = exports.TOGGLE_THUMB = exports.TOGGLE_QUESTION = exports.TOGGLE_SMILE = exports.TOGGLE_MONEY = exports.TOGGLE_HEART = exports.TOGGLE_EMPIRE = exports.TOGGLE_FROWN = exports.TOGGLE_CLAP = exports.ROOM_NOT_FOUND = exports.LOAD_BUTTONS = exports.REMOVED_BUTTON = exports.PICKED_BUTTON = exports.SET_CURRENT_BOARD = exports.SET_BOARDID = undefined;
 	
 	var _axios = __webpack_require__(219);
 	
@@ -23940,6 +23975,10 @@
 	var TOGGLE_THUMB = exports.TOGGLE_THUMB = "TOGGLE_THUMB";
 	var TOGGLE_RESISTANCE = exports.TOGGLE_RESISTANCE = "TOGGLE_RESISTANCE";
 	var TOGGLE_BOMB = exports.TOGGLE_BOMB = "TOGGLE_BOMB";
+	var SHOW_CREATE = exports.SHOW_CREATE = "SHOW_CREATE";
+	var HIDE_CREATE = exports.HIDE_CREATE = "HIDE_CREATE";
+	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
+	var HIDE_JOIN = exports.HIDE_JOIN = "HIDE_JOIN";
 	
 	/* ------ action creaters ------*/
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
@@ -24050,6 +24089,34 @@
 	var toggleBomb = exports.toggleBomb = function toggleBomb(bool) {
 		return {
 			type: TOGGLE_BOMB,
+			payload: bool
+		};
+	};
+	
+	var showCreate = exports.showCreate = function showCreate(bool) {
+		return {
+			type: SHOW_CREATE,
+			payload: bool
+		};
+	};
+	
+	var hideCreate = exports.hideCreate = function hideCreate(bool) {
+		return {
+			type: HIDE_CREATE,
+			payload: bool
+		};
+	};
+	
+	var showJoin = exports.showJoin = function showJoin(bool) {
+		return {
+			type: SHOW_JOIN,
+			payload: bool
+		};
+	};
+	
+	var hideJoin = exports.hideJoin = function hideJoin(bool) {
+		return {
+			type: HIDE_JOIN,
 			payload: bool
 		};
 	};
@@ -31507,7 +31574,9 @@
 			buttons: state.buttonsPicked,
 			roomNotFound: state.roomNotFound,
 			buttonsToLoad: state.buttonsToLoad,
-			foundBoard: state.currentBoard
+			foundBoard: state.currentBoard,
+			showCreate: state.showCreateTab,
+			showJoin: state.showJoinTab
 		};
 	}
 	
@@ -31524,6 +31593,18 @@
 			},
 			confirmRoom: function confirmRoom(boardId) {
 				dispatch((0, _actions.loadRoom)(boardId));
+			},
+			showCreateTab: function showCreateTab(bool) {
+				dispatch((0, _actions.showCreate)(bool));
+			},
+			hideCreateTab: function hideCreateTab(bool) {
+				dispatch((0, _actions.hideCreate)(bool));
+			},
+			showJoinTab: function showJoinTab(bool) {
+				dispatch((0, _actions.showJoin)(bool));
+			},
+			hideJoinTab: function hideJoinTab(bool) {
+				dispatch((0, _actions.hideJoin)(bool));
 			}
 		};
 	}
@@ -31572,12 +31653,6 @@
 	
 	        var _this = _possibleConstructorReturn(this, (HomeForm.__proto__ || Object.getPrototypeOf(HomeForm)).call(this, props));
 	
-	        _this.state = {
-	            joinBoardClass: 'active',
-	            createBoardClass: '',
-	            showLogin: true,
-	            showCreate: false
-	        };
 	        _this.generateBoardId = _this.generateBoardId.bind(_this);
 	        _this.handleCreateBoardClick = _this.handleCreateBoardClick.bind(_this);
 	        _this.handleJoinBoardClick = _this.handleJoinBoardClick.bind(_this);
@@ -31587,12 +31662,14 @@
 	    _createClass(HomeForm, [{
 	        key: 'handleCreateBoardClick',
 	        value: function handleCreateBoardClick() {
-	            this.setState({ createBoardClass: 'active', joinBoardClass: '', showCreate: true, showLogin: false });
+	            this.props.showCreateTab(true);
+	            this.props.hideJoinTab(false);
 	        }
 	    }, {
 	        key: 'handleJoinBoardClick',
 	        value: function handleJoinBoardClick() {
-	            this.setState({ createBoardClass: '', joinBoardClass: 'active', showCreate: false, showLogin: true });
+	            this.props.showJoinTab(true);
+	            this.props.hideCreateTab(false);
 	        }
 	    }, {
 	        key: 'generateBoardId',
@@ -31624,6 +31701,13 @@
 	        value: function render() {
 	            var _this2 = this;
 	
+	            var _props = this.props,
+	                showJoin = _props.showJoin,
+	                showCreate = _props.showCreate,
+	                roomNotFound = _props.roomNotFound,
+	                boardId = _props.boardId;
+	
+	
 	            return _react2.default.createElement(
 	                'div',
 	                { className: 'container' },
@@ -31649,7 +31733,7 @@
 	                                        { className: 'col-xs-6' },
 	                                        _react2.default.createElement(
 	                                            'a',
-	                                            { href: '#', onClick: this.handleJoinBoardClick, className: this.state.joinBoardClass },
+	                                            { href: '#', onClick: this.handleJoinBoardClick, className: showJoin ? 'active' : '' },
 	                                            'Join a Board'
 	                                        )
 	                                    ),
@@ -31658,7 +31742,7 @@
 	                                        { className: 'col-xs-6' },
 	                                        _react2.default.createElement(
 	                                            'a',
-	                                            { href: '#', onClick: this.handleCreateBoardClick, className: this.state.createBoardClass },
+	                                            { href: '#', onClick: this.handleCreateBoardClick, className: showCreate ? 'active' : '' },
 	                                            'Create a Board'
 	                                        )
 	                                    )
@@ -31679,13 +31763,13 @@
 	                                            'form',
 	                                            { onSubmit: function onSubmit(evt) {
 	                                                    return _this2.confirmRoomExists(evt);
-	                                                }, id: 'login-form', role: 'form', style: { display: this.state.showLogin ? 'block' : 'none' } },
+	                                                }, id: 'login-form', role: 'form', style: { display: showJoin ? 'block' : 'none' } },
 	                                            _react2.default.createElement(
 	                                                'div',
-	                                                { className: 'form-groupZ' },
+	                                                { className: 'form-group' },
 	                                                _react2.default.createElement('input', { name: 'boardId', type: 'text', tabIndex: '1', className: 'form-control', placeholder: 'Board #' })
 	                                            ),
-	                                            this.props.roomNotFound ? _react2.default.createElement(
+	                                            roomNotFound ? _react2.default.createElement(
 	                                                'div',
 	                                                null,
 	                                                'Oops! We couldn\'t find that room'
@@ -31701,7 +31785,7 @@
 	                                                        { className: 'col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3' },
 	                                                        _react2.default.createElement(
 	                                                            'button',
-	                                                            { type: 'submit', tabIndex: '4', className: 'form-control btn btn-login paddingLR' },
+	                                                            { type: 'submit', tabIndex: '4', className: 'form-control btn btn-login' },
 	                                                            'Join'
 	                                                        )
 	                                                    )
@@ -31710,8 +31794,8 @@
 	                                        ),
 	                                        _react2.default.createElement(
 	                                            'form',
-	                                            { role: 'form', style: { display: this.state.showCreate ? 'block' : 'none' } },
-	                                            this.props && this.props.boardId ? _react2.default.createElement(
+	                                            { role: 'form', style: { display: showCreate ? 'block' : 'none' } },
+	                                            this.props && boardId ? _react2.default.createElement(
 	                                                'div',
 	                                                null,
 	                                                _react2.default.createElement(
@@ -34504,6 +34588,122 @@
 	
 	
 	module.exports = EmptyPage;
+
+/***/ },
+/* 327 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(244);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var HomeFormTest = function (_React$Component) {
+	  _inherits(HomeFormTest, _React$Component);
+	
+	  function HomeFormTest(props) {
+	    _classCallCheck(this, HomeFormTest);
+	
+	    return _possibleConstructorReturn(this, (HomeFormTest.__proto__ || Object.getPrototypeOf(HomeFormTest)).call(this, props));
+	  }
+	
+	  _createClass(HomeFormTest, [{
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { className: 'container' },
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'testHeading col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2' },
+	            _react2.default.createElement(
+	              'h1',
+	              { className: 'test-centerHeadingText' },
+	              'Heading'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'testSocial col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'testSocialIcons' },
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Heart'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Twitter'
+	              ),
+	              _react2.default.createElement(
+	                'p',
+	                null,
+	                'Facebook'
+	              )
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'testForm col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2' },
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              'Content inside'
+	            )
+	          )
+	        ),
+	        _react2.default.createElement(
+	          'div',
+	          { className: 'row' },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'testFooter col-lg-12 col-lg-offset-0' },
+	            _react2.default.createElement(
+	              'h1',
+	              null,
+	              'Footer'
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
+	
+	  return HomeFormTest;
+	}(_react2.default.Component);
+	
+	exports.default = HomeFormTest;
 
 /***/ }
 /******/ ]);

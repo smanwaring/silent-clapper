@@ -12,7 +12,11 @@ import {
 	TOGGLE_QUESTION, 
 	TOGGLE_THUMB, 
 	TOGGLE_RESISTANCE, 
-	TOGGLE_BOMB } from './actions';
+	TOGGLE_BOMB,
+SHOW_CREATE,
+HIDE_CREATE,
+SHOW_JOIN,
+HIDE_JOIN } from './actions';
 
 const initialButtonState = {
 	    clap: false,
@@ -70,6 +74,29 @@ const roomButtonsReducer = function(state=[], action){
 	}
 }
 
+
+const showCreateTabReducer = function(state=false, action){
+	switch(action.type){
+		case SHOW_CREATE: 
+			return action.payload;
+		case HIDE_CREATE: 
+			return action.payload;
+		default: return state;
+	}
+}
+
+const showJoinBoardTabReducer= function(state=true, action){
+	switch(action.type){
+		case SHOW_JOIN: 
+			return action.payload;
+		case HIDE_JOIN: 
+			return action.payload;
+		default: return state;
+	}
+}
+
+
+
 const selectButtonReducer = function(state=initialButtonState, action){
 	switch(action.type){
 		case TOGGLE_CLAP: 
@@ -104,7 +131,9 @@ const rootReducer = combineReducers({
 	buttonsPicked: iconsPickedReducer,
 	roomNotFound: foundRoomReducer,
 	buttonsToLoad:  roomButtonsReducer,
-	buttonSelected: selectButtonReducer
+	buttonSelected: selectButtonReducer,
+	showCreateTab: showCreateTabReducer,
+	showJoinTab: showJoinBoardTabReducer
 })
 
 export default rootReducer;
