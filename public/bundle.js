@@ -24212,7 +24212,8 @@
 					return res.json();
 				}
 			}).then(function (buttons) {
-				return dispatch(foundRoom(buttons));
+				dispatch(foundRoom(buttons));
+				dispatch(stateCurrentBoard(roomId));
 			}).catch(function (err) {
 				return console.log(err);
 			});
@@ -32007,6 +32008,9 @@
 				dispatch((0, _actions.toggleMoney)(bool));
 				dispatch((0, _actions.toggleQuestion)(bool));
 				dispatch((0, _actions.toggleSelectAll)(bool));
+			},
+			toggleSelect: function toggleSelect(bool) {
+				dispatch((0, _actions.toggleSelectAll)(bool));
 			}
 		};
 	}
@@ -32114,13 +32118,21 @@
 	                color: "purple",
 	                icon: "fa fa-bomb fa-spin"
 	            }];
-	            dataArray.map(function (item) {
+	            var pickedArray = this.props.picked.map(function (data) {
+	                return data.icon;
+	            });
+	            var notSelectedArray = dataArray.filter(function (item) {
+	                return pickedArray.indexOf(item.icon) < 0;
+	            });
+	            notSelectedArray.forEach(function (item) {
 	                _this2.props.addButton(item);
 	            });
 	        }
 	    }, {
 	        key: 'deselectAllinDB',
 	        value: function deselectAllinDB() {
+	            var _this3 = this;
+	
 	            var dataArray = [{
 	                color: "blue",
 	                icon: "fa fa-sign-language"
@@ -32152,9 +32164,8 @@
 	                color: "purple",
 	                icon: "fa fa-bomb fa-spin"
 	            }];
-	            var self = this;
-	            dataArray.map(function (item) {
-	                self.props.removeButton(item);
+	            dataArray.forEach(function (item) {
+	                _this3.props.removeButton(item);
 	            });
 	        }
 	    }, {
@@ -32171,57 +32182,97 @@
 	    }, {
 	        key: 'handleClapClick',
 	        value: function handleClapClick() {
+	            if (!this.props.buttonClass.clap === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.clapClicked(!this.props.buttonClass.clap);
 	        }
 	    }, {
 	        key: 'handleFrownClick',
 	        value: function handleFrownClick() {
+	            if (!this.props.buttonClass.frown === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.frownClicked(!this.props.buttonClass.frown);
 	        }
 	    }, {
 	        key: 'handleEmpireClick',
 	        value: function handleEmpireClick() {
+	            if (!this.props.buttonClass.empire === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.empireClicked(!this.props.buttonClass.empire);
 	        }
 	    }, {
 	        key: 'handleHeartClick',
 	        value: function handleHeartClick() {
+	            if (!this.props.buttonClass.heart === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.heartClicked(!this.props.buttonClass.heart);
 	        }
 	    }, {
 	        key: 'handleMoneyClick',
 	        value: function handleMoneyClick() {
+	            if (!this.props.buttonClass.money === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.moneyClicked(!this.props.buttonClass.money);
 	        }
 	    }, {
 	        key: 'handleSmileClick',
 	        value: function handleSmileClick() {
+	            if (!this.props.buttonClass.smile === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.smileClicked(!this.props.buttonClass.smile);
 	        }
 	    }, {
 	        key: 'handleQuestionClick',
 	        value: function handleQuestionClick() {
+	            if (!this.props.buttonClass.question === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.questionClicked(!this.props.buttonClass.question);
 	        }
 	    }, {
 	        key: 'handleThumbClick',
 	        value: function handleThumbClick() {
+	            if (!this.props.buttonClass.thumb === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.thumbClicked(!this.props.buttonClass.thumb);
 	        }
 	    }, {
 	        key: 'handleResistanceClick',
 	        value: function handleResistanceClick() {
+	            if (!this.props.buttonClass.resistance === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.resistanceClicked(!this.props.buttonClass.resistance);
 	        }
 	    }, {
 	        key: 'handleBombClick',
 	        value: function handleBombClick() {
+	            if (!this.props.buttonClass.bomb === false) {
+	                this.props.toggleSelect(false);
+	            }
+	
 	            this.props.bombClicked(!this.props.buttonClass.bomb);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this3 = this;
+	            var _this4 = this;
 	
 	            var buttonClass = this.props.buttonClass;
 	
@@ -32240,6 +32291,7 @@
 	            var bombClass = "btn btn-circle btn-xl purple";
 	
 	            var allButtonsOn = this.props.picked.length === 10;
+	            console.log("picked!!!!!!!!", this.props.picked);
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -32265,70 +32317,70 @@
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.clap ? clapClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'blue');_this3.handleClapClick();
+	                                addRemove(evt, 'blue');_this4.handleClapClick();
 	                            }, 'data-icon': 'fa fa-sign-language' },
 	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.frown ? frownClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'red');_this3.handleFrownClick();
+	                                addRemove(evt, 'red');_this4.handleFrownClick();
 	                            }, 'data-icon': 'fa fa-frown-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.empire ? empireClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'gray');_this3.handleEmpireClick();
+	                                addRemove(evt, 'gray');_this4.handleEmpireClick();
 	                            }, 'data-icon': 'fa fa-empire' },
 	                        _react2.default.createElement('i', { className: 'fa fa-empire', 'data-icon': 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.heart ? heartClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'dark-blue');_this3.handleHeartClick();
+	                                addRemove(evt, 'dark-blue');_this4.handleHeartClick();
 	                            }, 'data-icon': 'fa fa-heart-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-heart-o', 'data-icon': 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.money ? moneyClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'green');_this3.handleMoneyClick();
+	                                addRemove(evt, 'green');_this4.handleMoneyClick();
 	                            }, 'data-icon': 'fa fa-money fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-money', 'data-icon': 'fa fa-money fa-spin' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.smile ? smileClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'pink');_this3.handleSmileClick();
+	                                addRemove(evt, 'pink');_this4.handleSmileClick();
 	                            }, 'data-icon': 'fa fa-smile-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-smile-o', 'data-icon': 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.question ? questionClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'yellow');_this3.handleQuestionClick();
+	                                addRemove(evt, 'yellow');_this4.handleQuestionClick();
 	                            }, 'data-icon': 'fa fa-question' },
 	                        _react2.default.createElement('i', { className: 'fa fa-question', 'data-icon': 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'mint-green');_this3.handleThumbClick();
+	                                addRemove(evt, 'mint-green');_this4.handleThumbClick();
 	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
 	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'data-icon': 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'orange');_this3.handleResistanceClick();
+	                                addRemove(evt, 'orange');_this4.handleResistanceClick();
 	                            }, 'data-icon': 'fa fa-rebel' },
 	                        _react2.default.createElement('i', { className: 'fa fa-rebel', 'data-icon': 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'purple');_this3.handleBombClick();
+	                                addRemove(evt, 'purple');_this4.handleBombClick();
 	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-bomb', 'data-icon': 'fa fa-bomb fa-spin' })
 	                    )
@@ -34614,7 +34666,7 @@
 	            // initialize client socket
 	            this.socket = io.connect();
 	            //join room
-	            this.socket.emit('wantToJoinRoom', component.props.currentBoard.toString() || component.props.boardId.toString());
+	            this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
 	            // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
 	            this.socket.on('showAction', function (icon) {
 	                // hey, someone else clicked an icon and we found out from the server

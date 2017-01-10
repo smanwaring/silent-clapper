@@ -16,7 +16,7 @@ class Room extends React.Component {
 		 // initialize client socket
 		 this.socket = io.connect();
          //join room
-         this.socket.emit('wantToJoinRoom', component.props.currentBoard.toString() || component.props.boardId.toString());
+         this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
 		 // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
 		 this.socket.on('showAction', function(icon){
 		 	// hey, someone else clicked an icon and we found out from the server

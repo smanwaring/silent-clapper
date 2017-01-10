@@ -37,7 +37,7 @@ class HomeForm extends React.Component {
         }
     }
 
-    componentDidUpdate(){
+    componentDidUpdate(){ 
         const self = this;
         if(this.props.roomNotFound){
           setTimeout(function() {

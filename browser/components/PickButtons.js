@@ -74,7 +74,9 @@ class PickButtons extends React.Component {
                 icon: "fa fa-bomb fa-spin"
             }
         ];
-        dataArray.map(item => {
+        const pickedArray = this.props.picked.map(data => data.icon);
+        const notSelectedArray = dataArray.filter( item => pickedArray.indexOf(item.icon) < 0);
+        notSelectedArray.forEach(item => {
             this.props.addButton(item);
         });
     }
@@ -123,9 +125,8 @@ class PickButtons extends React.Component {
                 icon: "fa fa-bomb fa-spin"
             }
         ];
-        const self = this;
-        dataArray.map(item => {
-            self.props.removeButton(item);
+        dataArray.forEach(item => {
+            this.props.removeButton(item);
         });
     }
 
@@ -141,33 +142,73 @@ class PickButtons extends React.Component {
     }
 
     handleClapClick() {
+        if(!this.props.buttonClass.clap === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.clapClicked(!this.props.buttonClass.clap);
     }
     handleFrownClick() {
+      if(!this.props.buttonClass.frown === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.frownClicked(!this.props.buttonClass.frown);
     }
     handleEmpireClick() {
+        if(!this.props.buttonClass.empire === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.empireClicked(!this.props.buttonClass.empire);
     }
     handleHeartClick() {
+        if(!this.props.buttonClass.heart === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.heartClicked(!this.props.buttonClass.heart);
     }
     handleMoneyClick() {
+        if(!this.props.buttonClass.money === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.moneyClicked(!this.props.buttonClass.money);
     }
     handleSmileClick() {
+        if(!this.props.buttonClass.smile === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.smileClicked(!this.props.buttonClass.smile);
     }
     handleQuestionClick() {
+        if(!this.props.buttonClass.question === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.questionClicked(!this.props.buttonClass.question);
     }
     handleThumbClick() {
+        if(!this.props.buttonClass.thumb === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.thumbClicked(!this.props.buttonClass.thumb);
     }
     handleResistanceClick() {
+        if(!this.props.buttonClass.resistance === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.resistanceClicked(!this.props.buttonClass.resistance);
     }
     handleBombClick() {
+        if(!this.props.buttonClass.bomb === false){
+            this.props.toggleSelect(false);
+        }
+
        this.props.bombClicked(!this.props.buttonClass.bomb);
     }
 
@@ -188,10 +229,11 @@ class PickButtons extends React.Component {
       let bombClass = "btn btn-circle btn-xl purple";
 
       let allButtonsOn = this.props.picked.length === 10;
+      console.log("picked!!!!!!!!", this.props.picked)
 
 
     return (
-
+        
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>
             <div className="checkbox">

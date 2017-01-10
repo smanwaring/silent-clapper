@@ -13,7 +13,7 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
 	return {
 		setBoardId: function(boardId){
-			dispatch(stateBoardId(boardId));
+			dispatch( stateBoardId(boardId) );
 		}
 	};
 

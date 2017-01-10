@@ -61,6 +61,9 @@ function mapDispatchToProps(dispatch){
 			dispatch( toggleMoney(bool) );
 			dispatch( toggleQuestion(bool) );
 			dispatch( toggleSelectAll(bool) );
+		},
+		toggleSelect: function(bool){
+			dispatch( toggleSelectAll(bool) );
 		}
 	};
 

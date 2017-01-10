@@ -231,7 +231,10 @@ export const enterRoom = (roomId) => {
 					return res.json();
 				}
 			})
-			.then(buttons => dispatch(foundRoom(buttons)))
+			.then(buttons => {
+				dispatch( foundRoom(buttons) );
+				dispatch(stateCurrentBoard(roomId));
+			})
 			.catch(err => console.log(err));
 	}
 	return thunk;
