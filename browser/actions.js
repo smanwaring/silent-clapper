@@ -233,7 +233,6 @@ export const enterRoom = (roomId) => {
 			})
 			.then(buttons => {
 				dispatch( foundRoom(buttons) );
-				dispatch(stateCurrentBoard(roomId));
 			})
 			.catch(err => console.log(err));
 	}

@@ -19,6 +19,7 @@ import HomeFormTest from './components/HomeFormTest';
 /*------ load the buttons for the room you are about to enter ------ */
 function onEnterConfirmRoom(nextState) {
 	store.dispatch( enterRoom (nextState.params.roomId) );
+	store.dispatch( stateCurrentBoard(nextState.params.roomId));
 	store.dispatch( roomNotFound(false) );
 }
 
