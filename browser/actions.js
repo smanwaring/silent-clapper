@@ -22,6 +22,8 @@ export const SHOW_CREATE = "SHOW_CREATE";
 export const HIDE_CREATE = "HIDE_CREATE";
 export const SHOW_JOIN = "SHOW_JOIN";
 export const HIDE_JOIN = "HIDE_JOIN";
+export const TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
+export const TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
 
 /* ------ action creaters ------*/
 export const stateBoardId = (boardId) => {
@@ -67,6 +69,23 @@ export const roomNotFound = (bool) => {
 		payload: bool
 	};
 };
+
+export const toggleSelectAll= (bool) => {
+	return {
+		type: TOGGLE_SELECT_ALL,
+		payload: bool
+	};
+};
+
+
+export const showPickButtonError = (bool) => {
+	return {
+		type: TOGGLE_PICK_BUTTON_ERROR,
+		payload: bool
+	};
+};
+
+
 
 
 export const toggleClap = (bool) => {

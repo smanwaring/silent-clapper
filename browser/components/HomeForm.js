@@ -25,12 +25,16 @@ class HomeForm extends React.Component {
 
     generateBoardId(evt){
         evt.preventDefault();
-        let boardId = Math.floor(Math.random()*89999+10000);
-        let details = {
-            path: boardId,
-            buttons: this.props.buttons
+        if(this.props.buttons.length < 1){
+            this.props.pickButtonsError(true);
+        } else {
+            let boardId = Math.floor(Math.random()*89999+10000);
+            let details = {
+                path: boardId,
+                buttons: this.props.buttons
+            }
+            this.props.addBoard(details);
         }
-        this.props.addBoard(details);
     }
 
     componentDidUpdate(){
@@ -38,10 +42,13 @@ class HomeForm extends React.Component {
         if(this.props.roomNotFound){
           setTimeout(function() {
           self.props.clearRoomNotFound(false);
-           }, 3000)
+           }, 2000)
         }
-
-        console.log("HEY REDIRECTING AND I SHOULDN'T!!!")
+        if(this.props.showPickButtonError){
+          setTimeout(function() {
+          self.props.pickButtonsError(false);
+           }, 2000)       
+        }
         if (this.props.foundBoard) {
             hashHistory.push(`/${this.props.foundBoard}`);
         }
@@ -54,7 +61,7 @@ class HomeForm extends React.Component {
     }
 
   render () {
-      const { showJoin, showCreate, roomNotFound, boardId } = this.props;
+      const { showJoin, showCreate, roomNotFound, boardId, showPickButtonError, buttons } = this.props;
 
     return (
         <div className="container">
@@ -108,6 +115,7 @@ class HomeForm extends React.Component {
                                                         <div>
                                                             <button id="register-submit" tabIndex="4" className="form-control btn btn-register" onClick={this.generateBoardId}> Generate My Board Link </button>
                                                         </div>
+                                                          {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
                                                     </div>
                                                 </div> 
                                                 } 

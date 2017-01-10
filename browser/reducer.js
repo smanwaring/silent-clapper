@@ -21,6 +21,8 @@ import {
 	HIDE_CREATE,
 	SHOW_JOIN,
 	HIDE_JOIN,
+	TOGGLE_SELECT_ALL,
+	TOGGLE_PICK_BUTTON_ERROR
  } from './actions';
 
 const initialButtonState = {
@@ -100,6 +102,21 @@ const showJoinBoardTabReducer= function(state=true, action){
 	}
 }
 
+const toggleSelectAllReducer = function(state=false, action){
+	switch(action.type){
+		case TOGGLE_SELECT_ALL: 
+			return action.payload;
+		default: return state;
+	}
+}
+
+const pickButtonErrorReducer = function(state=false, action){
+	switch(action.type){
+		case TOGGLE_PICK_BUTTON_ERROR: 
+			return action.payload;
+		default: return state;
+	}
+}
 
 const selectButtonReducer = function(state=initialButtonState, action){
 	switch(action.type){
@@ -137,7 +154,9 @@ const rootReducer = combineReducers({
 	buttonsToLoad:  roomButtonsReducer,
 	buttonSelected: selectButtonReducer,
 	showCreateTab: showCreateTabReducer,
-	showJoinTab: showJoinBoardTabReducer
+	showJoinTab: showJoinBoardTabReducer,
+	allButtonSelect: toggleSelectAllReducer,
+	showPickButtonError: pickButtonErrorReducer
 })
 
 export default rootReducer;

@@ -86,13 +86,16 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	/*------ load the buttons for the room you are about to enter ------ */
 	function onEnterConfirmRoom(nextState) {
 		_store2.default.dispatch((0, _actions.enterRoom)(nextState.params.roomId));
 		_store2.default.dispatch((0, _actions.roomNotFound)(false));
 	}
 	
+	/*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
 	function onEnterResetCurrentBoard() {
 		_store2.default.dispatch((0, _actions.stateCurrentBoard)(false));
+		_store2.default.dispatch((0, _actions.showPickButtonError)(false));
 	}
 	
 	_reactDom2.default.render(_react2.default.createElement(
@@ -23901,6 +23904,30 @@
 		}
 	};
 	
+	var toggleSelectAllReducer = function toggleSelectAllReducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _actions.TOGGLE_SELECT_ALL:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
+	var pickButtonErrorReducer = function pickButtonErrorReducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _actions.TOGGLE_PICK_BUTTON_ERROR:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
 	var selectButtonReducer = function selectButtonReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialButtonState;
 		var action = arguments[1];
@@ -23939,7 +23966,9 @@
 		buttonsToLoad: roomButtonsReducer,
 		buttonSelected: selectButtonReducer,
 		showCreateTab: showCreateTabReducer,
-		showJoinTab: showJoinBoardTabReducer
+		showJoinTab: showJoinBoardTabReducer,
+		allButtonSelect: toggleSelectAllReducer,
+		showPickButtonError: pickButtonErrorReducer
 	});
 	
 	exports.default = rootReducer;
@@ -23953,7 +23982,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.enterRoom = exports.addRoom = exports.loadRoom = exports.hideJoin = exports.showJoin = exports.hideCreate = exports.showCreate = exports.toggleBomb = exports.toggleResistance = exports.toggleThumb = exports.toggleQuestion = exports.toggleSmile = exports.toggleMoney = exports.toggleHeart = exports.toggleEmpire = exports.toggleFrown = exports.toggleClap = exports.roomNotFound = exports.foundRoom = exports.removedButton = exports.pickedButton = exports.stateCurrentBoard = exports.stateBoardId = exports.HIDE_JOIN = exports.SHOW_JOIN = exports.HIDE_CREATE = exports.SHOW_CREATE = exports.TOGGLE_BOMB = exports.TOGGLE_RESISTANCE = exports.TOGGLE_THUMB = exports.TOGGLE_QUESTION = exports.TOGGLE_SMILE = exports.TOGGLE_MONEY = exports.TOGGLE_HEART = exports.TOGGLE_EMPIRE = exports.TOGGLE_FROWN = exports.TOGGLE_CLAP = exports.ROOM_NOT_FOUND = exports.LOAD_BUTTONS = exports.REMOVED_BUTTON = exports.PICKED_BUTTON = exports.SET_CURRENT_BOARD = exports.SET_BOARDID = undefined;
+	exports.enterRoom = exports.addRoom = exports.loadRoom = exports.hideJoin = exports.showJoin = exports.hideCreate = exports.showCreate = exports.toggleBomb = exports.toggleResistance = exports.toggleThumb = exports.toggleQuestion = exports.toggleSmile = exports.toggleMoney = exports.toggleHeart = exports.toggleEmpire = exports.toggleFrown = exports.toggleClap = exports.showPickButtonError = exports.toggleSelectAll = exports.roomNotFound = exports.foundRoom = exports.removedButton = exports.pickedButton = exports.stateCurrentBoard = exports.stateBoardId = exports.TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_SELECT_ALL = exports.HIDE_JOIN = exports.SHOW_JOIN = exports.HIDE_CREATE = exports.SHOW_CREATE = exports.TOGGLE_BOMB = exports.TOGGLE_RESISTANCE = exports.TOGGLE_THUMB = exports.TOGGLE_QUESTION = exports.TOGGLE_SMILE = exports.TOGGLE_MONEY = exports.TOGGLE_HEART = exports.TOGGLE_EMPIRE = exports.TOGGLE_FROWN = exports.TOGGLE_CLAP = exports.ROOM_NOT_FOUND = exports.LOAD_BUTTONS = exports.REMOVED_BUTTON = exports.PICKED_BUTTON = exports.SET_CURRENT_BOARD = exports.SET_BOARDID = undefined;
 	
 	var _axios = __webpack_require__(219);
 	
@@ -23984,6 +24013,8 @@
 	var HIDE_CREATE = exports.HIDE_CREATE = "HIDE_CREATE";
 	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
 	var HIDE_JOIN = exports.HIDE_JOIN = "HIDE_JOIN";
+	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
+	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
 	
 	/* ------ action creaters ------*/
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
@@ -24024,6 +24055,20 @@
 	var roomNotFound = exports.roomNotFound = function roomNotFound(bool) {
 		return {
 			type: ROOM_NOT_FOUND,
+			payload: bool
+		};
+	};
+	
+	var toggleSelectAll = exports.toggleSelectAll = function toggleSelectAll(bool) {
+		return {
+			type: TOGGLE_SELECT_ALL,
+			payload: bool
+		};
+	};
+	
+	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
+		return {
+			type: TOGGLE_PICK_BUTTON_ERROR,
 			payload: bool
 		};
 	};
@@ -31581,7 +31626,8 @@
 			buttonsToLoad: state.buttonsToLoad,
 			foundBoard: state.currentBoard,
 			showCreate: state.showCreateTab,
-			showJoin: state.showJoinTab
+			showJoin: state.showJoinTab,
+			showPickButtonError: state.showPickButtonError
 		};
 	}
 	
@@ -31613,6 +31659,9 @@
 			},
 			clearRoomNotFound: function clearRoomNotFound(bool) {
 				dispatch((0, _actions.roomNotFound)(bool));
+			},
+			pickButtonsError: function pickButtonsError(bool) {
+				dispatch((0, _actions.showPickButtonError)(bool));
 			}
 		};
 	}
@@ -31683,12 +31732,16 @@
 	        key: 'generateBoardId',
 	        value: function generateBoardId(evt) {
 	            evt.preventDefault();
-	            var boardId = Math.floor(Math.random() * 89999 + 10000);
-	            var details = {
-	                path: boardId,
-	                buttons: this.props.buttons
-	            };
-	            this.props.addBoard(details);
+	            if (this.props.buttons.length < 1) {
+	                this.props.pickButtonsError(true);
+	            } else {
+	                var boardId = Math.floor(Math.random() * 89999 + 10000);
+	                var details = {
+	                    path: boardId,
+	                    buttons: this.props.buttons
+	                };
+	                this.props.addBoard(details);
+	            }
 	        }
 	    }, {
 	        key: 'componentDidUpdate',
@@ -31697,10 +31750,13 @@
 	            if (this.props.roomNotFound) {
 	                setTimeout(function () {
 	                    self.props.clearRoomNotFound(false);
-	                }, 3000);
+	                }, 2000);
 	            }
-	
-	            console.log("HEY REDIRECTING AND I SHOULDN'T!!!");
+	            if (this.props.showPickButtonError) {
+	                setTimeout(function () {
+	                    self.props.pickButtonsError(false);
+	                }, 2000);
+	            }
 	            if (this.props.foundBoard) {
 	                _reactRouter.hashHistory.push('/' + this.props.foundBoard);
 	            }
@@ -31721,7 +31777,9 @@
 	                showJoin = _props.showJoin,
 	                showCreate = _props.showCreate,
 	                roomNotFound = _props.roomNotFound,
-	                boardId = _props.boardId;
+	                boardId = _props.boardId,
+	                showPickButtonError = _props.showPickButtonError,
+	                buttons = _props.buttons;
 	
 	
 	            return _react2.default.createElement(
@@ -31847,7 +31905,12 @@
 	                                                            { id: 'register-submit', tabIndex: '4', className: 'form-control btn btn-register', onClick: this.generateBoardId },
 	                                                            ' Generate My Board Link '
 	                                                        )
-	                                                    )
+	                                                    ),
+	                                                    showPickButtonError && buttons.length < 1 ? _react2.default.createElement(
+	                                                        'div',
+	                                                        null,
+	                                                        'Please select some buttons!'
+	                                                    ) : ''
 	                                                )
 	                                            )
 	                                        )
@@ -31889,7 +31952,8 @@
 	function mapStateToProps(state) {
 		return {
 			picked: state.buttonsPicked,
-			buttonClass: state.buttonSelected
+			buttonClass: state.buttonSelected,
+			allSelected: state.allButtonSelect
 		};
 	}
 	
@@ -31930,6 +31994,19 @@
 			},
 			questionClicked: function questionClicked(bool) {
 				dispatch((0, _actions.toggleQuestion)(bool));
+			},
+			selectAll: function selectAll(bool) {
+				dispatch((0, _actions.toggleClap)(bool));
+				dispatch((0, _actions.toggleFrown)(bool));
+				dispatch((0, _actions.toggleEmpire)(bool));
+				dispatch((0, _actions.toggleHeart)(bool));
+				dispatch((0, _actions.toggleSmile)(bool));
+				dispatch((0, _actions.toggleBomb)(bool));
+				dispatch((0, _actions.toggleThumb)(bool));
+				dispatch((0, _actions.toggleResistance)(bool));
+				dispatch((0, _actions.toggleMoney)(bool));
+				dispatch((0, _actions.toggleQuestion)(bool));
+				dispatch((0, _actions.toggleSelectAll)(bool));
 			}
 		};
 	}
@@ -31983,6 +32060,7 @@
 	        _this.handleThumbClick = _this.handleThumbClick.bind(_this);
 	        _this.handleResistanceClick = _this.handleResistanceClick.bind(_this);
 	        _this.handleBombClick = _this.handleBombClick.bind(_this);
+	        _this.handleCheck = _this.handleCheck.bind(_this);
 	        return _this;
 	    }
 	
@@ -31998,6 +32076,96 @@
 	                this.props.addButton(data);
 	            } else {
 	                this.props.removeButton(data);
+	            }
+	        }
+	    }, {
+	        key: 'selectAllinDB',
+	        value: function selectAllinDB() {
+	            var _this2 = this;
+	
+	            var dataArray = [{
+	                color: "blue",
+	                icon: "fa fa-sign-language"
+	            }, {
+	                color: "red",
+	                icon: "fa fa-frown-o"
+	            }, {
+	                color: "grey",
+	                icon: "fa fa-empire"
+	            }, {
+	                color: "dark-blue",
+	                icon: "fa fa-heart-o"
+	            }, {
+	                color: "green",
+	                icon: "fa fa-money fa-spin"
+	            }, {
+	                color: "pink",
+	                icon: "fa fa-smile-o"
+	            }, {
+	                color: "yellow",
+	                icon: "fa fa-question"
+	            }, {
+	                color: "mint-green",
+	                icon: "fa fa-thumbs-o-up"
+	            }, {
+	                color: "orange",
+	                icon: "fa fa-rebel"
+	            }, {
+	                color: "purple",
+	                icon: "fa fa-bomb fa-spin"
+	            }];
+	            dataArray.map(function (item) {
+	                _this2.props.addButton(item);
+	            });
+	        }
+	    }, {
+	        key: 'deselectAllinDB',
+	        value: function deselectAllinDB() {
+	            var dataArray = [{
+	                color: "blue",
+	                icon: "fa fa-sign-language"
+	            }, {
+	                color: "red",
+	                icon: "fa fa-frown-o"
+	            }, {
+	                color: "grey",
+	                icon: "fa fa-empire"
+	            }, {
+	                color: "dark-blue",
+	                icon: "fa fa-heart-o"
+	            }, {
+	                color: "green",
+	                icon: "fa fa-money fa-spin"
+	            }, {
+	                color: "pink",
+	                icon: "fa fa-smile-o"
+	            }, {
+	                color: "yellow",
+	                icon: "fa fa-question"
+	            }, {
+	                color: "mint-green",
+	                icon: "fa fa-thumbs-o-up"
+	            }, {
+	                color: "orange",
+	                icon: "fa fa-rebel"
+	            }, {
+	                color: "purple",
+	                icon: "fa fa-bomb fa-spin"
+	            }];
+	            var self = this;
+	            dataArray.map(function (item) {
+	                self.props.removeButton(item);
+	            });
+	        }
+	    }, {
+	        key: 'handleCheck',
+	        value: function handleCheck() {
+	            if (this.props.allSelected) {
+	                this.deselectAllinDB();
+	                this.props.selectAll(!this.props.allSelected);
+	            } else {
+	                this.selectAllinDB();
+	                this.props.selectAll(!this.props.allSelected);
 	            }
 	        }
 	    }, {
@@ -32053,7 +32221,7 @@
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this2 = this;
+	            var _this3 = this;
 	
 	            var buttonClass = this.props.buttonClass;
 	
@@ -32070,6 +32238,9 @@
 	            var thumbClass = "btn btn-circle btn-xl mint-green";
 	            var resistanceClass = "btn btn-circle btn-xl orange";
 	            var bombClass = "btn btn-circle btn-xl purple";
+	
+	            var allButtonsOn = this.props.picked.length === 10;
+	
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -32080,74 +32251,84 @@
 	                ),
 	                _react2.default.createElement(
 	                    'div',
+	                    { className: 'checkbox' },
+	                    _react2.default.createElement(
+	                        'label',
+	                        null,
+	                        _react2.default.createElement('input', { type: 'checkbox', checked: allButtonsOn ? "checked" : '', onChange: this.handleCheck }),
+	                        ' select all'
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
 	                    { className: 'col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body' },
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.clap ? clapClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'blue');_this2.handleClapClick();
+	                                addRemove(evt, 'blue');_this3.handleClapClick();
 	                            }, 'data-icon': 'fa fa-sign-language' },
 	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.frown ? frownClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'red');_this2.handleFrownClick();
+	                                addRemove(evt, 'red');_this3.handleFrownClick();
 	                            }, 'data-icon': 'fa fa-frown-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.empire ? empireClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'gray');_this2.handleEmpireClick();
+	                                addRemove(evt, 'gray');_this3.handleEmpireClick();
 	                            }, 'data-icon': 'fa fa-empire' },
 	                        _react2.default.createElement('i', { className: 'fa fa-empire', 'data-icon': 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.heart ? heartClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'dark-blue');_this2.handleHeartClick();
+	                                addRemove(evt, 'dark-blue');_this3.handleHeartClick();
 	                            }, 'data-icon': 'fa fa-heart-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-heart-o', 'data-icon': 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.money ? moneyClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'green');_this2.handleMoneyClick();
+	                                addRemove(evt, 'green');_this3.handleMoneyClick();
 	                            }, 'data-icon': 'fa fa-money fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-money', 'data-icon': 'fa fa-money fa-spin' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.smile ? smileClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'pink');_this2.handleSmileClick();
+	                                addRemove(evt, 'pink');_this3.handleSmileClick();
 	                            }, 'data-icon': 'fa fa-smile-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-smile-o', 'data-icon': 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.question ? questionClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'yellow');_this2.handleQuestionClick();
+	                                addRemove(evt, 'yellow');_this3.handleQuestionClick();
 	                            }, 'data-icon': 'fa fa-question' },
 	                        _react2.default.createElement('i', { className: 'fa fa-question', 'data-icon': 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'mint-green');_this2.handleThumbClick();
+	                                addRemove(evt, 'mint-green');_this3.handleThumbClick();
 	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
 	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'data-icon': 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'orange');_this2.handleResistanceClick();
+	                                addRemove(evt, 'orange');_this3.handleResistanceClick();
 	                            }, 'data-icon': 'fa fa-rebel' },
 	                        _react2.default.createElement('i', { className: 'fa fa-rebel', 'data-icon': 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonClass.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'purple');_this2.handleBombClick();
+	                                addRemove(evt, 'purple');_this3.handleBombClick();
 	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-bomb', 'data-icon': 'fa fa-bomb fa-spin' })
 	                    )

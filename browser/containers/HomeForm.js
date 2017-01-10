@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import HomeForm from '../components/HomeForm';
-import { setInterval, stateBoardId, stateCurrentBoard, addRoom, loadRoom, showCreate, hideCreate, showJoin, hideJoin, roomNotFound } from '../actions';
+import { setInterval, stateBoardId, stateCurrentBoard, addRoom, loadRoom, showCreate, hideCreate, showJoin, hideJoin, roomNotFound, showPickButtonError } from '../actions';
 
 function mapStateToProps(state){
 	return {
@@ -10,7 +10,8 @@ function mapStateToProps(state){
 		buttonsToLoad: state.buttonsToLoad,
 		foundBoard: state.currentBoard,
 		showCreate: state.showCreateTab,
-		showJoin: state.showJoinTab
+		showJoin: state.showJoinTab,
+		showPickButtonError: state.showPickButtonError
 	};
 }
 
@@ -42,6 +43,9 @@ function mapDispatchToProps(dispatch){
 		},
 		clearRoomNotFound: function(bool){
 			dispatch (  roomNotFound(bool) ); 
+		},
+		pickButtonsError: function(bool){
+			dispatch ( showPickButtonError(bool));
 		}
 	};
 

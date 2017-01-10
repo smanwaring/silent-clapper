@@ -1,12 +1,13 @@
 import {connect} from 'react-redux';
 import PickButtons from '../components/PickButtons';
 import { stateBoardId, pickedButton, removedButton, toggleClap,
-toggleBomb, toggleThumb, toggleSmile, toggleResistance, toggleHeart, toggleMoney, toggleQuestion, toggleFrown, toggleEmpire} from '../actions';
+toggleBomb, toggleThumb, toggleSmile, toggleResistance, toggleHeart, toggleMoney, toggleQuestion, toggleFrown, toggleEmpire, toggleSelectAll} from '../actions';
 
 function mapStateToProps(state){
 	return {
 		picked: state.buttonsPicked,
-		buttonClass: state.buttonSelected
+		buttonClass: state.buttonSelected,
+		allSelected: state.allButtonSelect
 	};
 }
 
@@ -47,6 +48,19 @@ function mapDispatchToProps(dispatch){
 		},
 		questionClicked: function (bool) {
 			dispatch( toggleQuestion(bool) );
+		},
+		selectAll: function(bool) {
+			dispatch( toggleClap(bool) );
+			dispatch( toggleFrown(bool) );
+			dispatch( toggleEmpire(bool) );
+			dispatch( toggleHeart(bool) );
+			dispatch( toggleSmile(bool) );
+			dispatch( toggleBomb(bool) );
+			dispatch( toggleThumb(bool) );
+			dispatch( toggleResistance(bool) );
+			dispatch( toggleMoney(bool) );
+			dispatch( toggleQuestion(bool) );
+			dispatch( toggleSelectAll(bool) );
 		}
 	};
 

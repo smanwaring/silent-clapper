@@ -16,7 +16,9 @@ class PickButtons extends React.Component {
         this.handleThumbClick = this.handleThumbClick.bind(this);
         this.handleResistanceClick = this.handleResistanceClick.bind(this);
         this.handleBombClick = this.handleBombClick.bind(this);
+        this.handleCheck = this.handleCheck.bind(this);
 	}
+
 
     handleIconClick(evt, color) {
         evt.preventDefault();
@@ -26,6 +28,115 @@ class PickButtons extends React.Component {
             this.props.addButton(data);
         } else {
             this.props.removeButton(data);
+        }
+    }
+
+    selectAllinDB() {
+        const dataArray = [
+            {
+                color: "blue",
+                icon:"fa fa-sign-language"
+            }, 
+            {
+                color: "red",
+                icon: "fa fa-frown-o"
+            },
+             {
+                color: "grey",
+                icon: "fa fa-empire"
+            },
+             {
+                color: "dark-blue",
+                icon: "fa fa-heart-o"
+            },
+             {
+                color: "green",
+                icon: "fa fa-money fa-spin"
+            },
+             {
+                color: "pink",
+                icon: "fa fa-smile-o"
+            },
+             {
+                color: "yellow",
+                icon: "fa fa-question"
+            },
+             {
+                color: "mint-green",
+                icon: "fa fa-thumbs-o-up"
+            },
+             {
+                color: "orange",
+                icon: "fa fa-rebel"
+            },
+              {
+                color: "purple",
+                icon: "fa fa-bomb fa-spin"
+            }
+        ];
+        dataArray.map(item => {
+            this.props.addButton(item);
+        });
+    }
+
+
+      deselectAllinDB() {
+        const dataArray = [
+            {
+                color: "blue",
+                icon:"fa fa-sign-language"
+            }, 
+            {
+                color: "red",
+                icon: "fa fa-frown-o"
+            },
+             {
+                color: "grey",
+                icon: "fa fa-empire"
+            },
+             {
+                color: "dark-blue",
+                icon: "fa fa-heart-o"
+            },
+             {
+                color: "green",
+                icon: "fa fa-money fa-spin"
+            },
+             {
+                color: "pink",
+                icon: "fa fa-smile-o"
+            },
+             {
+                color: "yellow",
+                icon: "fa fa-question"
+            },
+             {
+                color: "mint-green",
+                icon: "fa fa-thumbs-o-up"
+            },
+             {
+                color: "orange",
+                icon: "fa fa-rebel"
+            },
+              {
+                color: "purple",
+                icon: "fa fa-bomb fa-spin"
+            }
+        ];
+        const self = this;
+        dataArray.map(item => {
+            self.props.removeButton(item);
+        });
+    }
+
+
+    handleCheck(){
+        if(this.props.allSelected){
+            this.deselectAllinDB();
+            this.props.selectAll(!this.props.allSelected);
+        } else {
+            this.selectAllinDB();
+            this.props.selectAll(!this.props.allSelected);
         }
     }
 
@@ -75,9 +186,19 @@ class PickButtons extends React.Component {
       let thumbClass = "btn btn-circle btn-xl mint-green";
       let resistanceClass = "btn btn-circle btn-xl orange";
       let bombClass = "btn btn-circle btn-xl purple";
+
+      let allButtonsOn = this.props.picked.length === 10;
+
+
     return (
+
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>
+            <div className="checkbox">
+                <label>
+                <input type="checkbox" checked={allButtonsOn ? "checked" : '' } onChange={this.handleCheck}/> select all
+                </label>
+            </div>
         <div className="col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body">
             <button className={buttonClass.clap ? clapClass : basicClass} onClick={(evt) => {addRemove(evt, 'blue'); this.handleClapClick()}} data-icon="fa fa-sign-language">
                 <i className="fa fa-sign-language"></i>
