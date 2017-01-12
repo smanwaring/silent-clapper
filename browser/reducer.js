@@ -1,29 +1,12 @@
 import React from 'react';
 import {combineReducers} from 'redux';
-import { 
-	SET_BOARDID, 
-	SET_CURRENT_BOARD, 
-	PICKED_BUTTON, 
-	REMOVED_BUTTON, 
-	ROOM_NOT_FOUND, 
-	LOAD_BUTTONS,
-	TOGGLE_CLAP, 
-	TOGGLE_FROWN, 
-	TOGGLE_EMPIRE, 
-	TOGGLE_HEART, 
-	TOGGLE_MONEY, 
-	TOGGLE_SMILE, 
-	TOGGLE_QUESTION, 
-	TOGGLE_THUMB, 
-	TOGGLE_RESISTANCE, 
-	TOGGLE_BOMB,
-	SHOW_CREATE,
-	HIDE_CREATE,
-	SHOW_JOIN,
-	HIDE_JOIN,
-	TOGGLE_SELECT_ALL,
-	TOGGLE_PICK_BUTTON_ERROR
- } from './actions';
+
+
+import { TOGGLE_PICK_BUTTON_ERROR  } from './actions/createboard-actions';
+import { SHOW_CREATE, HIDE_CREATE, SHOW_JOIN, HIDE_JOIN } from './actions/homeform-actions'; 
+import { ROOM_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
+import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
+import { LOAD_BUTTONS, SET_BOARDID } from './actions/room-actions';
 
 const initialButtonState = {
 	    clap: false,
@@ -37,7 +20,6 @@ const initialButtonState = {
 		resistance: false,
 		bomb: false
 }
-
 
 const boardReducer = function(state="", action){
 	switch(action.type){

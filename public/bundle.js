@@ -66,37 +66,44 @@
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _Root = __webpack_require__(323);
+	var _Root = __webpack_require__(314);
 	
 	var _Root2 = _interopRequireDefault(_Root);
 	
-	var _Room = __webpack_require__(324);
+	var _Room = __webpack_require__(315);
 	
 	var _Room2 = _interopRequireDefault(_Room);
 	
-	var _actions = __webpack_require__(218);
+	var _roomActions = __webpack_require__(322);
 	
-	var _EmptyPage = __webpack_require__(326);
+	var _joinboardformActions = __webpack_require__(321);
+	
+	var _createboardActions = __webpack_require__(319);
+	
+	var _EmptyPage = __webpack_require__(317);
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
-	var _HomeFormTest = __webpack_require__(327);
+	var _HomeFormTest = __webpack_require__(318);
 	
 	var _HomeFormTest2 = _interopRequireDefault(_HomeFormTest);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/*------ load the buttons for the room you are about to enter ------ */
+	
+	
+	//actions
 	function onEnterConfirmRoom(nextState) {
-		_store2.default.dispatch((0, _actions.enterRoom)(nextState.params.roomId));
-		_store2.default.dispatch((0, _actions.stateCurrentBoard)(nextState.params.roomId));
-		_store2.default.dispatch((0, _actions.roomNotFound)(false));
+		_store2.default.dispatch((0, _roomActions.enterRoom)(nextState.params.roomId));
+		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(nextState.params.roomId));
+		_store2.default.dispatch((0, _joinboardformActions.roomNotFound)(false));
 	}
 	
 	/*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
 	function onEnterResetCurrentBoard() {
-		_store2.default.dispatch((0, _actions.stateCurrentBoard)(false));
-		_store2.default.dispatch((0, _actions.showPickButtonError)(false));
+		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(false));
+		_store2.default.dispatch((0, _createboardActions.showPickButtonError)(false));
 	}
 	
 	_reactDom2.default.render(_react2.default.createElement(
@@ -23794,7 +23801,15 @@
 	
 	var _redux = __webpack_require__(189);
 	
-	var _actions = __webpack_require__(218);
+	var _createboardActions = __webpack_require__(319);
+	
+	var _homeformActions = __webpack_require__(320);
+	
+	var _joinboardformActions = __webpack_require__(321);
+	
+	var _pickbuttonActions = __webpack_require__(323);
+	
+	var _roomActions = __webpack_require__(322);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -23818,7 +23833,7 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.SET_BOARDID:
+			case _roomActions.SET_BOARDID:
 				return action.payload;
 			default:
 				return state;
@@ -23830,7 +23845,7 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.SET_CURRENT_BOARD:
+			case _joinboardformActions.SET_CURRENT_BOARD:
 				return action.payload;
 			default:
 				return state;
@@ -23842,9 +23857,9 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.PICKED_BUTTON:
+			case _pickbuttonActions.PICKED_BUTTON:
 				return [].concat(_toConsumableArray(state), [action.payload]);
-			case _actions.REMOVED_BUTTON:
+			case _pickbuttonActions.REMOVED_BUTTON:
 				return state.filter(function (buttonInfo) {
 					return buttonInfo.icon !== action.payload.icon;
 				});
@@ -23858,7 +23873,7 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.ROOM_NOT_FOUND:
+			case _joinboardformActions.ROOM_NOT_FOUND:
 				return action.payload;
 			default:
 				return state;
@@ -23870,7 +23885,7 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.LOAD_BUTTONS:
+			case _roomActions.LOAD_BUTTONS:
 				return action.payload;
 			default:
 				return state;
@@ -23882,9 +23897,9 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.SHOW_CREATE:
+			case _homeformActions.SHOW_CREATE:
 				return action.payload;
-			case _actions.HIDE_CREATE:
+			case _homeformActions.HIDE_CREATE:
 				return action.payload;
 			default:
 				return state;
@@ -23896,9 +23911,9 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.SHOW_JOIN:
+			case _homeformActions.SHOW_JOIN:
 				return action.payload;
-			case _actions.HIDE_JOIN:
+			case _homeformActions.HIDE_JOIN:
 				return action.payload;
 			default:
 				return state;
@@ -23910,7 +23925,7 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.TOGGLE_SELECT_ALL:
+			case _pickbuttonActions.TOGGLE_SELECT_ALL:
 				return action.payload;
 			default:
 				return state;
@@ -23922,7 +23937,7 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.TOGGLE_PICK_BUTTON_ERROR:
+			case _createboardActions.TOGGLE_PICK_BUTTON_ERROR:
 				return action.payload;
 			default:
 				return state;
@@ -23934,25 +23949,25 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _actions.TOGGLE_CLAP:
+			case _pickbuttonActions.TOGGLE_CLAP:
 				return Object.assign({}, state, { clap: action.payload });
-			case _actions.TOGGLE_FROWN:
+			case _pickbuttonActions.TOGGLE_FROWN:
 				return Object.assign({}, state, { frown: action.payload });
-			case _actions.TOGGLE_EMPIRE:
+			case _pickbuttonActions.TOGGLE_EMPIRE:
 				return Object.assign({}, state, { empire: action.payload });
-			case _actions.TOGGLE_HEART:
+			case _pickbuttonActions.TOGGLE_HEART:
 				return Object.assign({}, state, { heart: action.payload });
-			case _actions.TOGGLE_MONEY:
+			case _pickbuttonActions.TOGGLE_MONEY:
 				return Object.assign({}, state, { money: action.payload });
-			case _actions.TOGGLE_SMILE:
+			case _pickbuttonActions.TOGGLE_SMILE:
 				return Object.assign({}, state, { smile: action.payload });
-			case _actions.TOGGLE_QUESTION:
+			case _pickbuttonActions.TOGGLE_QUESTION:
 				return Object.assign({}, state, { question: action.payload });
-			case _actions.TOGGLE_THUMB:
+			case _pickbuttonActions.TOGGLE_THUMB:
 				return Object.assign({}, state, { thumb: action.payload });
-			case _actions.TOGGLE_BOMB:
+			case _pickbuttonActions.TOGGLE_BOMB:
 				return Object.assign({}, state, { bomb: action.payload });
-			case _actions.TOGGLE_RESISTANCE:
+			case _pickbuttonActions.TOGGLE_RESISTANCE:
 				return Object.assign({}, state, { resistance: action.payload });
 			default:
 				return state;
@@ -23975,253 +23990,7 @@
 	exports.default = rootReducer;
 
 /***/ },
-/* 218 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.enterRoom = exports.addRoom = exports.loadRoom = exports.hideJoin = exports.showJoin = exports.hideCreate = exports.showCreate = exports.toggleBomb = exports.toggleResistance = exports.toggleThumb = exports.toggleQuestion = exports.toggleSmile = exports.toggleMoney = exports.toggleHeart = exports.toggleEmpire = exports.toggleFrown = exports.toggleClap = exports.showPickButtonError = exports.toggleSelectAll = exports.roomNotFound = exports.foundRoom = exports.removedButton = exports.pickedButton = exports.stateCurrentBoard = exports.stateBoardId = exports.TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_SELECT_ALL = exports.HIDE_JOIN = exports.SHOW_JOIN = exports.HIDE_CREATE = exports.SHOW_CREATE = exports.TOGGLE_BOMB = exports.TOGGLE_RESISTANCE = exports.TOGGLE_THUMB = exports.TOGGLE_QUESTION = exports.TOGGLE_SMILE = exports.TOGGLE_MONEY = exports.TOGGLE_HEART = exports.TOGGLE_EMPIRE = exports.TOGGLE_FROWN = exports.TOGGLE_CLAP = exports.ROOM_NOT_FOUND = exports.LOAD_BUTTONS = exports.REMOVED_BUTTON = exports.PICKED_BUTTON = exports.SET_CURRENT_BOARD = exports.SET_BOARDID = undefined;
-	
-	var _axios = __webpack_require__(219);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
-	var _reactRouter = __webpack_require__(244);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	/* ------ action variables ----- */
-	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
-	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
-	var PICKED_BUTTON = exports.PICKED_BUTTON = "PICKED_BUTTON";
-	var REMOVED_BUTTON = exports.REMOVED_BUTTON = "REMOVED_BUTTON";
-	var LOAD_BUTTONS = exports.LOAD_BUTTONS = "LOAD_BUTTONS";
-	var ROOM_NOT_FOUND = exports.ROOM_NOT_FOUND = "ROOM_NOT_FOUND";
-	var TOGGLE_CLAP = exports.TOGGLE_CLAP = "TOGGLE_CLAP";
-	var TOGGLE_FROWN = exports.TOGGLE_FROWN = "TOGGLE_FROWN";
-	var TOGGLE_EMPIRE = exports.TOGGLE_EMPIRE = "TOGGLE_EMPIRE";
-	var TOGGLE_HEART = exports.TOGGLE_HEART = "TOGGLE_HEART";
-	var TOGGLE_MONEY = exports.TOGGLE_MONEY = "TOGGLE_MONEY";
-	var TOGGLE_SMILE = exports.TOGGLE_SMILE = "TOGGLE_SMILE";
-	var TOGGLE_QUESTION = exports.TOGGLE_QUESTION = "TOGGLE_QUESTION";
-	var TOGGLE_THUMB = exports.TOGGLE_THUMB = "TOGGLE_THUMB";
-	var TOGGLE_RESISTANCE = exports.TOGGLE_RESISTANCE = "TOGGLE_RESISTANCE";
-	var TOGGLE_BOMB = exports.TOGGLE_BOMB = "TOGGLE_BOMB";
-	var SHOW_CREATE = exports.SHOW_CREATE = "SHOW_CREATE";
-	var HIDE_CREATE = exports.HIDE_CREATE = "HIDE_CREATE";
-	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
-	var HIDE_JOIN = exports.HIDE_JOIN = "HIDE_JOIN";
-	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
-	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
-	
-	/* ------ action creaters ------*/
-	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
-		return {
-			type: SET_BOARDID,
-			payload: boardId
-		};
-	};
-	
-	var stateCurrentBoard = exports.stateCurrentBoard = function stateCurrentBoard(boardId) {
-		return {
-			type: SET_CURRENT_BOARD,
-			payload: boardId
-		};
-	};
-	
-	var pickedButton = exports.pickedButton = function pickedButton(data) {
-		return {
-			type: PICKED_BUTTON,
-			payload: data
-		};
-	};
-	
-	var removedButton = exports.removedButton = function removedButton(buttonData) {
-		return {
-			type: REMOVED_BUTTON,
-			payload: buttonData
-		};
-	};
-	
-	var foundRoom = exports.foundRoom = function foundRoom(buttons) {
-		return {
-			type: LOAD_BUTTONS,
-			payload: buttons
-		};
-	};
-	
-	var roomNotFound = exports.roomNotFound = function roomNotFound(bool) {
-		return {
-			type: ROOM_NOT_FOUND,
-			payload: bool
-		};
-	};
-	
-	var toggleSelectAll = exports.toggleSelectAll = function toggleSelectAll(bool) {
-		return {
-			type: TOGGLE_SELECT_ALL,
-			payload: bool
-		};
-	};
-	
-	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
-		return {
-			type: TOGGLE_PICK_BUTTON_ERROR,
-			payload: bool
-		};
-	};
-	
-	var toggleClap = exports.toggleClap = function toggleClap(bool) {
-		return {
-			type: TOGGLE_CLAP,
-			payload: bool
-		};
-	};
-	
-	var toggleFrown = exports.toggleFrown = function toggleFrown(bool) {
-		return {
-			type: TOGGLE_FROWN,
-			payload: bool
-		};
-	};
-	
-	var toggleEmpire = exports.toggleEmpire = function toggleEmpire(bool) {
-		return {
-			type: TOGGLE_EMPIRE,
-			payload: bool
-		};
-	};
-	
-	var toggleHeart = exports.toggleHeart = function toggleHeart(bool) {
-		return {
-			type: TOGGLE_HEART,
-			payload: bool
-		};
-	};
-	
-	var toggleMoney = exports.toggleMoney = function toggleMoney(bool) {
-		return {
-			type: TOGGLE_MONEY,
-			payload: bool
-		};
-	};
-	
-	var toggleSmile = exports.toggleSmile = function toggleSmile(bool) {
-		return {
-			type: TOGGLE_SMILE,
-			payload: bool
-		};
-	};
-	
-	var toggleQuestion = exports.toggleQuestion = function toggleQuestion(bool) {
-		return {
-			type: TOGGLE_QUESTION,
-			payload: bool
-		};
-	};
-	
-	var toggleThumb = exports.toggleThumb = function toggleThumb(bool) {
-		return {
-			type: TOGGLE_THUMB,
-			payload: bool
-		};
-	};
-	
-	var toggleResistance = exports.toggleResistance = function toggleResistance(bool) {
-		return {
-			type: TOGGLE_RESISTANCE,
-			payload: bool
-		};
-	};
-	
-	var toggleBomb = exports.toggleBomb = function toggleBomb(bool) {
-		return {
-			type: TOGGLE_BOMB,
-			payload: bool
-		};
-	};
-	
-	var showCreate = exports.showCreate = function showCreate(bool) {
-		return {
-			type: SHOW_CREATE,
-			payload: bool
-		};
-	};
-	
-	var hideCreate = exports.hideCreate = function hideCreate(bool) {
-		return {
-			type: HIDE_CREATE,
-			payload: bool
-		};
-	};
-	
-	var showJoin = exports.showJoin = function showJoin(bool) {
-		return {
-			type: SHOW_JOIN,
-			payload: bool
-		};
-	};
-	
-	var hideJoin = exports.hideJoin = function hideJoin(bool) {
-		return {
-			type: HIDE_JOIN,
-			payload: bool
-		};
-	};
-	
-	/* ------ async action creaters ------*/
-	
-	var loadRoom = exports.loadRoom = function loadRoom(roomId) {
-		var thunk = function thunk(dispatch) {
-			fetch('/api/' + roomId).then(function (res) {
-				return res.json();
-			}).then(function (room) {
-				if (room.message) {
-					dispatch(roomNotFound(true));
-				} else {
-					dispatch(stateCurrentBoard(room));
-				}
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		};
-		return thunk;
-	};
-	
-	var addRoom = exports.addRoom = function addRoom(details) {
-		var thunk = function thunk(dispatch) {
-			_axios2.default.post('/api/', details).then(function (res) {
-				return res.data;
-			}).then(function (createdRoom) {
-				return dispatch(stateBoardId(createdRoom.path));
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		};
-		return thunk;
-	};
-	
-	var enterRoom = exports.enterRoom = function enterRoom(roomId) {
-		var thunk = function thunk(dispatch) {
-			fetch('/api/enter/' + roomId).then(function (res) {
-				if (res.status === 404) {
-					_reactRouter.hashHistory.push("/pageNotFound/error");
-				} else {
-					return res.json();
-				}
-			}).then(function (buttons) {
-				dispatch(foundRoom(buttons));
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		};
-		return thunk;
-	};
-
-/***/ },
+/* 218 */,
 /* 219 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -31404,22 +31173,14 @@
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _actions = __webpack_require__(218);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function mapStateToProps(state) {
-		return {
-			boardId: state.generatedBoard
-		};
+		return {};
 	}
 	
 	function mapDispatchToProps(dispatch) {
-		return {
-			setBoardId: function setBoardId(boardId) {
-				dispatch((0, _actions.stateBoardId)(boardId));
-			}
-		};
+		return {};
 	}
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Homepage2.default);
@@ -31615,7 +31376,7 @@
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
-	var _actions = __webpack_require__(218);
+	var _homeformActions = __webpack_require__(320);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -31629,16 +31390,16 @@
 	function mapDispatchToProps(dispatch) {
 		return {
 			showCreateTab: function showCreateTab(bool) {
-				dispatch((0, _actions.showCreate)(bool));
+				dispatch((0, _homeformActions.showCreate)(bool));
 			},
 			hideCreateTab: function hideCreateTab(bool) {
-				dispatch((0, _actions.hideCreate)(bool));
+				dispatch((0, _homeformActions.hideCreate)(bool));
 			},
 			showJoinTab: function showJoinTab(bool) {
-				dispatch((0, _actions.showJoin)(bool));
+				dispatch((0, _homeformActions.showJoin)(bool));
 			},
 			hideJoinTab: function hideJoinTab(bool) {
-				dispatch((0, _actions.hideJoin)(bool));
+				dispatch((0, _homeformActions.hideJoin)(bool));
 			}
 		};
 	}
@@ -31667,11 +31428,11 @@
 	
 	var _PickButtons2 = _interopRequireDefault(_PickButtons);
 	
-	var _JoinBoardForm = __webpack_require__(328);
+	var _JoinBoardForm = __webpack_require__(310);
 	
 	var _JoinBoardForm2 = _interopRequireDefault(_JoinBoardForm);
 	
-	var _CreateBoard = __webpack_require__(330);
+	var _CreateBoard = __webpack_require__(312);
 	
 	var _CreateBoard2 = _interopRequireDefault(_CreateBoard);
 	
@@ -31800,7 +31561,7 @@
 	
 	var _PickButtons2 = _interopRequireDefault(_PickButtons);
 	
-	var _actions = __webpack_require__(218);
+	var _pickbuttonActions = __webpack_require__(323);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -31815,56 +31576,56 @@
 	function mapDispatchToProps(dispatch) {
 		return {
 			addButton: function addButton(icon) {
-				dispatch((0, _actions.pickedButton)(icon));
+				dispatch((0, _pickbuttonActions.pickedButton)(icon));
 			},
 			removeButton: function removeButton(icon) {
-				dispatch((0, _actions.removedButton)(icon));
+				dispatch((0, _pickbuttonActions.removedButton)(icon));
 			},
 			clapClicked: function clapClicked(bool) {
-				dispatch((0, _actions.toggleClap)(bool));
+				dispatch((0, _pickbuttonActions.toggleClap)(bool));
 			},
 			frownClicked: function frownClicked(bool) {
-				dispatch((0, _actions.toggleFrown)(bool));
+				dispatch((0, _pickbuttonActions.toggleFrown)(bool));
 			},
 			empireClicked: function empireClicked(bool) {
-				dispatch((0, _actions.toggleEmpire)(bool));
+				dispatch((0, _pickbuttonActions.toggleEmpire)(bool));
 			},
 			heartClicked: function heartClicked(bool) {
-				dispatch((0, _actions.toggleHeart)(bool));
+				dispatch((0, _pickbuttonActions.toggleHeart)(bool));
 			},
 			smileClicked: function smileClicked(bool) {
-				dispatch((0, _actions.toggleSmile)(bool));
+				dispatch((0, _pickbuttonActions.toggleSmile)(bool));
 			},
 			bombClicked: function bombClicked(bool) {
-				dispatch((0, _actions.toggleBomb)(bool));
+				dispatch((0, _pickbuttonActions.toggleBomb)(bool));
 			},
 			thumbClicked: function thumbClicked(bool) {
-				dispatch((0, _actions.toggleThumb)(bool));
+				dispatch((0, _pickbuttonActions.toggleThumb)(bool));
 			},
 			resistanceClicked: function resistanceClicked(bool) {
-				dispatch((0, _actions.toggleResistance)(bool));
+				dispatch((0, _pickbuttonActions.toggleResistance)(bool));
 			},
 			moneyClicked: function moneyClicked(bool) {
-				dispatch((0, _actions.toggleMoney)(bool));
+				dispatch((0, _pickbuttonActions.toggleMoney)(bool));
 			},
 			questionClicked: function questionClicked(bool) {
-				dispatch((0, _actions.toggleQuestion)(bool));
+				dispatch((0, _pickbuttonActions.toggleQuestion)(bool));
 			},
 			selectAll: function selectAll(bool) {
-				dispatch((0, _actions.toggleClap)(bool));
-				dispatch((0, _actions.toggleFrown)(bool));
-				dispatch((0, _actions.toggleEmpire)(bool));
-				dispatch((0, _actions.toggleHeart)(bool));
-				dispatch((0, _actions.toggleSmile)(bool));
-				dispatch((0, _actions.toggleBomb)(bool));
-				dispatch((0, _actions.toggleThumb)(bool));
-				dispatch((0, _actions.toggleResistance)(bool));
-				dispatch((0, _actions.toggleMoney)(bool));
-				dispatch((0, _actions.toggleQuestion)(bool));
-				dispatch((0, _actions.toggleSelectAll)(bool));
+				dispatch((0, _pickbuttonActions.toggleClap)(bool));
+				dispatch((0, _pickbuttonActions.toggleFrown)(bool));
+				dispatch((0, _pickbuttonActions.toggleEmpire)(bool));
+				dispatch((0, _pickbuttonActions.toggleHeart)(bool));
+				dispatch((0, _pickbuttonActions.toggleSmile)(bool));
+				dispatch((0, _pickbuttonActions.toggleBomb)(bool));
+				dispatch((0, _pickbuttonActions.toggleThumb)(bool));
+				dispatch((0, _pickbuttonActions.toggleResistance)(bool));
+				dispatch((0, _pickbuttonActions.toggleMoney)(bool));
+				dispatch((0, _pickbuttonActions.toggleQuestion)(bool));
+				dispatch((0, _pickbuttonActions.toggleSelectAll)(bool));
 			},
 			toggleSelect: function toggleSelect(bool) {
-				dispatch((0, _actions.toggleSelectAll)(bool));
+				dispatch((0, _pickbuttonActions.toggleSelectAll)(bool));
 			}
 		};
 	}
@@ -32247,20 +32008,333 @@
 	exports.default = PickButtons;
 
 /***/ },
-/* 310 */,
-/* 311 */,
-/* 312 */,
-/* 313 */,
-/* 314 */,
-/* 315 */,
-/* 316 */,
-/* 317 */,
-/* 318 */,
-/* 319 */,
-/* 320 */,
-/* 321 */,
-/* 322 */,
-/* 323 */
+/* 310 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _JoinBoardForm = __webpack_require__(311);
+	
+	var _JoinBoardForm2 = _interopRequireDefault(_JoinBoardForm);
+	
+	var _joinboardformActions = __webpack_require__(321);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function mapStateToProps(state) {
+		return {
+			showJoin: state.showJoinTab,
+			roomNotFound: state.roomNotFound,
+			foundBoard: state.currentBoard
+		};
+	}
+	
+	function mapDispatchToProps(dispatch) {
+		return {
+			confirmRoom: function confirmRoom(boardId) {
+				dispatch((0, _joinboardformActions.loadRoom)(boardId));
+			},
+			clearRoomNotFound: function clearRoomNotFound(bool) {
+				dispatch((0, _joinboardformActions.roomNotFound)(bool));
+			}
+		};
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_JoinBoardForm2.default);
+
+/***/ },
+/* 311 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(244);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var JoinBoardForm = function (_Component) {
+	    _inherits(JoinBoardForm, _Component);
+	
+	    function JoinBoardForm(props) {
+	        _classCallCheck(this, JoinBoardForm);
+	
+	        var _this = _possibleConstructorReturn(this, (JoinBoardForm.__proto__ || Object.getPrototypeOf(JoinBoardForm)).call(this, props));
+	
+	        _this.confirmRoomExists = _this.confirmRoomExists.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(JoinBoardForm, [{
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            var self = this;
+	            if (this.props.roomNotFound) {
+	                setTimeout(function () {
+	                    self.props.clearRoomNotFound(false);
+	                }, 2000);
+	            }
+	            if (this.props.foundBoard) {
+	                _reactRouter.hashHistory.push('/' + this.props.foundBoard);
+	            }
+	        }
+	    }, {
+	        key: 'confirmRoomExists',
+	        value: function confirmRoomExists(evt) {
+	            evt.preventDefault();
+	            var boardId = evt.target.boardId.value.toString();
+	            this.props.confirmRoom(boardId);
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _this2 = this;
+	
+	            var _props = this.props,
+	                showJoin = _props.showJoin,
+	                roomNotFound = _props.roomNotFound;
+	
+	            return _react2.default.createElement(
+	                'div',
+	                null,
+	                _react2.default.createElement(
+	                    'form',
+	                    { onSubmit: function onSubmit(evt) {
+	                            return _this2.confirmRoomExists(evt);
+	                        }, id: 'login-form', role: 'form', style: { display: showJoin ? 'block' : 'none' } },
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement('input', { name: 'boardId', type: 'text', tabIndex: '1', className: 'form-control', placeholder: 'Board #' })
+	                    ),
+	                    roomNotFound ? _react2.default.createElement(
+	                        'div',
+	                        null,
+	                        'Oops! We couldn\'t find that room'
+	                    ) : '',
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'form-group' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'row' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3' },
+	                                _react2.default.createElement(
+	                                    'button',
+	                                    { type: 'submit', tabIndex: '4', className: 'form-control btn btn-login' },
+	                                    'Join'
+	                                )
+	                            )
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return JoinBoardForm;
+	}(_react.Component);
+	
+	exports.default = JoinBoardForm;
+
+/***/ },
+/* 312 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _reactRedux = __webpack_require__(178);
+	
+	var _CreateBoard = __webpack_require__(313);
+	
+	var _CreateBoard2 = _interopRequireDefault(_CreateBoard);
+	
+	var _createboardActions = __webpack_require__(319);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function mapStateToProps(state) {
+		return {
+			buttons: state.buttonsPicked,
+			boardId: state.generatedBoard,
+			showCreate: state.showCreateTab
+		};
+	}
+	
+	function mapDispatchToProps(dispatch) {
+		return {
+			addBoard: function addBoard(details) {
+				dispatch((0, _createboardActions.addRoom)(details));
+			},
+			pickButtonsError: function pickButtonsError(bool) {
+				dispatch((0, _createboardActions.showPickButtonError)(bool));
+			}
+		};
+	}
+	
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CreateBoard2.default);
+
+/***/ },
+/* 313 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _PickButtons = __webpack_require__(308);
+	
+	var _PickButtons2 = _interopRequireDefault(_PickButtons);
+	
+	var _reactRouter = __webpack_require__(244);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var CreateBoard = function (_Component) {
+	    _inherits(CreateBoard, _Component);
+	
+	    function CreateBoard(props) {
+	        _classCallCheck(this, CreateBoard);
+	
+	        var _this = _possibleConstructorReturn(this, (CreateBoard.__proto__ || Object.getPrototypeOf(CreateBoard)).call(this, props));
+	
+	        _this.generateBoardId = _this.generateBoardId.bind(_this);
+	        return _this;
+	    }
+	
+	    _createClass(CreateBoard, [{
+	        key: 'componentDidUpdate',
+	        value: function componentDidUpdate() {
+	            var self = this;
+	            if (this.props.showPickButtonError) {
+	                setTimeout(function () {
+	                    self.props.pickButtonsError(false);
+	                }, 2000);
+	            }
+	        }
+	    }, {
+	        key: 'generateBoardId',
+	        value: function generateBoardId(evt) {
+	            evt.preventDefault();
+	            if (this.props.buttons.length < 1) {
+	                this.props.pickButtonsError(true);
+	            } else {
+	                var boardId = Math.floor(Math.random() * 89999 + 10000);
+	                var details = {
+	                    path: boardId,
+	                    buttons: this.props.buttons
+	                };
+	                this.props.addBoard(details);
+	            }
+	        }
+	    }, {
+	        key: 'render',
+	        value: function render() {
+	            var _props = this.props,
+	                boardId = _props.boardId,
+	                showPickButtonError = _props.showPickButtonError,
+	                buttons = _props.buttons,
+	                showCreate = _props.showCreate;
+	
+	            return _react2.default.createElement(
+	                'form',
+	                { role: 'form', style: { display: showCreate ? 'block' : 'none' } },
+	                this.props && boardId ? _react2.default.createElement(
+	                    'div',
+	                    null,
+	                    _react2.default.createElement(
+	                        'h4',
+	                        null,
+	                        'Here is your board #: ' + this.props.boardId
+	                    ),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'col-sm-6 col-sm-offset-3' },
+	                        _react2.default.createElement(
+	                            _reactRouter.Link,
+	                            { to: '/' + boardId },
+	                            _react2.default.createElement(
+	                                'button',
+	                                { type: 'submit', tabIndex: '4', className: 'form-control btn btn-register' },
+	                                'GO TO MY BOARD'
+	                            )
+	                        )
+	                    )
+	                ) : _react2.default.createElement(
+	                    'div',
+	                    { className: 'form-group' },
+	                    _react2.default.createElement(_PickButtons2.default, null),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { className: 'row' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            _react2.default.createElement(
+	                                'button',
+	                                { id: 'register-submit', tabIndex: '4', className: 'form-control btn btn-register', onClick: this.generateBoardId },
+	                                ' Generate My Board Link '
+	                            )
+	                        ),
+	                        showPickButtonError && buttons.length < 1 ? _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            'Please select some buttons!'
+	                        ) : ''
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return CreateBoard;
+	}(_react.Component);
+	
+	exports.default = CreateBoard;
+
+/***/ },
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32309,7 +32383,7 @@
 	exports.default = Root;
 
 /***/ },
-/* 324 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32320,11 +32394,11 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Room = __webpack_require__(325);
+	var _Room = __webpack_require__(316);
 	
 	var _Room2 = _interopRequireDefault(_Room);
 	
-	var _actions = __webpack_require__(218);
+	var _roomActions = __webpack_require__(322);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32339,7 +32413,7 @@
 	function mapDispatchToProps(dispatch) {
 		return {
 			setBoardId: function setBoardId(boardId) {
-				dispatch((0, _actions.stateBoardId)(boardId));
+				dispatch((0, _roomActions.stateBoardId)(boardId));
 			}
 		};
 	}
@@ -32347,7 +32421,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Room2.default);
 
 /***/ },
-/* 325 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32507,7 +32581,7 @@
 	exports.default = Room;
 
 /***/ },
-/* 326 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32574,7 +32648,7 @@
 	module.exports = EmptyPage;
 
 /***/ },
-/* 327 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32690,7 +32764,151 @@
 	exports.default = HomeFormTest;
 
 /***/ },
-/* 328 */
+/* 319 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.addRoom = exports.stateBoardId = exports.showPickButtonError = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
+	
+	var _axios = __webpack_require__(219);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
+	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
+	
+	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
+		return {
+			type: TOGGLE_PICK_BUTTON_ERROR,
+			payload: bool
+		};
+	};
+	
+	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
+		return {
+			type: SET_BOARDID,
+			payload: boardId
+		};
+	};
+	
+	/* ------ async action creaters ------*/
+	
+	var addRoom = exports.addRoom = function addRoom(details) {
+		var thunk = function thunk(dispatch) {
+			_axios2.default.post("/api/", details).then(function (res) {
+				return res.data;
+			}).then(function (createdRoom) {
+				return dispatch(stateBoardId(createdRoom.path));
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		};
+		return thunk;
+	};
+
+/***/ },
+/* 320 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var SHOW_CREATE = exports.SHOW_CREATE = "SHOW_CREATE";
+	var HIDE_CREATE = exports.HIDE_CREATE = "HIDE_CREATE";
+	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
+	var HIDE_JOIN = exports.HIDE_JOIN = "HIDE_JOIN";
+	
+	var showCreate = exports.showCreate = function showCreate(bool) {
+		return {
+			type: SHOW_CREATE,
+			payload: bool
+		};
+	};
+	
+	var hideCreate = exports.hideCreate = function hideCreate(bool) {
+		return {
+			type: HIDE_CREATE,
+			payload: bool
+		};
+	};
+	
+	var showJoin = exports.showJoin = function showJoin(bool) {
+		return {
+			type: SHOW_JOIN,
+			payload: bool
+		};
+	};
+	
+	var hideJoin = exports.hideJoin = function hideJoin(bool) {
+		return {
+			type: HIDE_JOIN,
+			payload: bool
+		};
+	};
+
+/***/ },
+/* 321 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.loadRoom = exports.stateCurrentBoard = exports.roomNotFound = exports.SET_CURRENT_BOARD = exports.ROOM_NOT_FOUND = undefined;
+	
+	var _axios = __webpack_require__(219);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var ROOM_NOT_FOUND = exports.ROOM_NOT_FOUND = "ROOM_NOT_FOUND";
+	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
+	
+	var roomNotFound = exports.roomNotFound = function roomNotFound(bool) {
+		return {
+			type: ROOM_NOT_FOUND,
+			payload: bool
+		};
+	};
+	
+	var stateCurrentBoard = exports.stateCurrentBoard = function stateCurrentBoard(boardId) {
+		return {
+			type: SET_CURRENT_BOARD,
+			payload: boardId
+		};
+	};
+	
+	/* ------ async action creaters ------*/
+	
+	var loadRoom = exports.loadRoom = function loadRoom(roomId) {
+		var thunk = function thunk(dispatch) {
+			fetch("/api/" + roomId).then(function (res) {
+				return res.json();
+			}).then(function (room) {
+				if (room.message) {
+					dispatch(roomNotFound(true));
+				} else {
+					dispatch(stateCurrentBoard(room));
+				}
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		};
+		return thunk;
+	};
+
+/***/ },
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32698,319 +32916,164 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.enterRoom = exports.foundRoom = exports.stateBoardId = exports.SET_BOARDID = exports.LOAD_BUTTONS = undefined;
 	
-	var _reactRedux = __webpack_require__(178);
+	var _axios = __webpack_require__(219);
 	
-	var _JoinBoardForm = __webpack_require__(329);
-	
-	var _JoinBoardForm2 = _interopRequireDefault(_JoinBoardForm);
-	
-	var _actions = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function mapStateToProps(state) {
-		return {
-			showJoin: state.showJoinTab,
-			roomNotFound: state.roomNotFound,
-			foundBoard: state.currentBoard
-		};
-	}
-	
-	function mapDispatchToProps(dispatch) {
-		return {
-			confirmRoom: function confirmRoom(boardId) {
-				dispatch((0, _actions.loadRoom)(boardId));
-			}
-		};
-	}
-	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_JoinBoardForm2.default);
-
-/***/ },
-/* 329 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
+	var _axios2 = _interopRequireDefault(_axios);
 	
 	var _reactRouter = __webpack_require__(244);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var LOAD_BUTTONS = exports.LOAD_BUTTONS = "LOAD_BUTTONS";
+	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
+		return {
+			type: SET_BOARDID,
+			payload: boardId
+		};
+	};
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	var foundRoom = exports.foundRoom = function foundRoom(buttons) {
+		return {
+			type: LOAD_BUTTONS,
+			payload: buttons
+		};
+	};
 	
-	var JoinBoardForm = function (_Component) {
-	    _inherits(JoinBoardForm, _Component);
-	
-	    function JoinBoardForm(props) {
-	        _classCallCheck(this, JoinBoardForm);
-	
-	        var _this = _possibleConstructorReturn(this, (JoinBoardForm.__proto__ || Object.getPrototypeOf(JoinBoardForm)).call(this, props));
-	
-	        _this.confirmRoomExists = _this.confirmRoomExists.bind(_this);
-	        return _this;
-	    }
-	
-	    _createClass(JoinBoardForm, [{
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            var self = this;
-	            if (this.props.roomNotFound) {
-	                setTimeout(function () {
-	                    self.props.clearRoomNotFound(false);
-	                }, 2000);
-	            }
-	            if (this.props.foundBoard) {
-	                _reactRouter.hashHistory.push('/' + this.props.foundBoard);
-	            }
-	        }
-	    }, {
-	        key: 'confirmRoomExists',
-	        value: function confirmRoomExists(evt) {
-	            evt.preventDefault();
-	            var boardId = evt.target.boardId.value.toString();
-	            this.props.confirmRoom(boardId);
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this2 = this;
-	
-	            var _props = this.props,
-	                showJoin = _props.showJoin,
-	                roomNotFound = _props.roomNotFound;
-	
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'form',
-	                    { onSubmit: function onSubmit(evt) {
-	                            return _this2.confirmRoomExists(evt);
-	                        }, id: 'login-form', role: 'form', style: { display: showJoin ? 'block' : 'none' } },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-group' },
-	                        _react2.default.createElement('input', { name: 'boardId', type: 'text', tabIndex: '1', className: 'form-control', placeholder: 'Board #' })
-	                    ),
-	                    roomNotFound ? _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        'Oops! We couldn\'t find that room'
-	                    ) : '',
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-group' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'row' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3' },
-	                                _react2.default.createElement(
-	                                    'button',
-	                                    { type: 'submit', tabIndex: '4', className: 'form-control btn btn-login' },
-	                                    'Join'
-	                                )
-	                            )
-	                        )
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return JoinBoardForm;
-	}(_react.Component);
-	
-	exports.default = JoinBoardForm;
+	/* ------ async action creaters ------*/
+	var enterRoom = exports.enterRoom = function enterRoom(roomId) {
+		var thunk = function thunk(dispatch) {
+			fetch('/api/enter/' + roomId).then(function (res) {
+				if (res.status === 404) {
+					_reactRouter.hashHistory.push("/pageNotFound/error");
+				} else {
+					return res.json();
+				}
+			}).then(function (buttons) {
+				dispatch(foundRoom(buttons));
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		};
+		return thunk;
+	};
 
 /***/ },
-/* 330 */
-/***/ function(module, exports, __webpack_require__) {
+/* 323 */
+/***/ function(module, exports) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
+	var PICKED_BUTTON = exports.PICKED_BUTTON = "PICKED_BUTTON";
+	var REMOVED_BUTTON = exports.REMOVED_BUTTON = "REMOVED_BUTTON";
+	var TOGGLE_CLAP = exports.TOGGLE_CLAP = "TOGGLE_CLAP";
+	var TOGGLE_FROWN = exports.TOGGLE_FROWN = "TOGGLE_FROWN";
+	var TOGGLE_EMPIRE = exports.TOGGLE_EMPIRE = "TOGGLE_EMPIRE";
+	var TOGGLE_HEART = exports.TOGGLE_HEART = "TOGGLE_HEART";
+	var TOGGLE_MONEY = exports.TOGGLE_MONEY = "TOGGLE_MONEY";
+	var TOGGLE_SMILE = exports.TOGGLE_SMILE = "TOGGLE_SMILE";
+	var TOGGLE_QUESTION = exports.TOGGLE_QUESTION = "TOGGLE_QUESTION";
+	var TOGGLE_THUMB = exports.TOGGLE_THUMB = "TOGGLE_THUMB";
+	var TOGGLE_RESISTANCE = exports.TOGGLE_RESISTANCE = "TOGGLE_RESISTANCE";
+	var TOGGLE_BOMB = exports.TOGGLE_BOMB = "TOGGLE_BOMB";
 	
-	var _reactRedux = __webpack_require__(178);
-	
-	var _CreateBoard = __webpack_require__(331);
-	
-	var _CreateBoard2 = _interopRequireDefault(_CreateBoard);
-	
-	var _actions = __webpack_require__(218);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function mapStateToProps(state) {
+	var pickedButton = exports.pickedButton = function pickedButton(data) {
 		return {
-			buttons: state.buttonsPicked,
-			boardId: state.generatedBoard,
-			showCreate: state.showCreateTab
+			type: PICKED_BUTTON,
+			payload: data
 		};
-	}
+	};
 	
-	function mapDispatchToProps(dispatch) {
+	var removedButton = exports.removedButton = function removedButton(buttonData) {
 		return {
-			addBoard: function addBoard(details) {
-				dispatch((0, _actions.addRoom)(details));
-			},
-			pickButtonsError: function pickButtonsError(bool) {
-				dispatch((0, _actions.showPickButtonError)(bool));
-			}
+			type: REMOVED_BUTTON,
+			payload: buttonData
 		};
-	}
+	};
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CreateBoard2.default);
-
-/***/ },
-/* 331 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
+	var toggleClap = exports.toggleClap = function toggleClap(bool) {
+		return {
+			type: TOGGLE_CLAP,
+			payload: bool
+		};
+	};
 	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
+	var toggleFrown = exports.toggleFrown = function toggleFrown(bool) {
+		return {
+			type: TOGGLE_FROWN,
+			payload: bool
+		};
+	};
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	var toggleEmpire = exports.toggleEmpire = function toggleEmpire(bool) {
+		return {
+			type: TOGGLE_EMPIRE,
+			payload: bool
+		};
+	};
 	
-	var _react = __webpack_require__(1);
+	var toggleHeart = exports.toggleHeart = function toggleHeart(bool) {
+		return {
+			type: TOGGLE_HEART,
+			payload: bool
+		};
+	};
 	
-	var _react2 = _interopRequireDefault(_react);
+	var toggleMoney = exports.toggleMoney = function toggleMoney(bool) {
+		return {
+			type: TOGGLE_MONEY,
+			payload: bool
+		};
+	};
 	
-	var _PickButtons = __webpack_require__(308);
+	var toggleSmile = exports.toggleSmile = function toggleSmile(bool) {
+		return {
+			type: TOGGLE_SMILE,
+			payload: bool
+		};
+	};
 	
-	var _PickButtons2 = _interopRequireDefault(_PickButtons);
+	var toggleQuestion = exports.toggleQuestion = function toggleQuestion(bool) {
+		return {
+			type: TOGGLE_QUESTION,
+			payload: bool
+		};
+	};
 	
-	var _reactRouter = __webpack_require__(244);
+	var toggleThumb = exports.toggleThumb = function toggleThumb(bool) {
+		return {
+			type: TOGGLE_THUMB,
+			payload: bool
+		};
+	};
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var toggleResistance = exports.toggleResistance = function toggleResistance(bool) {
+		return {
+			type: TOGGLE_RESISTANCE,
+			payload: bool
+		};
+	};
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var toggleBomb = exports.toggleBomb = function toggleBomb(bool) {
+		return {
+			type: TOGGLE_BOMB,
+			payload: bool
+		};
+	};
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var CreateBoard = function (_Component) {
-	    _inherits(CreateBoard, _Component);
-	
-	    function CreateBoard(props) {
-	        _classCallCheck(this, CreateBoard);
-	
-	        var _this = _possibleConstructorReturn(this, (CreateBoard.__proto__ || Object.getPrototypeOf(CreateBoard)).call(this, props));
-	
-	        _this.generateBoardId = _this.generateBoardId.bind(_this);
-	        return _this;
-	    }
-	
-	    _createClass(CreateBoard, [{
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            var self = this;
-	            if (this.props.showPickButtonError) {
-	                setTimeout(function () {
-	                    self.props.pickButtonsError(false);
-	                }, 2000);
-	            }
-	        }
-	    }, {
-	        key: 'generateBoardId',
-	        value: function generateBoardId(evt) {
-	            evt.preventDefault();
-	            if (this.props.buttons.length < 1) {
-	                this.props.pickButtonsError(true);
-	            } else {
-	                var boardId = Math.floor(Math.random() * 89999 + 10000);
-	                var details = {
-	                    path: boardId,
-	                    buttons: this.props.buttons
-	                };
-	                this.props.addBoard(details);
-	            }
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props,
-	                boardId = _props.boardId,
-	                showPickButtonError = _props.showPickButtonError,
-	                buttons = _props.buttons,
-	                showCreate = _props.showCreate;
-	
-	            return _react2.default.createElement(
-	                'form',
-	                { role: 'form', style: { display: showCreate ? 'block' : 'none' } },
-	                this.props && boardId ? _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(
-	                        'h4',
-	                        null,
-	                        'Here is your board #: ' + this.props.boardId
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-sm-6 col-sm-offset-3' },
-	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/' + boardId },
-	                            _react2.default.createElement(
-	                                'button',
-	                                { type: 'submit', tabIndex: '4', className: 'form-control btn btn-register' },
-	                                'GO TO MY BOARD'
-	                            )
-	                        )
-	                    )
-	                ) : _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-group' },
-	                    _react2.default.createElement(_PickButtons2.default, null),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            null,
-	                            _react2.default.createElement(
-	                                'button',
-	                                { id: 'register-submit', tabIndex: '4', className: 'form-control btn btn-register', onClick: this.generateBoardId },
-	                                ' Generate My Board Link '
-	                            )
-	                        ),
-	                        showPickButtonError && buttons.length < 1 ? _react2.default.createElement(
-	                            'div',
-	                            null,
-	                            'Please select some buttons!'
-	                        ) : ''
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return CreateBoard;
-	}(_react.Component);
-	
-	exports.default = CreateBoard;
+	var toggleSelectAll = exports.toggleSelectAll = function toggleSelectAll(bool) {
+		return {
+			type: TOGGLE_SELECT_ALL,
+			payload: bool
+		};
+	};
 
 /***/ }
 /******/ ]);

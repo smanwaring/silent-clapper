@@ -41,7 +41,6 @@ class HomeForm extends React.Component {
                                     <a href="#" onClick={this.handleCreateBoardClick} className={showCreate ? 'active' : ''}>Create a Board</a>
                                 </div>
                             </div>{/* panel headings text end */}
-
                             <hr/>
                         </div> {/* panel heading end*/}
 

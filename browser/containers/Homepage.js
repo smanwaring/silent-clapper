@@ -1,18 +1,16 @@
 import {connect} from 'react-redux';
 import Homepage from '../components/Homepage';
-import { stateBoardId } from '../actions';
+
 
 function mapStateToProps(state){
 	return {
-		boardId: state.generatedBoard
+
 	};
 }
 
 function mapDispatchToProps(dispatch){
 	return {
-		setBoardId: function(boardId){
-			dispatch(stateBoardId(boardId));
-		}
+
 	};
 
 }

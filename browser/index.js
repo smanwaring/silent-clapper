@@ -11,7 +11,13 @@ import {Router, Route, hashHistory, IndexRedirect, browserHistory, IndexRoute} f
 import Homepage from './containers/Homepage';
 import Root from './components/Root';
 import Room from './containers/Room';
-import { enterRoom, roomNotFound, stateCurrentBoard, showPickButtonError } from './actions';
+
+//actions
+import { enterRoom } from './actions/room-actions';
+import { roomNotFound } from './actions/joinboardform-actions';
+import { showPickButtonError } from './actions/createboard-actions';
+import { stateCurrentBoard } from './actions/joinboardform-actions';
+
 import EmptyPage from './components/EmptyPage';
 import HomeFormTest from './components/HomeFormTest';
 

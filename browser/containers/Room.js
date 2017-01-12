@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Room from '../components/Room';
-import { stateBoardId } from '../actions';
+import { stateBoardId } from '../actions/room-actions';
 
 function mapStateToProps(state){
 	return {

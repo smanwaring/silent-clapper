@@ -1,7 +1,7 @@
 import {connect} from 'react-redux';
 import PickButtons from '../components/PickButtons';
-import { stateBoardId, pickedButton, removedButton, toggleClap,
-toggleBomb, toggleThumb, toggleSmile, toggleResistance, toggleHeart, toggleMoney, toggleQuestion, toggleFrown, toggleEmpire, toggleSelectAll} from '../actions';
+import { pickedButton, removedButton, toggleClap,
+toggleBomb, toggleThumb, toggleSmile, toggleResistance, toggleHeart, toggleMoney, toggleQuestion, toggleFrown, toggleEmpire, toggleSelectAll} from '../actions/pickbutton-actions';
 
 function mapStateToProps(state){
 	return {

@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import CreateBoard from '../components/CreateBoard';
-import { addRoom, showPickButtonError  } from '../actions';
+import { addRoom, showPickButtonError  } from '../actions/createboard-actions';
 
 function mapStateToProps(state){
 	return {

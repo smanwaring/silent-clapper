@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import HomeForm from '../components/HomeForm';
-import {  showCreate, hideCreate, showJoin, hideJoin } from '../actions';
+import {  showCreate, hideCreate, showJoin, hideJoin } from '../actions/homeform-actions';
 
 function mapStateToProps(state){
 	return {

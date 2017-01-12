@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import JoinBoardForm from '../components/JoinBoardForm';
-import { loadRoom } from '../actions';
+import { loadRoom, roomNotFound } from '../actions/joinboardform-actions';
 
 function mapStateToProps(state){
 	return {
@@ -14,7 +14,10 @@ function mapDispatchToProps(dispatch){
 	return {
         confirmRoom: function(boardId) {
             dispatch ( loadRoom(boardId) );
-        }
+        },
+		clearRoomNotFound: function(bool){
+ 			dispatch (  roomNotFound(bool) ); 
+  		}		  
 	};
 
 }
