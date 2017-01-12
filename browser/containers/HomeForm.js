@@ -1,34 +1,16 @@
 import {connect} from 'react-redux';
 import HomeForm from '../components/HomeForm';
-import { setInterval, stateBoardId, stateCurrentBoard, addRoom, loadRoom, showCreate, hideCreate, showJoin, hideJoin, roomNotFound, showPickButtonError } from '../actions';
+import {  showCreate, hideCreate, showJoin, hideJoin } from '../actions';
 
 function mapStateToProps(state){
 	return {
-		boardId: state.generatedBoard,
-		buttons: state.buttonsPicked,
-		roomNotFound: state.roomNotFound,
-		buttonsToLoad: state.buttonsToLoad,
-		foundBoard: state.currentBoard,
 		showCreate: state.showCreateTab,
-		showJoin: state.showJoinTab,
-		showPickButtonError: state.showPickButtonError
+		showJoin: state.showJoinTab
 	};
 }
 
 function mapDispatchToProps(dispatch){
 	return {
-		setBoardId: function(boardId){
-			dispatch(stateBoardId(boardId));
-		},
-		setCurrentBoard: function(boardId){
-			dispatch(stateCurrentBoard(boardId));
-		},
-		addBoard: function(details){
-			dispatch( addRoom(details));
-		},
-		confirmRoom: function(boardId) {
-			dispatch ( loadRoom(boardId) );
-		},
 		showCreateTab: function(bool) {
 			dispatch ( showCreate(bool) );
 		},
@@ -41,12 +23,6 @@ function mapDispatchToProps(dispatch){
 		hideJoinTab: function(bool) {
 			dispatch ( hideJoin(bool) );
 		},
-		clearRoomNotFound: function(bool){
-			dispatch (  roomNotFound(bool) ); 
-		},
-		pickButtonsError: function(bool){
-			dispatch ( showPickButtonError(bool));
-		}
 	};
 
 }

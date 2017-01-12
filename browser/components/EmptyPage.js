@@ -1,7 +1,8 @@
-import React, { Component, PropTypes } from 'react';
+import React from 'react';
 import {Link, browserHistory, hashHistory} from 'react-router';
 
 export default class EmptyPage extends React.Component {
+
     render() {
         return (
             <div>                                

@@ -227,9 +227,7 @@ class PickButtons extends React.Component {
       let thumbClass = "btn btn-circle btn-xl mint-green";
       let resistanceClass = "btn btn-circle btn-xl orange";
       let bombClass = "btn btn-circle btn-xl purple";
-
       let allButtonsOn = this.props.picked.length === 10;
-      console.log("picked!!!!!!!!", this.props.picked)
 
 
     return (

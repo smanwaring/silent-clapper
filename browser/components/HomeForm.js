@@ -1,17 +1,16 @@
 import React from 'react';
-import {Link, browserHistory, hashHistory} from 'react-router';
+import { Link, hashHistory } from 'react-router';
 import PickButtons from '../containers/PickButtons';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import JoinBoardForm from '../containers/JoinBoardForm';
+import CreateBoard from '../containers/CreateBoard';
 
 
 class HomeForm extends React.Component {
     constructor(props){
         super(props);
-        this.generateBoardId = this.generateBoardId.bind(this);
         this.handleCreateBoardClick= this.handleCreateBoardClick.bind(this);
         this.handleJoinBoardClick = this.handleJoinBoardClick.bind(this);
     }
-
 
     handleCreateBoardClick( ) {
         this.props.showCreateTab(true);
@@ -23,45 +22,9 @@ class HomeForm extends React.Component {
         this.props.hideCreateTab(false);
     }
 
-    generateBoardId(evt){
-        evt.preventDefault();
-        if(this.props.buttons.length < 1){
-            this.props.pickButtonsError(true);
-        } else {
-            let boardId = Math.floor(Math.random()*89999+10000);
-            let details = {
-                path: boardId,
-                buttons: this.props.buttons
-            }
-            this.props.addBoard(details);
-        }
-    }
-
-    componentDidUpdate(){ 
-        const self = this;
-        if(this.props.roomNotFound){
-          setTimeout(function() {
-          self.props.clearRoomNotFound(false);
-           }, 2000)
-        }
-        if(this.props.showPickButtonError){
-          setTimeout(function() {
-          self.props.pickButtonsError(false);
-           }, 2000)       
-        }
-        if (this.props.foundBoard) {
-            hashHistory.push(`/${this.props.foundBoard}`);
-        }
-    }
-
-    confirmRoomExists(evt){
-        evt.preventDefault();
-        let boardId = evt.target.boardId.value.toString()
-        this.props.confirmRoom(boardId);
-    }
 
   render () {
-      const { showJoin, showCreate, roomNotFound, boardId, showPickButtonError, buttons } = this.props;
+      const { showJoin, showCreate } = this.props;
 
     return (
         <div className="container">
@@ -85,41 +48,8 @@ class HomeForm extends React.Component {
                         <div className="panel-body">
                             <div className="row">
                                 <div className="col-lg-12">
-
-                                    <form onSubmit={(evt) => this.confirmRoomExists(evt)} id="login-form" role="form" style={{display: showJoin ? 'block' : 'none' }}>
-                                        <div className="form-group">
-                                            <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
-                                        </div>
-                                            {roomNotFound ? <div>Oops! We couldn't find that room</div> : ''}
-                                        <div className="form-group">
-                                            <div className="row">
-                                                <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                                    <button type="submit" tabIndex="4" className="form-control btn btn-login">Join</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </form>
-
-                                    <form role="form" style={{display: showCreate ? 'block' : 'none' }}>                 
-                                        {this.props && boardId ? 
-                                                    <div>
-                                                    <h4>{`Here is your board #: ${this.props.boardId}`}</h4>
-                                                    <div className="col-sm-6 col-sm-offset-3">
-                                                        <Link to={`/${this.props.boardId}`}><button type="submit" tabIndex="4" className="form-control btn btn-register">GO TO MY BOARD</button></Link>
-                                                    </div>
-                                                </div>
-                                                     :
-                                                <div className="form-group">
-                                                    <PickButtons/>
-                                                    <div className="row">
-                                                        <div>
-                                                            <button id="register-submit" tabIndex="4" className="form-control btn btn-register" onClick={this.generateBoardId}> Generate My Board Link </button>
-                                                        </div>
-                                                          {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
-                                                    </div>
-                                                </div> 
-                                                } 
-                                    </form>
+                                    <JoinBoardForm/>
+                                    <CreateBoard/>
                             </div>
                         </div>
                     </div>

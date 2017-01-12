@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Homepage from '../components/Homepage';
-import { setInterval, stateBoardId } from '../actions';
+import { stateBoardId } from '../actions';
 
 function mapStateToProps(state){
 	return {
