@@ -1,12 +1,13 @@
 import {connect} from 'react-redux';
 import CreateBoard from '../components/CreateBoard';
-import { addRoom, showPickButtonError  } from '../actions/createboard-actions';
+import { addRoom, showPickButtonError, stateBoardId, clearAllButtons, clearAllSelectedButtons  } from '../actions/createboard-actions';
 
 function mapStateToProps(state){
 	return {
 		buttons: state.buttonsPicked,
-		boardId: state.generatedBoard,
-        showCreate: state.showCreateTab
+		generatedBoard: state.generatedBoard,
+        showCreate: state.showCreateTab,
+		showPickButtonError: state.showPickButtonError
 	};
 }
 
@@ -17,7 +18,12 @@ function mapDispatchToProps(dispatch){
 		},
 		pickButtonsError: function(bool){
 			dispatch ( showPickButtonError(bool) );
-		}
+		},
+		clearGeneratedboard: function(details){
+			dispatch( stateBoardId(details) );
+			dispatch( clearAllButtons() );
+			dispatch ( clearAllSelectedButtons() );
+		},
 	};
 
 }

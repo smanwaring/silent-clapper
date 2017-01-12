@@ -7,7 +7,7 @@ function mapStateToProps(state){
 	return {
 		picked: state.buttonsPicked,
 		buttonClass: state.buttonSelected,
-		allSelected: state.allButtonSelect
+		allSelected: state.allButtonSelect,
 	};
 }
 

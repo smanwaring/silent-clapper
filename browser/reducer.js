@@ -2,7 +2,7 @@ import React from 'react';
 import {combineReducers} from 'redux';
 
 
-import { TOGGLE_PICK_BUTTON_ERROR  } from './actions/createboard-actions';
+import { TOGGLE_PICK_BUTTON_ERROR, CLEAR_ALL_BUTTONS, CLEAR_ALL_SELECTED_BUTTONS  } from './actions/createboard-actions';
 import { SHOW_CREATE, SHOW_JOIN } from './actions/homeform-actions'; 
 import { ROOM_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
 import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
@@ -43,6 +43,8 @@ const iconsPickedReducer = function(state=[], action){
 			return [...state, action.payload];
 		case REMOVED_BUTTON:
 			return state.filter(buttonInfo => buttonInfo.icon !== action.payload.icon);
+		case CLEAR_ALL_BUTTONS:
+			return [];
 		default: return state;
 	}
 }
@@ -118,6 +120,8 @@ const selectButtonReducer = function(state=initialButtonState, action){
 			return Object.assign({}, state, {bomb: action.payload});
 		case TOGGLE_RESISTANCE: 
 			return Object.assign({}, state, {resistance: action.payload});
+		case CLEAR_ALL_SELECTED_BUTTONS:
+			return initialButtonState;
 		default: return state;
 	}
 }

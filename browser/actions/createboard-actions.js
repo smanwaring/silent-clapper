@@ -1,6 +1,8 @@
 import axios from 'axios';
 export const TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
 export const SET_BOARDID = "SET_BOARDID";
+export const CLEAR_ALL_BUTTONS = "CLEAR_ALL_BUTTONS";
+export const CLEAR_ALL_SELECTED_BUTTONS = "CLEAR_ALL_SELECTED_BUTTONS";
 
 
 export const showPickButtonError = (bool) => {
@@ -14,6 +16,18 @@ export const stateBoardId = (boardId) => {
 	return {
 		type: SET_BOARDID,
 		payload: boardId
+	};
+};
+
+export const clearAllButtons = () => {
+	return {
+		type: CLEAR_ALL_BUTTONS,
+	};
+};
+
+export const clearAllSelectedButtons = () => {
+	return {
+		type: CLEAR_ALL_SELECTED_BUTTONS,
 	};
 };
 

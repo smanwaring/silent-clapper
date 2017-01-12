@@ -482,6 +482,25 @@ div.column i {
 	border-color: #1CA347;
 }
 
+.btn-create-new {
+	background-color: #59B2E0;
+	outline: none;
+	color: #fff;
+	font-size: 14px;
+	height: auto;
+	font-weight: normal;
+	padding: 14px 0;
+	text-transform: uppercase;
+	border-color: #59B2E6;
+}
+.btn-create-new:hover,
+.btn-create-new:focus {
+	color: #fff;
+	background-color: #53A3CD;
+	border-color: #53A3CD;
+}
+
+
 
 
 

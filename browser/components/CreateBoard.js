@@ -7,6 +7,7 @@ class CreateBoard extends Component {
     constructor(props){
         super(props);
         this.generateBoardId = this.generateBoardId.bind(this);
+        this.clearGeneratedboard = this.clearGeneratedboard.bind(this);
     }
 
 
@@ -34,16 +35,22 @@ class CreateBoard extends Component {
         }
     }
 
+    clearGeneratedboard(evt){
+        evt.preventDefault();
+        this.props.clearGeneratedboard("");
+    }
+
     render() {
-        const { boardId, showPickButtonError, buttons, showCreate } = this.props;
+        const { generatedBoard, showPickButtonError, buttons, showCreate } = this.props;
         return (
             <form role="form" style={{display: showCreate ? 'block' : 'none' }}>                 
-                {this.props && boardId ? 
+                {this.props && generatedBoard ? 
                             <div>
-                            <h4>{`Here is your board #: ${this.props.boardId}`}</h4>
+                            <h4>{`Here is your board #: ${generatedBoard}`}</h4>
                             <div className="col-sm-6 col-sm-offset-3">
-                                <Link to={`/${boardId}`}><button type="submit" tabIndex="4" className="form-control btn btn-register">GO TO MY BOARD</button></Link>
-                                <button tabIndex="4" className="form-control btn btn-register">GENERATE A NEW BOARD</button>
+                                <Link to={`/${generatedBoard}`}><button type="submit" tabIndex="4" className="form-control btn btn-register">GO TO MY BOARD</button></Link>
+                                <h5>OR</h5>
+                                <button tabIndex="4"  onClick={this.clearGeneratedboard} className="form-control btn btn-create-new">GENERATE A NEW BOARD</button>
                             </div>
                         </div>
                                 :

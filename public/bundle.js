@@ -28657,6 +28657,8 @@
 				return state.filter(function (buttonInfo) {
 					return buttonInfo.icon !== action.payload.icon;
 				});
+			case _createboardActions.CLEAR_ALL_BUTTONS:
+				return [];
 			default:
 				return state;
 		}
@@ -28759,6 +28761,8 @@
 				return Object.assign({}, state, { bomb: action.payload });
 			case _pickbuttonActions.TOGGLE_RESISTANCE:
 				return Object.assign({}, state, { resistance: action.payload });
+			case _createboardActions.CLEAR_ALL_SELECTED_BUTTONS:
+				return initialButtonState;
 			default:
 				return state;
 		}
@@ -28788,7 +28792,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.addRoom = exports.stateBoardId = exports.showPickButtonError = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
+	exports.addRoom = exports.clearAllSelectedButtons = exports.clearAllButtons = exports.stateBoardId = exports.showPickButtonError = exports.CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_BUTTONS = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
 	
 	var _axios = __webpack_require__(272);
 	
@@ -28798,6 +28802,8 @@
 	
 	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
 	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
+	var CLEAR_ALL_BUTTONS = exports.CLEAR_ALL_BUTTONS = "CLEAR_ALL_BUTTONS";
+	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = "CLEAR_ALL_SELECTED_BUTTONS";
 	
 	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
 		return {
@@ -28810,6 +28816,18 @@
 		return {
 			type: SET_BOARDID,
 			payload: boardId
+		};
+	};
+	
+	var clearAllButtons = exports.clearAllButtons = function clearAllButtons() {
+		return {
+			type: CLEAR_ALL_BUTTONS
+		};
+	};
+	
+	var clearAllSelectedButtons = exports.clearAllSelectedButtons = function clearAllSelectedButtons() {
+		return {
+			type: CLEAR_ALL_SELECTED_BUTTONS
 		};
 	};
 	
@@ -32471,8 +32489,9 @@
 	function mapStateToProps(state) {
 		return {
 			buttons: state.buttonsPicked,
-			boardId: state.generatedBoard,
-			showCreate: state.showCreateTab
+			generatedBoard: state.generatedBoard,
+			showCreate: state.showCreateTab,
+			showPickButtonError: state.showPickButtonError
 		};
 	}
 	
@@ -32483,6 +32502,11 @@
 			},
 			pickButtonsError: function pickButtonsError(bool) {
 				dispatch((0, _createboardActions.showPickButtonError)(bool));
+			},
+			clearGeneratedboard: function clearGeneratedboard(details) {
+				dispatch((0, _createboardActions.stateBoardId)(details));
+				dispatch((0, _createboardActions.clearAllButtons)());
+				dispatch((0, _createboardActions.clearAllSelectedButtons)());
 			}
 		};
 	}
@@ -32528,6 +32552,7 @@
 	        var _this = _possibleConstructorReturn(this, (CreateBoard.__proto__ || Object.getPrototypeOf(CreateBoard)).call(this, props));
 	
 	        _this.generateBoardId = _this.generateBoardId.bind(_this);
+	        _this.clearGeneratedboard = _this.clearGeneratedboard.bind(_this);
 	        return _this;
 	    }
 	
@@ -32557,10 +32582,16 @@
 	            }
 	        }
 	    }, {
+	        key: 'clearGeneratedboard',
+	        value: function clearGeneratedboard(evt) {
+	            evt.preventDefault();
+	            this.props.clearGeneratedboard("");
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props = this.props,
-	                boardId = _props.boardId,
+	                generatedBoard = _props.generatedBoard,
 	                showPickButtonError = _props.showPickButtonError,
 	                buttons = _props.buttons,
 	                showCreate = _props.showCreate;
@@ -32568,20 +32599,20 @@
 	            return _react2.default.createElement(
 	                'form',
 	                { role: 'form', style: { display: showCreate ? 'block' : 'none' } },
-	                this.props && boardId ? _react2.default.createElement(
+	                this.props && generatedBoard ? _react2.default.createElement(
 	                    'div',
 	                    null,
 	                    _react2.default.createElement(
 	                        'h4',
 	                        null,
-	                        'Here is your board #: ' + this.props.boardId
+	                        'Here is your board #: ' + generatedBoard
 	                    ),
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'col-sm-6 col-sm-offset-3' },
 	                        _react2.default.createElement(
 	                            _reactRouter.Link,
-	                            { to: '/' + boardId },
+	                            { to: '/' + generatedBoard },
 	                            _react2.default.createElement(
 	                                'button',
 	                                { type: 'submit', tabIndex: '4', className: 'form-control btn btn-register' },
@@ -32589,8 +32620,13 @@
 	                            )
 	                        ),
 	                        _react2.default.createElement(
+	                            'h5',
+	                            null,
+	                            'OR'
+	                        ),
+	                        _react2.default.createElement(
 	                            'button',
-	                            { tabIndex: '4', className: 'form-control btn btn-register' },
+	                            { tabIndex: '4', onClick: this.clearGeneratedboard, className: 'form-control btn btn-create-new' },
 	                            'GENERATE A NEW BOARD'
 	                        )
 	                    )
