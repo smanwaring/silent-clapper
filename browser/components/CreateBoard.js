@@ -43,6 +43,7 @@ class CreateBoard extends Component {
                             <h4>{`Here is your board #: ${this.props.boardId}`}</h4>
                             <div className="col-sm-6 col-sm-offset-3">
                                 <Link to={`/${boardId}`}><button type="submit" tabIndex="4" className="form-control btn btn-register">GO TO MY BOARD</button></Link>
+                                <button tabIndex="4" className="form-control btn btn-register">GENERATE A NEW BOARD</button>
                             </div>
                         </div>
                                 :

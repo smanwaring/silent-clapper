@@ -3,7 +3,7 @@ import {combineReducers} from 'redux';
 
 
 import { TOGGLE_PICK_BUTTON_ERROR  } from './actions/createboard-actions';
-import { SHOW_CREATE, HIDE_CREATE, SHOW_JOIN, HIDE_JOIN } from './actions/homeform-actions'; 
+import { SHOW_CREATE, SHOW_JOIN } from './actions/homeform-actions'; 
 import { ROOM_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
 import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
 import { LOAD_BUTTONS, SET_BOARDID } from './actions/room-actions';
@@ -68,8 +68,6 @@ const showCreateTabReducer = function(state=false, action){
 	switch(action.type){
 		case SHOW_CREATE: 
 			return action.payload;
-		case HIDE_CREATE: 
-			return action.payload;
 		default: return state;
 	}
 }
@@ -77,8 +75,6 @@ const showCreateTabReducer = function(state=false, action){
 const showJoinBoardTabReducer= function(state=true, action){
 	switch(action.type){
 		case SHOW_JOIN: 
-			return action.payload;
-		case HIDE_JOIN: 
 			return action.payload;
 		default: return state;
 	}

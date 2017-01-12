@@ -3,23 +3,24 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Provider} from 'react-redux';
-import store from './store';
 import {Router, Route, hashHistory, IndexRedirect, browserHistory, IndexRoute} from 'react-router';
+import store from './store';
 
 
-
+/*------ components/containers ------ */
 import Homepage from './containers/Homepage';
-import Root from './components/Root';
 import Room from './containers/Room';
+import Root from './components/Root';
+import EmptyPage from './components/EmptyPage';
+import HomeFormTest from './components/HomeFormTest';
 
-//actions
+/*------ actions ------ */
 import { enterRoom } from './actions/room-actions';
 import { roomNotFound } from './actions/joinboardform-actions';
 import { showPickButtonError } from './actions/createboard-actions';
 import { stateCurrentBoard } from './actions/joinboardform-actions';
 
-import EmptyPage from './components/EmptyPage';
-import HomeFormTest from './components/HomeFormTest';
+
 
 
 /*------ load the buttons for the room you are about to enter ------ */

@@ -42,7 +42,7 @@ class PickButtons extends React.Component {
                 icon: "fa fa-frown-o"
             },
              {
-                color: "grey",
+                color: "gray",
                 icon: "fa fa-empire"
             },
              {

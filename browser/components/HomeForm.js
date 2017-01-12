@@ -14,12 +14,12 @@ class HomeForm extends React.Component {
 
     handleCreateBoardClick( ) {
         this.props.showCreateTab(true);
-        this.props.hideJoinTab(false);
+        this.props.showJoinTab(false);
     }
 
     handleJoinBoardClick() {
         this.props.showJoinTab(true);
-        this.props.hideCreateTab(false);
+        this.props.showCreateTab(false);
     }
 
 
