@@ -98,6 +98,8 @@ const pickButtonErrorReducer = function(state=false, action){
 	}
 }
 
+
+
 const selectButtonReducer = function(state=initialButtonState, action){
 	switch(action.type){
 		case TOGGLE_CLAP: 
@@ -138,7 +140,7 @@ const rootReducer = combineReducers({
 	showCreateTab: showCreateTabReducer,
 	showJoinTab: showJoinBoardTabReducer,
 	allButtonSelect: toggleSelectAllReducer,
-	showPickButtonError: pickButtonErrorReducer
+	showPickButtonError: pickButtonErrorReducer,
 })
 
 export default rootReducer;

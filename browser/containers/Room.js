@@ -6,7 +6,8 @@ function mapStateToProps(state){
 	return {
 		boardId: state.generatedBoard,
 		currentBoard: state.currentBoard,
-		buttons: state.buttonsToLoad
+		buttons: state.buttonsToLoad,
+		connectToSocket: state.connectToSocket
 	};
 }
 

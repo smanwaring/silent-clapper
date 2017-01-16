@@ -93,7 +93,7 @@
 	/*------ load the buttons for the room you are about to enter ------ */
 	
 	
-	/*------ actions ------ */
+	/*------ ACTIONS ------ */
 	function onEnterConfirmRoom(nextState) {
 		_store2.default.dispatch((0, _roomActions.enterRoom)(nextState.params.roomId));
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(nextState.params.roomId));
@@ -103,7 +103,7 @@
 	/*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
 	
 	
-	/*------ components/containers ------ */
+	/*------ COMPONENTS/CONTAINERS ------ */
 	function onEnterResetCurrentBoard() {
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(false));
 		_store2.default.dispatch((0, _createboardActions.showPickButtonError)(false));
@@ -28800,11 +28800,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	/* ------ TYPE VARIABLES ------*/
 	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
 	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
 	var CLEAR_ALL_BUTTONS = exports.CLEAR_ALL_BUTTONS = "CLEAR_ALL_BUTTONS";
 	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = "CLEAR_ALL_SELECTED_BUTTONS";
 	
+	/* ------ SYNCHRONOUS ACTION CREATORS ------ */
 	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
 		return {
 			type: TOGGLE_PICK_BUTTON_ERROR,
@@ -28831,8 +28833,7 @@
 		};
 	};
 	
-	/* ------ async action creaters ------*/
-	
+	/* ------ ASYNC ACTION CREATORS ------*/
 	var addRoom = exports.addRoom = function addRoom(details) {
 		var thunk = function thunk(dispatch) {
 			_axios2.default.post("/api/", details).then(function (res) {
@@ -30344,9 +30345,12 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	
+	/* ------ TYPE VARIABLES ------ */
 	var SHOW_CREATE = exports.SHOW_CREATE = "SHOW_CREATE";
 	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
 	
+	/* ------ SYNCHRONOUS ACTION CREATORS ------ */
 	var showCreate = exports.showCreate = function showCreate(bool) {
 		return {
 			type: SHOW_CREATE,
@@ -30378,9 +30382,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	/* ------ TYPE VARIABLES ------*/
 	var ROOM_NOT_FOUND = exports.ROOM_NOT_FOUND = "ROOM_NOT_FOUND";
 	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
 	
+	/* ------ SYNCHRONOUS ACTION CREATORS ------*/
 	var roomNotFound = exports.roomNotFound = function roomNotFound(bool) {
 		return {
 			type: ROOM_NOT_FOUND,
@@ -30395,7 +30401,7 @@
 		};
 	};
 	
-	/* ------ async action creaters ------*/
+	/* ------ ASYNC ACTION CREATORS ------*/
 	
 	var loadRoom = exports.loadRoom = function loadRoom(roomId) {
 		var thunk = function thunk(dispatch) {
@@ -30423,6 +30429,8 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	
+	/* ------ TYPE VARIABLES ------*/
 	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
 	var PICKED_BUTTON = exports.PICKED_BUTTON = "PICKED_BUTTON";
 	var REMOVED_BUTTON = exports.REMOVED_BUTTON = "REMOVED_BUTTON";
@@ -30437,6 +30445,7 @@
 	var TOGGLE_RESISTANCE = exports.TOGGLE_RESISTANCE = "TOGGLE_RESISTANCE";
 	var TOGGLE_BOMB = exports.TOGGLE_BOMB = "TOGGLE_BOMB";
 	
+	/* ------ SYNCHRONOUS ACTION CREATORS ------*/
 	var pickedButton = exports.pickedButton = function pickedButton(data) {
 		return {
 			type: PICKED_BUTTON,
@@ -30547,9 +30556,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
+	/* ------ TYPE VARIABLES ------*/
 	var LOAD_BUTTONS = exports.LOAD_BUTTONS = "LOAD_BUTTONS";
 	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
 	
+	/* ------ SYNCHRONOUS ACTION CREATORS ------*/
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
 		return {
 			type: SET_BOARDID,
@@ -30564,17 +30575,17 @@
 		};
 	};
 	
-	/* ------ async action creaters ------*/
+	/* ------ ASYNC ACTION CREATORS ------*/
 	var enterRoom = exports.enterRoom = function enterRoom(roomId) {
 		var thunk = function thunk(dispatch) {
 			fetch('/api/enter/' + roomId).then(function (res) {
-				if (res.status === 404) {
+				return res.json();
+			}).then(function (errorOrButtons) {
+				if (errorOrButtons.notFound) {
 					_reactRouter.hashHistory.push("/pageNotFound/error");
 				} else {
-					return res.json();
+					dispatch(foundRoom(errorOrButtons.buttons));
 				}
-			}).then(function (buttons) {
-				dispatch(foundRoom(buttons));
 			}).catch(function (err) {
 				return console.log(err);
 			});
@@ -31609,7 +31620,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'footer',
-	                    { className: 'center-icons col-lg-12 col-xs-12 col-md-12 col-sm-12' },
+	                    null,
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: 'btn blue btn-circle btn-xl', onClick: this.handleIconClick, 'data-icon': 'fa fa-sign-language' },
@@ -32686,7 +32697,8 @@
 		return {
 			boardId: state.generatedBoard,
 			currentBoard: state.currentBoard,
-			buttons: state.buttonsToLoad
+			buttons: state.buttonsToLoad,
+			connectToSocket: state.connectToSocket
 		};
 	}
 	

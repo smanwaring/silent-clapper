@@ -1,3 +1,5 @@
+
+/* ------ TYPE VARIABLES ------*/
 export const TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
 export const PICKED_BUTTON = "PICKED_BUTTON";
 export const REMOVED_BUTTON = "REMOVED_BUTTON";
@@ -12,6 +14,8 @@ export const TOGGLE_THUMB = "TOGGLE_THUMB";
 export const TOGGLE_RESISTANCE = "TOGGLE_RESISTANCE";
 export const TOGGLE_BOMB = "TOGGLE_BOMB";
 
+
+/* ------ SYNCHRONOUS ACTION CREATORS ------*/
 export const pickedButton = (data) => {
 	return {
 		type: PICKED_BUTTON,

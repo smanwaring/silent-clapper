@@ -54,15 +54,20 @@ router.get('/:boardId', (req, res, next) => {
 
 //get the buttons for a particular room
 router.get('/enter/:boardId', (req, res, next) => {
+    var objToReturn = {};
     if (!req.board){
-        res.sendStatus(404);
+        objToReturn["notFound"] = true; 
+        res.send(objToReturn).status(404);
     } else {
         Button.findAll({
             where: {
                 boardId: req.board.id
             }
          })
-        .then(foundButtons => res.send(foundButtons))
+        .then(foundButtons => {
+            objToReturn["buttons"] = foundButtons;
+            res.send(objToReturn);
+        })
         .catch(next);
     }
 });

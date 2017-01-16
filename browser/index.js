@@ -7,14 +7,14 @@ import {Router, Route, hashHistory, IndexRedirect, browserHistory, IndexRoute} f
 import store from './store';
 
 
-/*------ components/containers ------ */
+/*------ COMPONENTS/CONTAINERS ------ */
 import Homepage from './containers/Homepage';
 import Room from './containers/Room';
 import Root from './components/Root';
 import EmptyPage from './components/EmptyPage';
 import HomeFormTest from './components/HomeFormTest';
 
-/*------ actions ------ */
+/*------ ACTIONS ------ */
 import { enterRoom } from './actions/room-actions';
 import { roomNotFound } from './actions/joinboardform-actions';
 import { showPickButtonError } from './actions/createboard-actions';

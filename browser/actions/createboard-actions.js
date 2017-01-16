@@ -1,10 +1,12 @@
 import axios from 'axios';
+
+/* ------ TYPE VARIABLES ------*/
 export const TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
 export const SET_BOARDID = "SET_BOARDID";
 export const CLEAR_ALL_BUTTONS = "CLEAR_ALL_BUTTONS";
 export const CLEAR_ALL_SELECTED_BUTTONS = "CLEAR_ALL_SELECTED_BUTTONS";
 
-
+/* ------ SYNCHRONOUS ACTION CREATORS ------ */
 export const showPickButtonError = (bool) => {
 	return {
 		type: TOGGLE_PICK_BUTTON_ERROR,
@@ -31,8 +33,7 @@ export const clearAllSelectedButtons = () => {
 	};
 };
 
-/* ------ async action creaters ------*/
-
+/* ------ ASYNC ACTION CREATORS ------*/
 export const addRoom = (details) => {
     const thunk = function (dispatch) {
         axios.post(`/api/`, details)

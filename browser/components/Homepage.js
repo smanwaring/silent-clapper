@@ -69,7 +69,7 @@ class Homepage extends React.Component {
             
 
 
-               <footer className="center-icons col-lg-12 col-xs-12 col-md-12 col-sm-12">
+               <footer>
                     <button className="btn blue btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-sign-language">
                         <i className="fa fa-sign-language"></i>
                     </button>

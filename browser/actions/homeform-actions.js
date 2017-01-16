@@ -1,8 +1,9 @@
 
+/* ------ TYPE VARIABLES ------ */
 export const SHOW_CREATE = "SHOW_CREATE";
 export const SHOW_JOIN = "SHOW_JOIN";
 
-
+/* ------ SYNCHRONOUS ACTION CREATORS ------ */
 export const showCreate = (bool) => {
 	return {
 		type: SHOW_CREATE,

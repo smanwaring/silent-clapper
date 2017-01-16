@@ -1,9 +1,12 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 
+/* ------ TYPE VARIABLES ------*/
 export const LOAD_BUTTONS = "LOAD_BUTTONS";
 export const SET_BOARDID = "SET_BOARDID";
 
+
+/* ------ SYNCHRONOUS ACTION CREATORS ------*/
 export const stateBoardId = (boardId) => {
 	return {
 		type: SET_BOARDID,
@@ -20,21 +23,19 @@ export const foundRoom = (buttons) => {
 
 
 
-/* ------ async action creaters ------*/
+/* ------ ASYNC ACTION CREATORS ------*/
 export const enterRoom = (roomId) => {
 	const thunk = function(dispatch){ 
 		fetch(`/api/enter/${roomId}`)
-			.then(res => {
-				if (res.status === 404){
+			.then(res => res.json())
+			.then(errorOrButtons => {
+				if(errorOrButtons.notFound){
 					hashHistory.push("/pageNotFound/error");
 				} else {
-					return res.json();
+					dispatch( foundRoom(errorOrButtons.buttons) );
 				}
 			})
-			.then(buttons => {
-				dispatch( foundRoom(buttons) );
-			})
-			.catch(err => console.log(err));
+			.catch(err => console.log(err))
 	}
 	return thunk;
 }
