@@ -1,28 +1,28 @@
 
 import React, { Component } from 'react';
-import { Link, hashHistory } from 'react-router';
+import { hashHistory } from 'react-router';
 
 class JoinBoardForm extends Component {
     constructor(props){
         super(props);
         this.confirmRoomExists = this.confirmRoomExists.bind(this);
-    }   
+    }
 
-    componentDidUpdate(){ 
+    componentDidUpdate(){
         const self = this;
-        if(this.props.roomNotFound){
+        if (this.props.roomNotFound){
           setTimeout(function() {
           self.props.clearRoomNotFound(false);
-           }, 2000)
+           }, 2000);
         }
         if (this.props.foundBoard) {
             hashHistory.push(`/${this.props.foundBoard}`);
         }
     }
-    
+   
     confirmRoomExists(evt){
         evt.preventDefault();
-        let boardId = evt.target.boardId.value.toString()
+        let boardId = evt.target.boardId.value.toString();
         this.props.confirmRoom(boardId);
     }
 

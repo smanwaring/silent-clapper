@@ -2,8 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {Provider} from 'react-redux';
-import {Router, Route, hashHistory, IndexRedirect, browserHistory, IndexRoute} from 'react-router';
+import { Provider } from 'react-redux';
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import store from './store';
 
 
@@ -15,16 +15,15 @@ import EmptyPage from './components/EmptyPage';
 
 /*------ ACTIONS ------ */
 import { enterRoom } from './actions/room-actions';
-import { roomNotFound } from './actions/joinboardform-actions';
+import { roomNotFound, stateCurrentBoard } from './actions/joinboardform-actions';
 import { showPickButtonError } from './actions/createboard-actions';
-import { stateCurrentBoard } from './actions/joinboardform-actions';
 
 
 
 
 /*------ load the buttons for the room you are about to enter ------ */
 function onEnterConfirmRoom(nextState) {
-	store.dispatch( enterRoom (nextState.params.roomId) );
+	store.dispatch( enterRoom(nextState.params.roomId) );
 	store.dispatch( stateCurrentBoard(nextState.params.roomId));
 	store.dispatch( roomNotFound(false) );
 }
@@ -37,13 +36,13 @@ function onEnterResetCurrentBoard() {
 
 ReactDOM.render(
   <Provider store={store}>
-	    <Router history={hashHistory}> 
-	    	<Route component={Root}>
+	    <Router history={hashHistory}>
+			<Route component={Root}>
 				<Route path="/" component={Homepage} onEnter={onEnterResetCurrentBoard}/>
 				<Route path="/:roomId" component={Room} onEnter={onEnterConfirmRoom}/>
 				<Route path="/pageNotFound/error" component={EmptyPage}/>
 				<IndexRoute component={Homepage}/>
 			</Route>
-	  	</Router>
+		</Router>
   </Provider>,
   document.getElementById('app'));

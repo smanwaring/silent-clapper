@@ -1,6 +1,4 @@
 import React from 'react';
-import { Link, hashHistory } from 'react-router';
-import PickButtons from '../containers/PickButtons';
 import JoinBoardForm from '../containers/JoinBoardForm';
 import CreateBoard from '../containers/CreateBoard';
 
@@ -8,7 +6,7 @@ import CreateBoard from '../containers/CreateBoard';
 class HomeForm extends React.Component {
     constructor(props){
         super(props);
-        this.handleCreateBoardClick= this.handleCreateBoardClick.bind(this);
+        this.handleCreateBoardClick = this.handleCreateBoardClick.bind(this);
         this.handleJoinBoardClick = this.handleJoinBoardClick.bind(this);
     }
 

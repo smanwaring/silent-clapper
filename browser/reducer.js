@@ -65,25 +65,25 @@ const initialButtonState = {
 		bomb: false
 }
 
-const boardReducer = function(state='', action) {
+const boardReducer = function(state = '', action) {
 	switch (action.type){
-		case SET_BOARDID: 
+		case SET_BOARDID:
 			return action.payload;
 		default: return state;
 	}
 }
 
-const currentBoardReducer = function(state=false, action) {
+const currentBoardReducer = function(state = false, action) {
 	switch (action.type){
-		case SET_CURRENT_BOARD: 
+		case SET_CURRENT_BOARD:
 			return action.payload;
 		default: return state;
 	}
 }
 
-const iconsPickedReducer = function(state=[], action) {
+const iconsPickedReducer = function(state = [], action) {
 	switch (action.type){
-		case PICKED_BUTTON: 
+		case PICKED_BUTTON:
 			return [...state, action.payload];
 		case REMOVED_BUTTON:
 			return state.filter(buttonInfo => buttonInfo.icon !== action.payload.icon);
@@ -93,82 +93,82 @@ const iconsPickedReducer = function(state=[], action) {
 	}
 }
 
-const foundRoomReducer = function(state=false, action) {
+const foundRoomReducer = function(state = false, action) {
 	switch (action.type){
-		case ROOM_NOT_FOUND: 
+		case ROOM_NOT_FOUND:
 			return action.payload;
 		default: return state;
 	}
 }
 
-const roomButtonsReducer = function(state=[], action) {
+const roomButtonsReducer = function(state = [], action) {
 	switch (action.type){
-		case LOAD_BUTTONS: 
+		case LOAD_BUTTONS:
 			return action.payload;
 		default: return state;
 	}
 }
 
 
-const showCreateTabReducer = function(state=false, action) {
+const showCreateTabReducer = function(state = false, action) {
 	switch (action.type){
-		case SHOW_CREATE: 
+		case SHOW_CREATE:
 			return action.payload;
 		default: return state;
 	}
 }
 
-const showJoinBoardTabReducer= function(state=true, action) {
+const showJoinBoardTabReducer= function(state = true, action) {
 	switch (action.type){
-		case SHOW_JOIN: 
+		case SHOW_JOIN:
 			return action.payload;
 		default: return state;
 	}
 }
 
-const toggleSelectAllReducer = function(state=false, action) {
+const toggleSelectAllReducer = function(state = false, action) {
 	switch (action.type){
-		case TOGGLE_SELECT_ALL: 
+		case TOGGLE_SELECT_ALL:
 			return action.payload;
 		default: return state;
 	}
 }
 
-const pickButtonErrorReducer = function(state=false, action) {
+const pickButtonErrorReducer = function(state = false, action) {
 	switch (action.type){
-		case TOGGLE_PICK_BUTTON_ERROR: 
+		case TOGGLE_PICK_BUTTON_ERROR:
 			return action.payload;
 		default: return state;
 	}
 }
 
-const buttonsAvailableReducer = function(state=buttonDataState, action) {
+const buttonsAvailableReducer = function(state = buttonDataState, action) {
 	switch (action.type){
 		default: return state;
 	}
 }
 
-const selectButtonReducer = function(state=initialButtonState, action) {
+const selectButtonReducer = function(state = initialButtonState, action) {
 	switch (action.type) {
-		case TOGGLE_CLAP: 
+		case TOGGLE_CLAP:
 			return Object.assign({}, state, {clap: action.payload});
-		case TOGGLE_FROWN: 
+		case TOGGLE_FROWN:
 			return Object.assign({}, state, {frown: action.payload});
-		case TOGGLE_EMPIRE: 
+		case TOGGLE_EMPIRE:
 			return Object.assign({}, state, {empire: action.payload});
-		case TOGGLE_HEART: 
+		case TOGGLE_HEART:
 			return Object.assign({}, state, {heart: action.payload});
-		case TOGGLE_MONEY: 
+		case TOGGLE_MONEY:
 			return Object.assign({}, state, {money: action.payload});
-		case TOGGLE_SMILE: 
+		case TOGGLE_SMILE:
 			return Object.assign({}, state, {smile: action.payload});
-		case TOGGLE_QUESTION: 
+		case TOGGLE_QUESTION:
 			return Object.assign({}, state, {question: action.payload});
-		case TOGGLE_THUMB: 
+		case TOGGLE_THUMB:
 			return Object.assign({}, state, {thumb: action.payload});
-		case TOGGLE_BOMB: 
+		case TOGGLE_BOMB:
 			return Object.assign({}, state, {bomb: action.payload});
-		case TOGGLE_RESISTANCE: 
+		case TOGGLE_RESISTANCE:
 			return Object.assign({}, state, {resistance: action.payload});
 		case CLEAR_ALL_SELECTED_BUTTONS:
 			return initialButtonState;

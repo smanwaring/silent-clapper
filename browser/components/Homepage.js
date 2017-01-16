@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link, hashHistory } from 'react-router';
 import HomeForm from '../containers/HomeForm';
 
 
@@ -43,8 +42,8 @@ class Homepage extends React.Component {
         $(".part-" + uniqueIdentifier).show();
         
         setTimeout(function() {
-            $(".part-" + uniqueIdentifier).remove()
-        }, speed * 900)
+            $(".part-" + uniqueIdentifier).remove();
+        }, speed * 900);
 	}
 
   render () {
@@ -66,7 +65,6 @@ class Homepage extends React.Component {
                         
                     </div>
                 </div>
-            
 
 
                <footer>
@@ -101,17 +99,10 @@ class Homepage extends React.Component {
                         <i className="fa fa-bomb"></i>
                     </button>
                 </footer>
-            
 
-
-
-      </div> 
-    )
+      </div>
+    );
   }
 }
 
 export default Homepage;
-
-
-
-    //    <div>id="button-wrap" className="center-icons col-lg-12 col-xs-12 col-md-12 col-sm-12 navbar navbar-default navbar-fixed-bottom"</div>

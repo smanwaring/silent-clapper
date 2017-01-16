@@ -1,5 +1,4 @@
 import React from 'react';
-import HomeForm from '../containers/HomeForm';
 
 
 class PickButtons extends React.Component {
@@ -144,8 +143,6 @@ class PickButtons extends React.Component {
       let resistanceClass = "btn btn-circle btn-xl orange";
       let bombClass = "btn btn-circle btn-xl purple";
       let allButtonsOn = this.props.picked.length === 10;
-
-
     return (
         
       <div>

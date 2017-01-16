@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import PickButtons from '../containers/PickButtons';
-import {Link, browserHistory, hashHistory} from 'react-router';
+import { Link } from 'react-router';
 
 class CreateBoard extends Component {
     constructor(props){
@@ -11,33 +11,33 @@ class CreateBoard extends Component {
     }
 
 
-    componentDidUpdate(){ 
+    componentDidUpdate(){
         const self = this;
-        if(this.props.showPickButtonError){
+        if (this.props.showPickButtonError){
           setTimeout(function() {
           self.props.pickButtonsError(false);
-           }, 2000)       
+           }, 2000);
         }
     }
 
 
     generateBoardId(evt){
         evt.preventDefault();
-        if(this.props.buttons.length < 1){
+        if (this.props.buttons.length < 1){
             this.props.pickButtonsError(true);
         } else {
             let boardId = Math.floor(Math.random()*89999+10000);
             let details = {
                 path: boardId,
                 buttons: this.props.buttons
-            }
+            };
             this.props.addBoard(details);
         }
     }
 
     clearGeneratedboard(evt){
         evt.preventDefault();
-        this.props.clearGeneratedboard("");
+        this.props.clearGeneratedboard('');
     }
 
     render() {
