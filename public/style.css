@@ -76,13 +76,6 @@ footer {
 }*/
 
 
-.invis{
-	position: relative;
-	width: 100%;
-	height: 10px;
-	background-color: red;
-}
-
 /*
 *
 * Icon containers
@@ -513,33 +506,12 @@ div.column i {
 }
 
 
-
-
-
-
 .form-container{
 	margin-top: 20px;
 }
 
 .display-none {
 	display: none;
-}
-
-
-/* reactTransion text */
-.example-enter {
-  opacity: 0.01;
-}
-.example-enter.example-enter-active {
-  opacity: 1;
-  transition: opacity 500ms ease-in;
-}
-.example-leave {
-  opacity: 1;
-}
-.example-leave.example-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
 }
 
 .pick-body {
@@ -552,106 +524,9 @@ div.column i {
 	margin-top: 0px;
 }
 
-
-.boxforicons{
-	height: 200px;
-}
-
-.wontgoabove {
-	background-color: red;
-	height: 100%;
-	width: 100%;
-	position: relative; 
-	z-index: -1;
-}
-
-.parent {
-  width:100%;
-  height:250px;
-  background-color:#CCCCCC;
-  position:relative;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.child {
-  /*width:100px;
-  height:100px;
-  background-color:#999999;*/
-  position:absolute;
-  /*bottom:0px;
-  right:0px;*/
-}
- 
  .no-margin{
 	 margin: 0px !important;
  }
-
- .no-padding{
-	 padding: 0px 0px 5px 0px;
- }
- 
- .yes-padding{
-	 padding: 0px 10px 0px 10px !important;
- }
-
- .paddingLR{
-	 padding-left: 10px;
-	 padding-right: 10px;
- }
-
-
-/* 
-*
-*
-*
-*
-ROOM CSS 
-*
-*
-*
-*
-*/
-
-.testHeading{
-	text-align: center;
-	background-color: lightcoral;
-}
-
-.test-CenterHeadingText {
-	padding-top: 3px;
-	margin-top: 0px;
-	margin-bottom: 0px;
-}
-
-.testSocial{
-	background-color: lightgreen;
-	text-align: center;
-	padding-left: 0px;
-	padding-right: 0px;
-	position: absolute;
-}
-
-.testSocialIcons{
-	padding-top: 10px;
-	padding-bottom: 10px;
-}
-
-.testForm{
-	background-color: lightseagreen;
-	height: 275px;
-	margin-top: 20px;
-
-}
-
-.testFooter{
-    width: 100%;
-    height: 60px;
-    background-color: #f5f5f5;
-	bottom: 0;
-	position: fixed;
-}
 
 
 /* 

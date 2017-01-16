@@ -24,7 +24,7 @@ class PickButtons extends React.Component {
         evt.preventDefault();
         let icon = evt.currentTarget.dataset.icon;
         let data = {icon: icon, color: color};
-        if(this.props.picked.map(data => data.icon).indexOf(icon) < 0) {
+        if (this.props.picked.map(data => data.icon).indexOf(icon) < 0) {
             this.props.addButton(data);
         } else {
             this.props.removeButton(data);
@@ -32,50 +32,8 @@ class PickButtons extends React.Component {
     }
 
     selectAllinDB() {
-        const dataArray = [
-            {
-                color: "blue",
-                icon:"fa fa-sign-language"
-            }, 
-            {
-                color: "red",
-                icon: "fa fa-frown-o"
-            },
-             {
-                color: "gray",
-                icon: "fa fa-empire"
-            },
-             {
-                color: "dark-blue",
-                icon: "fa fa-heart-o"
-            },
-             {
-                color: "green",
-                icon: "fa fa-money fa-spin"
-            },
-             {
-                color: "pink",
-                icon: "fa fa-smile-o"
-            },
-             {
-                color: "yellow",
-                icon: "fa fa-question"
-            },
-             {
-                color: "mint-green",
-                icon: "fa fa-thumbs-o-up"
-            },
-             {
-                color: "orange",
-                icon: "fa fa-rebel"
-            },
-              {
-                color: "purple",
-                icon: "fa fa-bomb fa-spin"
-            }
-        ];
         const pickedArray = this.props.picked.map(data => data.icon);
-        const notSelectedArray = dataArray.filter( item => pickedArray.indexOf(item.icon) < 0);
+        const notSelectedArray = this.props.buttonsAvailable.filter( item => pickedArray.indexOf(item.icon) < 0);
         notSelectedArray.forEach(item => {
             this.props.addButton(item);
         });
@@ -83,56 +41,14 @@ class PickButtons extends React.Component {
 
 
       deselectAllinDB() {
-        const dataArray = [
-            {
-                color: "blue",
-                icon:"fa fa-sign-language"
-            }, 
-            {
-                color: "red",
-                icon: "fa fa-frown-o"
-            },
-             {
-                color: "grey",
-                icon: "fa fa-empire"
-            },
-             {
-                color: "dark-blue",
-                icon: "fa fa-heart-o"
-            },
-             {
-                color: "green",
-                icon: "fa fa-money fa-spin"
-            },
-             {
-                color: "pink",
-                icon: "fa fa-smile-o"
-            },
-             {
-                color: "yellow",
-                icon: "fa fa-question"
-            },
-             {
-                color: "mint-green",
-                icon: "fa fa-thumbs-o-up"
-            },
-             {
-                color: "orange",
-                icon: "fa fa-rebel"
-            },
-              {
-                color: "purple",
-                icon: "fa fa-bomb fa-spin"
-            }
-        ];
-        dataArray.forEach(item => {
+        this.props.buttonsAvailable.forEach(item => {
             this.props.removeButton(item);
         });
     }
 
 
     handleCheck(){
-        if(this.props.allSelected){
+        if (this.props.allSelected){
             this.deselectAllinDB();
             this.props.selectAll(!this.props.allSelected);
         } else {
@@ -142,70 +58,70 @@ class PickButtons extends React.Component {
     }
 
     handleClapClick() {
-        if(!this.props.buttonClass.clap === false){
+        if (!this.props.buttonClass.clap === false){
             this.props.toggleSelect(false);
         }
 
        this.props.clapClicked(!this.props.buttonClass.clap);
     }
     handleFrownClick() {
-      if(!this.props.buttonClass.frown === false){
+      if (!this.props.buttonClass.frown === false){
             this.props.toggleSelect(false);
         }
 
        this.props.frownClicked(!this.props.buttonClass.frown);
     }
     handleEmpireClick() {
-        if(!this.props.buttonClass.empire === false){
+        if (!this.props.buttonClass.empire === false){
             this.props.toggleSelect(false);
         }
 
        this.props.empireClicked(!this.props.buttonClass.empire);
     }
     handleHeartClick() {
-        if(!this.props.buttonClass.heart === false){
+        if (!this.props.buttonClass.heart === false){
             this.props.toggleSelect(false);
         }
 
        this.props.heartClicked(!this.props.buttonClass.heart);
     }
     handleMoneyClick() {
-        if(!this.props.buttonClass.money === false){
+        if (!this.props.buttonClass.money === false){
             this.props.toggleSelect(false);
         }
 
        this.props.moneyClicked(!this.props.buttonClass.money);
     }
     handleSmileClick() {
-        if(!this.props.buttonClass.smile === false){
+        if (!this.props.buttonClass.smile === false){
             this.props.toggleSelect(false);
         }
 
        this.props.smileClicked(!this.props.buttonClass.smile);
     }
     handleQuestionClick() {
-        if(!this.props.buttonClass.question === false){
+        if (!this.props.buttonClass.question === false){
             this.props.toggleSelect(false);
         }
 
        this.props.questionClicked(!this.props.buttonClass.question);
     }
     handleThumbClick() {
-        if(!this.props.buttonClass.thumb === false){
+        if (!this.props.buttonClass.thumb === false){
             this.props.toggleSelect(false);
         }
 
        this.props.thumbClicked(!this.props.buttonClass.thumb);
     }
     handleResistanceClick() {
-        if(!this.props.buttonClass.resistance === false){
+        if (!this.props.buttonClass.resistance === false){
             this.props.toggleSelect(false);
         }
 
        this.props.resistanceClicked(!this.props.buttonClass.resistance);
     }
     handleBombClick() {
-        if(!this.props.buttonClass.bomb === false){
+        if (!this.props.buttonClass.bomb === false){
             this.props.toggleSelect(false);
         }
 

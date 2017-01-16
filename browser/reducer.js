@@ -8,6 +8,50 @@ import { ROOM_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actio
 import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
 import { LOAD_BUTTONS, SET_BOARDID } from './actions/room-actions';
 
+const buttonDataState = [
+            {
+                color: 'blue',
+                icon: 'fa fa-sign-language'
+            }, 
+            {
+                color: 'red',
+                icon: 'fa fa-frown-o'
+            },
+             {
+                color: 'gray',
+                icon: 'fa fa-empire'
+            },
+             {
+                color: 'dark-blue',
+                icon: 'fa fa-heart-o'
+            },
+             {
+                color: 'green',
+                icon: 'fa fa-money fa-spin'
+            },
+             {
+                color: 'pink',
+                icon: 'fa fa-smile-o'
+            },
+             {
+                color: 'yellow',
+                icon: 'fa fa-question'
+            },
+             {
+                color: 'mint-green',
+                icon: 'fa fa-thumbs-o-up'
+            },
+             {
+                color: 'orange',
+                icon: 'fa fa-rebel'
+            },
+              {
+                color: 'purple',
+                icon: 'fa fa-bomb fa-spin'
+            }
+];
+
+
 const initialButtonState = {
 	    clap: false,
 		frown: false,
@@ -21,24 +65,24 @@ const initialButtonState = {
 		bomb: false
 }
 
-const boardReducer = function(state="", action){
-	switch(action.type){
+const boardReducer = function(state='', action) {
+	switch (action.type){
 		case SET_BOARDID: 
 			return action.payload;
 		default: return state;
 	}
 }
 
-const currentBoardReducer = function(state=false, action){
-	switch(action.type){
+const currentBoardReducer = function(state=false, action) {
+	switch (action.type){
 		case SET_CURRENT_BOARD: 
 			return action.payload;
 		default: return state;
 	}
 }
 
-const iconsPickedReducer = function(state=[], action){
-	switch(action.type){
+const iconsPickedReducer = function(state=[], action) {
+	switch (action.type){
 		case PICKED_BUTTON: 
 			return [...state, action.payload];
 		case REMOVED_BUTTON:
@@ -49,16 +93,16 @@ const iconsPickedReducer = function(state=[], action){
 	}
 }
 
-const foundRoomReducer = function(state=false, action){
-	switch(action.type){
+const foundRoomReducer = function(state=false, action) {
+	switch (action.type){
 		case ROOM_NOT_FOUND: 
 			return action.payload;
 		default: return state;
 	}
 }
 
-const roomButtonsReducer = function(state=[], action){
-	switch(action.type){
+const roomButtonsReducer = function(state=[], action) {
+	switch (action.type){
 		case LOAD_BUTTONS: 
 			return action.payload;
 		default: return state;
@@ -66,42 +110,46 @@ const roomButtonsReducer = function(state=[], action){
 }
 
 
-const showCreateTabReducer = function(state=false, action){
-	switch(action.type){
+const showCreateTabReducer = function(state=false, action) {
+	switch (action.type){
 		case SHOW_CREATE: 
 			return action.payload;
 		default: return state;
 	}
 }
 
-const showJoinBoardTabReducer= function(state=true, action){
-	switch(action.type){
+const showJoinBoardTabReducer= function(state=true, action) {
+	switch (action.type){
 		case SHOW_JOIN: 
 			return action.payload;
 		default: return state;
 	}
 }
 
-const toggleSelectAllReducer = function(state=false, action){
-	switch(action.type){
+const toggleSelectAllReducer = function(state=false, action) {
+	switch (action.type){
 		case TOGGLE_SELECT_ALL: 
 			return action.payload;
 		default: return state;
 	}
 }
 
-const pickButtonErrorReducer = function(state=false, action){
-	switch(action.type){
+const pickButtonErrorReducer = function(state=false, action) {
+	switch (action.type){
 		case TOGGLE_PICK_BUTTON_ERROR: 
 			return action.payload;
 		default: return state;
 	}
 }
 
+const buttonsAvailableReducer = function(state=buttonDataState, action) {
+	switch (action.type){
+		default: return state;
+	}
+}
 
-
-const selectButtonReducer = function(state=initialButtonState, action){
-	switch(action.type){
+const selectButtonReducer = function(state=initialButtonState, action) {
+	switch (action.type) {
 		case TOGGLE_CLAP: 
 			return Object.assign({}, state, {clap: action.payload});
 		case TOGGLE_FROWN: 
@@ -129,7 +177,6 @@ const selectButtonReducer = function(state=initialButtonState, action){
 }
 
 
-
 const rootReducer = combineReducers({
 	generatedBoard: boardReducer,
 	currentBoard: currentBoardReducer,
@@ -141,6 +188,7 @@ const rootReducer = combineReducers({
 	showJoinTab: showJoinBoardTabReducer,
 	allButtonSelect: toggleSelectAllReducer,
 	showPickButtonError: pickButtonErrorReducer,
+	buttonsAvailable: buttonsAvailableReducer,
 })
 
 export default rootReducer;

@@ -12,7 +12,6 @@ import Homepage from './containers/Homepage';
 import Room from './containers/Room';
 import Root from './components/Root';
 import EmptyPage from './components/EmptyPage';
-import HomeFormTest from './components/HomeFormTest';
 
 /*------ ACTIONS ------ */
 import { enterRoom } from './actions/room-actions';
@@ -43,7 +42,6 @@ ReactDOM.render(
 				<Route path="/" component={Homepage} onEnter={onEnterResetCurrentBoard}/>
 				<Route path="/:roomId" component={Room} onEnter={onEnterConfirmRoom}/>
 				<Route path="/pageNotFound/error" component={EmptyPage}/>
-				<Route path="/hometest/home" component={HomeFormTest}/>
 				<IndexRoute component={Homepage}/>
 			</Route>
 	  	</Router>

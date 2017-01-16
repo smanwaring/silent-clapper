@@ -78,10 +78,6 @@
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
-	var _HomeFormTest = __webpack_require__(322);
-	
-	var _HomeFormTest2 = _interopRequireDefault(_HomeFormTest);
-	
 	var _roomActions = __webpack_require__(300);
 	
 	var _joinboardformActions = __webpack_require__(298);
@@ -94,6 +90,9 @@
 	
 	
 	/*------ ACTIONS ------ */
+	
+	
+	/*------ COMPONENTS/CONTAINERS ------ */
 	function onEnterConfirmRoom(nextState) {
 		_store2.default.dispatch((0, _roomActions.enterRoom)(nextState.params.roomId));
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(nextState.params.roomId));
@@ -101,9 +100,6 @@
 	}
 	
 	/*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
-	
-	
-	/*------ COMPONENTS/CONTAINERS ------ */
 	function onEnterResetCurrentBoard() {
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(false));
 		_store2.default.dispatch((0, _createboardActions.showPickButtonError)(false));
@@ -121,7 +117,6 @@
 				_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Homepage2.default, onEnter: onEnterResetCurrentBoard }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/:roomId', component: _Room2.default, onEnter: onEnterConfirmRoom }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/pageNotFound/error', component: _EmptyPage2.default }),
-				_react2.default.createElement(_reactRouter.Route, { path: '/hometest/home', component: _HomeFormTest2.default }),
 				_react2.default.createElement(_reactRouter.IndexRoute, { component: _Homepage2.default })
 			)
 		)
@@ -28609,6 +28604,38 @@
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
+	var buttonDataState = [{
+		color: 'blue',
+		icon: 'fa fa-sign-language'
+	}, {
+		color: 'red',
+		icon: 'fa fa-frown-o'
+	}, {
+		color: 'gray',
+		icon: 'fa fa-empire'
+	}, {
+		color: 'dark-blue',
+		icon: 'fa fa-heart-o'
+	}, {
+		color: 'green',
+		icon: 'fa fa-money fa-spin'
+	}, {
+		color: 'pink',
+		icon: 'fa fa-smile-o'
+	}, {
+		color: 'yellow',
+		icon: 'fa fa-question'
+	}, {
+		color: 'mint-green',
+		icon: 'fa fa-thumbs-o-up'
+	}, {
+		color: 'orange',
+		icon: 'fa fa-rebel'
+	}, {
+		color: 'purple',
+		icon: 'fa fa-bomb fa-spin'
+	}];
+	
 	var initialButtonState = {
 		clap: false,
 		frown: false,
@@ -28623,7 +28650,7 @@
 	};
 	
 	var boardReducer = function boardReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
 		var action = arguments[1];
 	
 		switch (action.type) {
@@ -28736,6 +28763,16 @@
 		}
 	};
 	
+	var buttonsAvailableReducer = function buttonsAvailableReducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : buttonDataState;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			default:
+				return state;
+		}
+	};
+	
 	var selectButtonReducer = function selectButtonReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialButtonState;
 		var action = arguments[1];
@@ -28778,7 +28815,8 @@
 		showCreateTab: showCreateTabReducer,
 		showJoinTab: showJoinBoardTabReducer,
 		allButtonSelect: toggleSelectAllReducer,
-		showPickButtonError: pickButtonErrorReducer
+		showPickButtonError: pickButtonErrorReducer,
+		buttonsAvailable: buttonsAvailableReducer
 	});
 	
 	exports.default = rootReducer;
@@ -31886,7 +31924,8 @@
 		return {
 			picked: state.buttonsPicked,
 			buttonClass: state.buttonSelected,
-			allSelected: state.allButtonSelect
+			allSelected: state.allButtonSelect,
+			buttonsAvailable: state.buttonsAvailable
 		};
 	}
 	
@@ -32019,41 +32058,10 @@
 	        value: function selectAllinDB() {
 	            var _this2 = this;
 	
-	            var dataArray = [{
-	                color: "blue",
-	                icon: "fa fa-sign-language"
-	            }, {
-	                color: "red",
-	                icon: "fa fa-frown-o"
-	            }, {
-	                color: "gray",
-	                icon: "fa fa-empire"
-	            }, {
-	                color: "dark-blue",
-	                icon: "fa fa-heart-o"
-	            }, {
-	                color: "green",
-	                icon: "fa fa-money fa-spin"
-	            }, {
-	                color: "pink",
-	                icon: "fa fa-smile-o"
-	            }, {
-	                color: "yellow",
-	                icon: "fa fa-question"
-	            }, {
-	                color: "mint-green",
-	                icon: "fa fa-thumbs-o-up"
-	            }, {
-	                color: "orange",
-	                icon: "fa fa-rebel"
-	            }, {
-	                color: "purple",
-	                icon: "fa fa-bomb fa-spin"
-	            }];
 	            var pickedArray = this.props.picked.map(function (data) {
 	                return data.icon;
 	            });
-	            var notSelectedArray = dataArray.filter(function (item) {
+	            var notSelectedArray = this.props.buttonsAvailable.filter(function (item) {
 	                return pickedArray.indexOf(item.icon) < 0;
 	            });
 	            notSelectedArray.forEach(function (item) {
@@ -32065,38 +32073,7 @@
 	        value: function deselectAllinDB() {
 	            var _this3 = this;
 	
-	            var dataArray = [{
-	                color: "blue",
-	                icon: "fa fa-sign-language"
-	            }, {
-	                color: "red",
-	                icon: "fa fa-frown-o"
-	            }, {
-	                color: "grey",
-	                icon: "fa fa-empire"
-	            }, {
-	                color: "dark-blue",
-	                icon: "fa fa-heart-o"
-	            }, {
-	                color: "green",
-	                icon: "fa fa-money fa-spin"
-	            }, {
-	                color: "pink",
-	                icon: "fa fa-smile-o"
-	            }, {
-	                color: "yellow",
-	                icon: "fa fa-question"
-	            }, {
-	                color: "mint-green",
-	                icon: "fa fa-thumbs-o-up"
-	            }, {
-	                color: "orange",
-	                icon: "fa fa-rebel"
-	            }, {
-	                color: "purple",
-	                icon: "fa fa-bomb fa-spin"
-	            }];
-	            dataArray.forEach(function (item) {
+	            this.props.buttonsAvailable.forEach(function (item) {
 	                _this3.props.removeButton(item);
 	            });
 	        }
@@ -32851,8 +32828,8 @@
 	                    _react2.default.createElement('div', { className: 'columns column-4' })
 	                ),
 	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'button-wrap', className: 'center-icons' },
+	                    'footer',
+	                    null,
 	                    this.props.buttons && this.props.buttons.map(function (button, i) {
 	                        return _react2.default.createElement(
 	                            'button',
@@ -32987,122 +32964,6 @@
 	
 	
 	module.exports = EmptyPage;
-
-/***/ },
-/* 322 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(216);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var HomeFormTest = function (_React$Component) {
-	  _inherits(HomeFormTest, _React$Component);
-	
-	  function HomeFormTest(props) {
-	    _classCallCheck(this, HomeFormTest);
-	
-	    return _possibleConstructorReturn(this, (HomeFormTest.__proto__ || Object.getPrototypeOf(HomeFormTest)).call(this, props));
-	  }
-	
-	  _createClass(HomeFormTest, [{
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
-	        { className: 'container' },
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'testHeading col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2' },
-	            _react2.default.createElement(
-	              'h1',
-	              { className: 'test-centerHeadingText' },
-	              'Heading'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'testSocial col-lg-1 col-lg-offset-1 col-md-1 col-md-offset-1 col-sm-1 col-sm-offset-1' },
-	            _react2.default.createElement(
-	              'div',
-	              { className: 'testSocialIcons' },
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Heart'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Twitter'
-	              ),
-	              _react2.default.createElement(
-	                'p',
-	                null,
-	                'Facebook'
-	              )
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'testForm col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-8 col-xs-offset-2' },
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              'Content inside'
-	            )
-	          )
-	        ),
-	        _react2.default.createElement(
-	          'div',
-	          { className: 'row' },
-	          _react2.default.createElement(
-	            'div',
-	            { className: 'testFooter col-lg-12 col-lg-offset-0' },
-	            _react2.default.createElement(
-	              'h1',
-	              null,
-	              'Footer'
-	            )
-	          )
-	        )
-	      );
-	    }
-	  }]);
-	
-	  return HomeFormTest;
-	}(_react2.default.Component);
-	
-	exports.default = HomeFormTest;
 
 /***/ }
 /******/ ]);

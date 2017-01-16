@@ -86,7 +86,8 @@ class Room extends React.Component {
             <div className="columns column-3"></div>
             <div className="columns column-4"></div>
         </div>
-        <div id="button-wrap" className="center-icons">
+
+        <footer>
             {this.props.buttons && this.props.buttons.map((button, i) => {
                 return (
                     <button key={i} className={`btn btn-circle btn-xl ${button.color}`} onClick={this.handleIconClick} data-icon={button.icon}>
@@ -94,7 +95,8 @@ class Room extends React.Component {
                     </button>
                 )
             })}
-        </div>
+        </footer>
+
       </div>
     )
   }
