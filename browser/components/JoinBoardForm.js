@@ -22,6 +22,8 @@ class JoinBoardForm extends Component {
    
     confirmRoomExists(evt){
         evt.preventDefault();
+        console.log("here is the target!", evt.target);
+        console.log("HELLLLO I CLICKED YOU!")
         let boardId = evt.target.boardId.value.toString();
         this.props.confirmRoom(boardId);
     }

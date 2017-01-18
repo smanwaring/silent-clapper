@@ -26,7 +26,7 @@ export const stateCurrentBoard = (boardId) => {
 
 export const loadRoom = (roomId) => {
 	const thunk = function(dispatch){ 
-		fetch(`/api/${roomId}`)
+		window.fetch(`/api/${roomId}`)
 			.then(res => res.json())
 			.then(room => { 
 				if (room.message){

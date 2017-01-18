@@ -30443,7 +30443,7 @@
 	
 	var loadRoom = exports.loadRoom = function loadRoom(roomId) {
 		var thunk = function thunk(dispatch) {
-			fetch("/api/" + roomId).then(function (res) {
+			window.fetch("/api/" + roomId).then(function (res) {
 				return res.json();
 			}).then(function (room) {
 				if (room.message) {
@@ -31986,6 +31986,8 @@
 	        key: 'confirmRoomExists',
 	        value: function confirmRoomExists(evt) {
 	            evt.preventDefault();
+	            console.log("here is the target!", evt.target);
+	            console.log("HELLLLO I CLICKED YOU!");
 	            var boardId = evt.target.boardId.value.toString();
 	            this.props.confirmRoom(boardId);
 	        }
@@ -32522,17 +32524,17 @@
 	
 	            var addRemove = this.handleIconClick;
 	            var handleClapClick = this.handleClapClick;
-	            var basicClass = "btn btn-circle btn-xl btn-hover";
-	            var clapClass = "btn btn-circle btn-xl blue";
-	            var frownClass = "btn btn-circle btn-xl red";
-	            var empireClass = "btn btn-circle btn-xl gray";
-	            var heartClass = "btn btn-circle btn-xl dark-blue";
-	            var moneyClass = "btn btn-circle btn-xl green";
-	            var questionClass = "btn btn-circle btn-xl yellow";
-	            var smileClass = "btn btn-circle btn-xl pink";
-	            var thumbClass = "btn btn-circle btn-xl mint-green";
-	            var resistanceClass = "btn btn-circle btn-xl orange";
-	            var bombClass = "btn btn-circle btn-xl purple";
+	            var basicClass = "btn btn-circle btn-md btn-hover nuetralbg";
+	            var clapClass = "btn btn-circle btn-md blue";
+	            var frownClass = "btn btn-circle btn-md red";
+	            var empireClass = "btn btn-circle btn-md gray";
+	            var heartClass = "btn btn-circle btn-md dark-blue";
+	            var moneyClass = "btn btn-circle btn-md green";
+	            var questionClass = "btn btn-circle btn-md yellow";
+	            var smileClass = "btn btn-circle btn-md pink";
+	            var thumbClass = "btn btn-circle btn-md mint-green";
+	            var resistanceClass = "btn btn-circle btn-md orange";
+	            var bombClass = "btn btn-circle btn-md purple";
 	            var allButtonsOn = this.props.picked.length === 10;
 	            return _react2.default.createElement(
 	                "div",
@@ -32554,7 +32556,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    "div",
-	                    { className: "col-lg-10 col-xs-10 col-md-10 col-sm-10 pick-body" },
+	                    { className: "button-spacer" },
 	                    _react2.default.createElement(
 	                        "button",
 	                        { className: buttonClass.clap ? clapClass : basicClass, onClick: function onClick(evt) {

@@ -5,11 +5,11 @@ export default class EmptyPage extends React.Component {
 
     render() {
         return (
-            <div>                                
+            <div>
                 <h1>Oops! That page doesn't exist</h1>
                 <Link to={'/'}><h1> Go back home</h1></Link>
             </div>
-        )
+        );
     }
 }
 
