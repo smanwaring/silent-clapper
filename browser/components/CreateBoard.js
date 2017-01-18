@@ -57,15 +57,15 @@ class CreateBoard extends Component {
                         <div className="form-group">
                             <PickButtons/>
                             <div className="row">
+                            {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
                                 <div className="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
                                     <button tabIndex="4" className="form-control btn btn-create" onClick={this.generateBoardId}> Generate My Board Link </button>
-                                </div>
-                                    {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
+                                </div>      
                             </div>
-                        </div> 
-                        } 
+                        </div>
+                        }
             </form>
-        )
+        );
     }
 }
 

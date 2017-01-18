@@ -130,7 +130,6 @@ class PickButtons extends React.Component {
   render () {
       const { buttonClass } = this.props;
       let addRemove = this.handleIconClick;
-      let handleClapClick = this.handleClapClick;
       let basicClass = "btn btn-circle btn-md btn-hover nuetralbg";
       let clapClass = "btn btn-circle btn-md blue";
       let frownClass = "btn btn-circle btn-md red";
@@ -144,7 +143,6 @@ class PickButtons extends React.Component {
       let bombClass = "btn btn-circle btn-md purple";
       let allButtonsOn = this.props.picked.length === 10;
     return (
-        
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>
             <div className="checkbox">

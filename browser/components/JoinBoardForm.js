@@ -44,7 +44,7 @@ class JoinBoardForm extends Component {
                     </div>
                 </form>
             </div>
-        )
+        );
     }
 }
 

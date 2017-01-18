@@ -10,11 +10,8 @@ html {
 }
 
 body {
-	/*min-height:100%;*/
 	overflow: hidden;
 	font-family: 'Roboto Condensed', sans-serif;
-	/*display: flex;
-	flex-direction: column;*/
 	margin: 0 0 180px
 }
 
@@ -41,15 +38,9 @@ footer {
 }
 
 #wrap {
-	/*height:100%;*/
-	/*margin-bottom: -180px;*/
 	text-align: center;
 }
 
-#wrap:after {
-  /*content: "";*/
-  /*display: block;*/
-}
 
 #button-wrap{
 	margin: auto;
@@ -68,12 +59,6 @@ footer {
 #num-players {
   text-align: center;
 }
-
-
-/*maybe don't need this since flexbox*/
-/*.center-icons{
-  text-align: center;
-}*/
 
 
 /*
@@ -516,12 +501,38 @@ div.column i {
 	margin-top: 0px;
 }
 
- .no-margin{
-	 margin: 0px !important;
- }
+.textbold{
+	font-weight: bold;
+}
 
+.tweet{
+	width: 30px;
+	height: 30px;
+}
 
+.social-container{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	color: #59B2E6;
+}
 
+a {
+	text-decoration: none !important;
+}
+
+a, a:visited {
+    color: lightgray;
+}
+
+.fa-2x{
+	margin: 2px;
+	color: lightgray;
+}
+
+.top-margin{
+	margin-top: 30px;
+}
 
 /* 
 * Media Query Large Mobile

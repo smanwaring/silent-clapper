@@ -31639,8 +31639,14 @@
 	                        null,
 	                        _react2.default.createElement(
 	                            'h1',
-	                            null,
+	                            { className: 'top-margin' },
 	                            ' Silent Salutations '
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'social-container' },
+	                            _react2.default.createElement('a', { className: 'fa fa-github fa-2x', href: 'https://github.com/smanwaring/silent-clapper' }),
+	                            _react2.default.createElement('a', { className: 'fa fa-twitter fa-2x', href: 'https://twitter.com/intent/tweet?text=Silent+Applauding+%3E+Regular+Applauding.+%F0%9F%91%8F+SilentSalutations.com.+' })
 	                        ),
 	                        _react2.default.createElement(
 	                            'div',
@@ -32214,6 +32220,11 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'row' },
+	                        showPickButtonError && buttons.length < 1 ? _react2.default.createElement(
+	                            'div',
+	                            null,
+	                            'Please select some buttons!'
+	                        ) : '',
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2' },
@@ -32222,12 +32233,7 @@
 	                                { tabIndex: '4', className: 'form-control btn btn-create', onClick: this.generateBoardId },
 	                                ' Generate My Board Link '
 	                            )
-	                        ),
-	                        showPickButtonError && buttons.length < 1 ? _react2.default.createElement(
-	                            'div',
-	                            null,
-	                            'Please select some buttons!'
-	                        ) : ''
+	                        )
 	                    )
 	                )
 	            );
@@ -32521,7 +32527,6 @@
 	            var buttonClass = this.props.buttonClass;
 	
 	            var addRemove = this.handleIconClick;
-	            var handleClapClick = this.handleClapClick;
 	            var basicClass = "btn btn-circle btn-md btn-hover nuetralbg";
 	            var clapClass = "btn btn-circle btn-md blue";
 	            var frownClass = "btn btn-circle btn-md red";
@@ -32912,13 +32917,66 @@
 	var EmptyPage = function (_React$Component) {
 	    _inherits(EmptyPage, _React$Component);
 	
-	    function EmptyPage() {
+	    function EmptyPage(props) {
 	        _classCallCheck(this, EmptyPage);
 	
-	        return _possibleConstructorReturn(this, (EmptyPage.__proto__ || Object.getPrototypeOf(EmptyPage)).apply(this, arguments));
+	        var _this = _possibleConstructorReturn(this, (EmptyPage.__proto__ || Object.getPrototypeOf(EmptyPage)).call(this, props));
+	
+	        _this.interval = null;
+	        _this.drawAction = _this.drawAction.bind(_this);
+	        _this.addIcons = _this.addIcons.bind(_this);
+	        _this.startInterval = _this.startInterval.bind(_this);
+	        return _this;
 	    }
 	
 	    _createClass(EmptyPage, [{
+	        key: 'componentDidMount',
+	        value: function componentDidMount() {
+	            this.interval = setInterval(this.startInterval, 500);
+	        }
+	    }, {
+	        key: 'componentWillUnmount',
+	        value: function componentWillUnmount() {
+	            clearInterval(this.interval);
+	        }
+	    }, {
+	        key: 'startInterval',
+	        value: function startInterval() {
+	            this.drawAction({ icon: 'fa fa-frown-o' });
+	        }
+	    }, {
+	        key: 'drawAction',
+	        value: function drawAction(icon) {
+	            this.addIcons(icon.icon);
+	        }
+	    }, {
+	        key: 'addIcons',
+	        value: function addIcons(icon) {
+	            var columns = [].slice.call(document.querySelectorAll('.columns'));
+	            var lowRange = 1.2,
+	                highRange = 1.6,
+	                uniqueIdentifier = Math.floor(Math.random() * 100 + 1),
+	                flowArray = ["flowOne", "flowTwo", "flowThree"],
+	                colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
+	                speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
+	
+	            function randomColumnContainer() {
+	                var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
+	                return toReturn;
+	            }
+	
+	            //creates icon element with necessary styling classes + icon that was passed in
+	            $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor(Math.random() * 6)] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>').appendTo(randomColumnContainer()).css({
+	                animation: "" + flowArray[Math.floor(Math.random() * 3)] + " " + speed + "s linear"
+	            });
+	
+	            $(".part-" + uniqueIdentifier).show();
+	
+	            setTimeout(function () {
+	                $(".part-" + uniqueIdentifier).remove();
+	            }, speed * 900);
+	        }
+	    }, {
 	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
@@ -32941,7 +32999,7 @@
 	                ),
 	                _react2.default.createElement(
 	                    'h1',
-	                    null,
+	                    { className: 'textbold' },
 	                    'Oops! That room doesn\'t exist...'
 	                ),
 	                _react2.default.createElement(
