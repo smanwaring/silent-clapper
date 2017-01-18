@@ -22,8 +22,6 @@ class JoinBoardForm extends Component {
    
     confirmRoomExists(evt){
         evt.preventDefault();
-        console.log("here is the target!", evt.target);
-        console.log("HELLLLO I CLICKED YOU!")
         let boardId = evt.target.boardId.value.toString();
         this.props.confirmRoom(boardId);
     }
@@ -32,7 +30,7 @@ class JoinBoardForm extends Component {
         const { showJoin, roomNotFound } = this.props;
         return (
             <div>
-                <form onSubmit={(evt) => this.confirmRoomExists(evt)} id="login-form" role="form" style={{display: showJoin ? 'block' : 'none' }}>
+                <form onSubmit={(evt) => this.confirmRoomExists(evt)} role="form" style={{display: showJoin ? 'block' : 'none' }}>
                     <div className="form-group">
                         <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
                     </div>
@@ -40,7 +38,7 @@ class JoinBoardForm extends Component {
                     <div className="form-group">
                         <div className="row">
                             <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                <button type="submit" tabIndex="4" className="form-control btn btn-login">Join</button>
+                                <button type="submit" tabIndex="4" className="form-control btn btn-join">Join</button>
                             </div>
                         </div>
                     </div>

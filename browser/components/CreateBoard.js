@@ -48,7 +48,7 @@ class CreateBoard extends Component {
                             <div>
                             <h4>{`Here is your board #: ${generatedBoard}`}</h4>
                             <div className="col-sm-6 col-sm-offset-3">
-                                <Link to={`/${generatedBoard}`}><button type="submit" tabIndex="4" className="form-control btn btn-register">GO TO MY BOARD</button></Link>
+                                <Link to={`/${generatedBoard}`}><button type="submit" tabIndex="4" className="form-control btn btn-create">GO TO MY BOARD</button></Link>
                                 <h5>OR</h5>
                                 <button tabIndex="4"  onClick={this.clearGeneratedboard} className="form-control btn btn-create-new">GENERATE A NEW BOARD</button>
                             </div>
@@ -57,8 +57,8 @@ class CreateBoard extends Component {
                         <div className="form-group">
                             <PickButtons/>
                             <div className="row">
-                                <div>
-                                    <button id="register-submit" tabIndex="4" className="form-control btn btn-register" onClick={this.generateBoardId}> Generate My Board Link </button>
+                                <div className="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+                                    <button tabIndex="4" className="form-control btn btn-create" onClick={this.generateBoardId}> Generate My Board Link </button>
                                 </div>
                                     {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
                             </div>

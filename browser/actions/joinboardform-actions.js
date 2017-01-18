@@ -26,13 +26,13 @@ export const stateCurrentBoard = (boardId) => {
 
 export const loadRoom = (roomId) => {
 	const thunk = function(dispatch){ 
-		window.fetch(`/api/${roomId}`)
-			.then(res => res.json())
-			.then(room => { 
-				if (room.message){
-					dispatch(roomNotFound(true))
+		axios.get(`/api/${roomId}`)
+			.then( res => res.data )
+			.then( room => {
+				if (room.message) {
+					dispatch( roomNotFound(true) );
 				} else {
-					dispatch(stateCurrentBoard(room) ); 
+					dispatch( stateCurrentBoard(room) );
 				}
 			})
 			.catch(err => console.log(err));

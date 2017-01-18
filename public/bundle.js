@@ -30443,8 +30443,8 @@
 	
 	var loadRoom = exports.loadRoom = function loadRoom(roomId) {
 		var thunk = function thunk(dispatch) {
-			window.fetch("/api/" + roomId).then(function (res) {
-				return res.json();
+			_axios2.default.get("/api/" + roomId).then(function (res) {
+				return res.data;
 			}).then(function (room) {
 				if (room.message) {
 					dispatch(roomNotFound(true));
@@ -30595,8 +30595,8 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/* ------ TYPE VARIABLES ------*/
-	var LOAD_BUTTONS = exports.LOAD_BUTTONS = "LOAD_BUTTONS";
-	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
+	var LOAD_BUTTONS = exports.LOAD_BUTTONS = 'LOAD_BUTTONS';
+	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
 	
 	/* ------ SYNCHRONOUS ACTION CREATORS ------*/
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
@@ -30616,11 +30616,11 @@
 	/* ------ ASYNC ACTION CREATORS ------*/
 	var enterRoom = exports.enterRoom = function enterRoom(roomId) {
 		var thunk = function thunk(dispatch) {
-			fetch('/api/enter/' + roomId).then(function (res) {
-				return res.json();
+			_axios2.default.get('/api/enter/' + roomId).then(function (res) {
+				return res.data;
 			}).then(function (errorOrButtons) {
 				if (errorOrButtons.notFound) {
-					_reactRouter.hashHistory.push("/pageNotFound/error");
+					_reactRouter.hashHistory.push('/pageNotFound/error');
 				} else {
 					dispatch(foundRoom(errorOrButtons.buttons));
 				}
@@ -31986,8 +31986,6 @@
 	        key: 'confirmRoomExists',
 	        value: function confirmRoomExists(evt) {
 	            evt.preventDefault();
-	            console.log("here is the target!", evt.target);
-	            console.log("HELLLLO I CLICKED YOU!");
 	            var boardId = evt.target.boardId.value.toString();
 	            this.props.confirmRoom(boardId);
 	        }
@@ -32007,7 +32005,7 @@
 	                    'form',
 	                    { onSubmit: function onSubmit(evt) {
 	                            return _this2.confirmRoomExists(evt);
-	                        }, id: 'login-form', role: 'form', style: { display: showJoin ? 'block' : 'none' } },
+	                        }, role: 'form', style: { display: showJoin ? 'block' : 'none' } },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'form-group' },
@@ -32029,7 +32027,7 @@
 	                                { className: 'col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3' },
 	                                _react2.default.createElement(
 	                                    'button',
-	                                    { type: 'submit', tabIndex: '4', className: 'form-control btn btn-login' },
+	                                    { type: 'submit', tabIndex: '4', className: 'form-control btn btn-join' },
 	                                    'Join'
 	                                )
 	                            )
@@ -32194,7 +32192,7 @@
 	                            { to: '/' + generatedBoard },
 	                            _react2.default.createElement(
 	                                'button',
-	                                { type: 'submit', tabIndex: '4', className: 'form-control btn btn-register' },
+	                                { type: 'submit', tabIndex: '4', className: 'form-control btn btn-create' },
 	                                'GO TO MY BOARD'
 	                            )
 	                        ),
@@ -32218,10 +32216,10 @@
 	                        { className: 'row' },
 	                        _react2.default.createElement(
 	                            'div',
-	                            null,
+	                            { className: 'col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2' },
 	                            _react2.default.createElement(
 	                                'button',
-	                                { id: 'register-submit', tabIndex: '4', className: 'form-control btn btn-register', onClick: this.generateBoardId },
+	                                { tabIndex: '4', className: 'form-control btn btn-create', onClick: this.generateBoardId },
 	                                ' Generate My Board Link '
 	                            )
 	                        ),
@@ -32925,11 +32923,26 @@
 	        value: function render() {
 	            return _react2.default.createElement(
 	                'div',
-	                null,
+	                { id: 'wrap' },
 	                _react2.default.createElement(
 	                    'h1',
 	                    null,
-	                    'Oops! That page doesn\'t exist'
+	                    ' Silent Salutations '
+	                ),
+	                _react2.default.createElement('div', { className: 'columns column-0' }),
+	                _react2.default.createElement('div', { className: 'columns column-1' }),
+	                _react2.default.createElement('div', { className: 'columns column-2' }),
+	                _react2.default.createElement('div', { className: 'columns column-3' }),
+	                _react2.default.createElement('div', { className: 'columns column-4' }),
+	                _react2.default.createElement(
+	                    'button',
+	                    { className: 'btn red btn-circle btn-xl', 'data-icon': 'fa fa-frown-o' },
+	                    _react2.default.createElement('i', { className: 'fa fa-frown-o' })
+	                ),
+	                _react2.default.createElement(
+	                    'h1',
+	                    null,
+	                    'Oops! That room doesn\'t exist...'
 	                ),
 	                _react2.default.createElement(
 	                    _reactRouter.Link,

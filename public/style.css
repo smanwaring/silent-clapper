@@ -449,16 +449,7 @@ div.column i {
 }
 
 
-/*.panel-border input:hover,
-.panel-border input:focus {
-	outline:none;
-	-webkit-box-shadow: none;
-	-moz-box-shadow: none;
-	box-shadow: none;
-	border-color: #ccc;
-}*/
-
-.btn-login {
+.btn-join {
 	background-color: #59B2E0;
 	outline: none;
 	color: #fff;
@@ -469,14 +460,14 @@ div.column i {
 	text-transform: uppercase;
 	border-color: #59B2E6;
 }
-.btn-login:hover,
-.btn-login:focus {
+.btn-join:hover,
+.btn-join:focus {
 	color: #fff;
 	background-color: #53A3CD;
 	border-color: #53A3CD;
 } 
 
-.btn-register {
+.btn-create {
 	background-color: #1CB94E;
 	outline: none;
 	color: #fff;
@@ -487,8 +478,8 @@ div.column i {
 	text-transform: uppercase;
 	border-color: #1CB94A;
 }
-.btn-register:hover,
-.btn-register:focus {
+.btn-create:hover,
+.btn-create:focus {
 	color: #fff;
 	background-color: #1CA347;
 	border-color: #1CA347;
@@ -519,12 +510,6 @@ div.column i {
 
 .display-none {
 	display: none;
-}
-
-.pick-body {
-	margin-left: 40px;
-	margin-bottom: 20px;
-	margin-top: 10px;
 }
 
 .pick-no-margin{
