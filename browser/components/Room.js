@@ -6,6 +6,7 @@ import HomeForm from '../containers/HomeForm';
 class Room extends React.Component {
 	constructor(props){
 		super(props);
+        // this.socket;
 		this.handleIconClick = this.handleIconClick.bind(this);
 		this.drawAction = this.drawAction.bind(this);
 		this.addIcons = this.addIcons.bind(this);
@@ -17,8 +18,6 @@ class Room extends React.Component {
 		 this.socket = io.connect();
          //join room
          this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
-         console.log("currentBoard", component.props.currentBoard)
-         console.log("boardId", component.props.boardId)
 		 // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
 		 this.socket.on('showAction', function(icon){
 		 	// hey, someone else clicked an icon and we found out from the server
@@ -35,6 +34,10 @@ class Room extends React.Component {
     		}
   		})
 	}
+
+    // componentWillUnmount(){
+    //     this.socket.emit('leaveRoom', '33238' );
+    // }
 
 	handleIconClick(evt) {
 		this.socket.emit('registerAction', {icon: evt.currentTarget.dataset.icon});

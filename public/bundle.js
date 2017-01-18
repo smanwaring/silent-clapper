@@ -32715,6 +32715,7 @@
 	    function Room(props) {
 	        _classCallCheck(this, Room);
 	
+	        // this.socket;
 	        var _this = _possibleConstructorReturn(this, (Room.__proto__ || Object.getPrototypeOf(Room)).call(this, props));
 	
 	        _this.handleIconClick = _this.handleIconClick.bind(_this);
@@ -32731,8 +32732,6 @@
 	            this.socket = io.connect();
 	            //join room
 	            this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
-	            console.log("currentBoard", component.props.currentBoard);
-	            console.log("boardId", component.props.boardId);
 	            // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
 	            this.socket.on('showAction', function (icon) {
 	                // hey, someone else clicked an icon and we found out from the server
@@ -32749,6 +32748,11 @@
 	                }
 	            });
 	        }
+	
+	        // componentWillUnmount(){
+	        //     this.socket.emit('leaveRoom', '33238' );
+	        // }
+	
 	    }, {
 	        key: 'handleIconClick',
 	        value: function handleIconClick(evt) {

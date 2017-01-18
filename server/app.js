@@ -48,37 +48,57 @@ app.use((err, req, res, next) => {
 // express app takes precedence over our socket server for typical HTTP requests
 let io = socketio(server);
 
+let roomsToCount = {
+
+}
+
 // use socket server as an event emitter in order to listen for new connections
 io.on('connection', function(socket){
 
   let newRoom;
   let count = 0;
 
+ 
+
     // listens to emit to join room
   socket.on('wantToJoinRoom', function(roomName) {
     console.log('joining room', roomName);
     newRoom = roomName;
     socket.join(newRoom);
-    count = socket.adapter.rooms[newRoom].length;
-    io.emit('connectionEvent', count);
+    socket.currRoom = newRoom;
+    roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
+    io.emit('connectionEvent', roomsToCount[newRoom]);
+
+
   });
+
+// socket.on('leaveRoom', function(room){
+//   console.log("ROOM", room);
+//   console.log("SOCKET ADAPTER ROOMS", socket.adapter.rooms)
+//   let myCount = socket.adapter.rooms[room].length;
+//    io.emit('connectionEvent', myCount);
+//    socket.leave(room);
+
+// })
 
   //event that runs anytime a socket disconnects
   socket.on('disconnect', function(){
-    // count = socket.adapter.rooms[newRoom].length - 1;
-    // io.emit('connectionEvent', count);
-    socket.leave(newRoom);
+    roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
+    io.emit('connectionEvent', roomsToCount[newRoom]);
     socket.disconnect();
-  });
+  })
+
+
+
 
   // server is receiving click data from the client here 
   // so we want to broadcast that data to all other connected clients 
   socket.on('registerAction', function(icon){
     console.log("room I am emitting to", newRoom)
     io.to(newRoom).emit('showAction', icon);
-  });
+  })
 
-});
+})
 
 server.listen(1337, function () {
     console.log('The server is listening on port 1337!');
