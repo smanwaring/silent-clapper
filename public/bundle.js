@@ -101,8 +101,10 @@
 	
 	/*------ COMPONENTS/CONTAINERS ------ */
 	function onEnterResetCurrentBoard() {
+		console.log("did we make it here????????????");
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(false));
 		_store2.default.dispatch((0, _createboardActions.showPickButtonError)(false));
+		_store2.default.dispatch((0, _roomActions.foundRoom)([]));
 	}
 	
 	_reactDom2.default.render(_react2.default.createElement(
@@ -30616,12 +30618,16 @@
 	/* ------ ASYNC ACTION CREATORS ------*/
 	var enterRoom = exports.enterRoom = function enterRoom(roomId) {
 		var thunk = function thunk(dispatch) {
+			console.log("HERE IS WHAT WE ARE PASSING TO THUNK", roomId);
 			_axios2.default.get('/api/enter/' + roomId).then(function (res) {
 				return res.data;
 			}).then(function (errorOrButtons) {
+				console.log("HERE IS WHAT IS RETURNED FROM FINDING THE ROOM", errorOrButtons);
 				if (errorOrButtons.notFound) {
+					console.log("We are pushing to the error page");
 					_reactRouter.hashHistory.push('/pageNotFound/error');
 				} else {
+					console.log("we are dispatching found room with", errorOrButtons.buttons);
 					dispatch(foundRoom(errorOrButtons.buttons));
 				}
 			}).catch(function (err) {
@@ -32715,7 +32721,6 @@
 	    function Room(props) {
 	        _classCallCheck(this, Room);
 	
-	        // this.socket;
 	        var _this = _possibleConstructorReturn(this, (Room.__proto__ || Object.getPrototypeOf(Room)).call(this, props));
 	
 	        _this.handleIconClick = _this.handleIconClick.bind(_this);
@@ -32727,6 +32732,7 @@
 	    _createClass(Room, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
+	            console.log("THE COMPONENT MOUNTED WITH", this.props.currentBoard || this.props.boardId);
 	            var component = this;
 	            // initialize client socket
 	            this.socket = io.connect();
@@ -32748,11 +32754,6 @@
 	                }
 	            });
 	        }
-	
-	        // componentWillUnmount(){
-	        //     this.socket.emit('leaveRoom', '33238' );
-	        // }
-	
 	    }, {
 	        key: 'handleIconClick',
 	        value: function handleIconClick(evt) {

@@ -6,13 +6,13 @@ import HomeForm from '../containers/HomeForm';
 class Room extends React.Component {
 	constructor(props){
 		super(props);
-        // this.socket;
 		this.handleIconClick = this.handleIconClick.bind(this);
 		this.drawAction = this.drawAction.bind(this);
 		this.addIcons = this.addIcons.bind(this);
 	}
 
 	componentDidMount(){
+        console.log("THE COMPONENT MOUNTED WITH", this.props.currentBoard || this.props.boardId )
 		let component = this;
 		 // initialize client socket
 		 this.socket = io.connect();
@@ -34,10 +34,6 @@ class Room extends React.Component {
     		}
   		})
 	}
-
-    // componentWillUnmount(){
-    //     this.socket.emit('leaveRoom', '33238' );
-    // }
 
 	handleIconClick(evt) {
 		this.socket.emit('registerAction', {icon: evt.currentTarget.dataset.icon});

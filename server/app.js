@@ -56,11 +56,8 @@ let roomsToCount = {
 io.on('connection', function(socket){
 
   let newRoom;
-  let count = 0;
 
- 
-
-    // listens to emit to join room
+  // listens to emit to join room
   socket.on('wantToJoinRoom', function(roomName) {
     console.log('joining room', roomName);
     newRoom = roomName;
@@ -68,37 +65,29 @@ io.on('connection', function(socket){
     socket.currRoom = newRoom;
     roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
     io.emit('connectionEvent', roomsToCount[newRoom]);
-
-
   });
-
-// socket.on('leaveRoom', function(room){
-//   console.log("ROOM", room);
-//   console.log("SOCKET ADAPTER ROOMS", socket.adapter.rooms)
-//   let myCount = socket.adapter.rooms[room].length;
-//    io.emit('connectionEvent', myCount);
-//    socket.leave(room);
-
-// })
 
   //event that runs anytime a socket disconnects
   socket.on('disconnect', function(){
-    roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
-    io.emit('connectionEvent', roomsToCount[newRoom]);
+    console.log("I am disconnecting now");
+    if (socket.adapter.rooms[newRoom]){
+      roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
+      io.emit('connectionEvent', roomsToCount[newRoom]);
+    } else {
+      delete  roomsToCount[newRoom];
+    }
     socket.disconnect();
-  })
-
-
-
+  });
 
   // server is receiving click data from the client here 
   // so we want to broadcast that data to all other connected clients 
   socket.on('registerAction', function(icon){
     console.log("room I am emitting to", newRoom)
     io.to(newRoom).emit('showAction', icon);
-  })
+  });
 
-})
+});
+
 
 server.listen(1337, function () {
     console.log('The server is listening on port 1337!');
@@ -111,4 +100,4 @@ server.listen(1337, function () {
 
 
 // export app and socket.io server
-module.exports = app
+module.exports = app;

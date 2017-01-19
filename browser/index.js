@@ -14,7 +14,7 @@ import Root from './components/Root';
 import EmptyPage from './components/EmptyPage';
 
 /*------ ACTIONS ------ */
-import { enterRoom } from './actions/room-actions';
+import { enterRoom, foundRoom } from './actions/room-actions';
 import { roomNotFound, stateCurrentBoard } from './actions/joinboardform-actions';
 import { showPickButtonError } from './actions/createboard-actions';
 
@@ -30,8 +30,10 @@ function onEnterConfirmRoom(nextState) {
 
 /*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
 function onEnterResetCurrentBoard() {
+	console.log("did we make it here????????????")
 	store.dispatch( stateCurrentBoard(false) );
 	store.dispatch( showPickButtonError(false) );
+	store.dispatch( foundRoom( [] ) );
 }
 
 ReactDOM.render(
