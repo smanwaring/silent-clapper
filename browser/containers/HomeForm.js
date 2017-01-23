@@ -12,10 +12,10 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
 	return {
 		showCreateTab: function(bool) {
-			dispatch ( showCreate(bool) );
+			dispatch( showCreate(bool) );
 		},
 		showJoinTab: function(bool) {
-			dispatch ( showJoin(bool) );
+			dispatch( showJoin(bool) );
 		}
 	};
 

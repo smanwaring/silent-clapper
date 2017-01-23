@@ -22,7 +22,7 @@ function mapDispatchToProps(dispatch){
 		clearGeneratedboard: function(details){
 			dispatch( stateBoardId(details) );
 			dispatch( clearAllButtons() );
-			dispatch ( clearAllSelectedButtons() );
+			dispatch( clearAllSelectedButtons() );
 		},
 	};
 

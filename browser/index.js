@@ -30,7 +30,6 @@ function onEnterConfirmRoom(nextState) {
 
 /*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
 function onEnterResetCurrentBoard() {
-	console.log("did we make it here????????????")
 	store.dispatch( stateCurrentBoard(false) );
 	store.dispatch( showPickButtonError(false) );
 	store.dispatch( foundRoom( [] ) );

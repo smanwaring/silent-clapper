@@ -1,21 +1,24 @@
 
-/* ------ TYPE VARIABLES ------*/
-export const TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
-export const PICKED_BUTTON = "PICKED_BUTTON";
-export const REMOVED_BUTTON = "REMOVED_BUTTON";
-export const TOGGLE_CLAP = "TOGGLE_CLAP";
-export const TOGGLE_FROWN = "TOGGLE_FROWN";
-export const TOGGLE_EMPIRE = "TOGGLE_EMPIRE";
-export const TOGGLE_HEART = "TOGGLE_HEART";
-export const TOGGLE_MONEY = "TOGGLE_MONEY"
-export const TOGGLE_SMILE = "TOGGLE_SMILE";
-export const TOGGLE_QUESTION = "TOGGLE_QUESTION";
-export const TOGGLE_THUMB = "TOGGLE_THUMB";
-export const TOGGLE_RESISTANCE = "TOGGLE_RESISTANCE";
-export const TOGGLE_BOMB = "TOGGLE_BOMB";
+
+/* -----------------    ACTIONS     ------------------ */
+
+export const TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
+export const PICKED_BUTTON = 'PICKED_BUTTON';
+export const REMOVED_BUTTON = 'REMOVED_BUTTON';
+export const TOGGLE_CLAP = 'TOGGLE_CLAP';
+export const TOGGLE_FROWN = 'TOGGLE_FROWN';
+export const TOGGLE_EMPIRE = 'TOGGLE_EMPIRE';
+export const TOGGLE_HEART = 'TOGGLE_HEART';
+export const TOGGLE_MONEY = 'TOGGLE_MONEY';
+export const TOGGLE_SMILE = 'TOGGLE_SMILE';
+export const TOGGLE_QUESTION = 'TOGGLE_QUESTION';
+export const TOGGLE_THUMB = 'TOGGLE_THUMB';
+export const TOGGLE_RESISTANCE = 'TOGGLE_RESISTANCE';
+export const TOGGLE_BOMB = 'TOGGLE_BOMB';
 
 
-/* ------ SYNCHRONOUS ACTION CREATORS ------*/
+/* ------------   ACTION CREATORS     ------------------ */
+
 export const pickedButton = (data) => {
 	return {
 		type: PICKED_BUTTON,

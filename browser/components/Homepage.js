@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeForm from '../containers/HomeForm';
+import addIcons from '../utils/icon-animations';
 
 
 class Homepage extends React.Component {
@@ -7,7 +8,6 @@ class Homepage extends React.Component {
 		super(props);
 		this.handleIconClick = this.handleIconClick.bind(this);
 		this.drawAction = this.drawAction.bind(this);
-		this.addIcons = this.addIcons.bind(this);
 	}
 
     handleIconClick(evt) {
@@ -15,35 +15,7 @@ class Homepage extends React.Component {
     }
 
 	drawAction(icon) {
-	  this.addIcons(icon.icon);
-	}
-
-	addIcons(icon) {
-		var columns = [].slice.call(document.querySelectorAll('.columns'));
-		var lowRange = 1.2,
-            highRange = 1.6,
-            uniqueIdentifier = Math.floor((Math.random() * 100) + 1),
-            flowArray = ["flowOne", "flowTwo", "flowThree"],
-            colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
-            speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1)
-
-        function randomColumnContainer () {
-            var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
-            return toReturn;
-        }
-
-        //creates icon element with necessary styling classes + icon that was passed in
-        $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor((Math.random() * 6))] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>')
-            .appendTo(randomColumnContainer()).css({
-                animation: "" + flowArray[Math.floor((Math.random() * 3))] + " " + speed + "s linear"
-            });
-
-
-        $(".part-" + uniqueIdentifier).show();
-        
-        setTimeout(function() {
-            $(".part-" + uniqueIdentifier).remove();
-        }, speed * 900);
+	  addIcons(icon.icon);
 	}
 
   render () {

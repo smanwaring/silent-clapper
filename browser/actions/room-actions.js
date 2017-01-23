@@ -1,12 +1,14 @@
 import axios from 'axios';
 import { hashHistory } from 'react-router';
 
-/* ------ TYPE VARIABLES ------*/
+/* -----------------    ACTIONS     ------------------ */
+
 export const LOAD_BUTTONS = 'LOAD_BUTTONS';
 export const SET_BOARDID = 'SET_BOARDID';
 
 
-/* ------ SYNCHRONOUS ACTION CREATORS ------*/
+/* -----------------    ACTIONS     ------------------ */
+
 export const stateBoardId = (boardId) => {
 	return {
 		type: SET_BOARDID,
@@ -23,19 +25,15 @@ export const foundRoom = (buttons) => {
 
 
 
-/* ------ ASYNC ACTION CREATORS ------*/
+/* ------------       REDUCER     ------------------ */
 export const enterRoom = (roomId) => {
 	const thunk = function(dispatch){ 
-		console.log("HERE IS WHAT WE ARE PASSING TO THUNK", roomId)
 		axios.get(`/api/enter/${roomId}`)
 			.then(res => res.data)
 			.then(errorOrButtons => {
-				console.log( "HERE IS WHAT IS RETURNED FROM FINDING THE ROOM", errorOrButtons);
 				if (errorOrButtons.notFound){
-					console.log("We are pushing to the error page")
 					hashHistory.push('/pageNotFound/error');
 				} else {
-					console.log("we are dispatching found room with", errorOrButtons.buttons)
 					dispatch( foundRoom(errorOrButtons.buttons) );
 				}
 			})

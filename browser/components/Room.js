@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 import HomeForm from '../containers/HomeForm';
+import addIcons from '../utils/icon-animations';
+// just like require-ish import '../file/..'
 
 
 class Room extends React.Component {
@@ -8,11 +10,9 @@ class Room extends React.Component {
 		super(props);
 		this.handleIconClick = this.handleIconClick.bind(this);
 		this.drawAction = this.drawAction.bind(this);
-		this.addIcons = this.addIcons.bind(this);
 	}
 
 	componentDidMount(){
-        console.log("THE COMPONENT MOUNTED WITH", this.props.currentBoard || this.props.boardId )
 		let component = this;
 		 // initialize client socket
 		 this.socket = io.connect();
@@ -20,7 +20,7 @@ class Room extends React.Component {
          this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
 		 // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
 		 this.socket.on('showAction', function(icon){
-		 	// hey, someone else clicked an icon and we found out from the server
+		 // hey, someone else clicked an icon and we found out from the server
 		    component.drawAction(icon);
 		 })
 		 //emitted from server, caught here with the current num of people connected
@@ -30,7 +30,7 @@ class Room extends React.Component {
         		audience = "people";
     		}
     		if(numPeople > 0) {
-    			$('#num-people span').text(numPeople + " " + audience + ' connected')
+				document.querySelector('#num-people span').textContent = numPeople + " " + audience + ' connected';
     		}
   		})
 	}
@@ -40,35 +40,7 @@ class Room extends React.Component {
 	}
 
 	drawAction(icon) {
-		this.addIcons(icon.icon);
-	}
-
-	addIcons(icon) {
-		var columns = [].slice.call(document.querySelectorAll('.columns'));
-		var lowRange = 1.2,
-            highRange = 1.6,
-            uniqueIdentifier = Math.floor((Math.random() * 100) + 1),
-            flowArray = ["flowOne", "flowTwo", "flowThree"],
-            colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
-            speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1)
-
-        function randomColumnContainer () {
-            var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
-            return toReturn;
-        }
-
-        //creates icon element with necessary styling classes + icon that was passed in
-        $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor((Math.random() * 6))] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>')
-            .appendTo(randomColumnContainer()).css({
-                animation: "" + flowArray[Math.floor((Math.random() * 3))] + " " + speed + "s linear"
-            });
-
-
-        $(".part-" + uniqueIdentifier).show();
-        
-        setTimeout(function() {
-            $(".part-" + uniqueIdentifier).remove()
-        }, speed * 900)
+		addIcons(icon.icon);
 	}
 
   render () {

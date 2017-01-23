@@ -1,11 +1,11 @@
 import axios from 'axios';
 
-/* ------ TYPE VARIABLES ------*/
+/* -----------------    ACTIONS     ------------------ */
 export const ROOM_NOT_FOUND = "ROOM_NOT_FOUND";
 export const SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
 
 
-/* ------ SYNCHRONOUS ACTION CREATORS ------*/
+/* ------------   ACTION CREATORS     ------------------ */
 export const roomNotFound = (bool) => {
 	return {
 		type: ROOM_NOT_FOUND,
@@ -22,7 +22,7 @@ export const stateCurrentBoard = (boardId) => {
 };
 
 
-/* ------ ASYNC ACTION CREATORS ------*/
+/* ------------       DISPATCHERS     ------------------ */
 
 export const loadRoom = (roomId) => {
 	const thunk = function(dispatch){ 

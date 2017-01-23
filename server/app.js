@@ -69,7 +69,6 @@ io.on('connection', function(socket){
 
   //event that runs anytime a socket disconnects
   socket.on('disconnect', function(){
-    console.log("I am disconnecting now");
     if (socket.adapter.rooms[newRoom]){
       roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
       io.emit('connectionEvent', roomsToCount[newRoom]);

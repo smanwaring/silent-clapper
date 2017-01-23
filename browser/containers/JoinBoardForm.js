@@ -13,11 +13,11 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
 	return {
         confirmRoom: function(boardId) {
-            dispatch ( loadRoom(boardId) );
+            dispatch( loadRoom(boardId) );
         },
 		clearRoomNotFound: function(bool){
- 			dispatch (  roomNotFound(bool) ); 
-  		}		  
+ 			dispatch(  roomNotFound(bool) );
+  		}	  
 	};
 
 }

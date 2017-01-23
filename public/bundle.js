@@ -66,15 +66,15 @@
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _Room = __webpack_require__(318);
+	var _Room = __webpack_require__(319);
 	
 	var _Room2 = _interopRequireDefault(_Room);
 	
-	var _Root = __webpack_require__(320);
+	var _Root = __webpack_require__(321);
 	
 	var _Root2 = _interopRequireDefault(_Root);
 	
-	var _EmptyPage = __webpack_require__(321);
+	var _EmptyPage = __webpack_require__(322);
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
@@ -101,7 +101,6 @@
 	
 	/*------ COMPONENTS/CONTAINERS ------ */
 	function onEnterResetCurrentBoard() {
-		console.log("did we make it here????????????");
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(false));
 		_store2.default.dispatch((0, _createboardActions.showPickButtonError)(false));
 		_store2.default.dispatch((0, _roomActions.foundRoom)([]));
@@ -28840,13 +28839,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	/* ------ TYPE VARIABLES ------*/
+	/* -----------------    ACTIONS     ------------------ */
 	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
 	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
 	var CLEAR_ALL_BUTTONS = exports.CLEAR_ALL_BUTTONS = "CLEAR_ALL_BUTTONS";
 	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = "CLEAR_ALL_SELECTED_BUTTONS";
 	
-	/* ------ SYNCHRONOUS ACTION CREATORS ------ */
+	/* ------------   ACTION CREATORS     ------------------ */
 	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
 		return {
 			type: TOGGLE_PICK_BUTTON_ERROR,
@@ -28873,7 +28872,7 @@
 		};
 	};
 	
-	/* ------ ASYNC ACTION CREATORS ------*/
+	/* ------------       DISPATCHERS     ------------------ */
 	var addRoom = exports.addRoom = function addRoom(details) {
 		var thunk = function thunk(dispatch) {
 			_axios2.default.post("/api/", details).then(function (res) {
@@ -30386,11 +30385,11 @@
 		value: true
 	});
 	
-	/* ------ TYPE VARIABLES ------ */
+	/* -----------------    ACTIONS     ------------------ */
 	var SHOW_CREATE = exports.SHOW_CREATE = "SHOW_CREATE";
 	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
 	
-	/* ------ SYNCHRONOUS ACTION CREATORS ------ */
+	/* ------------   ACTION CREATORS     ------------------ */
 	var showCreate = exports.showCreate = function showCreate(bool) {
 		return {
 			type: SHOW_CREATE,
@@ -30422,11 +30421,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	/* ------ TYPE VARIABLES ------*/
+	/* -----------------    ACTIONS     ------------------ */
 	var ROOM_NOT_FOUND = exports.ROOM_NOT_FOUND = "ROOM_NOT_FOUND";
 	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
 	
-	/* ------ SYNCHRONOUS ACTION CREATORS ------*/
+	/* ------------   ACTION CREATORS     ------------------ */
 	var roomNotFound = exports.roomNotFound = function roomNotFound(bool) {
 		return {
 			type: ROOM_NOT_FOUND,
@@ -30441,7 +30440,7 @@
 		};
 	};
 	
-	/* ------ ASYNC ACTION CREATORS ------*/
+	/* ------------       DISPATCHERS     ------------------ */
 	
 	var loadRoom = exports.loadRoom = function loadRoom(roomId) {
 		var thunk = function thunk(dispatch) {
@@ -30464,28 +30463,31 @@
 /* 299 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 	
-	/* ------ TYPE VARIABLES ------*/
-	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = "TOGGLE_SELECT_ALL";
-	var PICKED_BUTTON = exports.PICKED_BUTTON = "PICKED_BUTTON";
-	var REMOVED_BUTTON = exports.REMOVED_BUTTON = "REMOVED_BUTTON";
-	var TOGGLE_CLAP = exports.TOGGLE_CLAP = "TOGGLE_CLAP";
-	var TOGGLE_FROWN = exports.TOGGLE_FROWN = "TOGGLE_FROWN";
-	var TOGGLE_EMPIRE = exports.TOGGLE_EMPIRE = "TOGGLE_EMPIRE";
-	var TOGGLE_HEART = exports.TOGGLE_HEART = "TOGGLE_HEART";
-	var TOGGLE_MONEY = exports.TOGGLE_MONEY = "TOGGLE_MONEY";
-	var TOGGLE_SMILE = exports.TOGGLE_SMILE = "TOGGLE_SMILE";
-	var TOGGLE_QUESTION = exports.TOGGLE_QUESTION = "TOGGLE_QUESTION";
-	var TOGGLE_THUMB = exports.TOGGLE_THUMB = "TOGGLE_THUMB";
-	var TOGGLE_RESISTANCE = exports.TOGGLE_RESISTANCE = "TOGGLE_RESISTANCE";
-	var TOGGLE_BOMB = exports.TOGGLE_BOMB = "TOGGLE_BOMB";
 	
-	/* ------ SYNCHRONOUS ACTION CREATORS ------*/
+	/* -----------------    ACTIONS     ------------------ */
+	
+	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
+	var PICKED_BUTTON = exports.PICKED_BUTTON = 'PICKED_BUTTON';
+	var REMOVED_BUTTON = exports.REMOVED_BUTTON = 'REMOVED_BUTTON';
+	var TOGGLE_CLAP = exports.TOGGLE_CLAP = 'TOGGLE_CLAP';
+	var TOGGLE_FROWN = exports.TOGGLE_FROWN = 'TOGGLE_FROWN';
+	var TOGGLE_EMPIRE = exports.TOGGLE_EMPIRE = 'TOGGLE_EMPIRE';
+	var TOGGLE_HEART = exports.TOGGLE_HEART = 'TOGGLE_HEART';
+	var TOGGLE_MONEY = exports.TOGGLE_MONEY = 'TOGGLE_MONEY';
+	var TOGGLE_SMILE = exports.TOGGLE_SMILE = 'TOGGLE_SMILE';
+	var TOGGLE_QUESTION = exports.TOGGLE_QUESTION = 'TOGGLE_QUESTION';
+	var TOGGLE_THUMB = exports.TOGGLE_THUMB = 'TOGGLE_THUMB';
+	var TOGGLE_RESISTANCE = exports.TOGGLE_RESISTANCE = 'TOGGLE_RESISTANCE';
+	var TOGGLE_BOMB = exports.TOGGLE_BOMB = 'TOGGLE_BOMB';
+	
+	/* ------------   ACTION CREATORS     ------------------ */
+	
 	var pickedButton = exports.pickedButton = function pickedButton(data) {
 		return {
 			type: PICKED_BUTTON,
@@ -30596,11 +30598,13 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	/* ------ TYPE VARIABLES ------*/
+	/* -----------------    ACTIONS     ------------------ */
+	
 	var LOAD_BUTTONS = exports.LOAD_BUTTONS = 'LOAD_BUTTONS';
 	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
 	
-	/* ------ SYNCHRONOUS ACTION CREATORS ------*/
+	/* -----------------    ACTIONS     ------------------ */
+	
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
 		return {
 			type: SET_BOARDID,
@@ -30615,19 +30619,15 @@
 		};
 	};
 	
-	/* ------ ASYNC ACTION CREATORS ------*/
+	/* ------------       REDUCER     ------------------ */
 	var enterRoom = exports.enterRoom = function enterRoom(roomId) {
 		var thunk = function thunk(dispatch) {
-			console.log("HERE IS WHAT WE ARE PASSING TO THUNK", roomId);
 			_axios2.default.get('/api/enter/' + roomId).then(function (res) {
 				return res.data;
 			}).then(function (errorOrButtons) {
-				console.log("HERE IS WHAT IS RETURNED FROM FINDING THE ROOM", errorOrButtons);
 				if (errorOrButtons.notFound) {
-					console.log("We are pushing to the error page");
 					_reactRouter.hashHistory.push('/pageNotFound/error');
 				} else {
-					console.log("we are dispatching found room with", errorOrButtons.buttons);
 					dispatch(foundRoom(errorOrButtons.buttons));
 				}
 			}).catch(function (err) {
@@ -31572,6 +31572,10 @@
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
+	var _iconAnimations = __webpack_require__(318);
+	
+	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31590,7 +31594,6 @@
 	
 	        _this.handleIconClick = _this.handleIconClick.bind(_this);
 	        _this.drawAction = _this.drawAction.bind(_this);
-	        _this.addIcons = _this.addIcons.bind(_this);
 	        return _this;
 	    }
 	
@@ -31602,34 +31605,7 @@
 	    }, {
 	        key: 'drawAction',
 	        value: function drawAction(icon) {
-	            this.addIcons(icon.icon);
-	        }
-	    }, {
-	        key: 'addIcons',
-	        value: function addIcons(icon) {
-	            var columns = [].slice.call(document.querySelectorAll('.columns'));
-	            var lowRange = 1.2,
-	                highRange = 1.6,
-	                uniqueIdentifier = Math.floor(Math.random() * 100 + 1),
-	                flowArray = ["flowOne", "flowTwo", "flowThree"],
-	                colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
-	                speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
-	
-	            function randomColumnContainer() {
-	                var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
-	                return toReturn;
-	            }
-	
-	            //creates icon element with necessary styling classes + icon that was passed in
-	            $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor(Math.random() * 6)] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>').appendTo(randomColumnContainer()).css({
-	                animation: "" + flowArray[Math.floor(Math.random() * 3)] + " " + speed + "s linear"
-	            });
-	
-	            $(".part-" + uniqueIdentifier).show();
-	
-	            setTimeout(function () {
-	                $(".part-" + uniqueIdentifier).remove();
-	            }, speed * 900);
+	            (0, _iconAnimations2.default)(icon.icon);
 	        }
 	    }, {
 	        key: 'render',
@@ -32648,6 +32624,65 @@
 
 /***/ },
 /* 318 */
+/***/ function(module, exports) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	exports.default = addIcons;
+	function addIcons(icon) {
+	    var columns = [].slice.call(document.querySelectorAll('.columns'));
+	    var lowRange = 1.2,
+	        highRange = 1.6,
+	        flowArray = ["flowOne", "flowTwo", "flowThree"],
+	        colorArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
+	        speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
+	
+	    function randomColumnContainer() {
+	        var column = '.column-' + Math.floor(Math.random() * columns.length);
+	        return column;
+	    }
+	
+	    //creating DIV element 
+	    var animationDiv = document.createElement('div');
+	
+	    //creating icon element (which will be appended to the animationDiv)
+	    var iconElement = document.createElement('i');
+	
+	    //choose a random column on the window to display the animation
+	    var randomColumn = document.querySelector(randomColumnContainer());
+	
+	    //adding classes to the animationDiv, includes column spec and icon animation color
+	    animationDiv.setAttribute('class', "column " + colorArray[Math.floor(Math.random() * 6)]);
+	
+	    //setting size of the icon element between a certain range
+	    iconElement.style.fontSize = Math.floor(Math.random() * (50 - 22) + 80) + 'px';
+	
+	    //set the icon to the passed in icon
+	    iconElement.setAttribute('class', "" + icon);
+	
+	    //append the icon to the animationDiv
+	    animationDiv.appendChild(iconElement);
+	
+	    //setting animationDiv keyframe and time animation properties & easing
+	    animationDiv.style.animation = flowArray[Math.floor(Math.random() * 3)] + "  " + speed + "s linear";
+	
+	    //make the icon animation visible
+	    animationDiv.style.display = 'initial';
+	
+	    //appending animationDiv to a random column that is in the HTML
+	    randomColumn.appendChild(animationDiv);
+	
+	    //when animation is over, remove animationDiv from the doc
+	    setTimeout(function () {
+	        randomColumn.removeChild(animationDiv);
+	    }, speed * 900);
+	}
+
+/***/ },
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32658,7 +32693,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Room = __webpack_require__(319);
+	var _Room = __webpack_require__(320);
 	
 	var _Room2 = _interopRequireDefault(_Room);
 	
@@ -32686,7 +32721,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Room2.default);
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32707,6 +32742,10 @@
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
+	var _iconAnimations = __webpack_require__(318);
+	
+	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32714,6 +32753,9 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// just like require-ish import '../file/..'
+	
 	
 	var Room = function (_React$Component) {
 	    _inherits(Room, _React$Component);
@@ -32725,14 +32767,12 @@
 	
 	        _this.handleIconClick = _this.handleIconClick.bind(_this);
 	        _this.drawAction = _this.drawAction.bind(_this);
-	        _this.addIcons = _this.addIcons.bind(_this);
 	        return _this;
 	    }
 	
 	    _createClass(Room, [{
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	            console.log("THE COMPONENT MOUNTED WITH", this.props.currentBoard || this.props.boardId);
 	            var component = this;
 	            // initialize client socket
 	            this.socket = io.connect();
@@ -32750,7 +32790,7 @@
 	                    audience = "people";
 	                }
 	                if (numPeople > 0) {
-	                    $('#num-people span').text(numPeople + " " + audience + ' connected');
+	                    document.querySelector('#num-people span').textContent = numPeople + " " + audience + ' connected';
 	                }
 	            });
 	        }
@@ -32762,34 +32802,7 @@
 	    }, {
 	        key: 'drawAction',
 	        value: function drawAction(icon) {
-	            this.addIcons(icon.icon);
-	        }
-	    }, {
-	        key: 'addIcons',
-	        value: function addIcons(icon) {
-	            var columns = [].slice.call(document.querySelectorAll('.columns'));
-	            var lowRange = 1.2,
-	                highRange = 1.6,
-	                uniqueIdentifier = Math.floor(Math.random() * 100 + 1),
-	                flowArray = ["flowOne", "flowTwo", "flowThree"],
-	                colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
-	                speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
-	
-	            function randomColumnContainer() {
-	                var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
-	                return toReturn;
-	            }
-	
-	            //creates icon element with necessary styling classes + icon that was passed in
-	            $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor(Math.random() * 6)] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>').appendTo(randomColumnContainer()).css({
-	                animation: "" + flowArray[Math.floor(Math.random() * 3)] + " " + speed + "s linear"
-	            });
-	
-	            $(".part-" + uniqueIdentifier).show();
-	
-	            setTimeout(function () {
-	                $(".part-" + uniqueIdentifier).remove();
-	            }, speed * 900);
+	            (0, _iconAnimations2.default)(icon.icon);
 	        }
 	    }, {
 	        key: 'render',
@@ -32845,7 +32858,7 @@
 	exports.default = Room;
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32894,7 +32907,7 @@
 	exports.default = Root;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32910,6 +32923,10 @@
 	var _react2 = _interopRequireDefault(_react);
 	
 	var _reactRouter = __webpack_require__(216);
+	
+	var _iconAnimations = __webpack_require__(318);
+	
+	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32929,7 +32946,6 @@
 	
 	        _this.interval = null;
 	        _this.drawAction = _this.drawAction.bind(_this);
-	        _this.addIcons = _this.addIcons.bind(_this);
 	        _this.startInterval = _this.startInterval.bind(_this);
 	        return _this;
 	    }
@@ -32952,34 +32968,7 @@
 	    }, {
 	        key: 'drawAction',
 	        value: function drawAction(icon) {
-	            this.addIcons(icon.icon);
-	        }
-	    }, {
-	        key: 'addIcons',
-	        value: function addIcons(icon) {
-	            var columns = [].slice.call(document.querySelectorAll('.columns'));
-	            var lowRange = 1.2,
-	                highRange = 1.6,
-	                uniqueIdentifier = Math.floor(Math.random() * 100 + 1),
-	                flowArray = ["flowOne", "flowTwo", "flowThree"],
-	                colArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
-	                speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
-	
-	            function randomColumnContainer() {
-	                var toReturn = ".column-" + Math.floor(Math.random() * columns.length);
-	                return toReturn;
-	            }
-	
-	            //creates icon element with necessary styling classes + icon that was passed in
-	            $('<div class="column part-' + uniqueIdentifier + " " + colArray[Math.floor(Math.random() * 6)] + '" style="font-size:' + Math.floor(Math.random() * (50 - 22) + 80) + 'px;"><i class="' + icon + '"></i></div>').appendTo(randomColumnContainer()).css({
-	                animation: "" + flowArray[Math.floor(Math.random() * 3)] + " " + speed + "s linear"
-	            });
-	
-	            $(".part-" + uniqueIdentifier).show();
-	
-	            setTimeout(function () {
-	                $(".part-" + uniqueIdentifier).remove();
-	            }, speed * 900);
+	            (0, _iconAnimations2.default)(icon.icon);
 	        }
 	    }, {
 	        key: 'render',
