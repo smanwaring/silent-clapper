@@ -6,6 +6,7 @@ import { Link } from 'react-router';
 class CreateBoard extends Component {
     constructor(props){
         super(props);
+        // KAT: these bindings could be removed if you rewrite components as React.createClass
         this.generateBoardId = this.generateBoardId.bind(this);
         this.clearGeneratedboard = this.clearGeneratedboard.bind(this);
     }
@@ -13,7 +14,8 @@ class CreateBoard extends Component {
 
     componentDidUpdate(){
         const self = this;
-        if (this.props.showPickButtonError){
+        // KAT: changed "this"" to "self"" so that it stays consistent within the function, or maybe change all back to "this"?
+        if (self.props.showPickButtonError){
           setTimeout(function() {
           self.props.pickButtonsError(false);
            }, 2000);
@@ -43,7 +45,8 @@ class CreateBoard extends Component {
     render() {
         const { generatedBoard, showPickButtonError, buttons, showCreate } = this.props;
         return (
-            <form role="form" style={{display: showCreate ? 'block' : 'none' }}>                 
+            <form role="form" style={{display: showCreate ? 'block' : 'none' }}> 
+                {/* KAT: Tabbing here doesn't look consistent*/}                
                 {this.props && generatedBoard ? 
                             <div>
                             <h4>{`Here is your board #: ${generatedBoard}`}</h4>
@@ -63,7 +66,7 @@ class CreateBoard extends Component {
                                 </div>      
                             </div>
                         </div>
-                        }
+                }
             </form>
         );
     }

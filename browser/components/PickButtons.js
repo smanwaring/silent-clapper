@@ -1,6 +1,8 @@
 import React from 'react';
 
 
+// KAT: this file is a great example of where you've already saved a bunch of things in constants and could easily use them to loop through everything to produce the JSX in a shorter format.
+
 class PickButtons extends React.Component {
 	constructor(props){
 		super(props);

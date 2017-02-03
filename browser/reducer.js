@@ -8,6 +8,8 @@ import { ROOM_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actio
 import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
 import { LOAD_BUTTONS, SET_BOARDID } from './actions/room-actions';
 
+// KAT: Since you have the button classes here already, you could save these in a separate file and refer to them both here (deconstructed) and in the JSX files that use them
+
 const buttonDataState = [
             {
                 color: 'blue',

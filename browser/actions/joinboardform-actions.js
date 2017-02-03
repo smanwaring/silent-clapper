@@ -28,12 +28,14 @@ export const loadRoom = (roomId) => {
 	const thunk = function(dispatch){ 
 		axios.get(`/api/${roomId}`)
 			.then( res => res.data )
-			.then( room => {
-				if (room.message) {
-					dispatch( roomNotFound(true) );
-				} else {
-					dispatch( stateCurrentBoard(room) );
-				}
+			.then( room => { 
+				// KAT: could make this ternary to reduce lines
+				room.message ? dispatch(roomNotFound(true)) : dispatch(stateCurrentBoard(room));
+				// if (room.message) {
+				// 	dispatch( roomNotFound(true) );
+				// } else {
+				// 	dispatch( stateCurrentBoard(room) );
+				// }
 			})
 			.catch(err => console.log(err));
 	}

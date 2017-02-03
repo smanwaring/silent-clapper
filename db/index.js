@@ -2,7 +2,8 @@ const chalk = require('chalk');
 const Sequelize = require('sequelize');
 
 // db server constant(s)
-const dbName = 'silentSalutations'; 
+// KAT: had to rename without camelCase -- psql on my computer won't let you use it, has to be either silentsalutations or silent_salutations
+const dbName = 'silentsalutations'; 
 // +(process.env.NODE_ENV === 'testing' ? '_test' : '');
 const url = process.env.DATABASE_URL || `postgres://localhost:5432/${dbName}`;
 

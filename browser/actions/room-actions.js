@@ -31,11 +31,13 @@ export const enterRoom = (roomId) => {
 		axios.get(`/api/enter/${roomId}`)
 			.then(res => res.data)
 			.then(errorOrButtons => {
-				if (errorOrButtons.notFound){
-					hashHistory.push('/pageNotFound/error');
-				} else {
-					dispatch( foundRoom(errorOrButtons.buttons) );
-				}
+				// KAT: again, could make ternary:
+				errorOrButtons.notFound ? hashHistory.push('/pageNotFound/error') : dispatch( foundRoom(errorOrButtons.buttons));
+				// if (errorOrButtons.notFound){
+				// 	hashHistory.push('/pageNotFound/error');
+				// } else {
+				// 	dispatch( foundRoom(errorOrButtons.buttons) );
+				// }
 			})
 			.catch(err => console.log(err))
 	}

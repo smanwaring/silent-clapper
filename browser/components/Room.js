@@ -44,6 +44,7 @@ class Room extends React.Component {
 	}
 
   render () {
+	  // inconsistent tabbing in my text editor, maybe not in yours
     return (
       <div>
         <div id="wrap">
