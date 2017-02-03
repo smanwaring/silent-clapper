@@ -23,7 +23,7 @@ class HomeForm extends React.Component {
 
   render () {
       const { showJoin, showCreate } = this.props;
-
+      // KAT: tabbing looks inconsistent again? Maybe it's my text editor, or maybe linter will fix
     return (
         <div className="container">
             <div className="row">
@@ -47,13 +47,13 @@ class HomeForm extends React.Component {
                                 <div className="col-lg-12">
                                     <JoinBoardForm/>
                                     <CreateBoard/>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>                  
-    </div>
+            </div>                  
+        </div>
     )
   }
 }

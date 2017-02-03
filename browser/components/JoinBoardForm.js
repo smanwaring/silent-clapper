@@ -10,13 +10,14 @@ class JoinBoardForm extends Component {
 
     componentDidUpdate(){
         const self = this;
-        if (this.props.roomNotFound){
+        // KAT: changed "this" to "self" to be consistent
+        if (self.props.roomNotFound){
           setTimeout(function() {
           self.props.clearRoomNotFound(false);
            }, 2000);
         }
-        if (this.props.foundBoard) {
-            hashHistory.push(`/${this.props.foundBoard}`);
+        if (self.props.foundBoard) {
+            hashHistory.push(`/${self.props.foundBoard}`);
         }
     }
    

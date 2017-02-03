@@ -13,13 +13,14 @@ router.param('boardId', function(req, res, next, theId){
     })
 	.then(function(foundBoard){
 		req.board = foundBoard;
+        // KAT: may want to remove this comment for production :)
 		next(); // !!! --> you must call next here so the middleware knows to go to the next router!!!
 	})
 	.catch(next) //don't forget your error handler
 })
 
 
-//post a newlly created board link
+//post a newly created board link
 router.post('/', (req, res, next) => {
     let buttons = req.body.buttons
     Board.create({

@@ -37,9 +37,10 @@ export const clearAllSelectedButtons = () => {
 export const addRoom = (details) => {
     const thunk = function (dispatch) {
         axios.post(`/api/`, details)
-			.then(res => res.data)
-			.then(createdRoom => dispatch( stateBoardId(createdRoom.path) ) )
-            .catch(err => console.log(err))
+				// KAT: moved .then forward two tabs so that they cascade forwards instead of backwards
+					.then(res => res.data)
+					.then(createdRoom => dispatch( stateBoardId(createdRoom.path) ) )
+        .catch(err => console.log(err))
     }
     return thunk;
 }

@@ -20,6 +20,7 @@ class Homepage extends React.Component {
 
   render () {
     return (
+        // KAT: tabbing
       <div>
                 <div id="wrap">
                     <div>
@@ -29,7 +30,7 @@ class Homepage extends React.Component {
                                 <a className="fa fa-twitter fa-2x" href="https://twitter.com/intent/tweet?text=Silent+Applauding+%3E+Regular+Applauding.+%F0%9F%91%8F+SilentSalutations.com.+"></a>
                             </div>
                         <div className="form-container">
-                            <HomeForm/>
+                        <HomeForm/>
                         </div>
                         
                         <div className="columns column-0"></div>
@@ -43,6 +44,7 @@ class Homepage extends React.Component {
 
 
                <footer>
+                   {/*KAT: you could store all this data in a few constants up top and then loop through it all to produce this? Definitely not necessary, but might be more dry? I don't really know though*/}
                     <button className="btn blue btn-circle btn-xl" onClick={this.handleIconClick} data-icon="fa fa-sign-language">
                         <i className="fa fa-sign-language"></i>
                     </button>

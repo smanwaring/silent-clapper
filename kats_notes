@@ -1,0 +1,7 @@
+The database name is given in db/index, but psql doesn't recognize camelCase; instead needs to be renamed to either silentsalutations or silent_salutations
+
+You could try reformatting all of your react components to be written as React.createClass({}) or whatever other way works with ES6 -- that way, you can get rid of deliberately binding your components functions, but it might be more work than it's worth
+
+Connect a linter to fix a few things, like often there's (){} without a space between the closing parentheses and opening curly brace and tabbing gets weird in the JSX
+
+Overall, this is really beautifully done!!!! :):):)
