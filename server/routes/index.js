@@ -5,23 +5,20 @@ const Button = require('../../db/models').Button;
 
 
 router.param('boardId', function(req, res, next, theId){
-	//findById returns a promise
-    Board.findOne({ 
-        where: { 
-            path: theId
-        }
+    Board.findOne({
+        where: { path: theId }
     })
 	.then(function(foundBoard){
 		req.board = foundBoard;
-		next(); // !!! --> you must call next here so the middleware knows to go to the next router!!!
+		next(); // call next() here so the middleware knows to go to the next router!!!
 	})
-	.catch(next) //don't forget your error handler
-})
+	.catch(next); //don't forget your error handler
+});
 
 
 //post a newlly created board link
 router.post('/', (req, res, next) => {
-    let buttons = req.body.buttons
+    let buttons = req.body.buttons;
     Board.create({
         path: req.body.path,
         buttons: buttons
@@ -35,24 +32,18 @@ router.post('/', (req, res, next) => {
 
 //get the board if it exists
 router.get('/:boardId', (req, res, next) => {
-    Board.findOne({
-        where: {
-            path: req.params.boardId
-        }
-    })
-    .then(foundBoard => {
-        let data = {message: 'not found'};
-        if (!foundBoard){
-            res.send(data);
-        } else {
-            res.send(foundBoard.path);
-        }
-    })
-    .catch(next);
+    let data = {message: 'not found'};
+    let foundBoard = req.board;
+    if (!foundBoard){
+        res.send(data);
+    } else {
+        res.send(foundBoard.path);
+    }
+    next();
 });
 
 
-//get the buttons for a particular room
+//get the buttons for a particular board
 router.get('/enter/:boardId', (req, res, next) => {
     var objToReturn = {};
     if (!req.board){
@@ -74,6 +65,6 @@ router.get('/enter/:boardId', (req, res, next) => {
 
 
 // No API routes matched? 404.
-router.use((req, res) => res.status(404).end())
+router.use((req, res) => res.status(404).end());
 
 module.exports = router;

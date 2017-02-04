@@ -66,19 +66,19 @@
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _Room = __webpack_require__(319);
+	var _Board = __webpack_require__(319);
 	
-	var _Room2 = _interopRequireDefault(_Room);
+	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _Root = __webpack_require__(321);
+	var _Root = __webpack_require__(320);
 	
 	var _Root2 = _interopRequireDefault(_Root);
 	
-	var _EmptyPage = __webpack_require__(322);
+	var _EmptyPage = __webpack_require__(321);
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
-	var _roomActions = __webpack_require__(300);
+	var _boardActions = __webpack_require__(300);
 	
 	var _joinboardformActions = __webpack_require__(298);
 	
@@ -86,11 +86,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	/*------ load the buttons for the room you are about to enter ------ */
-	function onEnterConfirmRoom(nextState) {
-		_store2.default.dispatch((0, _roomActions.enterRoom)(nextState.params.roomId));
-		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(nextState.params.roomId));
-		_store2.default.dispatch((0, _joinboardformActions.roomNotFound)(false));
+	/*------ load the buttons for the board you are about to enter ------ */
+	function onEnterConfirmBoard(nextState) {
+		_store2.default.dispatch((0, _boardActions.enterBoard)(nextState.params.boardId));
+		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(nextState.params.boardId));
+		_store2.default.dispatch((0, _joinboardformActions.boardNotFound)(false));
 	}
 	
 	/*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
@@ -103,7 +103,7 @@
 	function onEnterResetCurrentBoard() {
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(false));
 		_store2.default.dispatch((0, _createboardActions.showPickButtonError)(false));
-		_store2.default.dispatch((0, _roomActions.foundRoom)([]));
+		_store2.default.dispatch((0, _boardActions.foundBoard)([]));
 	}
 	
 	_reactDom2.default.render(_react2.default.createElement(
@@ -116,7 +116,7 @@
 				_reactRouter.Route,
 				{ component: _Root2.default },
 				_react2.default.createElement(_reactRouter.Route, { path: '/', component: _Homepage2.default, onEnter: onEnterResetCurrentBoard }),
-				_react2.default.createElement(_reactRouter.Route, { path: '/:roomId', component: _Room2.default, onEnter: onEnterConfirmRoom }),
+				_react2.default.createElement(_reactRouter.Route, { path: '/:boardId', component: _Board2.default, onEnter: onEnterConfirmBoard }),
 				_react2.default.createElement(_reactRouter.Route, { path: '/pageNotFound/error', component: _EmptyPage2.default }),
 				_react2.default.createElement(_reactRouter.IndexRoute, { component: _Homepage2.default })
 			)
@@ -28599,7 +28599,7 @@
 	
 	var _pickbuttonActions = __webpack_require__(299);
 	
-	var _roomActions = __webpack_require__(300);
+	var _boardActions = __webpack_require__(300);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28655,7 +28655,7 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _roomActions.SET_BOARDID:
+			case _boardActions.SET_BOARDID:
 				return action.payload;
 			default:
 				return state;
@@ -28692,24 +28692,24 @@
 		}
 	};
 	
-	var foundRoomReducer = function foundRoomReducer() {
+	var foundBoardReducer = function foundBoardReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _joinboardformActions.ROOM_NOT_FOUND:
+			case _joinboardformActions.BOARD_NOT_FOUND:
 				return action.payload;
 			default:
 				return state;
 		}
 	};
 	
-	var roomButtonsReducer = function roomButtonsReducer() {
+	var boardButtonsReducer = function boardButtonsReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _roomActions.LOAD_BUTTONS:
+			case _boardActions.LOAD_BUTTONS:
 				return action.payload;
 			default:
 				return state;
@@ -28810,8 +28810,8 @@
 		generatedBoard: boardReducer,
 		currentBoard: currentBoardReducer,
 		buttonsPicked: iconsPickedReducer,
-		roomNotFound: foundRoomReducer,
-		buttonsToLoad: roomButtonsReducer,
+		boardNotFound: foundBoardReducer,
+		buttonsToLoad: boardButtonsReducer,
 		buttonSelected: selectButtonReducer,
 		showCreateTab: showCreateTabReducer,
 		showJoinTab: showJoinBoardTabReducer,
@@ -28831,7 +28831,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.addRoom = exports.clearAllSelectedButtons = exports.clearAllButtons = exports.stateBoardId = exports.showPickButtonError = exports.CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_BUTTONS = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
+	exports.addBoard = exports.clearAllSelectedButtons = exports.clearAllButtons = exports.stateBoardId = exports.showPickButtonError = exports.CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_BUTTONS = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
 	
 	var _axios = __webpack_require__(272);
 	
@@ -28873,12 +28873,12 @@
 	};
 	
 	/* ------------       DISPATCHERS     ------------------ */
-	var addRoom = exports.addRoom = function addRoom(details) {
+	var addBoard = exports.addBoard = function addBoard(details) {
 		var thunk = function thunk(dispatch) {
 			_axios2.default.post("/api/", details).then(function (res) {
 				return res.data;
-			}).then(function (createdRoom) {
-				return dispatch(stateBoardId(createdRoom.path));
+			}).then(function (createdBoard) {
+				return dispatch(stateBoardId(createdBoard.path));
 			}).catch(function (err) {
 				return console.log(err);
 			});
@@ -30408,12 +30408,12 @@
 /* 298 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.loadRoom = exports.stateCurrentBoard = exports.roomNotFound = exports.SET_CURRENT_BOARD = exports.ROOM_NOT_FOUND = undefined;
+	exports.loadBoard = exports.stateCurrentBoard = exports.boardNotFound = exports.SET_CURRENT_BOARD = exports.BOARD_NOT_FOUND = undefined;
 	
 	var _axios = __webpack_require__(272);
 	
@@ -30422,13 +30422,13 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/* -----------------    ACTIONS     ------------------ */
-	var ROOM_NOT_FOUND = exports.ROOM_NOT_FOUND = "ROOM_NOT_FOUND";
-	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
+	var BOARD_NOT_FOUND = exports.BOARD_NOT_FOUND = 'BOARD_NOT_FOUND';
+	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = 'SET_CURRENT_BOARD';
 	
 	/* ------------   ACTION CREATORS     ------------------ */
-	var roomNotFound = exports.roomNotFound = function roomNotFound(bool) {
+	var boardNotFound = exports.boardNotFound = function boardNotFound(bool) {
 		return {
-			type: ROOM_NOT_FOUND,
+			type: BOARD_NOT_FOUND,
 			payload: bool
 		};
 	};
@@ -30442,16 +30442,12 @@
 	
 	/* ------------       DISPATCHERS     ------------------ */
 	
-	var loadRoom = exports.loadRoom = function loadRoom(roomId) {
+	var loadBoard = exports.loadBoard = function loadBoard(boardId) {
 		var thunk = function thunk(dispatch) {
-			_axios2.default.get("/api/" + roomId).then(function (res) {
+			_axios2.default.get('/api/' + boardId).then(function (res) {
 				return res.data;
-			}).then(function (room) {
-				if (room.message) {
-					dispatch(roomNotFound(true));
-				} else {
-					dispatch(stateCurrentBoard(room));
-				}
+			}).then(function (board) {
+				board.message ? dispatch(boardNotFound(true)) : dispatch(stateCurrentBoard(board));
 			}).catch(function (err) {
 				return console.log(err);
 			});
@@ -30588,7 +30584,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.enterRoom = exports.foundRoom = exports.stateBoardId = exports.SET_BOARDID = exports.LOAD_BUTTONS = undefined;
+	exports.enterBoard = exports.foundBoard = exports.stateBoardId = exports.SET_BOARDID = exports.LOAD_BUTTONS = undefined;
 	
 	var _axios = __webpack_require__(272);
 	
@@ -30612,7 +30608,7 @@
 		};
 	};
 	
-	var foundRoom = exports.foundRoom = function foundRoom(buttons) {
+	var foundBoard = exports.foundBoard = function foundBoard(buttons) {
 		return {
 			type: LOAD_BUTTONS,
 			payload: buttons
@@ -30620,16 +30616,12 @@
 	};
 	
 	/* ------------       REDUCER     ------------------ */
-	var enterRoom = exports.enterRoom = function enterRoom(roomId) {
+	var enterBoard = exports.enterBoard = function enterBoard(boardId) {
 		var thunk = function thunk(dispatch) {
-			_axios2.default.get('/api/enter/' + roomId).then(function (res) {
+			_axios2.default.get('/api/enter/' + boardId).then(function (res) {
 				return res.data;
 			}).then(function (errorOrButtons) {
-				if (errorOrButtons.notFound) {
-					_reactRouter.hashHistory.push('/pageNotFound/error');
-				} else {
-					dispatch(foundRoom(errorOrButtons.buttons));
-				}
+				errorOrButtons.notFound ? _reactRouter.hashHistory.push('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));
 			}).catch(function (err) {
 				return console.log(err);
 			});
@@ -31901,18 +31893,18 @@
 	function mapStateToProps(state) {
 		return {
 			showJoin: state.showJoinTab,
-			roomNotFound: state.roomNotFound,
+			boardNotFound: state.boardNotFound,
 			foundBoard: state.currentBoard
 		};
 	}
 	
 	function mapDispatchToProps(dispatch) {
 		return {
-			confirmRoom: function confirmRoom(boardId) {
-				dispatch((0, _joinboardformActions.loadRoom)(boardId));
+			confirmBoard: function confirmBoard(boardId) {
+				dispatch((0, _joinboardformActions.loadBoard)(boardId));
 			},
-			clearRoomNotFound: function clearRoomNotFound(bool) {
-				dispatch((0, _joinboardformActions.roomNotFound)(bool));
+			clearBoardNotFound: function clearBoardNotFound(bool) {
+				dispatch((0, _joinboardformActions.boardNotFound)(bool));
 			}
 		};
 	}
@@ -31953,7 +31945,7 @@
 	
 	        var _this = _possibleConstructorReturn(this, (JoinBoardForm.__proto__ || Object.getPrototypeOf(JoinBoardForm)).call(this, props));
 	
-	        _this.confirmRoomExists = _this.confirmRoomExists.bind(_this);
+	        _this.confirmBoardExists = _this.confirmBoardExists.bind(_this);
 	        return _this;
 	    }
 	
@@ -31961,9 +31953,9 @@
 	        key: 'componentDidUpdate',
 	        value: function componentDidUpdate() {
 	            var self = this;
-	            if (this.props.roomNotFound) {
+	            if (this.props.boardNotFound) {
 	                setTimeout(function () {
-	                    self.props.clearRoomNotFound(false);
+	                    self.props.clearBoardNotFound(false);
 	                }, 2000);
 	            }
 	            if (this.props.foundBoard) {
@@ -31971,11 +31963,11 @@
 	            }
 	        }
 	    }, {
-	        key: 'confirmRoomExists',
-	        value: function confirmRoomExists(evt) {
+	        key: 'confirmBoardExists',
+	        value: function confirmBoardExists(evt) {
 	            evt.preventDefault();
 	            var boardId = evt.target.boardId.value.toString();
-	            this.props.confirmRoom(boardId);
+	            this.props.confirmBoard(boardId);
 	        }
 	    }, {
 	        key: 'render',
@@ -31984,7 +31976,7 @@
 	
 	            var _props = this.props,
 	                showJoin = _props.showJoin,
-	                roomNotFound = _props.roomNotFound;
+	                boardNotFound = _props.boardNotFound;
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -31992,17 +31984,17 @@
 	                _react2.default.createElement(
 	                    'form',
 	                    { onSubmit: function onSubmit(evt) {
-	                            return _this2.confirmRoomExists(evt);
+	                            return _this2.confirmBoardExists(evt);
 	                        }, role: 'form', style: { display: showJoin ? 'block' : 'none' } },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'form-group' },
 	                        _react2.default.createElement('input', { name: 'boardId', type: 'text', tabIndex: '1', className: 'form-control', placeholder: 'Board #' })
 	                    ),
-	                    roomNotFound ? _react2.default.createElement(
+	                    boardNotFound ? _react2.default.createElement(
 	                        'div',
 	                        null,
-	                        'Oops! We couldn\'t find that room'
+	                        'Oops! We couldn\'t find that board'
 	                    ) : '',
 	                    _react2.default.createElement(
 	                        'div',
@@ -32063,7 +32055,7 @@
 	function mapDispatchToProps(dispatch) {
 		return {
 			addBoard: function addBoard(details) {
-				dispatch((0, _createboardActions.addRoom)(details));
+				dispatch((0, _createboardActions.addBoard)(details));
 			},
 			pickButtonsError: function pickButtonsError(bool) {
 				dispatch((0, _createboardActions.showPickButtonError)(bool));
@@ -32319,7 +32311,7 @@
 /* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -32363,7 +32355,7 @@
 	    }
 	
 	    _createClass(PickButtons, [{
-	        key: "handleIconClick",
+	        key: 'handleIconClick',
 	        value: function handleIconClick(evt, color) {
 	            evt.preventDefault();
 	            var icon = evt.currentTarget.dataset.icon;
@@ -32377,7 +32369,7 @@
 	            }
 	        }
 	    }, {
-	        key: "selectAllinDB",
+	        key: 'selectAllinDB',
 	        value: function selectAllinDB() {
 	            var _this2 = this;
 	
@@ -32392,7 +32384,7 @@
 	            });
 	        }
 	    }, {
-	        key: "deselectAllinDB",
+	        key: 'deselectAllinDB',
 	        value: function deselectAllinDB() {
 	            var _this3 = this;
 	
@@ -32401,7 +32393,7 @@
 	            });
 	        }
 	    }, {
-	        key: "handleCheck",
+	        key: 'handleCheck',
 	        value: function handleCheck() {
 	            if (this.props.allSelected) {
 	                this.deselectAllinDB();
@@ -32412,7 +32404,7 @@
 	            }
 	        }
 	    }, {
-	        key: "handleClapClick",
+	        key: 'handleClapClick',
 	        value: function handleClapClick() {
 	            if (!this.props.buttonClass.clap === false) {
 	                this.props.toggleSelect(false);
@@ -32421,7 +32413,7 @@
 	            this.props.clapClicked(!this.props.buttonClass.clap);
 	        }
 	    }, {
-	        key: "handleFrownClick",
+	        key: 'handleFrownClick',
 	        value: function handleFrownClick() {
 	            if (!this.props.buttonClass.frown === false) {
 	                this.props.toggleSelect(false);
@@ -32430,7 +32422,7 @@
 	            this.props.frownClicked(!this.props.buttonClass.frown);
 	        }
 	    }, {
-	        key: "handleEmpireClick",
+	        key: 'handleEmpireClick',
 	        value: function handleEmpireClick() {
 	            if (!this.props.buttonClass.empire === false) {
 	                this.props.toggleSelect(false);
@@ -32439,7 +32431,7 @@
 	            this.props.empireClicked(!this.props.buttonClass.empire);
 	        }
 	    }, {
-	        key: "handleHeartClick",
+	        key: 'handleHeartClick',
 	        value: function handleHeartClick() {
 	            if (!this.props.buttonClass.heart === false) {
 	                this.props.toggleSelect(false);
@@ -32448,7 +32440,7 @@
 	            this.props.heartClicked(!this.props.buttonClass.heart);
 	        }
 	    }, {
-	        key: "handleMoneyClick",
+	        key: 'handleMoneyClick',
 	        value: function handleMoneyClick() {
 	            if (!this.props.buttonClass.money === false) {
 	                this.props.toggleSelect(false);
@@ -32457,7 +32449,7 @@
 	            this.props.moneyClicked(!this.props.buttonClass.money);
 	        }
 	    }, {
-	        key: "handleSmileClick",
+	        key: 'handleSmileClick',
 	        value: function handleSmileClick() {
 	            if (!this.props.buttonClass.smile === false) {
 	                this.props.toggleSelect(false);
@@ -32466,7 +32458,7 @@
 	            this.props.smileClicked(!this.props.buttonClass.smile);
 	        }
 	    }, {
-	        key: "handleQuestionClick",
+	        key: 'handleQuestionClick',
 	        value: function handleQuestionClick() {
 	            if (!this.props.buttonClass.question === false) {
 	                this.props.toggleSelect(false);
@@ -32475,7 +32467,7 @@
 	            this.props.questionClicked(!this.props.buttonClass.question);
 	        }
 	    }, {
-	        key: "handleThumbClick",
+	        key: 'handleThumbClick',
 	        value: function handleThumbClick() {
 	            if (!this.props.buttonClass.thumb === false) {
 	                this.props.toggleSelect(false);
@@ -32484,7 +32476,7 @@
 	            this.props.thumbClicked(!this.props.buttonClass.thumb);
 	        }
 	    }, {
-	        key: "handleResistanceClick",
+	        key: 'handleResistanceClick',
 	        value: function handleResistanceClick() {
 	            if (!this.props.buttonClass.resistance === false) {
 	                this.props.toggleSelect(false);
@@ -32493,7 +32485,7 @@
 	            this.props.resistanceClicked(!this.props.buttonClass.resistance);
 	        }
 	    }, {
-	        key: "handleBombClick",
+	        key: 'handleBombClick',
 	        value: function handleBombClick() {
 	            if (!this.props.buttonClass.bomb === false) {
 	                this.props.toggleSelect(false);
@@ -32502,115 +32494,115 @@
 	            this.props.bombClicked(!this.props.buttonClass.bomb);
 	        }
 	    }, {
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            var _this4 = this;
 	
 	            var buttonClass = this.props.buttonClass;
 	
 	            var addRemove = this.handleIconClick;
-	            var basicClass = "btn btn-circle btn-md btn-hover nuetralbg";
-	            var clapClass = "btn btn-circle btn-md blue";
-	            var frownClass = "btn btn-circle btn-md red";
-	            var empireClass = "btn btn-circle btn-md gray";
-	            var heartClass = "btn btn-circle btn-md dark-blue";
-	            var moneyClass = "btn btn-circle btn-md green";
-	            var questionClass = "btn btn-circle btn-md yellow";
-	            var smileClass = "btn btn-circle btn-md pink";
-	            var thumbClass = "btn btn-circle btn-md mint-green";
-	            var resistanceClass = "btn btn-circle btn-md orange";
-	            var bombClass = "btn btn-circle btn-md purple";
+	            var basicClass = 'btn btn-circle btn-md btn-hover nuetralbg';
+	            var clapClass = 'btn btn-circle btn-md blue';
+	            var frownClass = 'btn btn-circle btn-md red';
+	            var empireClass = 'btn btn-circle btn-md gray';
+	            var heartClass = 'btn btn-circle btn-md dark-blue';
+	            var moneyClass = 'btn btn-circle btn-md green';
+	            var questionClass = 'btn btn-circle btn-md yellow';
+	            var smileClass = 'btn btn-circle btn-md pink';
+	            var thumbClass = 'btn btn-circle btn-md mint-green';
+	            var resistanceClass = 'btn btn-circle btn-md orange';
+	            var bombClass = 'btn btn-circle btn-md purple';
 	            var allButtonsOn = this.props.picked.length === 10;
 	            return _react2.default.createElement(
-	                "div",
+	                'div',
 	                null,
 	                _react2.default.createElement(
-	                    "h4",
-	                    { className: "pick-no-margin" },
-	                    "Pick your buttons"
+	                    'h4',
+	                    { className: 'pick-no-margin' },
+	                    'Pick your buttons'
 	                ),
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "checkbox" },
+	                    'div',
+	                    { className: 'checkbox' },
 	                    _react2.default.createElement(
-	                        "label",
+	                        'label',
 	                        null,
-	                        _react2.default.createElement("input", { type: "checkbox", checked: allButtonsOn ? "checked" : '', onChange: this.handleCheck }),
-	                        " select all"
+	                        _react2.default.createElement('input', { type: 'checkbox', checked: allButtonsOn ? 'checked' : '', onChange: this.handleCheck }),
+	                        ' select all'
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    "div",
-	                    { className: "button-spacer" },
+	                    'div',
+	                    { className: 'button-spacer' },
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.clap ? clapClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'blue');_this4.handleClapClick();
-	                            }, "data-icon": "fa fa-sign-language" },
-	                        _react2.default.createElement("i", { className: "fa fa-sign-language" })
+	                            }, 'data-icon': 'fa fa-sign-language' },
+	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.frown ? frownClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'red');_this4.handleFrownClick();
-	                            }, "data-icon": "fa fa-frown-o" },
-	                        _react2.default.createElement("i", { className: "fa fa-frown-o" })
+	                            }, 'data-icon': 'fa fa-frown-o' },
+	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.empire ? empireClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'gray');_this4.handleEmpireClick();
-	                            }, "data-icon": "fa fa-empire" },
-	                        _react2.default.createElement("i", { className: "fa fa-empire", "data-icon": "fa fa-empire" })
+	                            }, 'data-icon': 'fa fa-empire' },
+	                        _react2.default.createElement('i', { className: 'fa fa-empire', 'data-icon': 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.heart ? heartClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'dark-blue');_this4.handleHeartClick();
-	                            }, "data-icon": "fa fa-heart-o" },
-	                        _react2.default.createElement("i", { className: "fa fa-heart-o", "data-icon": "fa fa-heart-o" })
+	                            }, 'data-icon': 'fa fa-heart-o' },
+	                        _react2.default.createElement('i', { className: 'fa fa-heart-o', 'data-icon': 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.money ? moneyClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'green');_this4.handleMoneyClick();
-	                            }, "data-icon": "fa fa-money fa-spin" },
-	                        _react2.default.createElement("i", { className: "fa fa-money", "data-icon": "fa fa-money fa-spin" })
+	                            }, 'data-icon': 'fa fa-money fa-spin' },
+	                        _react2.default.createElement('i', { className: 'fa fa-money', 'data-icon': 'fa fa-money fa-spin' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.smile ? smileClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'pink');_this4.handleSmileClick();
-	                            }, "data-icon": "fa fa-smile-o" },
-	                        _react2.default.createElement("i", { className: "fa fa-smile-o", "data-icon": "fa fa-smile-o" })
+	                            }, 'data-icon': 'fa fa-smile-o' },
+	                        _react2.default.createElement('i', { className: 'fa fa-smile-o', 'data-icon': 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.question ? questionClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'yellow');_this4.handleQuestionClick();
-	                            }, "data-icon": "fa fa-question" },
-	                        _react2.default.createElement("i", { className: "fa fa-question", "data-icon": "fa fa-question" })
+	                            }, 'data-icon': 'fa fa-question' },
+	                        _react2.default.createElement('i', { className: 'fa fa-question', 'data-icon': 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'mint-green');_this4.handleThumbClick();
-	                            }, "data-icon": "fa fa-thumbs-o-up" },
-	                        _react2.default.createElement("i", { className: "fa fa-thumbs-o-up", "data-icon": "fa fa-thumbs-o-up" })
+	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
+	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'data-icon': 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'orange');_this4.handleResistanceClick();
-	                            }, "data-icon": "fa fa-rebel" },
-	                        _react2.default.createElement("i", { className: "fa fa-rebel", "data-icon": "fa fa-rebel" })
+	                            }, 'data-icon': 'fa fa-rebel' },
+	                        _react2.default.createElement('i', { className: 'fa fa-rebel', 'data-icon': 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
-	                        "button",
+	                        'button',
 	                        { className: buttonClass.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'purple');_this4.handleBombClick();
-	                            }, "data-icon": "fa fa-bomb fa-spin" },
-	                        _react2.default.createElement("i", { className: "fa fa-bomb", "data-icon": "fa fa-bomb fa-spin" })
+	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
+	                        _react2.default.createElement('i', { className: 'fa fa-bomb', 'data-icon': 'fa fa-bomb fa-spin' })
 	                    )
 	                )
 	            );
@@ -32640,12 +32632,13 @@
 	        colorArray = ["colOne", "colTwo", "colThree", "colFour", "colFive", "colSix"],
 	        speed = (Math.random() * (highRange - lowRange) + lowRange).toFixed(1);
 	
+	    //pick a random column on the page
 	    function randomColumnContainer() {
 	        var column = '.column-' + Math.floor(Math.random() * columns.length);
 	        return column;
 	    }
 	
-	    //creating DIV element 
+	    //creating DIV element
 	    var animationDiv = document.createElement('div');
 	
 	    //creating icon element (which will be appended to the animationDiv)
@@ -32675,7 +32668,7 @@
 	    //appending animationDiv to a random column that is in the HTML
 	    randomColumn.appendChild(animationDiv);
 	
-	    //when animation is over, remove animationDiv from the doc
+	    //when animation is over, remove animationDiv from the DOM
 	    setTimeout(function () {
 	        randomColumn.removeChild(animationDiv);
 	    }, speed * 900);
@@ -32693,11 +32686,11 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Room = __webpack_require__(320);
+	var _Board = __webpack_require__(322);
 	
-	var _Room2 = _interopRequireDefault(_Room);
+	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _roomActions = __webpack_require__(300);
+	var _boardActions = __webpack_require__(300);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -32713,152 +32706,15 @@
 	function mapDispatchToProps(dispatch) {
 		return {
 			setBoardId: function setBoardId(boardId) {
-				dispatch((0, _roomActions.stateBoardId)(boardId));
+				dispatch((0, _boardActions.stateBoardId)(boardId));
 			}
 		};
 	}
 	
-	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Room2.default);
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Board2.default);
 
 /***/ },
 /* 320 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _reactRouter = __webpack_require__(216);
-	
-	var _HomeForm = __webpack_require__(310);
-	
-	var _HomeForm2 = _interopRequireDefault(_HomeForm);
-	
-	var _iconAnimations = __webpack_require__(318);
-	
-	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// just like require-ish import '../file/..'
-	
-	
-	var Room = function (_React$Component) {
-	    _inherits(Room, _React$Component);
-	
-	    function Room(props) {
-	        _classCallCheck(this, Room);
-	
-	        var _this = _possibleConstructorReturn(this, (Room.__proto__ || Object.getPrototypeOf(Room)).call(this, props));
-	
-	        _this.handleIconClick = _this.handleIconClick.bind(_this);
-	        _this.drawAction = _this.drawAction.bind(_this);
-	        return _this;
-	    }
-	
-	    _createClass(Room, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            var component = this;
-	            // initialize client socket
-	            this.socket = io.connect();
-	            //join room
-	            this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
-	            // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
-	            this.socket.on('showAction', function (icon) {
-	                // hey, someone else clicked an icon and we found out from the server
-	                component.drawAction(icon);
-	            });
-	            //emitted from server, caught here with the current num of people connected
-	            this.socket.on('connectionEvent', function (numPeople) {
-	                var audience = "person";
-	                if (numPeople > 1) {
-	                    audience = "people";
-	                }
-	                if (numPeople > 0) {
-	                    document.querySelector('#num-people span').textContent = numPeople + " " + audience + ' connected';
-	                }
-	            });
-	        }
-	    }, {
-	        key: 'handleIconClick',
-	        value: function handleIconClick(evt) {
-	            this.socket.emit('registerAction', { icon: evt.currentTarget.dataset.icon });
-	        }
-	    }, {
-	        key: 'drawAction',
-	        value: function drawAction(icon) {
-	            (0, _iconAnimations2.default)(icon.icon);
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this2 = this;
-	
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                _react2.default.createElement(
-	                    'div',
-	                    { id: 'wrap' },
-	                    _react2.default.createElement(
-	                        'h1',
-	                        null,
-	                        ' Silent Salutations '
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { id: 'num-people' },
-	                        _react2.default.createElement(
-	                            'span',
-	                            null,
-	                            'audience connecting...'
-	                        )
-	                    ),
-	                    _react2.default.createElement('div', { className: 'columns column-0' }),
-	                    _react2.default.createElement('div', { className: 'columns column-1' }),
-	                    _react2.default.createElement('div', { className: 'columns column-2' }),
-	                    _react2.default.createElement('div', { className: 'columns column-3' }),
-	                    _react2.default.createElement('div', { className: 'columns column-4' })
-	                ),
-	                _react2.default.createElement(
-	                    'footer',
-	                    null,
-	                    this.props.buttons && this.props.buttons.map(function (button, i) {
-	                        return _react2.default.createElement(
-	                            'button',
-	                            { key: i, className: 'btn btn-circle btn-xl ' + button.color, onClick: _this2.handleIconClick, 'data-icon': button.icon },
-	                            _react2.default.createElement('i', { className: button.icon.replace("fa-spin", "") })
-	                        );
-	                    })
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return Room;
-	}(_react2.default.Component);
-	
-	;
-	
-	exports.default = Room;
-
-/***/ },
-/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32907,7 +32763,7 @@
 	exports.default = Root;
 
 /***/ },
-/* 322 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -33016,6 +32872,141 @@
 	
 	
 	module.exports = EmptyPage;
+
+/***/ },
+/* 322 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactRouter = __webpack_require__(216);
+	
+	var _HomeForm = __webpack_require__(310);
+	
+	var _HomeForm2 = _interopRequireDefault(_HomeForm);
+	
+	var _iconAnimations = __webpack_require__(318);
+	
+	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// just like require-ish import '../file/..'
+	
+	
+	var Board = function (_React$Component) {
+		_inherits(Board, _React$Component);
+	
+		function Board(props) {
+			_classCallCheck(this, Board);
+	
+			var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+	
+			_this.handleIconClick = _this.handleIconClick.bind(_this);
+			_this.drawAction = _this.drawAction.bind(_this);
+			return _this;
+		}
+	
+		_createClass(Board, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				var component = this;
+				// initialize client socket
+				this.socket = io.connect();
+				//join room
+				this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
+				// emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
+				this.socket.on('showAction', function (icon) {
+					// hey, someone else clicked an icon and we found out from the server
+					component.drawAction(icon);
+				});
+				//emitted from server, caught here with the current num of people connected
+				this.socket.on('connectionEvent', function (numPeople) {
+					var audience = 'person';
+					if (numPeople > 1) {
+						audience = 'people';
+					}
+					if (numPeople > 0) {
+						document.querySelector('#num-people span').textContent = numPeople + ' ' + audience + ' connected';
+					}
+				});
+			}
+		}, {
+			key: 'handleIconClick',
+			value: function handleIconClick(evt) {
+				this.socket.emit('registerAction', { icon: evt.currentTarget.dataset.icon });
+			}
+		}, {
+			key: 'drawAction',
+			value: function drawAction(icon) {
+				(0, _iconAnimations2.default)(icon.icon);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _this2 = this;
+	
+				return _react2.default.createElement(
+					'div',
+					null,
+					_react2.default.createElement(
+						'div',
+						{ id: 'wrap' },
+						_react2.default.createElement(
+							'h1',
+							null,
+							' Silent Salutations '
+						),
+						_react2.default.createElement(
+							'div',
+							{ id: 'num-people' },
+							_react2.default.createElement(
+								'span',
+								null,
+								'audience connecting...'
+							)
+						),
+						_react2.default.createElement('div', { className: 'columns column-0' }),
+						_react2.default.createElement('div', { className: 'columns column-1' }),
+						_react2.default.createElement('div', { className: 'columns column-2' }),
+						_react2.default.createElement('div', { className: 'columns column-3' }),
+						_react2.default.createElement('div', { className: 'columns column-4' })
+					),
+					_react2.default.createElement(
+						'footer',
+						null,
+						this.props.buttons && this.props.buttons.map(function (button, i) {
+							return _react2.default.createElement(
+								'button',
+								{ key: i, className: 'btn btn-circle btn-xl ' + button.color, onClick: _this2.handleIconClick, 'data-icon': button.icon },
+								_react2.default.createElement('i', { className: button.icon.replace('fa-spin', '') })
+							);
+						})
+					)
+				);
+			}
+		}]);
+	
+		return Board;
+	}(_react2.default.Component);
+	
+	exports.default = Board;
 
 /***/ }
 /******/ ]);

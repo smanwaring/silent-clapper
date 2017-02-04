@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
-import Room from '../components/Room';
-import { stateBoardId } from '../actions/room-actions';
+import Board from '../components/Board';
+import { stateBoardId } from '../actions/board-actions';
 
 function mapStateToProps(state){
 	return {
@@ -23,4 +23,4 @@ function mapDispatchToProps(dispatch){
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(Room);
+)(Board);

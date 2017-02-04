@@ -4,15 +4,15 @@ import {combineReducers} from 'redux';
 
 import { TOGGLE_PICK_BUTTON_ERROR, CLEAR_ALL_BUTTONS, CLEAR_ALL_SELECTED_BUTTONS  } from './actions/createboard-actions';
 import { SHOW_CREATE, SHOW_JOIN } from './actions/homeform-actions'; 
-import { ROOM_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
+import { BOARD_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
 import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
-import { LOAD_BUTTONS, SET_BOARDID } from './actions/room-actions';
+import { LOAD_BUTTONS, SET_BOARDID } from './actions/board-actions';
 
 const buttonDataState = [
             {
                 color: 'blue',
                 icon: 'fa fa-sign-language'
-            }, 
+            },
             {
                 color: 'red',
                 icon: 'fa fa-frown-o'
@@ -63,7 +63,7 @@ const initialButtonState = {
 		thumb: false,
 		resistance: false,
 		bomb: false
-}
+};
 
 const boardReducer = function(state = '', action) {
 	switch (action.type){
@@ -71,7 +71,7 @@ const boardReducer = function(state = '', action) {
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
 const currentBoardReducer = function(state = false, action) {
 	switch (action.type){
@@ -79,7 +79,7 @@ const currentBoardReducer = function(state = false, action) {
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
 const iconsPickedReducer = function(state = [], action) {
 	switch (action.type){
@@ -91,23 +91,23 @@ const iconsPickedReducer = function(state = [], action) {
 			return [];
 		default: return state;
 	}
-}
+};
 
-const foundRoomReducer = function(state = false, action) {
+const foundBoardReducer = function(state = false, action) {
 	switch (action.type){
-		case ROOM_NOT_FOUND:
+		case BOARD_NOT_FOUND:
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
-const roomButtonsReducer = function(state = [], action) {
+const boardButtonsReducer = function(state = [], action) {
 	switch (action.type){
 		case LOAD_BUTTONS:
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
 
 const showCreateTabReducer = function(state = false, action) {
@@ -116,7 +116,7 @@ const showCreateTabReducer = function(state = false, action) {
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
 const showJoinBoardTabReducer= function(state = true, action) {
 	switch (action.type){
@@ -124,7 +124,7 @@ const showJoinBoardTabReducer= function(state = true, action) {
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
 const toggleSelectAllReducer = function(state = false, action) {
 	switch (action.type){
@@ -132,7 +132,7 @@ const toggleSelectAllReducer = function(state = false, action) {
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
 const pickButtonErrorReducer = function(state = false, action) {
 	switch (action.type){
@@ -140,13 +140,13 @@ const pickButtonErrorReducer = function(state = false, action) {
 			return action.payload;
 		default: return state;
 	}
-}
+};
 
 const buttonsAvailableReducer = function(state = buttonDataState, action) {
 	switch (action.type){
 		default: return state;
 	}
-}
+};
 
 const selectButtonReducer = function(state = initialButtonState, action) {
 	switch (action.type) {
@@ -174,22 +174,22 @@ const selectButtonReducer = function(state = initialButtonState, action) {
 			return initialButtonState;
 		default: return state;
 	}
-}
+};
 
 
 const rootReducer = combineReducers({
 	generatedBoard: boardReducer,
 	currentBoard: currentBoardReducer,
 	buttonsPicked: iconsPickedReducer,
-	roomNotFound: foundRoomReducer,
-	buttonsToLoad:  roomButtonsReducer,
+	boardNotFound: foundBoardReducer,
+	buttonsToLoad:  boardButtonsReducer,
 	buttonSelected: selectButtonReducer,
 	showCreateTab: showCreateTabReducer,
 	showJoinTab: showJoinBoardTabReducer,
 	allButtonSelect: toggleSelectAllReducer,
 	showPickButtonError: pickButtonErrorReducer,
 	buttonsAvailable: buttonsAvailableReducer,
-})
+});
 
 export default rootReducer;
 

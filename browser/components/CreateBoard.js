@@ -43,27 +43,27 @@ class CreateBoard extends Component {
     render() {
         const { generatedBoard, showPickButtonError, buttons, showCreate } = this.props;
         return (
-            <form role="form" style={{display: showCreate ? 'block' : 'none' }}>                 
-                {this.props && generatedBoard ? 
-                            <div>
-                            <h4>{`Here is your board #: ${generatedBoard}`}</h4>
-                            <div className="col-sm-6 col-sm-offset-3">
-                                <Link to={`/${generatedBoard}`}><button type="submit" tabIndex="4" className="form-control btn btn-create">GO TO MY BOARD</button></Link>
-                                <h5>OR</h5>
-                                <button tabIndex="4"  onClick={this.clearGeneratedboard} className="form-control btn btn-create-new">GENERATE A NEW BOARD</button>
+            <form role="form" style={{display: showCreate ? 'block' : 'none' }}>
+                {this.props && generatedBoard ?
+                    <div>
+                        <h4>{`Here is your board #: ${generatedBoard}`}</h4>
+                        <div className="col-sm-6 col-sm-offset-3">
+                            <Link to={`/${generatedBoard}`}><button type="submit" tabIndex="4" className="form-control btn btn-create">GO TO MY BOARD</button></Link>
+                            <h5>OR</h5>
+                            <button tabIndex="4"  onClick={this.clearGeneratedboard} className="form-control btn btn-create-new">GENERATE A NEW BOARD</button>
+                        </div>
+                    </div>
+                                            :
+                    <div className="form-group">
+                        <PickButtons />
+                        <div className="row">
+                        {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
+                            <div className="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
+                                <button tabIndex="4" className="form-control btn btn-create" onClick={this.generateBoardId}> Generate My Board Link </button>
                             </div>
                         </div>
-                                :
-                        <div className="form-group">
-                            <PickButtons/>
-                            <div className="row">
-                            {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
-                                <div className="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
-                                    <button tabIndex="4" className="form-control btn btn-create" onClick={this.generateBoardId}> Generate My Board Link </button>
-                                </div>      
-                            </div>
-                        </div>
-                        }
+                    </div>
+                }
             </form>
         );
     }

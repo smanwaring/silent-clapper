@@ -1,14 +1,14 @@
 import axios from 'axios';
 
 /* -----------------    ACTIONS     ------------------ */
-export const ROOM_NOT_FOUND = "ROOM_NOT_FOUND";
-export const SET_CURRENT_BOARD = "SET_CURRENT_BOARD";
+export const BOARD_NOT_FOUND = 'BOARD_NOT_FOUND';
+export const SET_CURRENT_BOARD = 'SET_CURRENT_BOARD';
 
 
 /* ------------   ACTION CREATORS     ------------------ */
-export const roomNotFound = (bool) => {
+export const boardNotFound = (bool) => {
 	return {
-		type: ROOM_NOT_FOUND,
+		type: BOARD_NOT_FOUND,
 		payload: bool
 	};
 };
@@ -24,18 +24,15 @@ export const stateCurrentBoard = (boardId) => {
 
 /* ------------       DISPATCHERS     ------------------ */
 
-export const loadRoom = (roomId) => {
-	const thunk = function(dispatch){ 
-		axios.get(`/api/${roomId}`)
+export const loadBoard = (boardId) => {
+	const thunk = (dispatch) => {
+		axios.get(`/api/${boardId}`)
 			.then( res => res.data )
-			.then( room => {
-				if (room.message) {
-					dispatch( roomNotFound(true) );
-				} else {
-					dispatch( stateCurrentBoard(room) );
-				}
+			.then( board => {
+				board.message ? dispatch(boardNotFound(true)) : dispatch(stateCurrentBoard(board));
 			})
 			.catch(err => console.log(err));
-	}
+	};
 	return thunk;
-}
+};
+

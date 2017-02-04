@@ -106,7 +106,7 @@ export const toggleBomb = (bool) => {
 };
 
 
-export const toggleSelectAll= (bool) => {
+export const toggleSelectAll = (bool) => {
 	return {
 		type: TOGGLE_SELECT_ALL,
 		payload: bool

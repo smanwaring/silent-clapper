@@ -1,6 +1,6 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import CreateBoard from '../components/CreateBoard';
-import { addRoom, showPickButtonError, stateBoardId, clearAllButtons, clearAllSelectedButtons  } from '../actions/createboard-actions';
+import { addBoard, showPickButtonError, stateBoardId, clearAllButtons, clearAllSelectedButtons  } from '../actions/createboard-actions';
 
 function mapStateToProps(state){
 	return {
@@ -14,10 +14,10 @@ function mapStateToProps(state){
 function mapDispatchToProps(dispatch){
 	return {
 		addBoard: function(details){
-			dispatch( addRoom(details) );
+			dispatch( addBoard(details) );
 		},
 		pickButtonsError: function(bool){
-			dispatch ( showPickButtonError(bool) );
+			dispatch( showPickButtonError(bool) );
 		},
 		clearGeneratedboard: function(details){
 			dispatch( stateBoardId(details) );

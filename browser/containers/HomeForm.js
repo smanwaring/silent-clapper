@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import HomeForm from '../components/HomeForm';
 import {  showCreate, showJoin } from '../actions/homeform-actions';
 

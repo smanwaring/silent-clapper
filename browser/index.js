@@ -9,40 +9,40 @@ import store from './store';
 
 /*------ COMPONENTS/CONTAINERS ------ */
 import Homepage from './containers/Homepage';
-import Room from './containers/Room';
+import Board from './containers/Board';
 import Root from './components/Root';
 import EmptyPage from './components/EmptyPage';
 
 /*------ ACTIONS ------ */
-import { enterRoom, foundRoom } from './actions/room-actions';
-import { roomNotFound, stateCurrentBoard } from './actions/joinboardform-actions';
+import { enterBoard, foundBoard } from './actions/board-actions';
+import { boardNotFound, stateCurrentBoard } from './actions/joinboardform-actions';
 import { showPickButtonError } from './actions/createboard-actions';
 
 
 
 
-/*------ load the buttons for the room you are about to enter ------ */
-function onEnterConfirmRoom(nextState) {
-	store.dispatch( enterRoom(nextState.params.roomId) );
-	store.dispatch( stateCurrentBoard(nextState.params.roomId));
-	store.dispatch( roomNotFound(false) );
+/*------ load the buttons for the board you are about to enter ------ */
+function onEnterConfirmBoard(nextState) {
+	store.dispatch( enterBoard(nextState.params.boardId) );
+	store.dispatch( stateCurrentBoard(nextState.params.boardId));
+	store.dispatch( boardNotFound(false) );
 }
 
 /*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
 function onEnterResetCurrentBoard() {
 	store.dispatch( stateCurrentBoard(false) );
 	store.dispatch( showPickButtonError(false) );
-	store.dispatch( foundRoom( [] ) );
+	store.dispatch( foundBoard( [] ) );
 }
 
 ReactDOM.render(
   <Provider store={store}>
 	    <Router history={hashHistory}>
 			<Route component={Root}>
-				<Route path="/" component={Homepage} onEnter={onEnterResetCurrentBoard}/>
-				<Route path="/:roomId" component={Room} onEnter={onEnterConfirmRoom}/>
-				<Route path="/pageNotFound/error" component={EmptyPage}/>
-				<IndexRoute component={Homepage}/>
+				<Route path="/" component={Homepage} onEnter={onEnterResetCurrentBoard} />
+				<Route path="/:boardId" component={Board} onEnter={onEnterConfirmBoard} />
+				<Route path="/pageNotFound/error" component={EmptyPage} />
+				<IndexRoute component={Homepage} />
 			</Route>
 		</Router>
   </Provider>,

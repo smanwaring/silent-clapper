@@ -130,24 +130,24 @@ class PickButtons extends React.Component {
   render () {
       const { buttonClass } = this.props;
       let addRemove = this.handleIconClick;
-      let basicClass = "btn btn-circle btn-md btn-hover nuetralbg";
-      let clapClass = "btn btn-circle btn-md blue";
-      let frownClass = "btn btn-circle btn-md red";
-      let empireClass = "btn btn-circle btn-md gray";
-      let heartClass = "btn btn-circle btn-md dark-blue";
-      let moneyClass = "btn btn-circle btn-md green";
-      let questionClass = "btn btn-circle btn-md yellow";
-      let smileClass = "btn btn-circle btn-md pink";
-      let thumbClass = "btn btn-circle btn-md mint-green";
-      let resistanceClass = "btn btn-circle btn-md orange";
-      let bombClass = "btn btn-circle btn-md purple";
+      let basicClass = 'btn btn-circle btn-md btn-hover nuetralbg';
+      let clapClass = 'btn btn-circle btn-md blue';
+      let frownClass = 'btn btn-circle btn-md red';
+      let empireClass = 'btn btn-circle btn-md gray';
+      let heartClass = 'btn btn-circle btn-md dark-blue';
+      let moneyClass = 'btn btn-circle btn-md green';
+      let questionClass = 'btn btn-circle btn-md yellow';
+      let smileClass = 'btn btn-circle btn-md pink';
+      let thumbClass = 'btn btn-circle btn-md mint-green';
+      let resistanceClass = 'btn btn-circle btn-md orange';
+      let bombClass = 'btn btn-circle btn-md purple';
       let allButtonsOn = this.props.picked.length === 10;
     return (
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>
             <div className="checkbox">
                 <label>
-                <input type="checkbox" checked={allButtonsOn ? "checked" : '' } onChange={this.handleCheck}/> select all
+                <input type="checkbox" checked={allButtonsOn ? 'checked' : '' } onChange={this.handleCheck}/> select all
                 </label>
             </div>
         <div className="button-spacer">

@@ -6,6 +6,6 @@ export default class Root extends Component {
             <div>
                 {this.props.children}
             </div>
-        )
+        );
     }
 }

@@ -34,11 +34,11 @@ export const clearAllSelectedButtons = () => {
 };
 
 /* ------------       DISPATCHERS     ------------------ */
-export const addRoom = (details) => {
-    const thunk = function (dispatch) {
+export const addBoard = (details) => {
+    const thunk = (dispatch) => {
         axios.post(`/api/`, details)
 			.then(res => res.data)
-			.then(createdRoom => dispatch( stateBoardId(createdRoom.path) ) )
+			.then(createdBoard => dispatch( stateBoardId(createdBoard.path) ) )
             .catch(err => console.log(err))
     }
     return thunk;

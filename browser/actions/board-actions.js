@@ -16,7 +16,7 @@ export const stateBoardId = (boardId) => {
 	};
 };
 
-export const foundRoom = (buttons) => {
+export const foundBoard = (buttons) => {
 	return {
 		type: LOAD_BUTTONS,
 		payload: buttons
@@ -26,18 +26,15 @@ export const foundRoom = (buttons) => {
 
 
 /* ------------       REDUCER     ------------------ */
-export const enterRoom = (roomId) => {
-	const thunk = function(dispatch){ 
-		axios.get(`/api/enter/${roomId}`)
+export const enterBoard = (boardId) => {
+	const thunk = (dispatch) => { 
+		axios.get(`/api/enter/${boardId}`)
 			.then(res => res.data)
 			.then(errorOrButtons => {
-				if (errorOrButtons.notFound){
-					hashHistory.push('/pageNotFound/error');
-				} else {
-					dispatch( foundRoom(errorOrButtons.buttons) );
-				}
+				errorOrButtons.notFound ? hashHistory.push('/pageNotFound/error') : dispatch( foundBoard(errorOrButtons.buttons));
 			})
-			.catch(err => console.log(err))
-	}
+			.catch(err => console.log(err));
+	};
 	return thunk;
-}
+};
+

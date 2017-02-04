@@ -19,19 +19,19 @@ server.on('request', app);
 const PATHS = {
   indexHTML: path.join(__dirname, '../public/index.html'),
   public: path.join(__dirname, '../public'),
-}
+};
 
 // init router ('app')
 app
   .use(express.static(PATHS.public)) //server up public files
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
-  .use(morgan('dev'))   
-  .use('/api', routes) 
+  .use(morgan('dev'))
+  .use('/api', routes);
 
 // default routing
 app.get('/*', function(req, res){
-  res.sendFile(PATHS.indexHTML)
+  res.sendFile(PATHS.indexHTML);
 });
 
 // Error handler
@@ -81,7 +81,7 @@ io.on('connection', function(socket){
   // server is receiving click data from the client here 
   // so we want to broadcast that data to all other connected clients 
   socket.on('registerAction', function(icon){
-    console.log("room I am emitting to", newRoom)
+    console.log('I am emitting to', newRoom);
     io.to(newRoom).emit('showAction', icon);
   });
 
