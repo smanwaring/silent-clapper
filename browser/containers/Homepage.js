@@ -4,7 +4,7 @@ import Homepage from '../components/Homepage';
 
 function mapStateToProps(state){
 	return {
-
+		buttonsAvailable: state.buttonsAvailable
 	};
 }
 
