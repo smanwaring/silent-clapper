@@ -36,7 +36,7 @@ export default class EmptyPage extends React.Component {
                 <div className="columns column-3"></div>
                 <div className="columns column-4"></div>
                 <button className="btn red btn-circle btn-xl" data-icon="fa fa-frown-o">
-                    <i className="fa fa-frown-o"></i>
+                    <i className="fa fa-frown-o" />
                  </button>
                 <h1 className="textbold">Oops! That room doesn't exist...</h1>
                 <Link to={'/'}><h1> Go back home</h1></Link>
