@@ -17,7 +17,7 @@ class Board extends React.Component {
 		// initialize client socket
 		this.socket = io.connect();
 		//join room
-		this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
+		this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.generatedBoard);
 		// emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
 		this.socket.on('showAction', function(icon){
 		// hey, someone else clicked an icon and we found out from the server
@@ -59,7 +59,7 @@ class Board extends React.Component {
         </div>
 
         <footer>
-            {this.props.buttons && this.props.buttons.map((button, i) => {
+            {this.props.buttonsToLoad && this.props.buttonsToLoad.map((button, i) => {
                 return (
                     <button key={i} className={`btn btn-circle btn-xl ${button.color}`} onClick={this.handleIconClick} data-icon={button.icon}>
                         <i className={button.icon.replace('fa-spin', '')}></i>

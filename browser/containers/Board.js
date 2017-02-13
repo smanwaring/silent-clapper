@@ -2,18 +2,18 @@ import {connect} from 'react-redux';
 import Board from '../components/Board';
 import { stateBoardId } from '../actions/board-actions';
 
-function mapStateToProps(state){
+function mapStateToProps( {generatedBoard, currentBoard, buttonsToLoad, connectToSocket} ){
 	return {
-		boardId: state.generatedBoard,
-		currentBoard: state.currentBoard,
-		buttons: state.buttonsToLoad,
-		connectToSocket: state.connectToSocket
+		generatedBoard,
+		currentBoard,
+		buttonsToLoad,
+		connectToSocket
 	};
 }
 
 function mapDispatchToProps(dispatch){
 	return {
-		setBoardId: function(boardId){
+		setBoardId: (boardId) => {
 			dispatch( stateBoardId(boardId) );
 		}
 	};
