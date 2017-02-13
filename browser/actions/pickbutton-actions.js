@@ -1,5 +1,3 @@
-
-
 /* -----------------    ACTIONS     ------------------ */
 
 export const TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';

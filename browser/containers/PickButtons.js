@@ -67,7 +67,6 @@ const mapDispatchToProps = dispatch => {
 			dispatch( toggleSelectAll(bool) );
 		}
 	};
-
 };
 
 export default connect(

@@ -2,7 +2,6 @@ import React from 'react';
 import JoinBoardForm from '../containers/JoinBoardForm';
 import CreateBoard from '../containers/CreateBoard';
 
-
 class HomeForm extends React.Component {
     constructor(props){
         super(props);

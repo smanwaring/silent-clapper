@@ -1,6 +1,5 @@
 import React from 'react';
 
-
 class PickButtons extends React.Component {
 	constructor(props){
 		super(props);

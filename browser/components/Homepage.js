@@ -2,7 +2,6 @@ import React from 'react';
 import HomeForm from '../containers/HomeForm';
 import addIcons from '../utils/icon-animations';
 
-
 class Homepage extends React.Component {
 	constructor(props){
 		super(props);

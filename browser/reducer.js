@@ -1,69 +1,10 @@
-import React from 'react';
-import {combineReducers} from 'redux';
-
-
+import { combineReducers } from 'redux';
 import { TOGGLE_PICK_BUTTON_ERROR, CLEAR_ALL_BUTTONS, CLEAR_ALL_SELECTED_BUTTONS  } from './actions/createboard-actions';
 import { SHOW_CREATE, SHOW_JOIN } from './actions/homeform-actions'; 
 import { BOARD_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
 import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
 import { LOAD_BUTTONS, SET_BOARDID } from './actions/board-actions';
-
-const buttonDataState = [
-            {
-                color: 'blue',
-                icon: 'fa fa-sign-language'
-            },
-            {
-                color: 'red',
-                icon: 'fa fa-frown-o'
-            },
-             {
-                color: 'gray',
-                icon: 'fa fa-empire'
-            },
-             {
-                color: 'dark-blue',
-                icon: 'fa fa-heart-o'
-            },
-             {
-                color: 'green',
-                icon: 'fa fa-money fa-spin'
-            },
-             {
-                color: 'pink',
-                icon: 'fa fa-smile-o'
-            },
-             {
-                color: 'yellow',
-                icon: 'fa fa-question'
-            },
-             {
-                color: 'mint-green',
-                icon: 'fa fa-thumbs-o-up'
-            },
-             {
-                color: 'orange',
-                icon: 'fa fa-rebel'
-            },
-              {
-                color: 'purple',
-                icon: 'fa fa-bomb fa-spin'
-            }
-];
-
-
-const initialButtonState = {
-	    clap: false,
-		frown: false,
-		empire: false,
-		heart: false,
-		money: false,
-		smile: false,
-		question: false,
-		thumb: false,
-		resistance: false,
-		bomb: false
-};
+import { buttonData, initialButtonState } from './initialstate';
 
 const boardReducer = (state = '', action) => {
 	switch (action.type){
@@ -142,7 +83,7 @@ const pickButtonErrorReducer = (state = false, action) => {
 	}
 };
 
-const buttonsAvailableReducer = (state = buttonDataState, action) => {
+const buttonsAvailableReducer = (state = buttonData, action) => {
 	switch (action.type){
 		default: return state;
 	}
@@ -175,7 +116,6 @@ const selectButtonReducer = (state = initialButtonState, action) => {
 		default: return state;
 	}
 };
-
 
 const rootReducer = combineReducers({
 	generatedBoard: boardReducer,

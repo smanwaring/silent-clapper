@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { hashHistory } from 'react-router';
 
@@ -19,7 +18,7 @@ class JoinBoardForm extends React.Component {
             hashHistory.push(`/${this.props.currentBoard}`);
         }
     }
-   
+
     confirmBoardExists(evt){
         evt.preventDefault();
         let boardId = evt.target.boardId.value.toString();

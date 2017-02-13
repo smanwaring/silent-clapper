@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PickButtons from '../containers/PickButtons';
 import { Link } from 'react-router';

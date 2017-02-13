@@ -1,4 +1,3 @@
-
 /* -----------------    ACTIONS     ------------------ */
 export const SHOW_CREATE = 'SHOW_CREATE';
 export const SHOW_JOIN = 'SHOW_JOIN';

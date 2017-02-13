@@ -28585,10 +28585,6 @@
 		value: true
 	});
 	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
 	var _redux = __webpack_require__(189);
 	
 	var _createboardActions = __webpack_require__(271);
@@ -28601,54 +28597,9 @@
 	
 	var _boardActions = __webpack_require__(300);
 	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	var _initialstate = __webpack_require__(323);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	var buttonDataState = [{
-		color: 'blue',
-		icon: 'fa fa-sign-language'
-	}, {
-		color: 'red',
-		icon: 'fa fa-frown-o'
-	}, {
-		color: 'gray',
-		icon: 'fa fa-empire'
-	}, {
-		color: 'dark-blue',
-		icon: 'fa fa-heart-o'
-	}, {
-		color: 'green',
-		icon: 'fa fa-money fa-spin'
-	}, {
-		color: 'pink',
-		icon: 'fa fa-smile-o'
-	}, {
-		color: 'yellow',
-		icon: 'fa fa-question'
-	}, {
-		color: 'mint-green',
-		icon: 'fa fa-thumbs-o-up'
-	}, {
-		color: 'orange',
-		icon: 'fa fa-rebel'
-	}, {
-		color: 'purple',
-		icon: 'fa fa-bomb fa-spin'
-	}];
-	
-	var initialButtonState = {
-		clap: false,
-		frown: false,
-		empire: false,
-		heart: false,
-		money: false,
-		smile: false,
-		question: false,
-		thumb: false,
-		resistance: false,
-		bomb: false
-	};
 	
 	var boardReducer = function boardReducer() {
 		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
@@ -28765,7 +28716,7 @@
 	};
 	
 	var buttonsAvailableReducer = function buttonsAvailableReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : buttonDataState;
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialstate.buttonData;
 		var action = arguments[1];
 	
 		switch (action.type) {
@@ -28775,7 +28726,7 @@
 	};
 	
 	var selectButtonReducer = function selectButtonReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialButtonState;
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialstate.initialButtonState;
 		var action = arguments[1];
 	
 		switch (action.type) {
@@ -28800,7 +28751,7 @@
 			case _pickbuttonActions.TOGGLE_RESISTANCE:
 				return Object.assign({}, state, { resistance: action.payload });
 			case _createboardActions.CLEAR_ALL_SELECTED_BUTTONS:
-				return initialButtonState;
+				return _initialstate.initialButtonState;
 			default:
 				return state;
 		}
@@ -30383,7 +30334,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	
 	/* -----------------    ACTIONS     ------------------ */
 	var SHOW_CREATE = exports.SHOW_CREATE = 'SHOW_CREATE';
 	var SHOW_JOIN = exports.SHOW_JOIN = 'SHOW_JOIN';
@@ -30462,8 +30412,6 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	
-	
 	/* -----------------    ACTIONS     ------------------ */
 	
 	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
@@ -30593,12 +30541,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/* -----------------    ACTIONS     ------------------ */
-	
 	var LOAD_BUTTONS = exports.LOAD_BUTTONS = 'LOAD_BUTTONS';
 	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
 	
 	/* -----------------    ACTION CREATORS     ------------------ */
-	
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
 		return {
 			type: SET_BOARDID,
@@ -32853,8 +32799,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var Root = function (_Component) {
-	    _inherits(Root, _Component);
+	var Root = function (_React$Component) {
+	    _inherits(Root, _React$Component);
 	
 	    function Root() {
 	        _classCallCheck(this, Root);
@@ -32874,7 +32820,7 @@
 	    }]);
 	
 	    return Root;
-	}(_react.Component);
+	}(_react2.default.Component);
 	
 	exports.default = Root;
 
@@ -32988,6 +32934,60 @@
 	
 	
 	module.exports = EmptyPage;
+
+/***/ },
+/* 323 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var buttonData = exports.buttonData = [{
+	    color: 'blue',
+	    icon: 'fa fa-sign-language'
+	}, {
+	    color: 'red',
+	    icon: 'fa fa-frown-o'
+	}, {
+	    color: 'gray',
+	    icon: 'fa fa-empire'
+	}, {
+	    color: 'dark-blue',
+	    icon: 'fa fa-heart-o'
+	}, {
+	    color: 'green',
+	    icon: 'fa fa-money fa-spin'
+	}, {
+	    color: 'pink',
+	    icon: 'fa fa-smile-o'
+	}, {
+	    color: 'yellow',
+	    icon: 'fa fa-question'
+	}, {
+	    color: 'mint-green',
+	    icon: 'fa fa-thumbs-o-up'
+	}, {
+	    color: 'orange',
+	    icon: 'fa fa-rebel'
+	}, {
+	    color: 'purple',
+	    icon: 'fa fa-bomb fa-spin'
+	}];
+	
+	var initialButtonState = exports.initialButtonState = {
+	    clap: false,
+	    frown: false,
+	    empire: false,
+	    heart: false,
+	    money: false,
+	    smile: false,
+	    question: false,
+	    thumb: false,
+	    resistance: false,
+	    bomb: false
+	};
 
 /***/ }
 /******/ ]);

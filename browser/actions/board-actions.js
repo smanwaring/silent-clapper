@@ -2,13 +2,11 @@ import axios from 'axios';
 import { hashHistory } from 'react-router';
 
 /* -----------------    ACTIONS     ------------------ */
-
 export const LOAD_BUTTONS = 'LOAD_BUTTONS';
 export const SET_BOARDID = 'SET_BOARDID';
 
 
 /* -----------------    ACTION CREATORS     ------------------ */
-
 export const stateBoardId = boardId => {
     return {
 		type: SET_BOARDID,

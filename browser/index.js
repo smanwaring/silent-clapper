@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { Router, Route, hashHistory, IndexRoute } from 'react-router';
 import store from './store';
 
-
 /*------ COMPONENTS/CONTAINERS ------ */
 import Homepage from './containers/Homepage';
 import Board from './containers/Board';
@@ -17,7 +16,6 @@ import EmptyPage from './components/EmptyPage';
 import { enterBoard, foundBoard } from './actions/board-actions';
 import { showBoardNotFound, stateCurrentBoard } from './actions/joinboardform-actions';
 import { showPickButtonError } from './actions/createboard-actions';
-
 
 /*------ load the buttons for the board you are about to enter ------ */
 function onEnterConfirmBoard(nextState) {

@@ -7,7 +7,7 @@ const mapStateToProps = ( {showCreateTab, showJoinTab} ) => {
 		showCreateTab,
 		showJoinTab
 	};
-}
+};
 
 const mapDispatchToProps = dispatch => {
 	return {
