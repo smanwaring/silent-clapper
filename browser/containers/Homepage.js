@@ -2,18 +2,13 @@ import { connect } from 'react-redux';
 import Homepage from '../components/Homepage';
 
 
-function mapStateToProps( {buttonsAvailable} ){
+const mapStateToProps = ( {buttonsAvailable} ) => {
 	return {
 		buttonsAvailable
 	};
-}
+};
 
-function mapDispatchToProps(dispatch){
-	return {
-
-	};
-
-}
+const mapDispatchToProps = null;
 
 export default connect(
 	mapStateToProps,

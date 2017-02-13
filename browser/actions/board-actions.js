@@ -9,14 +9,14 @@ export const SET_BOARDID = 'SET_BOARDID';
 
 /* -----------------    ACTION CREATORS     ------------------ */
 
-export const stateBoardId = (boardId) => {
+export const stateBoardId = boardId => {
     return {
 		type: SET_BOARDID,
 		payload: boardId
 	};
 };
 
-export const foundBoard = (buttons) => {
+export const foundBoard = buttons => {
 	return {
 		type: LOAD_BUTTONS,
 		payload: buttons
@@ -26,8 +26,8 @@ export const foundBoard = (buttons) => {
 
 
 /* ------------       REDUCER     ------------------ */
-export const enterBoard = (boardId) => {
-	return (dispatch) => {
+export const enterBoard = boardId => {
+	return dispatch => {
 		axios.get(`/api/enter/${boardId}`)
 			.then(res => res.data)
 			.then(errorOrButtons => {

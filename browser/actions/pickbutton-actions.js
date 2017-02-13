@@ -19,28 +19,28 @@ export const TOGGLE_BOMB = 'TOGGLE_BOMB';
 
 /* ------------   ACTION CREATORS     ------------------ */
 
-export const pickedButton = (data) => {
+export const pickedButton = data => {
 	return {
 		type: PICKED_BUTTON,
 		payload: data
 	};
 };
 
-export const removedButton = (buttonData) => {
+export const removedButton = buttonData => {
 	return {
 		type: REMOVED_BUTTON,
 		payload: buttonData
 	};
 };
 
-export const toggleClap = (bool) => {
+export const toggleClap = bool => {
 	return {
 		type: TOGGLE_CLAP,
 		payload: bool
 	};
 };
 
-export const toggleFrown = (bool) => {
+export const toggleFrown = bool => {
 	return {
 		type: TOGGLE_FROWN,
 		payload: bool
@@ -48,7 +48,7 @@ export const toggleFrown = (bool) => {
 };
 
 
-export const toggleEmpire = (bool) => {
+export const toggleEmpire = bool => {
 	return {
 		type: TOGGLE_EMPIRE,
 		payload: bool
@@ -56,49 +56,49 @@ export const toggleEmpire = (bool) => {
 };
 
 
-export const toggleHeart = (bool) => {
+export const toggleHeart = bool => {
 	return {
 		type: TOGGLE_HEART,
 		payload: bool
 	};
 };
 
-export const toggleMoney = (bool) => {
+export const toggleMoney = bool => {
 	return {
 		type: TOGGLE_MONEY,
 		payload: bool
 	};
 };
 
-export const toggleSmile = (bool) => {
+export const toggleSmile = bool => {
 	return {
 		type: TOGGLE_SMILE,
 		payload: bool
 	};
 };
 
-export const toggleQuestion = (bool) => {
+export const toggleQuestion = bool => {
 	return {
 		type: TOGGLE_QUESTION,
 		payload: bool
 	};
 };
 
-export const toggleThumb = (bool) => {
+export const toggleThumb = bool => {
 	return {
 		type: TOGGLE_THUMB,
 		payload: bool
 	};
 };
 
-export const toggleResistance = (bool) => {
+export const toggleResistance = bool => {
 	return {
 		type: TOGGLE_RESISTANCE,
 		payload: bool
 	};
 };
 
-export const toggleBomb = (bool) => {
+export const toggleBomb = bool => {
 	return {
 		type: TOGGLE_BOMB,
 		payload: bool
@@ -106,7 +106,7 @@ export const toggleBomb = (bool) => {
 };
 
 
-export const toggleSelectAll = (bool) => {
+export const toggleSelectAll = bool => {
 	return {
 		type: TOGGLE_SELECT_ALL,
 		payload: bool

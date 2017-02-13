@@ -7,14 +7,14 @@ export const CLEAR_ALL_BUTTONS = 'CLEAR_ALL_BUTTONS';
 export const CLEAR_ALL_SELECTED_BUTTONS = 'CLEAR_ALL_SELECTED_BUTTONS';
 
 /* ------------   ACTION CREATORS     ------------------ */
-export const showPickButtonError = (bool) => {
+export const showPickButtonError = bool => {
 	return {
 		type: TOGGLE_PICK_BUTTON_ERROR,
 		payload: bool
 	};
 };
 
-export const stateBoardId = (boardId) => {
+export const stateBoardId = boardId => {
 	return {
 		type: SET_BOARDID,
 		payload: boardId
@@ -34,8 +34,8 @@ export const clearAllSelectedButtons = () => {
 };
 
 /* ------------       ASYNC ACTION CREATORS     ------------------ */
-export const addBoard = (details) => {
-    return (dispatch) => {
+export const addBoard = details => {
+    return dispatch => {
         axios.post(`/api/`, details)
 			.then(res => res.data)
 			.then(createdBoard => dispatch( stateBoardId(createdBoard.path) ) )

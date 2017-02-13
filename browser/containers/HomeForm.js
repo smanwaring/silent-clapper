@@ -2,24 +2,24 @@ import { connect } from 'react-redux';
 import HomeForm from '../components/HomeForm';
 import {  showCreate, showJoin } from '../actions/homeform-actions';
 
-function mapStateToProps( {showCreateTab, showJoinTab} ){
+const mapStateToProps = ( {showCreateTab, showJoinTab} ) => {
 	return {
 		showCreateTab,
 		showJoinTab
 	};
 }
 
-function mapDispatchToProps(dispatch){
+const mapDispatchToProps = dispatch => {
 	return {
-		changeShowCreateTab: (bool) => {
+		changeShowCreateTab: bool => {
 			dispatch( showCreate(bool) );
 		},
-		changeShowJoinTab: (bool) => {
+		changeShowJoinTab: bool => {
 			dispatch( showJoin(bool) );
 		}
 	};
 
-}
+};
 
 export default connect(
 	mapStateToProps,

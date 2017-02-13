@@ -118,7 +118,7 @@ const showCreateTabReducer = (state = false, action) => {
 	}
 };
 
-const showJoinBoardTabReducer= (state = true, action) => {
+const showJoinBoardTabReducer = (state = true, action) => {
 	switch (action.type){
 		case SHOW_JOIN:
 			return action.payload;

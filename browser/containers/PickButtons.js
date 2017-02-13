@@ -3,54 +3,54 @@ import PickButtons from '../components/PickButtons';
 import { pickedButton, removedButton, toggleClap,
 toggleBomb, toggleThumb, toggleSmile, toggleResistance, toggleHeart, toggleMoney, toggleQuestion, toggleFrown, toggleEmpire, toggleSelectAll} from '../actions/pickbutton-actions';
 
-function mapStateToProps( {buttonsPicked, allButtonsSelected, buttonSelected, buttonsAvailable} ){
+const  mapStateToProps = ( {buttonsPicked, allButtonsSelected, buttonSelected, buttonsAvailable} ) => {
 	return {
 		buttonsPicked,
 		buttonSelected,
 		allButtonsSelected,
 		buttonsAvailable,
 	};
-}
+};
 
-function mapDispatchToProps(dispatch){
+const mapDispatchToProps = dispatch => {
 	return {
-		addButton: (icon) => {
+		addButton: icon => {
 			dispatch( pickedButton(icon) );
 		},
-		removeButton: (icon) => {
+		removeButton: icon => {
 			dispatch( removedButton(icon) );
 		},
-		clapClicked: (bool) => {
+		clapClicked: bool => {
 			dispatch( toggleClap(bool) );
 		},
-		frownClicked: (bool) => {
+		frownClicked: bool => {
 			dispatch( toggleFrown(bool) );
 		},
-		empireClicked: (bool) => {
+		empireClicked: bool => {
 			dispatch( toggleEmpire(bool) );
 		},
-		heartClicked: (bool) => {
+		heartClicked: bool => {
 			dispatch( toggleHeart(bool) );
 		},
-		smileClicked: (bool) => {
+		smileClicked: bool => {
 			dispatch( toggleSmile(bool) );
 		},
-		bombClicked: (bool) => {
+		bombClicked: bool => {
 			dispatch( toggleBomb(bool) );
 		},
-		thumbClicked: (bool) => {
+		thumbClicked: bool => {
 			dispatch( toggleThumb(bool) );
 		},
-		resistanceClicked: (bool) => {
+		resistanceClicked: bool => {
 			dispatch( toggleResistance(bool) );
 		},
-		moneyClicked: (bool) => {
+		moneyClicked: bool => {
 			dispatch( toggleMoney(bool) );
 		},
-		questionClicked: (bool) => {
+		questionClicked: bool => {
 			dispatch( toggleQuestion(bool) );
 		},
-		selectAll: (bool) => {
+		selectAll: bool => {
 			dispatch( toggleClap(bool) );
 			dispatch( toggleFrown(bool) );
 			dispatch( toggleEmpire(bool) );
@@ -63,12 +63,12 @@ function mapDispatchToProps(dispatch){
 			dispatch( toggleQuestion(bool) );
 			dispatch( toggleSelectAll(bool) );
 		},
-		toggleSelect: (bool) => {
+		toggleSelect: bool => {
 			dispatch( toggleSelectAll(bool) );
 		}
 	};
 
-}
+};
 
 export default connect(
 	mapStateToProps,

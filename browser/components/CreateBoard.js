@@ -1,9 +1,9 @@
 
-import React, { Component } from 'react';
+import React from 'react';
 import PickButtons from '../containers/PickButtons';
 import { Link } from 'react-router';
 
-class CreateBoard extends Component {
+class CreateBoard extends React.Component {
     constructor(props){
         super(props);
         this.generateBoardId = this.generateBoardId.bind(this);

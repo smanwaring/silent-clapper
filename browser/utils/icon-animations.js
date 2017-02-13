@@ -26,7 +26,6 @@ export default function addIcons(icon) {
 
     //setting size of the icon element between a certain range
     iconElement.style.fontSize = Math.floor(Math.random() * (50 - 22) + 80) + 'px';
-    
     //set the icon to the passed in icon
     iconElement.setAttribute('class', `${icon}`);
 
@@ -45,5 +44,5 @@ export default function addIcons(icon) {
     //when animation is over, remove animationDiv from the DOM
     setTimeout(function() {
         randomColumn.removeChild(animationDiv);
-    }, speed * 900)
+    }, speed * 900);
 }

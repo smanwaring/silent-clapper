@@ -31531,17 +31531,15 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(_ref) {
+	var mapStateToProps = function mapStateToProps(_ref) {
 		var buttonsAvailable = _ref.buttonsAvailable;
 	
 		return {
 			buttonsAvailable: buttonsAvailable
 		};
-	}
+	};
 	
-	function mapDispatchToProps(dispatch) {
-		return {};
-	}
+	var mapDispatchToProps = null;
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Homepage2.default);
 
@@ -31679,7 +31677,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(_ref) {
+	var mapStateToProps = function mapStateToProps(_ref) {
 		var showCreateTab = _ref.showCreateTab,
 		    showJoinTab = _ref.showJoinTab;
 	
@@ -31687,9 +31685,9 @@
 			showCreateTab: showCreateTab,
 			showJoinTab: showJoinTab
 		};
-	}
+	};
 	
-	function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
 			changeShowCreateTab: function changeShowCreateTab(bool) {
 				dispatch((0, _homeformActions.showCreate)(bool));
@@ -31698,7 +31696,7 @@
 				dispatch((0, _homeformActions.showJoin)(bool));
 			}
 		};
-	}
+	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_HomeForm2.default);
 
@@ -31855,7 +31853,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(_ref) {
+	var mapStateToProps = function mapStateToProps(_ref) {
 		var showJoinTab = _ref.showJoinTab,
 		    boardNotFound = _ref.boardNotFound,
 		    currentBoard = _ref.currentBoard;
@@ -31865,9 +31863,9 @@
 			boardNotFound: boardNotFound,
 			currentBoard: currentBoard
 		};
-	}
+	};
 	
-	function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
 			confirmBoard: function confirmBoard(boardId) {
 				dispatch((0, _joinboardformActions.loadBoard)(boardId));
@@ -31876,7 +31874,7 @@
 				dispatch((0, _joinboardformActions.showBoardNotFound)(bool));
 			}
 		};
-	}
+	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_JoinBoardForm2.default);
 
@@ -31906,8 +31904,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var JoinBoardForm = function (_Component) {
-	    _inherits(JoinBoardForm, _Component);
+	var JoinBoardForm = function (_React$Component) {
+	    _inherits(JoinBoardForm, _React$Component);
 	
 	    function JoinBoardForm(props) {
 	        _classCallCheck(this, JoinBoardForm);
@@ -31988,7 +31986,7 @@
 	    }]);
 	
 	    return JoinBoardForm;
-	}(_react.Component);
+	}(_react2.default.Component);
 	
 	exports.default = JoinBoardForm;
 
@@ -32026,7 +32024,7 @@
 		};
 	}
 	
-	function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
 			addBoard: function addBoard(details) {
 				dispatch((0, _createboardActions.addBoard)(details));
@@ -32040,7 +32038,7 @@
 				dispatch((0, _createboardActions.clearAllSelectedButtons)());
 			}
 		};
-	}
+	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CreateBoard2.default);
 
@@ -32074,8 +32072,8 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	var CreateBoard = function (_Component) {
-	    _inherits(CreateBoard, _Component);
+	var CreateBoard = function (_React$Component) {
+	    _inherits(CreateBoard, _React$Component);
 	
 	    function CreateBoard(props) {
 	        _classCallCheck(this, CreateBoard);
@@ -32189,7 +32187,7 @@
 	    }]);
 	
 	    return CreateBoard;
-	}(_react.Component);
+	}(_react2.default.Component);
 	
 	exports.default = CreateBoard;
 
@@ -32213,7 +32211,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(_ref) {
+	var mapStateToProps = function mapStateToProps(_ref) {
 		var buttonsPicked = _ref.buttonsPicked,
 		    allButtonsSelected = _ref.allButtonsSelected,
 		    buttonSelected = _ref.buttonSelected,
@@ -32225,9 +32223,9 @@
 			allButtonsSelected: allButtonsSelected,
 			buttonsAvailable: buttonsAvailable
 		};
-	}
+	};
 	
-	function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
 			addButton: function addButton(icon) {
 				dispatch((0, _pickbuttonActions.pickedButton)(icon));
@@ -32282,7 +32280,7 @@
 				dispatch((0, _pickbuttonActions.toggleSelectAll)(bool));
 			}
 		};
-	}
+	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PickButtons2.default);
 
@@ -32631,7 +32629,6 @@
 	
 	    //setting size of the icon element between a certain range
 	    iconElement.style.fontSize = Math.floor(Math.random() * (50 - 22) + 80) + 'px';
-	
 	    //set the icon to the passed in icon
 	    iconElement.setAttribute('class', "" + icon);
 	

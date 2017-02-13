@@ -11,15 +11,15 @@ function mapStateToProps( {buttonsPicked, generatedBoard, showCreateTab, showPic
 	};
 }
 
-function mapDispatchToProps(dispatch){
+const mapDispatchToProps = dispatch => {
 	return {
-		addBoard: (details) => {
+		addBoard: details => {
 			dispatch( addBoard(details) );
 		},
-		pickButtonsError: (bool) => {
+		pickButtonsError: bool => {
 			dispatch( pickButtonError(bool) );
 		},
-		clearGeneratedboard: (details) => {
+		clearGeneratedboard: details => {
 			dispatch( stateBoardId(details) );
 			dispatch( clearAllButtons() );
 			dispatch( clearAllSelectedButtons() );
