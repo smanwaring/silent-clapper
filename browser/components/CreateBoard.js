@@ -23,13 +23,13 @@ class CreateBoard extends Component {
 
     generateBoardId(evt){
         evt.preventDefault();
-        if (this.props.buttons.length < 1){
+        if (this.props.buttonsPicked.length < 1){
             this.props.pickButtonsError(true);
         } else {
             let boardId = Math.floor(Math.random()*89999+10000);
             let details = {
                 path: boardId,
-                buttons: this.props.buttons
+                buttons: this.props.buttonsPicked
             };
             this.props.addBoard(details);
         }
@@ -41,9 +41,9 @@ class CreateBoard extends Component {
     }
 
     render() {
-        const { generatedBoard, showPickButtonError, buttons, showCreate } = this.props;
+        const { generatedBoard, showPickButtonError, buttonsPicked, showCreateTab } = this.props;
         return (
-            <form role="form" style={{display: showCreate ? 'block' : 'none' }}>
+            <form role="form" style={{display: showCreateTab ? 'block' : 'none' }}>
                 {this.props && generatedBoard ?
                     <div>
                         <h4>{`Here is your board #: ${generatedBoard}`}</h4>
@@ -57,7 +57,7 @@ class CreateBoard extends Component {
                     <div className="form-group">
                         <PickButtons />
                         <div className="row">
-                        {showPickButtonError && buttons.length < 1 ? <div>Please select some buttons!</div> : ''}
+                        {showPickButtonError && buttonsPicked.length < 1 ? <div>Please select some buttons!</div> : ''}
                             <div className="col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2">
                                 <button tabIndex="4" className="form-control btn btn-create generate" onClick={this.generateBoardId}> Generate My Board Link </button>
                             </div>

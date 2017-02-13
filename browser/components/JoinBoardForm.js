@@ -15,8 +15,8 @@ class JoinBoardForm extends Component {
           self.props.clearBoardNotFound(false);
            }, 2000);
         }
-        if (this.props.foundBoard) {
-            hashHistory.push(`/${this.props.foundBoard}`);
+        if (this.props.currentBoard) {
+            hashHistory.push(`/${this.props.currentBoard}`);
         }
     }
    
@@ -27,10 +27,10 @@ class JoinBoardForm extends Component {
     }
 
     render() {
-        const { showJoin, boardNotFound } = this.props;
+        const { showJoinTab, boardNotFound } = this.props;
         return (
             <div>
-                <form onSubmit={(evt) => this.confirmBoardExists(evt)} role="form" style={{display: showJoin ? 'block' : 'none' }}>
+                <form onSubmit={(evt) => this.confirmBoardExists(evt)} role="form" style={{display: showJoinTab ? 'block' : 'none' }}>
                     <div className="form-group">
                         <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
                     </div>

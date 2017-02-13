@@ -6,7 +6,7 @@ export const SET_CURRENT_BOARD = 'SET_CURRENT_BOARD';
 
 
 /* ------------   ACTION CREATORS     ------------------ */
-export const boardNotFound = (bool) => {
+export const showBoardNotFound = (bool) => {
 	return {
 		type: BOARD_NOT_FOUND,
 		payload: bool
@@ -29,7 +29,7 @@ export const loadBoard = (boardId) => {
 		axios.get(`/api/${boardId}`)
 			.then( res => res.data )
 			.then( board => {
-				board.message ? dispatch(boardNotFound(true)) : dispatch(stateCurrentBoard(board));
+				board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board));
 			})
 			.catch(err => console.log(err));
 	};

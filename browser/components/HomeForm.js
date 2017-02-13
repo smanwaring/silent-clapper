@@ -11,18 +11,18 @@ class HomeForm extends React.Component {
     }
 
     handleCreateBoardClick( ) {
-        this.props.showCreateTab(true);
-        this.props.showJoinTab(false);
+        this.props.changeShowCreateTab(true);
+        this.props.changeShowJoinTab(false);
     }
 
     handleJoinBoardClick() {
-        this.props.showJoinTab(true);
-        this.props.showCreateTab(false);
+        this.props.changeShowJoinTab(true);
+        this.props.changeShowCreateTab(false);
     }
 
 
   render () {
-      const { showJoin, showCreate } = this.props;
+      const { showJoinTab, showCreateTab } = this.props;
 
     return (
         <div className="container">
@@ -32,10 +32,10 @@ class HomeForm extends React.Component {
                         <div className="panel-heading"> {/* panel heading start*/}
                             <div className="row"> {/* panel headings text start */}
                                 <div className="col-xs-6">
-                                    <a href="#" onClick={this.handleJoinBoardClick} className={showJoin ? 'active' : ''}>Join a Board</a>
+                                    <a href="#" onClick={this.handleJoinBoardClick} className={showJoinTab ? 'active' : ''}>Join a Board</a>
                                 </div>
                                 <div className="col-xs-6">
-                                    <a href="#" onClick={this.handleCreateBoardClick} className={showCreate ? 'active' : ''}>Create a Board</a>
+                                    <a href="#" onClick={this.handleCreateBoardClick} className={showCreateTab ? 'active' : ''}>Create a Board</a>
                                 </div>
                             </div>{/* panel headings text end */}
                             <hr />

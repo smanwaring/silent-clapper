@@ -8,7 +8,7 @@ const Board = db.define('board', {
     },
 });
 
-const Button = db.define("button", {
+const Button = db.define('button', {
     icon: {
         type: Sequelize.STRING,
         allowNull: false

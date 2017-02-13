@@ -1,22 +1,22 @@
 import { connect } from 'react-redux';
 import JoinBoardForm from '../components/JoinBoardForm';
-import { loadBoard, boardNotFound } from '../actions/joinboardform-actions';
+import { loadBoard, showBoardNotFound } from '../actions/joinboardform-actions';
 
-function mapStateToProps(state){
+function mapStateToProps( {showJoinTab, boardNotFound, currentBoard} ){
 	return {
-		showJoin: state.showJoinTab,
-        boardNotFound: state.boardNotFound,
-        foundBoard: state.currentBoard
+		showJoinTab,
+		boardNotFound,
+		currentBoard
 	};
 }
 
 function mapDispatchToProps(dispatch){
 	return {
-        confirmBoard: function(boardId) {
+        confirmBoard: (boardId) => {
             dispatch( loadBoard(boardId) );
         },
-		clearBoardNotFound: function(bool){
-			dispatch(  boardNotFound(bool) );
+		clearBoardNotFound: (bool) => {
+			dispatch(  showBoardNotFound(bool) );
 		}
 	};
 

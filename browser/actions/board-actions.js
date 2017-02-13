@@ -7,7 +7,7 @@ export const LOAD_BUTTONS = 'LOAD_BUTTONS';
 export const SET_BOARDID = 'SET_BOARDID';
 
 
-/* -----------------    ACTIONS     ------------------ */
+/* -----------------    ACTION CREATORS     ------------------ */
 
 export const stateBoardId = (boardId) => {
 	return {

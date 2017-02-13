@@ -3,54 +3,54 @@ import PickButtons from '../components/PickButtons';
 import { pickedButton, removedButton, toggleClap,
 toggleBomb, toggleThumb, toggleSmile, toggleResistance, toggleHeart, toggleMoney, toggleQuestion, toggleFrown, toggleEmpire, toggleSelectAll} from '../actions/pickbutton-actions';
 
-function mapStateToProps(state){
+function mapStateToProps( {buttonsPicked, allButtonsSelected, buttonSelected, buttonsAvailable} ){
 	return {
-		picked: state.buttonsPicked,
-		buttonClass: state.buttonSelected,
-		allSelected: state.allButtonSelect,
-		buttonsAvailable: state.buttonsAvailable
+		buttonsPicked,
+		buttonSelected,
+		allButtonsSelected,
+		buttonsAvailable,
 	};
 }
 
 function mapDispatchToProps(dispatch){
 	return {
-		addButton: function(icon) {
+		addButton: (icon) => {
 			dispatch( pickedButton(icon) );
 		},
-		removeButton: function (icon) {
+		removeButton: (icon) => {
 			dispatch( removedButton(icon) );
 		},
-		clapClicked: function (bool) {
+		clapClicked: (bool) => {
 			dispatch( toggleClap(bool) );
 		},
-		frownClicked: function (bool) {
+		frownClicked: (bool) => {
 			dispatch( toggleFrown(bool) );
 		},
-		empireClicked: function (bool) {
+		empireClicked: (bool) => {
 			dispatch( toggleEmpire(bool) );
 		},
-		heartClicked: function (bool) {
+		heartClicked: (bool) => {
 			dispatch( toggleHeart(bool) );
 		},
-		smileClicked: function (bool) {
+		smileClicked: (bool) => {
 			dispatch( toggleSmile(bool) );
 		},
-		bombClicked: function (bool) {
+		bombClicked: (bool) => {
 			dispatch( toggleBomb(bool) );
 		},
-		thumbClicked: function (bool) {
+		thumbClicked: (bool) => {
 			dispatch( toggleThumb(bool) );
 		},
-		resistanceClicked: function (bool) {
+		resistanceClicked: (bool) => {
 			dispatch( toggleResistance(bool) );
 		},
-		moneyClicked: function (bool) {
+		moneyClicked: (bool) => {
 			dispatch( toggleMoney(bool) );
 		},
-		questionClicked: function (bool) {
+		questionClicked: (bool) => {
 			dispatch( toggleQuestion(bool) );
 		},
-		selectAll: function(bool) {
+		selectAll: (bool) => {
 			dispatch( toggleClap(bool) );
 			dispatch( toggleFrown(bool) );
 			dispatch( toggleEmpire(bool) );
@@ -63,7 +63,7 @@ function mapDispatchToProps(dispatch){
 			dispatch( toggleQuestion(bool) );
 			dispatch( toggleSelectAll(bool) );
 		},
-		toggleSelect: function(bool){
+		toggleSelect: (bool) => {
 			dispatch( toggleSelectAll(bool) );
 		}
 	};

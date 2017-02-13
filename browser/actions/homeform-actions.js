@@ -1,7 +1,7 @@
 
 /* -----------------    ACTIONS     ------------------ */
-export const SHOW_CREATE = "SHOW_CREATE";
-export const SHOW_JOIN = "SHOW_JOIN";
+export const SHOW_CREATE = 'SHOW_CREATE';
+export const SHOW_JOIN = 'SHOW_JOIN';
 
 /* ------------   ACTION CREATORS     ------------------ */
 export const showCreate = (bool) => {

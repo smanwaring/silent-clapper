@@ -90,7 +90,7 @@
 	function onEnterConfirmBoard(nextState) {
 		_store2.default.dispatch((0, _boardActions.enterBoard)(nextState.params.boardId));
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(nextState.params.boardId));
-		_store2.default.dispatch((0, _joinboardformActions.boardNotFound)(false));
+		_store2.default.dispatch((0, _joinboardformActions.showBoardNotFound)(false));
 	}
 	
 	/*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
@@ -28815,7 +28815,7 @@
 		buttonSelected: selectButtonReducer,
 		showCreateTab: showCreateTabReducer,
 		showJoinTab: showJoinBoardTabReducer,
-		allButtonSelect: toggleSelectAllReducer,
+		allButtonSelected: toggleSelectAllReducer,
 		showPickButtonError: pickButtonErrorReducer,
 		buttonsAvailable: buttonsAvailableReducer
 	});
@@ -28872,7 +28872,7 @@
 		};
 	};
 	
-	/* ------------       DISPATCHERS     ------------------ */
+	/* ------------       ASYNC ACTION CREATORS     ------------------ */
 	var addBoard = exports.addBoard = function addBoard(details) {
 		var thunk = function thunk(dispatch) {
 			_axios2.default.post("/api/", details).then(function (res) {
@@ -30379,15 +30379,15 @@
 /* 297 */
 /***/ function(module, exports) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
 	
 	/* -----------------    ACTIONS     ------------------ */
-	var SHOW_CREATE = exports.SHOW_CREATE = "SHOW_CREATE";
-	var SHOW_JOIN = exports.SHOW_JOIN = "SHOW_JOIN";
+	var SHOW_CREATE = exports.SHOW_CREATE = 'SHOW_CREATE';
+	var SHOW_JOIN = exports.SHOW_JOIN = 'SHOW_JOIN';
 	
 	/* ------------   ACTION CREATORS     ------------------ */
 	var showCreate = exports.showCreate = function showCreate(bool) {
@@ -30413,7 +30413,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.loadBoard = exports.stateCurrentBoard = exports.boardNotFound = exports.SET_CURRENT_BOARD = exports.BOARD_NOT_FOUND = undefined;
+	exports.loadBoard = exports.stateCurrentBoard = exports.showBoardNotFound = exports.SET_CURRENT_BOARD = exports.BOARD_NOT_FOUND = undefined;
 	
 	var _axios = __webpack_require__(272);
 	
@@ -30426,7 +30426,7 @@
 	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = 'SET_CURRENT_BOARD';
 	
 	/* ------------   ACTION CREATORS     ------------------ */
-	var boardNotFound = exports.boardNotFound = function boardNotFound(bool) {
+	var showBoardNotFound = exports.showBoardNotFound = function showBoardNotFound(bool) {
 		return {
 			type: BOARD_NOT_FOUND,
 			payload: bool
@@ -30447,7 +30447,7 @@
 			_axios2.default.get('/api/' + boardId).then(function (res) {
 				return res.data;
 			}).then(function (board) {
-				board.message ? dispatch(boardNotFound(true)) : dispatch(stateCurrentBoard(board));
+				board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board));
 			}).catch(function (err) {
 				return console.log(err);
 			});
@@ -30599,7 +30599,7 @@
 	var LOAD_BUTTONS = exports.LOAD_BUTTONS = 'LOAD_BUTTONS';
 	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
 	
-	/* -----------------    ACTIONS     ------------------ */
+	/* -----------------    ACTION CREATORS     ------------------ */
 	
 	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
 		return {
@@ -31534,9 +31534,11 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(state) {
+	function mapStateToProps(_ref) {
+		var buttonsAvailable = _ref.buttonsAvailable;
+	
 		return {
-			buttonsAvailable: state.buttonsAvailable
+			buttonsAvailable: buttonsAvailable
 		};
 	}
 	
@@ -31680,19 +31682,22 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(state) {
+	function mapStateToProps(_ref) {
+		var showCreateTab = _ref.showCreateTab,
+		    showJoinTab = _ref.showJoinTab;
+	
 		return {
-			showCreate: state.showCreateTab,
-			showJoin: state.showJoinTab
+			showCreateTab: showCreateTab,
+			showJoinTab: showJoinTab
 		};
 	}
 	
 	function mapDispatchToProps(dispatch) {
 		return {
-			showCreateTab: function showCreateTab(bool) {
+			changeShowCreateTab: function changeShowCreateTab(bool) {
 				dispatch((0, _homeformActions.showCreate)(bool));
 			},
-			showJoinTab: function showJoinTab(bool) {
+			changeShowJoinTab: function changeShowJoinTab(bool) {
 				dispatch((0, _homeformActions.showJoin)(bool));
 			}
 		};
@@ -31748,21 +31753,21 @@
 	    _createClass(HomeForm, [{
 	        key: 'handleCreateBoardClick',
 	        value: function handleCreateBoardClick() {
-	            this.props.showCreateTab(true);
-	            this.props.showJoinTab(false);
+	            this.props.changeShowCreateTab(true);
+	            this.props.changeShowJoinTab(false);
 	        }
 	    }, {
 	        key: 'handleJoinBoardClick',
 	        value: function handleJoinBoardClick() {
-	            this.props.showJoinTab(true);
-	            this.props.showCreateTab(false);
+	            this.props.changeShowJoinTab(true);
+	            this.props.changeShowCreateTab(false);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _props = this.props,
-	                showJoin = _props.showJoin,
-	                showCreate = _props.showCreate;
+	                showJoinTab = _props.showJoinTab,
+	                showCreateTab = _props.showCreateTab;
 	
 	
 	            return _react2.default.createElement(
@@ -31790,7 +31795,7 @@
 	                                        { className: 'col-xs-6' },
 	                                        _react2.default.createElement(
 	                                            'a',
-	                                            { href: '#', onClick: this.handleJoinBoardClick, className: showJoin ? 'active' : '' },
+	                                            { href: '#', onClick: this.handleJoinBoardClick, className: showJoinTab ? 'active' : '' },
 	                                            'Join a Board'
 	                                        )
 	                                    ),
@@ -31799,7 +31804,7 @@
 	                                        { className: 'col-xs-6' },
 	                                        _react2.default.createElement(
 	                                            'a',
-	                                            { href: '#', onClick: this.handleCreateBoardClick, className: showCreate ? 'active' : '' },
+	                                            { href: '#', onClick: this.handleCreateBoardClick, className: showCreateTab ? 'active' : '' },
 	                                            'Create a Board'
 	                                        )
 	                                    )
@@ -31853,11 +31858,15 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(state) {
+	function mapStateToProps(_ref) {
+		var showJoinTab = _ref.showJoinTab,
+		    boardNotFound = _ref.boardNotFound,
+		    currentBoard = _ref.currentBoard;
+	
 		return {
-			showJoin: state.showJoinTab,
-			boardNotFound: state.boardNotFound,
-			foundBoard: state.currentBoard
+			showJoinTab: showJoinTab,
+			boardNotFound: boardNotFound,
+			currentBoard: currentBoard
 		};
 	}
 	
@@ -31867,7 +31876,7 @@
 				dispatch((0, _joinboardformActions.loadBoard)(boardId));
 			},
 			clearBoardNotFound: function clearBoardNotFound(bool) {
-				dispatch((0, _joinboardformActions.boardNotFound)(bool));
+				dispatch((0, _joinboardformActions.showBoardNotFound)(bool));
 			}
 		};
 	}
@@ -31921,8 +31930,8 @@
 	                    self.props.clearBoardNotFound(false);
 	                }, 2000);
 	            }
-	            if (this.props.foundBoard) {
-	                _reactRouter.hashHistory.push('/' + this.props.foundBoard);
+	            if (this.props.currentBoard) {
+	                _reactRouter.hashHistory.push('/' + this.props.currentBoard);
 	            }
 	        }
 	    }, {
@@ -31938,7 +31947,7 @@
 	            var _this2 = this;
 	
 	            var _props = this.props,
-	                showJoin = _props.showJoin,
+	                showJoinTab = _props.showJoinTab,
 	                boardNotFound = _props.boardNotFound;
 	
 	            return _react2.default.createElement(
@@ -31948,7 +31957,7 @@
 	                    'form',
 	                    { onSubmit: function onSubmit(evt) {
 	                            return _this2.confirmBoardExists(evt);
-	                        }, role: 'form', style: { display: showJoin ? 'block' : 'none' } },
+	                        }, role: 'form', style: { display: showJoinTab ? 'block' : 'none' } },
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'form-group' },
@@ -32006,12 +32015,17 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(state) {
+	function mapStateToProps(_ref) {
+		var buttonsPicked = _ref.buttonsPicked,
+		    generatedBoard = _ref.generatedBoard,
+		    showCreateTab = _ref.showCreateTab,
+		    showPickButtonError = _ref.showPickButtonError;
+	
 		return {
-			buttons: state.buttonsPicked,
-			generatedBoard: state.generatedBoard,
-			showCreate: state.showCreateTab,
-			showPickButtonError: state.showPickButtonError
+			buttonsPicked: buttonsPicked,
+			generatedBoard: generatedBoard,
+			showCreateTab: showCreateTab,
+			showPickButtonError: showPickButtonError
 		};
 	}
 	
@@ -32021,7 +32035,7 @@
 				dispatch((0, _createboardActions.addBoard)(details));
 			},
 			pickButtonsError: function pickButtonsError(bool) {
-				dispatch((0, _createboardActions.showPickButtonError)(bool));
+				dispatch((0, _createboardActions.pickButtonError)(bool));
 			},
 			clearGeneratedboard: function clearGeneratedboard(details) {
 				dispatch((0, _createboardActions.stateBoardId)(details));
@@ -32090,13 +32104,13 @@
 	        key: 'generateBoardId',
 	        value: function generateBoardId(evt) {
 	            evt.preventDefault();
-	            if (this.props.buttons.length < 1) {
+	            if (this.props.buttonsPicked.length < 1) {
 	                this.props.pickButtonsError(true);
 	            } else {
 	                var boardId = Math.floor(Math.random() * 89999 + 10000);
 	                var details = {
 	                    path: boardId,
-	                    buttons: this.props.buttons
+	                    buttons: this.props.buttonsPicked
 	                };
 	                this.props.addBoard(details);
 	            }
@@ -32113,12 +32127,12 @@
 	            var _props = this.props,
 	                generatedBoard = _props.generatedBoard,
 	                showPickButtonError = _props.showPickButtonError,
-	                buttons = _props.buttons,
-	                showCreate = _props.showCreate;
+	                buttonsPicked = _props.buttonsPicked,
+	                showCreateTab = _props.showCreateTab;
 	
 	            return _react2.default.createElement(
 	                'form',
-	                { role: 'form', style: { display: showCreate ? 'block' : 'none' } },
+	                { role: 'form', style: { display: showCreateTab ? 'block' : 'none' } },
 	                this.props && generatedBoard ? _react2.default.createElement(
 	                    'div',
 	                    null,
@@ -32157,7 +32171,7 @@
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'row' },
-	                        showPickButtonError && buttons.length < 1 ? _react2.default.createElement(
+	                        showPickButtonError && buttonsPicked.length < 1 ? _react2.default.createElement(
 	                            'div',
 	                            null,
 	                            'Please select some buttons!'
@@ -32202,12 +32216,17 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(state) {
+	function mapStateToProps(_ref) {
+		var buttonsPicked = _ref.buttonsPicked,
+		    allButtonsSelected = _ref.allButtonsSelected,
+		    buttonSelected = _ref.buttonSelected,
+		    buttonsAvailable = _ref.buttonsAvailable;
+	
 		return {
-			picked: state.buttonsPicked,
-			buttonClass: state.buttonSelected,
-			allSelected: state.allButtonSelect,
-			buttonsAvailable: state.buttonsAvailable
+			buttonsPicked: buttonsPicked,
+			buttonSelected: buttonSelected,
+			allButtonsSelected: allButtonsSelected,
+			buttonsAvailable: buttonsAvailable
 		};
 	}
 	
@@ -32323,7 +32342,7 @@
 	            evt.preventDefault();
 	            var icon = evt.currentTarget.dataset.icon;
 	            var data = { icon: icon, color: color };
-	            if (this.props.picked.map(function (data) {
+	            if (this.props.buttonsPicked.map(function (data) {
 	                return data.icon;
 	            }).indexOf(icon) < 0) {
 	                this.props.addButton(data);
@@ -32336,7 +32355,7 @@
 	        value: function selectAllinDB() {
 	            var _this2 = this;
 	
-	            var pickedArray = this.props.picked.map(function (data) {
+	            var pickedArray = this.props.buttonsPicked.map(function (data) {
 	                return data.icon;
 	            });
 	            var notSelectedArray = this.props.buttonsAvailable.filter(function (item) {
@@ -32369,99 +32388,99 @@
 	    }, {
 	        key: 'handleClapClick',
 	        value: function handleClapClick() {
-	            if (!this.props.buttonClass.clap === false) {
+	            if (!this.props.buttonsSelected.clap === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.clapClicked(!this.props.buttonClass.clap);
+	            this.props.clapClicked(!this.props.buttonSelected.clap);
 	        }
 	    }, {
 	        key: 'handleFrownClick',
 	        value: function handleFrownClick() {
-	            if (!this.props.buttonClass.frown === false) {
+	            if (!this.props.buttonSelected.frown === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.frownClicked(!this.props.buttonClass.frown);
+	            this.props.frownClicked(!this.props.buttonSelected.frown);
 	        }
 	    }, {
 	        key: 'handleEmpireClick',
 	        value: function handleEmpireClick() {
-	            if (!this.props.buttonClass.empire === false) {
+	            if (!this.props.buttonSelected.empire === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.empireClicked(!this.props.buttonClass.empire);
+	            this.props.empireClicked(!this.props.buttonSelected.empire);
 	        }
 	    }, {
 	        key: 'handleHeartClick',
 	        value: function handleHeartClick() {
-	            if (!this.props.buttonClass.heart === false) {
+	            if (!this.props.buttonSelected.heart === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.heartClicked(!this.props.buttonClass.heart);
+	            this.props.heartClicked(!this.props.buttonSelected.heart);
 	        }
 	    }, {
 	        key: 'handleMoneyClick',
 	        value: function handleMoneyClick() {
-	            if (!this.props.buttonClass.money === false) {
+	            if (!this.props.buttonSelected.money === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.moneyClicked(!this.props.buttonClass.money);
+	            this.props.moneyClicked(!this.props.buttonSelected.money);
 	        }
 	    }, {
 	        key: 'handleSmileClick',
 	        value: function handleSmileClick() {
-	            if (!this.props.buttonClass.smile === false) {
+	            if (!this.props.buttonSelected.smile === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.smileClicked(!this.props.buttonClass.smile);
+	            this.props.smileClicked(!this.props.buttonSelected.smile);
 	        }
 	    }, {
 	        key: 'handleQuestionClick',
 	        value: function handleQuestionClick() {
-	            if (!this.props.buttonClass.question === false) {
+	            if (!this.props.buttonSelected.question === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.questionClicked(!this.props.buttonClass.question);
+	            this.props.questionClicked(!this.props.buttonSelected.question);
 	        }
 	    }, {
 	        key: 'handleThumbClick',
 	        value: function handleThumbClick() {
-	            if (!this.props.buttonClass.thumb === false) {
+	            if (!this.props.buttonSelected.thumb === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.thumbClicked(!this.props.buttonClass.thumb);
+	            this.props.thumbClicked(!this.props.buttonSelected.thumb);
 	        }
 	    }, {
 	        key: 'handleResistanceClick',
 	        value: function handleResistanceClick() {
-	            if (!this.props.buttonClass.resistance === false) {
+	            if (!this.props.buttonSelected.resistance === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.resistanceClicked(!this.props.buttonClass.resistance);
+	            this.props.resistanceClicked(!this.props.buttonSelected.resistance);
 	        }
 	    }, {
 	        key: 'handleBombClick',
 	        value: function handleBombClick() {
-	            if (!this.props.buttonClass.bomb === false) {
+	            if (!this.props.buttonSelected.bomb === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
-	            this.props.bombClicked(!this.props.buttonClass.bomb);
+	            this.props.bombClicked(!this.props.buttonSelected.bomb);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
 	            var _this4 = this;
 	
-	            var buttonClass = this.props.buttonClass;
+	            var buttonSelected = this.props.buttonSelected;
 	
 	            var addRemove = this.handleIconClick;
 	            var basicClass = 'btn btn-circle btn-md btn-hover nuetralbg';
@@ -32475,7 +32494,7 @@
 	            var thumbClass = 'btn btn-circle btn-md mint-green';
 	            var resistanceClass = 'btn btn-circle btn-md orange';
 	            var bombClass = 'btn btn-circle btn-md purple';
-	            var allButtonsOn = this.props.picked.length === 10;
+	            var allButtonsOn = this.props.buttonsPicked.length === 10;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
@@ -32499,70 +32518,70 @@
 	                    { className: 'button-spacer' },
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.clap ? clapClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.clap ? clapClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'blue');_this4.handleClapClick();
 	                            }, 'data-icon': 'fa fa-sign-language' },
 	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.frown ? frownClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.frown ? frownClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'red');_this4.handleFrownClick();
 	                            }, 'data-icon': 'fa fa-frown-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.empire ? empireClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.empire ? empireClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'gray');_this4.handleEmpireClick();
 	                            }, 'data-icon': 'fa fa-empire' },
 	                        _react2.default.createElement('i', { className: 'fa fa-empire', 'data-icon': 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.heart ? heartClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.heart ? heartClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'dark-blue');_this4.handleHeartClick();
 	                            }, 'data-icon': 'fa fa-heart-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-heart-o', 'data-icon': 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.money ? moneyClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.money ? moneyClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'green');_this4.handleMoneyClick();
 	                            }, 'data-icon': 'fa fa-money fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-money', 'data-icon': 'fa fa-money fa-spin' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.smile ? smileClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.smile ? smileClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'pink');_this4.handleSmileClick();
 	                            }, 'data-icon': 'fa fa-smile-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-smile-o', 'data-icon': 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.question ? questionClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.question ? questionClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'yellow');_this4.handleQuestionClick();
 	                            }, 'data-icon': 'fa fa-question' },
 	                        _react2.default.createElement('i', { className: 'fa fa-question', 'data-icon': 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'mint-green');_this4.handleThumbClick();
 	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
 	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'data-icon': 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'orange');_this4.handleResistanceClick();
 	                            }, 'data-icon': 'fa fa-rebel' },
 	                        _react2.default.createElement('i', { className: 'fa fa-rebel', 'data-icon': 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
-	                        { className: buttonClass.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
+	                        { className: buttonSelected.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'purple');_this4.handleBombClick();
 	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-bomb', 'data-icon': 'fa fa-bomb fa-spin' })

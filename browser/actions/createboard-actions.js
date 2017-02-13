@@ -33,13 +33,13 @@ export const clearAllSelectedButtons = () => {
 	};
 };
 
-/* ------------       DISPATCHERS     ------------------ */
+/* ------------       ASYNC ACTION CREATORS     ------------------ */
 export const addBoard = (details) => {
     const thunk = (dispatch) => {
         axios.post(`/api/`, details)
 			.then(res => res.data)
 			.then(createdBoard => dispatch( stateBoardId(createdBoard.path) ) )
-            .catch(err => console.log(err))
+            .catch(err => console.log(err));
     }
     return thunk;
 }

@@ -186,7 +186,7 @@ const rootReducer = combineReducers({
 	buttonSelected: selectButtonReducer,
 	showCreateTab: showCreateTabReducer,
 	showJoinTab: showJoinBoardTabReducer,
-	allButtonSelect: toggleSelectAllReducer,
+	allButtonSelected: toggleSelectAllReducer,
 	showPickButtonError: pickButtonErrorReducer,
 	buttonsAvailable: buttonsAvailableReducer,
 });

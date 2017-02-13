@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import Homepage from '../components/Homepage';
 
 
-function mapStateToProps(state){
+function mapStateToProps( {buttonsAvailable} ){
 	return {
-		buttonsAvailable: state.buttonsAvailable
+		buttonsAvailable
 	};
 }
 
