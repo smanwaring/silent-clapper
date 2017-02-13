@@ -65,7 +65,7 @@ const initialButtonState = {
 		bomb: false
 };
 
-const boardReducer = function(state = '', action) {
+const boardReducer = (state = '', action) => {
 	switch (action.type){
 		case SET_BOARDID:
 			return action.payload;
@@ -73,7 +73,7 @@ const boardReducer = function(state = '', action) {
 	}
 };
 
-const currentBoardReducer = function(state = false, action) {
+const currentBoardReducer = (state = false, action) => {
 	switch (action.type){
 		case SET_CURRENT_BOARD:
 			return action.payload;
@@ -81,7 +81,7 @@ const currentBoardReducer = function(state = false, action) {
 	}
 };
 
-const iconsPickedReducer = function(state = [], action) {
+const iconsPickedReducer = (state = [], action) => {
 	switch (action.type){
 		case PICKED_BUTTON:
 			return [...state, action.payload];
@@ -93,7 +93,7 @@ const iconsPickedReducer = function(state = [], action) {
 	}
 };
 
-const foundBoardReducer = function(state = false, action) {
+const foundBoardReducer = (state = false, action) => {
 	switch (action.type){
 		case BOARD_NOT_FOUND:
 			return action.payload;
@@ -101,7 +101,7 @@ const foundBoardReducer = function(state = false, action) {
 	}
 };
 
-const boardButtonsReducer = function(state = [], action) {
+const boardButtonsReducer = (state = [], action) => {
 	switch (action.type){
 		case LOAD_BUTTONS:
 			return action.payload;
@@ -110,7 +110,7 @@ const boardButtonsReducer = function(state = [], action) {
 };
 
 
-const showCreateTabReducer = function(state = false, action) {
+const showCreateTabReducer = (state = false, action) => {
 	switch (action.type){
 		case SHOW_CREATE:
 			return action.payload;
@@ -118,7 +118,7 @@ const showCreateTabReducer = function(state = false, action) {
 	}
 };
 
-const showJoinBoardTabReducer= function(state = true, action) {
+const showJoinBoardTabReducer= (state = true, action) => {
 	switch (action.type){
 		case SHOW_JOIN:
 			return action.payload;
@@ -126,7 +126,7 @@ const showJoinBoardTabReducer= function(state = true, action) {
 	}
 };
 
-const toggleSelectAllReducer = function(state = false, action) {
+const toggleSelectAllReducer = (state = false, action) => {
 	switch (action.type){
 		case TOGGLE_SELECT_ALL:
 			return action.payload;
@@ -134,7 +134,7 @@ const toggleSelectAllReducer = function(state = false, action) {
 	}
 };
 
-const pickButtonErrorReducer = function(state = false, action) {
+const pickButtonErrorReducer = (state = false, action) => {
 	switch (action.type){
 		case TOGGLE_PICK_BUTTON_ERROR:
 			return action.payload;
@@ -142,13 +142,13 @@ const pickButtonErrorReducer = function(state = false, action) {
 	}
 };
 
-const buttonsAvailableReducer = function(state = buttonDataState, action) {
+const buttonsAvailableReducer = (state = buttonDataState, action) => {
 	switch (action.type){
 		default: return state;
 	}
 };
 
-const selectButtonReducer = function(state = initialButtonState, action) {
+const selectButtonReducer = (state = initialButtonState, action) => {
 	switch (action.type) {
 		case TOGGLE_CLAP:
 			return Object.assign({}, state, {clap: action.payload});
