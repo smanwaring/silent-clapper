@@ -25,7 +25,7 @@ export const stateCurrentBoard = (boardId) => {
 /* ------------       DISPATCHERS     ------------------ */
 
 export const loadBoard = (boardId) => {
-	const thunk = (dispatch) => {
+	return (dispatch) => {
 		axios.get(`/api/${boardId}`)
 			.then( res => res.data )
 			.then( board => {
@@ -33,6 +33,5 @@ export const loadBoard = (boardId) => {
 			})
 			.catch(err => console.log(err));
 	};
-	return thunk;
 };
 

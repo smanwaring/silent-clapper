@@ -27,7 +27,7 @@ export const foundBoard = (buttons) => {
 
 /* ------------       REDUCER     ------------------ */
 export const enterBoard = (boardId) => {
-	const thunk = (dispatch) => { 
+	return (dispatch) => {
 		axios.get(`/api/enter/${boardId}`)
 			.then(res => res.data)
 			.then(errorOrButtons => {
@@ -35,6 +35,5 @@ export const enterBoard = (boardId) => {
 			})
 			.catch(err => console.log(err));
 	};
-	return thunk;
 };
 

@@ -28874,7 +28874,7 @@
 	
 	/* ------------       ASYNC ACTION CREATORS     ------------------ */
 	var addBoard = exports.addBoard = function addBoard(details) {
-		var thunk = function thunk(dispatch) {
+		return function (dispatch) {
 			_axios2.default.post('/api/', details).then(function (res) {
 				return res.data;
 			}).then(function (createdBoard) {
@@ -28883,7 +28883,6 @@
 				return console.log(err);
 			});
 		};
-		return thunk;
 	};
 
 /***/ },
@@ -30443,7 +30442,7 @@
 	/* ------------       DISPATCHERS     ------------------ */
 	
 	var loadBoard = exports.loadBoard = function loadBoard(boardId) {
-		var thunk = function thunk(dispatch) {
+		return function (dispatch) {
 			_axios2.default.get('/api/' + boardId).then(function (res) {
 				return res.data;
 			}).then(function (board) {
@@ -30452,7 +30451,6 @@
 				return console.log(err);
 			});
 		};
-		return thunk;
 	};
 
 /***/ },
@@ -30617,7 +30615,7 @@
 	
 	/* ------------       REDUCER     ------------------ */
 	var enterBoard = exports.enterBoard = function enterBoard(boardId) {
-		var thunk = function thunk(dispatch) {
+		return function (dispatch) {
 			_axios2.default.get('/api/enter/' + boardId).then(function (res) {
 				return res.data;
 			}).then(function (errorOrButtons) {
@@ -30626,7 +30624,6 @@
 				return console.log(err);
 			});
 		};
-		return thunk;
 	};
 
 /***/ },
