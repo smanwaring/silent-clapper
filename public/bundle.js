@@ -28815,7 +28815,7 @@
 		buttonSelected: selectButtonReducer,
 		showCreateTab: showCreateTabReducer,
 		showJoinTab: showJoinBoardTabReducer,
-		allButtonSelected: toggleSelectAllReducer,
+		allButtonsSelected: toggleSelectAllReducer,
 		showPickButtonError: pickButtonErrorReducer,
 		buttonsAvailable: buttonsAvailableReducer
 	});
@@ -32370,7 +32370,6 @@
 	        value: function deselectAllinDB() {
 	            var _this3 = this;
 	
-	            console.log("!!!!!!!!!!!!!in deselect!!@(*#&!@#(*$&~(@#&*$(*!@&#*$(&)))))");
 	            this.props.buttonsAvailable.forEach(function (item) {
 	                _this3.props.removeButton(item);
 	            });
