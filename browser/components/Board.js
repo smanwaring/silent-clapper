@@ -47,7 +47,7 @@ class Board extends React.Component {
     return (
       <div>
         <div id="wrap">
-			<h1> Silent Salutations </h1>
+			<h1> Silent Salutations</h1>
 			<div id="num-people">
 				<span>audience connecting...</span>
 			</div>

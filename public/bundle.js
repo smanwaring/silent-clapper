@@ -32535,56 +32535,56 @@
 	                        { className: buttonSelected.empire ? empireClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'gray');_this4.handleEmpireClick();
 	                            }, 'data-icon': 'fa fa-empire' },
-	                        _react2.default.createElement('i', { className: 'fa fa-empire', 'data-icon': 'fa fa-empire' })
+	                        _react2.default.createElement('i', { className: 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.heart ? heartClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'dark-blue');_this4.handleHeartClick();
 	                            }, 'data-icon': 'fa fa-heart-o' },
-	                        _react2.default.createElement('i', { className: 'fa fa-heart-o', 'data-icon': 'fa fa-heart-o' })
+	                        _react2.default.createElement('i', { className: 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.money ? moneyClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'green');_this4.handleMoneyClick();
 	                            }, 'data-icon': 'fa fa-money fa-spin' },
-	                        _react2.default.createElement('i', { className: 'fa fa-money', 'data-icon': 'fa fa-money fa-spin' })
+	                        _react2.default.createElement('i', { className: 'fa fa-money' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.smile ? smileClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'pink');_this4.handleSmileClick();
 	                            }, 'data-icon': 'fa fa-smile-o' },
-	                        _react2.default.createElement('i', { className: 'fa fa-smile-o', 'data-icon': 'fa fa-smile-o' })
+	                        _react2.default.createElement('i', { className: 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.question ? questionClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'yellow');_this4.handleQuestionClick();
 	                            }, 'data-icon': 'fa fa-question' },
-	                        _react2.default.createElement('i', { className: 'fa fa-question', 'data-icon': 'fa fa-question' })
+	                        _react2.default.createElement('i', { className: 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'mint-green');_this4.handleThumbClick();
 	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
-	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up', 'data-icon': 'fa fa-thumbs-o-up' })
+	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'orange');_this4.handleResistanceClick();
 	                            }, 'data-icon': 'fa fa-rebel' },
-	                        _react2.default.createElement('i', { className: 'fa fa-rebel', 'data-icon': 'fa fa-rebel' })
+	                        _react2.default.createElement('i', { className: 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
 	                                addRemove(evt, 'purple');_this4.handleBombClick();
 	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
-	                        _react2.default.createElement('i', { className: 'fa fa-bomb', 'data-icon': 'fa fa-bomb fa-spin' })
+	                        _react2.default.createElement('i', { className: 'fa fa-bomb' })
 	                    )
 	                )
 	            );
@@ -32793,7 +32793,7 @@
 						_react2.default.createElement(
 							'h1',
 							null,
-							' Silent Salutations '
+							' Silent Salutations'
 						),
 						_react2.default.createElement(
 							'div',

@@ -158,28 +158,28 @@ class PickButtons extends React.Component {
                 <i className="fa fa-frown-o" />
             </button>
             <button className={buttonSelected.empire ? empireClass : basicClass} onClick={(evt) => {addRemove(evt, 'gray'); this.handleEmpireClick()}} data-icon="fa fa-empire">
-                <i className="fa fa-empire" data-icon="fa fa-empire" />
+                <i className="fa fa-empire" />
             </button>
             <button className={buttonSelected.heart ? heartClass : basicClass} onClick={(evt) => {addRemove(evt, 'dark-blue'); this.handleHeartClick()}} data-icon="fa fa-heart-o">
-                <i className="fa fa-heart-o" data-icon="fa fa-heart-o" />
+                <i className="fa fa-heart-o" />
             </button>
             <button className={buttonSelected.money ? moneyClass : basicClass} onClick={(evt) => {addRemove(evt, 'green'); this.handleMoneyClick()}} data-icon="fa fa-money fa-spin">
-                <i className="fa fa-money" data-icon="fa fa-money fa-spin" />
+                <i className="fa fa-money" />
             </button>
             <button className={buttonSelected.smile ? smileClass : basicClass} onClick={(evt) => {addRemove(evt, 'pink'); this.handleSmileClick()}} data-icon="fa fa-smile-o">
-                <i className="fa fa-smile-o" data-icon="fa fa-smile-o" />
+                <i className="fa fa-smile-o" />
             </button>
             <button className={buttonSelected.question ? questionClass : basicClass} onClick={(evt) => {addRemove(evt, 'yellow'); this.handleQuestionClick()}} data-icon="fa fa-question">
-                <i className="fa fa-question" data-icon="fa fa-question" />
+                <i className="fa fa-question" />
             </button>
             <button className={buttonSelected.thumb ? thumbClass : basicClass} onClick={(evt) => {addRemove(evt, 'mint-green'); this.handleThumbClick()}} data-icon="fa fa-thumbs-o-up">
-                <i className="fa fa-thumbs-o-up" data-icon="fa fa-thumbs-o-up" />
+                <i className="fa fa-thumbs-o-up" />
             </button>
             <button className={buttonSelected.resistance ? resistanceClass : basicClass} onClick={(evt) => {addRemove(evt, 'orange'); this.handleResistanceClick()}} data-icon="fa fa-rebel">
-                <i className="fa fa-rebel" data-icon="fa fa-rebel" />
+                <i className="fa fa-rebel" />
             </button>
             <button className={buttonSelected.bomb ? bombClass : basicClass} onClick={(evt) => {addRemove(evt, 'purple'); this.handleBombClick()}} data-icon="fa fa-bomb fa-spin">
-                <i className="fa fa-bomb" data-icon="fa fa-bomb fa-spin" />
+                <i className="fa fa-bomb" />
             </button>
         </div>
       </div>
