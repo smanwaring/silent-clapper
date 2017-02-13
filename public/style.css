@@ -138,27 +138,28 @@ div.column i {
 */
 
 .colOne {
-	color: #fce473;
+	color: #fff60c;
 }
 
 .colTwo {
-	color: #f68b39;
+	color: #ffb20c;
 }
 
 .colThree {
-	color: #ed6c63;
+
+	color: #ffa5a5;
 }
 
 .colFour {
-	color: #847bb9;
+	color: #471daf;
 }
 
 .colFive {
-	color: #97cd76;
+	color: #048937;
 }
 
 .colSix {
-	color: #35b1d1;
+	color: #07668c;
 }
 
 @keyframes flowOne {
@@ -176,7 +177,7 @@ div.column i {
 		left: 0;
 	}
 	60% {
-		opacity: .2;
+		opacity: .8;
 	}
 	80% {
 		bottom: 80%;
@@ -201,7 +202,7 @@ div.column i {
 		left: 11%;
 	}
 	60% {
-		opacity: .2;
+		opacity: .8;
 	}
 	80% {
 		bottom: 60%;
@@ -227,7 +228,7 @@ div.column i {
 		left: 30%
 	}
 	60% {
-		opacity: .2;
+		opacity: .8;
 	}
 	80% {
 		bottom: 70%;
