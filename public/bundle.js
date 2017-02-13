@@ -32370,6 +32370,7 @@
 	        value: function deselectAllinDB() {
 	            var _this3 = this;
 	
+	            console.log("!!!!!!!!!!!!!in deselect!!@(*#&!@#(*$&~(@#&*$(*!@&#*$(&)))))");
 	            this.props.buttonsAvailable.forEach(function (item) {
 	                _this3.props.removeButton(item);
 	            });
@@ -32377,18 +32378,18 @@
 	    }, {
 	        key: 'handleCheck',
 	        value: function handleCheck() {
-	            if (this.props.allSelected) {
+	            if (this.props.allButtonsSelected) {
 	                this.deselectAllinDB();
-	                this.props.selectAll(!this.props.allSelected);
+	                this.props.selectAll(!this.props.allButtonsSelected);
 	            } else {
 	                this.selectAllinDB();
-	                this.props.selectAll(!this.props.allSelected);
+	                this.props.selectAll(!this.props.allButtonsSelected);
 	            }
 	        }
 	    }, {
 	        key: 'handleClapClick',
 	        value: function handleClapClick() {
-	            if (!this.props.buttonsSelected.clap === false) {
+	            if (!this.props.buttonSelected.clap === false) {
 	                this.props.toggleSelect(false);
 	            }
 	
@@ -32676,12 +32677,17 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(state) {
+	function mapStateToProps(_ref) {
+		var generatedBoard = _ref.generatedBoard,
+		    currentBoard = _ref.currentBoard,
+		    buttonsToLoad = _ref.buttonsToLoad,
+		    connectToSocket = _ref.connectToSocket;
+	
 		return {
-			boardId: state.generatedBoard,
-			currentBoard: state.currentBoard,
-			buttons: state.buttonsToLoad,
-			connectToSocket: state.connectToSocket
+			generatedBoard: generatedBoard,
+			currentBoard: currentBoard,
+			buttonsToLoad: buttonsToLoad,
+			connectToSocket: connectToSocket
 		};
 	}
 	
@@ -32752,7 +32758,7 @@
 				// initialize client socket
 				this.socket = io.connect();
 				//join room
-				this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.boardId);
+				this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.generatedBoard);
 				// emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
 				this.socket.on('showAction', function (icon) {
 					// hey, someone else clicked an icon and we found out from the server
@@ -32813,7 +32819,7 @@
 					_react2.default.createElement(
 						'footer',
 						null,
-						this.props.buttons && this.props.buttons.map(function (button, i) {
+						this.props.buttonsToLoad && this.props.buttonsToLoad.map(function (button, i) {
 							return _react2.default.createElement(
 								'button',
 								{ key: i, className: 'btn btn-circle btn-xl ' + button.color, onClick: _this2.handleIconClick, 'data-icon': button.icon },

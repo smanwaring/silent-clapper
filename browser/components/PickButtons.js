@@ -47,17 +47,17 @@ class PickButtons extends React.Component {
 
 
     handleCheck(){
-        if (this.props.allSelected){
+        if (this.props.allButtonsSelected){
             this.deselectAllinDB();
-            this.props.selectAll(!this.props.allSelected);
+            this.props.selectAll(!this.props.allButtonsSelected);
         } else {
             this.selectAllinDB();
-            this.props.selectAll(!this.props.allSelected);
+            this.props.selectAll(!this.props.allButtonsSelected);
         }
     }
 
     handleClapClick() {
-        if (!this.props.buttonsSelected.clap === false){
+        if (!this.props.buttonSelected.clap === false){
             this.props.toggleSelect(false);
         }
 
