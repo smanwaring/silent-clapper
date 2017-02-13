@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class Root extends React.Component {
+export default class Root {
     render() {
         return (
             <div>

@@ -62,19 +62,19 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _Homepage = __webpack_require__(308);
+	var _Homepage = __webpack_require__(309);
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _Board = __webpack_require__(319);
+	var _Board = __webpack_require__(320);
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _Root = __webpack_require__(321);
+	var _Root = __webpack_require__(322);
 	
 	var _Root2 = _interopRequireDefault(_Root);
 	
-	var _EmptyPage = __webpack_require__(322);
+	var _EmptyPage = __webpack_require__(323);
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
@@ -28561,11 +28561,11 @@
 	
 	var _reducer2 = _interopRequireDefault(_reducer);
 	
-	var _reduxThunk = __webpack_require__(301);
+	var _reduxThunk = __webpack_require__(302);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(302);
+	var _reduxLogger = __webpack_require__(303);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -28597,7 +28597,7 @@
 	
 	var _boardActions = __webpack_require__(300);
 	
-	var _initialstate = __webpack_require__(323);
+	var _initialstate = __webpack_require__(301);
 	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
@@ -30578,6 +30578,60 @@
 
 	'use strict';
 	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	var buttonData = exports.buttonData = [{
+	    color: 'blue',
+	    icon: 'fa fa-sign-language'
+	}, {
+	    color: 'red',
+	    icon: 'fa fa-frown-o'
+	}, {
+	    color: 'gray',
+	    icon: 'fa fa-empire'
+	}, {
+	    color: 'dark-blue',
+	    icon: 'fa fa-heart-o'
+	}, {
+	    color: 'green',
+	    icon: 'fa fa-money fa-spin'
+	}, {
+	    color: 'pink',
+	    icon: 'fa fa-smile-o'
+	}, {
+	    color: 'yellow',
+	    icon: 'fa fa-question'
+	}, {
+	    color: 'mint-green',
+	    icon: 'fa fa-thumbs-o-up'
+	}, {
+	    color: 'orange',
+	    icon: 'fa fa-rebel'
+	}, {
+	    color: 'purple',
+	    icon: 'fa fa-bomb fa-spin'
+	}];
+	
+	var initialButtonState = exports.initialButtonState = {
+	    clap: false,
+	    frown: false,
+	    empire: false,
+	    heart: false,
+	    money: false,
+	    smile: false,
+	    question: false,
+	    thumb: false,
+	    resistance: false,
+	    bomb: false
+	};
+
+/***/ },
+/* 302 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
 	exports.__esModule = true;
 	function createThunkMiddleware(extraArgument) {
 	  return function (_ref) {
@@ -30601,7 +30655,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 302 */
+/* 303 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30612,11 +30666,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(303);
+	var _core = __webpack_require__(304);
 	
-	var _helpers = __webpack_require__(304);
+	var _helpers = __webpack_require__(305);
 	
-	var _defaults = __webpack_require__(307);
+	var _defaults = __webpack_require__(308);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -30719,7 +30773,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 303 */
+/* 304 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30729,9 +30783,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(304);
+	var _helpers = __webpack_require__(305);
 	
-	var _diff = __webpack_require__(305);
+	var _diff = __webpack_require__(306);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -30860,7 +30914,7 @@
 	}
 
 /***/ },
-/* 304 */
+/* 305 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -30884,7 +30938,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 305 */
+/* 306 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30894,7 +30948,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(306);
+	var _deepDiff = __webpack_require__(307);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -30980,7 +31034,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 306 */
+/* 307 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -31409,7 +31463,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 307 */
+/* 308 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -31460,7 +31514,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 308 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31471,7 +31525,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Homepage = __webpack_require__(309);
+	var _Homepage = __webpack_require__(310);
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
@@ -31490,7 +31544,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Homepage2.default);
 
 /***/ },
-/* 309 */
+/* 310 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31505,11 +31559,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HomeForm = __webpack_require__(310);
+	var _HomeForm = __webpack_require__(311);
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
-	var _iconAnimations = __webpack_require__(318);
+	var _iconAnimations = __webpack_require__(319);
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
@@ -31604,7 +31658,7 @@
 	exports.default = Homepage;
 
 /***/ },
-/* 310 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31615,7 +31669,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _HomeForm = __webpack_require__(311);
+	var _HomeForm = __webpack_require__(312);
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
@@ -31647,7 +31701,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_HomeForm2.default);
 
 /***/ },
-/* 311 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31662,11 +31716,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _JoinBoardForm = __webpack_require__(312);
+	var _JoinBoardForm = __webpack_require__(313);
 	
 	var _JoinBoardForm2 = _interopRequireDefault(_JoinBoardForm);
 	
-	var _CreateBoard = __webpack_require__(314);
+	var _CreateBoard = __webpack_require__(315);
 	
 	var _CreateBoard2 = _interopRequireDefault(_CreateBoard);
 	
@@ -31780,7 +31834,7 @@
 	exports.default = HomeForm;
 
 /***/ },
-/* 312 */
+/* 313 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31791,7 +31845,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _JoinBoardForm = __webpack_require__(313);
+	var _JoinBoardForm = __webpack_require__(314);
 	
 	var _JoinBoardForm2 = _interopRequireDefault(_JoinBoardForm);
 	
@@ -31825,7 +31879,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_JoinBoardForm2.default);
 
 /***/ },
-/* 313 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31937,7 +31991,7 @@
 	exports.default = JoinBoardForm;
 
 /***/ },
-/* 314 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31948,7 +32002,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _CreateBoard = __webpack_require__(315);
+	var _CreateBoard = __webpack_require__(316);
 	
 	var _CreateBoard2 = _interopRequireDefault(_CreateBoard);
 	
@@ -31956,7 +32010,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(_ref) {
+	var mapStateToProps = function mapStateToProps(_ref) {
 		var buttonsPicked = _ref.buttonsPicked,
 		    generatedBoard = _ref.generatedBoard,
 		    showCreateTab = _ref.showCreateTab,
@@ -31968,7 +32022,7 @@
 			showCreateTab: showCreateTab,
 			showPickButtonError: showPickButtonError
 		};
-	}
+	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
@@ -31989,7 +32043,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CreateBoard2.default);
 
 /***/ },
-/* 315 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32004,7 +32058,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PickButtons = __webpack_require__(316);
+	var _PickButtons = __webpack_require__(317);
 	
 	var _PickButtons2 = _interopRequireDefault(_PickButtons);
 	
@@ -32138,7 +32192,7 @@
 	exports.default = CreateBoard;
 
 /***/ },
-/* 316 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32149,7 +32203,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _PickButtons = __webpack_require__(317);
+	var _PickButtons = __webpack_require__(318);
 	
 	var _PickButtons2 = _interopRequireDefault(_PickButtons);
 	
@@ -32231,7 +32285,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PickButtons2.default);
 
 /***/ },
-/* 317 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32538,7 +32592,7 @@
 	exports.default = PickButtons;
 
 /***/ },
-/* 318 */
+/* 319 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32597,7 +32651,7 @@
 	}
 
 /***/ },
-/* 319 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32608,7 +32662,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Board = __webpack_require__(320);
+	var _Board = __webpack_require__(321);
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
@@ -32616,7 +32670,7 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function mapStateToProps(_ref) {
+	var mapStateToProps = function mapStateToProps(_ref) {
 		var generatedBoard = _ref.generatedBoard,
 		    currentBoard = _ref.currentBoard,
 		    buttonsToLoad = _ref.buttonsToLoad,
@@ -32628,20 +32682,20 @@
 			buttonsToLoad: buttonsToLoad,
 			connectToSocket: connectToSocket
 		};
-	}
+	};
 	
-	function mapDispatchToProps(dispatch) {
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 		return {
 			setBoardId: function setBoardId(boardId) {
 				dispatch((0, _boardActions.stateBoardId)(boardId));
 			}
 		};
-	}
+	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Board2.default);
 
 /***/ },
-/* 320 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32658,11 +32712,11 @@
 	
 	var _reactRouter = __webpack_require__(216);
 	
-	var _HomeForm = __webpack_require__(310);
+	var _HomeForm = __webpack_require__(311);
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
-	var _iconAnimations = __webpack_require__(318);
+	var _iconAnimations = __webpack_require__(319);
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
@@ -32776,7 +32830,7 @@
 	exports.default = Board;
 
 /***/ },
-/* 321 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32795,17 +32849,9 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var Root = function (_React$Component) {
-	    _inherits(Root, _React$Component);
-	
+	var Root = function () {
 	    function Root() {
 	        _classCallCheck(this, Root);
-	
-	        return _possibleConstructorReturn(this, (Root.__proto__ || Object.getPrototypeOf(Root)).apply(this, arguments));
 	    }
 	
 	    _createClass(Root, [{
@@ -32820,12 +32866,12 @@
 	    }]);
 	
 	    return Root;
-	}(_react2.default.Component);
+	}();
 	
 	exports.default = Root;
 
 /***/ },
-/* 322 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32842,7 +32888,7 @@
 	
 	var _reactRouter = __webpack_require__(216);
 	
-	var _iconAnimations = __webpack_require__(318);
+	var _iconAnimations = __webpack_require__(319);
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
@@ -32934,60 +32980,6 @@
 	
 	
 	module.exports = EmptyPage;
-
-/***/ },
-/* 323 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	var buttonData = exports.buttonData = [{
-	    color: 'blue',
-	    icon: 'fa fa-sign-language'
-	}, {
-	    color: 'red',
-	    icon: 'fa fa-frown-o'
-	}, {
-	    color: 'gray',
-	    icon: 'fa fa-empire'
-	}, {
-	    color: 'dark-blue',
-	    icon: 'fa fa-heart-o'
-	}, {
-	    color: 'green',
-	    icon: 'fa fa-money fa-spin'
-	}, {
-	    color: 'pink',
-	    icon: 'fa fa-smile-o'
-	}, {
-	    color: 'yellow',
-	    icon: 'fa fa-question'
-	}, {
-	    color: 'mint-green',
-	    icon: 'fa fa-thumbs-o-up'
-	}, {
-	    color: 'orange',
-	    icon: 'fa fa-rebel'
-	}, {
-	    color: 'purple',
-	    icon: 'fa fa-bomb fa-spin'
-	}];
-	
-	var initialButtonState = exports.initialButtonState = {
-	    clap: false,
-	    frown: false,
-	    empire: false,
-	    heart: false,
-	    money: false,
-	    smile: false,
-	    question: false,
-	    thumb: false,
-	    resistance: false,
-	    bomb: false
-	};
 
 /***/ }
 /******/ ]);

@@ -2,14 +2,14 @@ import { connect } from 'react-redux';
 import CreateBoard from '../components/CreateBoard';
 import { addBoard, pickButtonError, stateBoardId, clearAllButtons, clearAllSelectedButtons  } from '../actions/createboard-actions';
 
-function mapStateToProps( {buttonsPicked, generatedBoard, showCreateTab, showPickButtonError} ){
+const mapStateToProps = ( {buttonsPicked, generatedBoard, showCreateTab, showPickButtonError} ) => {
 	return {
 		buttonsPicked,
 		generatedBoard,
         showCreateTab,
 		showPickButtonError
 	};
-}
+};
 
 const mapDispatchToProps = dispatch => {
 	return {
@@ -26,7 +26,7 @@ const mapDispatchToProps = dispatch => {
 		},
 	};
 
-}
+};
 
 export default connect(
 	mapStateToProps,
