@@ -8,6 +8,9 @@ import { BOARD_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-acti
 import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
 import { LOAD_BUTTONS, SET_BOARDID } from './actions/board-actions';
 
+
+// THESE INITIAL STATE ITEMS COULD BE BROUGHT OUT INTO A SEPARATE FILE
+// IT WILL CLEAN UP THIS REDUCER A BIT.
 const buttonDataState = [
             {
                 color: 'blue',
