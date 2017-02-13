@@ -19,12 +19,12 @@ class Board extends React.Component {
 		//join room
 		this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.generatedBoard);
 		// emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
-		this.socket.on('showAction', function(icon){
+		this.socket.on('showAction', (icon) => {
 		// hey, someone else clicked an icon and we found out from the server
 			component.drawAction(icon);
 		});
 		 //emitted from server, caught here with the current num of people connected
-		this.socket.on('connectionEvent', function(numPeople) {
+		this.socket.on('connectionEvent', (numPeople) => {
 			var audience = 'person';
 			if (numPeople > 1)  {
 				audience = 'people';

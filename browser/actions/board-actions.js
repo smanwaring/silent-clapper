@@ -10,7 +10,7 @@ export const SET_BOARDID = 'SET_BOARDID';
 /* -----------------    ACTION CREATORS     ------------------ */
 
 export const stateBoardId = (boardId) => {
-	return {
+    return {
 		type: SET_BOARDID,
 		payload: boardId
 	};

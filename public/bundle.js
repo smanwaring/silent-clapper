@@ -28826,7 +28826,7 @@
 /* 271 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -28840,10 +28840,10 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	/* -----------------    ACTIONS     ------------------ */
-	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
-	var SET_BOARDID = exports.SET_BOARDID = "SET_BOARDID";
-	var CLEAR_ALL_BUTTONS = exports.CLEAR_ALL_BUTTONS = "CLEAR_ALL_BUTTONS";
-	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = "CLEAR_ALL_SELECTED_BUTTONS";
+	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = 'TOGGLE_PICK_BUTTON_ERROR';
+	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
+	var CLEAR_ALL_BUTTONS = exports.CLEAR_ALL_BUTTONS = 'CLEAR_ALL_BUTTONS';
+	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = 'CLEAR_ALL_SELECTED_BUTTONS';
 	
 	/* ------------   ACTION CREATORS     ------------------ */
 	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
@@ -28875,7 +28875,7 @@
 	/* ------------       ASYNC ACTION CREATORS     ------------------ */
 	var addBoard = exports.addBoard = function addBoard(details) {
 		var thunk = function thunk(dispatch) {
-			_axios2.default.post("/api/", details).then(function (res) {
+			_axios2.default.post('/api/', details).then(function (res) {
 				return res.data;
 			}).then(function (createdBoard) {
 				return dispatch(stateBoardId(createdBoard.path));

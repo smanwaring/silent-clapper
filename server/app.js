@@ -30,7 +30,7 @@ app
   .use('/api', routes);
 
 // default routing
-app.get('/*', function(req, res){
+app.get('/*', (req, res) => {
   res.sendFile(PATHS.indexHTML);
 });
 
@@ -48,18 +48,15 @@ app.use((err, req, res, next) => {
 // express app takes precedence over our socket server for typical HTTP requests
 let io = socketio(server);
 
-let roomsToCount = {
-
-}
+let roomsToCount = {};
 
 // use socket server as an event emitter in order to listen for new connections
-io.on('connection', function(socket){
+io.on('connection', (socket) => {
 
   let newRoom;
 
   // listens to emit to join room
-  socket.on('wantToJoinRoom', function(roomName) {
-    console.log('joining room', roomName);
+  socket.on('wantToJoinRoom', (roomName) => {
     newRoom = roomName;
     socket.join(newRoom);
     socket.currRoom = newRoom;
@@ -68,7 +65,7 @@ io.on('connection', function(socket){
   });
 
   //event that runs anytime a socket disconnects
-  socket.on('disconnect', function(){
+  socket.on('disconnect', () => {
     if (socket.adapter.rooms[newRoom]){
       roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
       io.emit('connectionEvent', roomsToCount[newRoom]);
@@ -80,7 +77,7 @@ io.on('connection', function(socket){
 
   // server is receiving click data from the client here 
   // so we want to broadcast that data to all other connected clients 
-  socket.on('registerAction', function(icon){
+  socket.on('registerAction', (icon) => {
     console.log('I am emitting to', newRoom);
     io.to(newRoom).emit('showAction', icon);
   });
@@ -88,10 +85,10 @@ io.on('connection', function(socket){
 });
 
 
-server.listen(1337, function () {
+server.listen(1337, () => {
     console.log('The server is listening on port 1337!');
     db.sync({})
-      .then(function () {
+      .then( () => {
       console.log('Oh and btw the postgres server is totally connected, too');
   });
 });

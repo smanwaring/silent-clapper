@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 /* -----------------    ACTIONS     ------------------ */
-export const TOGGLE_PICK_BUTTON_ERROR = "TOGGLE_PICK_BUTTON_ERROR";
-export const SET_BOARDID = "SET_BOARDID";
-export const CLEAR_ALL_BUTTONS = "CLEAR_ALL_BUTTONS";
-export const CLEAR_ALL_SELECTED_BUTTONS = "CLEAR_ALL_SELECTED_BUTTONS";
+export const TOGGLE_PICK_BUTTON_ERROR = 'TOGGLE_PICK_BUTTON_ERROR';
+export const SET_BOARDID = 'SET_BOARDID';
+export const CLEAR_ALL_BUTTONS = 'CLEAR_ALL_BUTTONS';
+export const CLEAR_ALL_SELECTED_BUTTONS = 'CLEAR_ALL_SELECTED_BUTTONS';
 
 /* ------------   ACTION CREATORS     ------------------ */
 export const showPickButtonError = (bool) => {
