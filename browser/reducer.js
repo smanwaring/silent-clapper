@@ -2,9 +2,9 @@ import { combineReducers } from 'redux';
 import { TOGGLE_PICK_BUTTON_ERROR, CLEAR_ALL_BUTTONS, CLEAR_ALL_SELECTED_BUTTONS  } from './actions/createboard-actions';
 import { SHOW_CREATE, SHOW_JOIN } from './actions/homeform-actions'; 
 import { BOARD_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
-import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB } from './actions/pickbutton-actions';
+import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB, TOGGLE_BUTTON_STATE } from './actions/pickbutton-actions';
 import { LOAD_BUTTONS, SET_BOARDID } from './actions/board-actions';
-import { buttonData, initialButtonState } from './initialstate';
+import { buttonData, initialButtonState} from './initialstate';
 
 const boardReducer = (state = '', action) => {
 	switch (action.type){
@@ -91,31 +91,13 @@ const buttonsAvailableReducer = (state = buttonData, action) => {
 
 const selectButtonReducer = (state = initialButtonState, action) => {
 	switch (action.type) {
-		case TOGGLE_CLAP:
-			return Object.assign({}, state, {clap: action.payload});
-		case TOGGLE_FROWN:
-			return Object.assign({}, state, {frown: action.payload});
-		case TOGGLE_EMPIRE:
-			return Object.assign({}, state, {empire: action.payload});
-		case TOGGLE_HEART:
-			return Object.assign({}, state, {heart: action.payload});
-		case TOGGLE_MONEY:
-			return Object.assign({}, state, {money: action.payload});
-		case TOGGLE_SMILE:
-			return Object.assign({}, state, {smile: action.payload});
-		case TOGGLE_QUESTION:
-			return Object.assign({}, state, {question: action.payload});
-		case TOGGLE_THUMB:
-			return Object.assign({}, state, {thumb: action.payload});
-		case TOGGLE_BOMB:
-			return Object.assign({}, state, {bomb: action.payload});
-		case TOGGLE_RESISTANCE:
-			return Object.assign({}, state, {resistance: action.payload});
-		case CLEAR_ALL_SELECTED_BUTTONS:
-			return initialButtonState;
+		case TOGGLE_BUTTON_STATE:
+			return Object.assign({}, state, {[action.icon]: action.boolean});
 		default: return state;
 	}
 };
+
+
 
 const rootReducer = combineReducers({
 	generatedBoard: boardReducer,

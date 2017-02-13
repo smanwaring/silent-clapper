@@ -13,7 +13,6 @@ export const showBoardNotFound = bool => {
 	};
 };
 
-
 export const stateCurrentBoard = boardId => {
 	return {
 		type: SET_CURRENT_BOARD,
@@ -21,9 +20,7 @@ export const stateCurrentBoard = boardId => {
 	};
 };
 
-
 /* ------------       DISPATCHERS     ------------------ */
-
 export const loadBoard = boardId => {
 	return dispatch => {
 		axios.get(`/api/${boardId}`)

@@ -4,29 +4,28 @@ class PickButtons extends React.Component {
 	constructor(props){
 		super(props);
 		this.handleIconClick = this.handleIconClick.bind(this);
-        this.handleClapClick = this.handleClapClick.bind(this);
-        this.handleFrownClick = this.handleFrownClick.bind(this);
-        this.handleEmpireClick = this.handleEmpireClick.bind(this);
-        this.handleHeartClick = this.handleHeartClick.bind(this);
-        this.handleMoneyClick = this.handleMoneyClick.bind(this);
-        this.handleSmileClick = this.handleSmileClick.bind(this);
-        this.handleQuestionClick = this.handleQuestionClick.bind(this);
-        this.handleThumbClick = this.handleThumbClick.bind(this);
-        this.handleResistanceClick = this.handleResistanceClick.bind(this);
-        this.handleBombClick = this.handleBombClick.bind(this);
         this.handleCheck = this.handleCheck.bind(this);
+        this.deselectAllinDB = this.deselectAllinDB.bind(this);
+        this.selectAllInDB = this.selectAllinDB.bind(this);
 	}
 
 
-    handleIconClick(evt, color) {
+    handleIconClick(evt, color, shortIcon) {
         evt.preventDefault();
         let icon = evt.currentTarget.dataset.icon;
         let data = {icon: icon, color: color};
+        
+        //add to db check
         if (this.props.buttonsPicked.map(data => data.icon).indexOf(icon) < 0) {
             this.props.addButton(data);
         } else {
             this.props.removeButton(data);
         }
+        //front end view
+        if (!this.props.buttonSelected[shortIcon]) {
+            this.props.toggleSelect(false);
+        }
+        this.props.toggleButton(!this.props.buttonSelected[shortIcon], shortIcon);
     }
 
     selectAllinDB() {
@@ -35,12 +34,19 @@ class PickButtons extends React.Component {
         notSelectedArray.forEach(item => {
             this.props.addButton(item);
         });
+
+        this.props.buttonsAvailable.forEach(item => {
+            this.props.toggleButton(true, item.shortIcon);
+        });
+
+        this.props.toggleSelect(true);
     }
 
-
-      deselectAllinDB() {
+    deselectAllinDB() {
         this.props.buttonsAvailable.forEach(item => {
             this.props.removeButton(item);
+            this.props.toggleButton(false, item.shortIcon);
+            this.props.toggleSelect(false);
         });
     }
 
@@ -48,82 +54,9 @@ class PickButtons extends React.Component {
     handleCheck(){
         if (this.props.allButtonsSelected){
             this.deselectAllinDB();
-            this.props.selectAll(!this.props.allButtonsSelected);
         } else {
             this.selectAllinDB();
-            this.props.selectAll(!this.props.allButtonsSelected);
         }
-    }
-
-    handleClapClick() {
-        if (!this.props.buttonSelected.clap === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.clapClicked(!this.props.buttonSelected.clap);
-    }
-    handleFrownClick() {
-      if (!this.props.buttonSelected.frown === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.frownClicked(!this.props.buttonSelected.frown);
-    }
-    handleEmpireClick() {
-        if (!this.props.buttonSelected.empire === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.empireClicked(!this.props.buttonSelected.empire);
-    }
-    handleHeartClick() {
-        if (!this.props.buttonSelected.heart === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.heartClicked(!this.props.buttonSelected.heart);
-    }
-    handleMoneyClick() {
-        if (!this.props.buttonSelected.money === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.moneyClicked(!this.props.buttonSelected.money);
-    }
-    handleSmileClick() {
-        if (!this.props.buttonSelected.smile === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.smileClicked(!this.props.buttonSelected.smile);
-    }
-    handleQuestionClick() {
-        if (!this.props.buttonSelected.question === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.questionClicked(!this.props.buttonSelected.question);
-    }
-    handleThumbClick() {
-        if (!this.props.buttonSelected.thumb === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.thumbClicked(!this.props.buttonSelected.thumb);
-    }
-    handleResistanceClick() {
-        if (!this.props.buttonSelected.resistance === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.resistanceClicked(!this.props.buttonSelected.resistance);
-    }
-    handleBombClick() {
-        if (!this.props.buttonSelected.bomb === false){
-            this.props.toggleSelect(false);
-        }
-
-       this.props.bombClicked(!this.props.buttonSelected.bomb);
     }
 
   render () {
@@ -146,38 +79,38 @@ class PickButtons extends React.Component {
         <h4 className="pick-no-margin">Pick your buttons</h4>
             <div className="checkbox">
                 <label>
-                    <input type="checkbox" checked={allButtonsOn ? 'checked' : '' } onChange={this.handleCheck} /> select all
+                    <input type="checkbox" checked={allButtonsOn ? 'checked' : '' } onClick={this.handleCheck} /> select all
                 </label>
             </div>
         <div className="button-spacer">
-            <button className={buttonSelected.clap ? clapClass : basicClass} onClick={(evt) => {addRemove(evt, 'blue'); this.handleClapClick()}} data-icon="fa fa-sign-language">
+            <button className={buttonSelected.clap ? clapClass : basicClass} onClick={evt => {addRemove(evt, 'blue', 'clap')}} data-icon="fa fa-sign-language">
                 <i className="fa fa-sign-language" />
             </button>
-            <button className={buttonSelected.frown ? frownClass : basicClass} onClick={(evt) => {addRemove(evt, 'red'); this.handleFrownClick()}} data-icon="fa fa-frown-o">
+            <button className={buttonSelected.frown ? frownClass : basicClass} onClick={(evt) => {addRemove(evt, 'red', 'frown')}} data-icon="fa fa-frown-o">
                 <i className="fa fa-frown-o" />
             </button>
-            <button className={buttonSelected.empire ? empireClass : basicClass} onClick={(evt) => {addRemove(evt, 'gray'); this.handleEmpireClick()}} data-icon="fa fa-empire">
+            <button className={buttonSelected.empire ? empireClass : basicClass} onClick={(evt) => {addRemove(evt, 'gray', 'empire')}} data-icon="fa fa-empire">
                 <i className="fa fa-empire" />
             </button>
-            <button className={buttonSelected.heart ? heartClass : basicClass} onClick={(evt) => {addRemove(evt, 'dark-blue'); this.handleHeartClick()}} data-icon="fa fa-heart-o">
+            <button className={buttonSelected.heart ? heartClass : basicClass} onClick={(evt) => {addRemove(evt, 'dark-blue', 'heart')}} data-icon="fa fa-heart-o">
                 <i className="fa fa-heart-o" />
             </button>
-            <button className={buttonSelected.money ? moneyClass : basicClass} onClick={(evt) => {addRemove(evt, 'green'); this.handleMoneyClick()}} data-icon="fa fa-money fa-spin">
+            <button className={buttonSelected.money ? moneyClass : basicClass} onClick={(evt) => {addRemove(evt, 'green', 'money')}} data-icon="fa fa-money fa-spin">
                 <i className="fa fa-money" />
             </button>
-            <button className={buttonSelected.smile ? smileClass : basicClass} onClick={(evt) => {addRemove(evt, 'pink'); this.handleSmileClick()}} data-icon="fa fa-smile-o">
+            <button className={buttonSelected.smile ? smileClass : basicClass} onClick={(evt) => {addRemove(evt, 'pink', 'smile')}} data-icon="fa fa-smile-o">
                 <i className="fa fa-smile-o" />
             </button>
-            <button className={buttonSelected.question ? questionClass : basicClass} onClick={(evt) => {addRemove(evt, 'yellow'); this.handleQuestionClick()}} data-icon="fa fa-question">
+            <button className={buttonSelected.question ? questionClass : basicClass} onClick={(evt) => {addRemove(evt, 'yellow', 'question')}} data-icon="fa fa-question">
                 <i className="fa fa-question" />
             </button>
-            <button className={buttonSelected.thumb ? thumbClass : basicClass} onClick={(evt) => {addRemove(evt, 'mint-green'); this.handleThumbClick()}} data-icon="fa fa-thumbs-o-up">
+            <button className={buttonSelected.thumb ? thumbClass : basicClass} onClick={(evt) => {addRemove(evt, 'mint-green', 'thumb')}} data-icon="fa fa-thumbs-o-up">
                 <i className="fa fa-thumbs-o-up" />
             </button>
-            <button className={buttonSelected.resistance ? resistanceClass : basicClass} onClick={(evt) => {addRemove(evt, 'orange'); this.handleResistanceClick()}} data-icon="fa fa-rebel">
+            <button className={buttonSelected.resistance ? resistanceClass : basicClass} onClick={(evt) => {addRemove(evt, 'orange', 'resistance')}} data-icon="fa fa-rebel">
                 <i className="fa fa-rebel" />
             </button>
-            <button className={buttonSelected.bomb ? bombClass : basicClass} onClick={(evt) => {addRemove(evt, 'purple'); this.handleBombClick()}} data-icon="fa fa-bomb fa-spin">
+            <button className={buttonSelected.bomb ? bombClass : basicClass} onClick={(evt) => {addRemove(evt, 'purple', 'bomb')}} data-icon="fa fa-bomb fa-spin">
                 <i className="fa fa-bomb" />
             </button>
         </div>

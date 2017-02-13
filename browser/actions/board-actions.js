@@ -22,7 +22,6 @@ export const foundBoard = buttons => {
 };
 
 
-
 /* ------------       REDUCER     ------------------ */
 export const enterBoard = boardId => {
 	return dispatch => {

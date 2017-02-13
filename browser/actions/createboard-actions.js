@@ -7,7 +7,7 @@ export const CLEAR_ALL_BUTTONS = 'CLEAR_ALL_BUTTONS';
 export const CLEAR_ALL_SELECTED_BUTTONS = 'CLEAR_ALL_SELECTED_BUTTONS';
 
 /* ------------   ACTION CREATORS     ------------------ */
-export const showPickButtonError = bool => {
+export const pickButtonError = bool => {
 	return {
 		type: TOGGLE_PICK_BUTTON_ERROR,
 		payload: bool

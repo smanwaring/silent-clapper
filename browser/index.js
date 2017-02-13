@@ -15,7 +15,7 @@ import EmptyPage from './components/EmptyPage';
 /*------ ACTIONS ------ */
 import { enterBoard, foundBoard } from './actions/board-actions';
 import { showBoardNotFound, stateCurrentBoard } from './actions/joinboardform-actions';
-import { showPickButtonError } from './actions/createboard-actions';
+import { pickButtonError } from './actions/createboard-actions';
 
 /*------ load the buttons for the board you are about to enter ------ */
 function onEnterConfirmBoard(nextState) {
@@ -27,7 +27,7 @@ function onEnterConfirmBoard(nextState) {
 /*------ when you redirect back to the homepage, set the currentBoard state to empty/false lest you run into componentDidUpdate issues ------ */
 function onEnterResetCurrentBoard() {
 	store.dispatch( stateCurrentBoard(false) );
-	store.dispatch( showPickButtonError(false) );
+	store.dispatch( pickButtonError(false) );
 	store.dispatch( foundBoard( [] ) );
 }
 

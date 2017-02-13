@@ -102,7 +102,7 @@
 	/*------ COMPONENTS/CONTAINERS ------ */
 	function onEnterResetCurrentBoard() {
 		_store2.default.dispatch((0, _joinboardformActions.stateCurrentBoard)(false));
-		_store2.default.dispatch((0, _createboardActions.showPickButtonError)(false));
+		_store2.default.dispatch((0, _createboardActions.pickButtonError)(false));
 		_store2.default.dispatch((0, _boardActions.foundBoard)([]));
 	}
 	
@@ -28599,6 +28599,8 @@
 	
 	var _initialstate = __webpack_require__(301);
 	
+	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	var boardReducer = function boardReducer() {
@@ -28730,28 +28732,8 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			case _pickbuttonActions.TOGGLE_CLAP:
-				return Object.assign({}, state, { clap: action.payload });
-			case _pickbuttonActions.TOGGLE_FROWN:
-				return Object.assign({}, state, { frown: action.payload });
-			case _pickbuttonActions.TOGGLE_EMPIRE:
-				return Object.assign({}, state, { empire: action.payload });
-			case _pickbuttonActions.TOGGLE_HEART:
-				return Object.assign({}, state, { heart: action.payload });
-			case _pickbuttonActions.TOGGLE_MONEY:
-				return Object.assign({}, state, { money: action.payload });
-			case _pickbuttonActions.TOGGLE_SMILE:
-				return Object.assign({}, state, { smile: action.payload });
-			case _pickbuttonActions.TOGGLE_QUESTION:
-				return Object.assign({}, state, { question: action.payload });
-			case _pickbuttonActions.TOGGLE_THUMB:
-				return Object.assign({}, state, { thumb: action.payload });
-			case _pickbuttonActions.TOGGLE_BOMB:
-				return Object.assign({}, state, { bomb: action.payload });
-			case _pickbuttonActions.TOGGLE_RESISTANCE:
-				return Object.assign({}, state, { resistance: action.payload });
-			case _createboardActions.CLEAR_ALL_SELECTED_BUTTONS:
-				return _initialstate.initialButtonState;
+			case _pickbuttonActions.TOGGLE_BUTTON_STATE:
+				return Object.assign({}, state, _defineProperty({}, action.icon, action.boolean));
 			default:
 				return state;
 		}
@@ -28782,7 +28764,7 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
-	exports.addBoard = exports.clearAllSelectedButtons = exports.clearAllButtons = exports.stateBoardId = exports.showPickButtonError = exports.CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_BUTTONS = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
+	exports.addBoard = exports.clearAllSelectedButtons = exports.clearAllButtons = exports.stateBoardId = exports.pickButtonError = exports.CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_BUTTONS = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
 	
 	var _axios = __webpack_require__(272);
 	
@@ -28797,7 +28779,7 @@
 	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = 'CLEAR_ALL_SELECTED_BUTTONS';
 	
 	/* ------------   ACTION CREATORS     ------------------ */
-	var showPickButtonError = exports.showPickButtonError = function showPickButtonError(bool) {
+	var pickButtonError = exports.pickButtonError = function pickButtonError(bool) {
 		return {
 			type: TOGGLE_PICK_BUTTON_ERROR,
 			payload: bool
@@ -30390,7 +30372,6 @@
 	};
 	
 	/* ------------       DISPATCHERS     ------------------ */
-	
 	var loadBoard = exports.loadBoard = function loadBoard(boardId) {
 		return function (dispatch) {
 			_axios2.default.get('/api/' + boardId).then(function (res) {
@@ -30413,23 +30394,12 @@
 		value: true
 	});
 	/* -----------------    ACTIONS     ------------------ */
-	
 	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
 	var PICKED_BUTTON = exports.PICKED_BUTTON = 'PICKED_BUTTON';
 	var REMOVED_BUTTON = exports.REMOVED_BUTTON = 'REMOVED_BUTTON';
-	var TOGGLE_CLAP = exports.TOGGLE_CLAP = 'TOGGLE_CLAP';
-	var TOGGLE_FROWN = exports.TOGGLE_FROWN = 'TOGGLE_FROWN';
-	var TOGGLE_EMPIRE = exports.TOGGLE_EMPIRE = 'TOGGLE_EMPIRE';
-	var TOGGLE_HEART = exports.TOGGLE_HEART = 'TOGGLE_HEART';
-	var TOGGLE_MONEY = exports.TOGGLE_MONEY = 'TOGGLE_MONEY';
-	var TOGGLE_SMILE = exports.TOGGLE_SMILE = 'TOGGLE_SMILE';
-	var TOGGLE_QUESTION = exports.TOGGLE_QUESTION = 'TOGGLE_QUESTION';
-	var TOGGLE_THUMB = exports.TOGGLE_THUMB = 'TOGGLE_THUMB';
-	var TOGGLE_RESISTANCE = exports.TOGGLE_RESISTANCE = 'TOGGLE_RESISTANCE';
-	var TOGGLE_BOMB = exports.TOGGLE_BOMB = 'TOGGLE_BOMB';
+	var TOGGLE_BUTTON_STATE = exports.TOGGLE_BUTTON_STATE = 'TOGGLE_BUTTON_STATE';
 	
 	/* ------------   ACTION CREATORS     ------------------ */
-	
 	var pickedButton = exports.pickedButton = function pickedButton(data) {
 		return {
 			type: PICKED_BUTTON,
@@ -30444,80 +30414,18 @@
 		};
 	};
 	
-	var toggleClap = exports.toggleClap = function toggleClap(bool) {
-		return {
-			type: TOGGLE_CLAP,
-			payload: bool
-		};
-	};
-	
-	var toggleFrown = exports.toggleFrown = function toggleFrown(bool) {
-		return {
-			type: TOGGLE_FROWN,
-			payload: bool
-		};
-	};
-	
-	var toggleEmpire = exports.toggleEmpire = function toggleEmpire(bool) {
-		return {
-			type: TOGGLE_EMPIRE,
-			payload: bool
-		};
-	};
-	
-	var toggleHeart = exports.toggleHeart = function toggleHeart(bool) {
-		return {
-			type: TOGGLE_HEART,
-			payload: bool
-		};
-	};
-	
-	var toggleMoney = exports.toggleMoney = function toggleMoney(bool) {
-		return {
-			type: TOGGLE_MONEY,
-			payload: bool
-		};
-	};
-	
-	var toggleSmile = exports.toggleSmile = function toggleSmile(bool) {
-		return {
-			type: TOGGLE_SMILE,
-			payload: bool
-		};
-	};
-	
-	var toggleQuestion = exports.toggleQuestion = function toggleQuestion(bool) {
-		return {
-			type: TOGGLE_QUESTION,
-			payload: bool
-		};
-	};
-	
-	var toggleThumb = exports.toggleThumb = function toggleThumb(bool) {
-		return {
-			type: TOGGLE_THUMB,
-			payload: bool
-		};
-	};
-	
-	var toggleResistance = exports.toggleResistance = function toggleResistance(bool) {
-		return {
-			type: TOGGLE_RESISTANCE,
-			payload: bool
-		};
-	};
-	
-	var toggleBomb = exports.toggleBomb = function toggleBomb(bool) {
-		return {
-			type: TOGGLE_BOMB,
-			payload: bool
-		};
-	};
-	
 	var toggleSelectAll = exports.toggleSelectAll = function toggleSelectAll(bool) {
 		return {
 			type: TOGGLE_SELECT_ALL,
 			payload: bool
+		};
+	};
+	
+	var toggleButtonState = exports.toggleButtonState = function toggleButtonState(bool, shortIcon) {
+		return {
+			type: TOGGLE_BUTTON_STATE,
+			boolean: bool,
+			icon: shortIcon
 		};
 	};
 
@@ -30583,34 +30491,44 @@
 	});
 	var buttonData = exports.buttonData = [{
 	    color: 'blue',
-	    icon: 'fa fa-sign-language'
+	    icon: 'fa fa-sign-language',
+	    shortIcon: 'clap'
 	}, {
 	    color: 'red',
-	    icon: 'fa fa-frown-o'
+	    icon: 'fa fa-frown-o',
+	    shortIcon: 'frown'
 	}, {
 	    color: 'gray',
-	    icon: 'fa fa-empire'
+	    icon: 'fa fa-empire',
+	    shortIcon: 'empire'
 	}, {
 	    color: 'dark-blue',
-	    icon: 'fa fa-heart-o'
+	    icon: 'fa fa-heart-o',
+	    shortIcon: 'heart'
 	}, {
 	    color: 'green',
-	    icon: 'fa fa-money fa-spin'
+	    icon: 'fa fa-money fa-spin',
+	    shortIcon: 'money'
 	}, {
 	    color: 'pink',
-	    icon: 'fa fa-smile-o'
+	    icon: 'fa fa-smile-o',
+	    shortIcon: 'smile'
 	}, {
 	    color: 'yellow',
-	    icon: 'fa fa-question'
+	    icon: 'fa fa-question',
+	    shortIcon: 'question'
 	}, {
 	    color: 'mint-green',
-	    icon: 'fa fa-thumbs-o-up'
+	    icon: 'fa fa-thumbs-o-up',
+	    shortIcon: 'thumb'
 	}, {
 	    color: 'orange',
-	    icon: 'fa fa-rebel'
+	    icon: 'fa fa-rebel',
+	    shortIcon: 'resistance'
 	}, {
 	    color: 'purple',
-	    icon: 'fa fa-bomb fa-spin'
+	    icon: 'fa fa-bomb fa-spin',
+	    shortIcon: 'bomb'
 	}];
 	
 	var initialButtonState = exports.initialButtonState = {
@@ -32233,51 +32151,11 @@
 			removeButton: function removeButton(icon) {
 				dispatch((0, _pickbuttonActions.removedButton)(icon));
 			},
-			clapClicked: function clapClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleClap)(bool));
-			},
-			frownClicked: function frownClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleFrown)(bool));
-			},
-			empireClicked: function empireClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleEmpire)(bool));
-			},
-			heartClicked: function heartClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleHeart)(bool));
-			},
-			smileClicked: function smileClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleSmile)(bool));
-			},
-			bombClicked: function bombClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleBomb)(bool));
-			},
-			thumbClicked: function thumbClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleThumb)(bool));
-			},
-			resistanceClicked: function resistanceClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleResistance)(bool));
-			},
-			moneyClicked: function moneyClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleMoney)(bool));
-			},
-			questionClicked: function questionClicked(bool) {
-				dispatch((0, _pickbuttonActions.toggleQuestion)(bool));
-			},
-			selectAll: function selectAll(bool) {
-				dispatch((0, _pickbuttonActions.toggleClap)(bool));
-				dispatch((0, _pickbuttonActions.toggleFrown)(bool));
-				dispatch((0, _pickbuttonActions.toggleEmpire)(bool));
-				dispatch((0, _pickbuttonActions.toggleHeart)(bool));
-				dispatch((0, _pickbuttonActions.toggleSmile)(bool));
-				dispatch((0, _pickbuttonActions.toggleBomb)(bool));
-				dispatch((0, _pickbuttonActions.toggleThumb)(bool));
-				dispatch((0, _pickbuttonActions.toggleResistance)(bool));
-				dispatch((0, _pickbuttonActions.toggleMoney)(bool));
-				dispatch((0, _pickbuttonActions.toggleQuestion)(bool));
-				dispatch((0, _pickbuttonActions.toggleSelectAll)(bool));
-			},
 			toggleSelect: function toggleSelect(bool) {
 				dispatch((0, _pickbuttonActions.toggleSelectAll)(bool));
+			},
+			toggleButton: function toggleButton(bool, shortIcon) {
+				dispatch((0, _pickbuttonActions.toggleButtonState)(bool, shortIcon));
 			}
 		};
 	};
@@ -32317,26 +32195,20 @@
 	        var _this = _possibleConstructorReturn(this, (PickButtons.__proto__ || Object.getPrototypeOf(PickButtons)).call(this, props));
 	
 	        _this.handleIconClick = _this.handleIconClick.bind(_this);
-	        _this.handleClapClick = _this.handleClapClick.bind(_this);
-	        _this.handleFrownClick = _this.handleFrownClick.bind(_this);
-	        _this.handleEmpireClick = _this.handleEmpireClick.bind(_this);
-	        _this.handleHeartClick = _this.handleHeartClick.bind(_this);
-	        _this.handleMoneyClick = _this.handleMoneyClick.bind(_this);
-	        _this.handleSmileClick = _this.handleSmileClick.bind(_this);
-	        _this.handleQuestionClick = _this.handleQuestionClick.bind(_this);
-	        _this.handleThumbClick = _this.handleThumbClick.bind(_this);
-	        _this.handleResistanceClick = _this.handleResistanceClick.bind(_this);
-	        _this.handleBombClick = _this.handleBombClick.bind(_this);
 	        _this.handleCheck = _this.handleCheck.bind(_this);
+	        _this.deselectAllinDB = _this.deselectAllinDB.bind(_this);
+	        _this.selectAllInDB = _this.selectAllinDB.bind(_this);
 	        return _this;
 	    }
 	
 	    _createClass(PickButtons, [{
 	        key: 'handleIconClick',
-	        value: function handleIconClick(evt, color) {
+	        value: function handleIconClick(evt, color, shortIcon) {
 	            evt.preventDefault();
 	            var icon = evt.currentTarget.dataset.icon;
 	            var data = { icon: icon, color: color };
+	
+	            //add to db check
 	            if (this.props.buttonsPicked.map(function (data) {
 	                return data.icon;
 	            }).indexOf(icon) < 0) {
@@ -32344,6 +32216,11 @@
 	            } else {
 	                this.props.removeButton(data);
 	            }
+	            //front end view
+	            if (!this.props.buttonSelected[shortIcon]) {
+	                this.props.toggleSelect(false);
+	            }
+	            this.props.toggleButton(!this.props.buttonSelected[shortIcon], shortIcon);
 	        }
 	    }, {
 	        key: 'selectAllinDB',
@@ -32359,6 +32236,12 @@
 	            notSelectedArray.forEach(function (item) {
 	                _this2.props.addButton(item);
 	            });
+	
+	            this.props.buttonsAvailable.forEach(function (item) {
+	                _this2.props.toggleButton(true, item.shortIcon);
+	            });
+	
+	            this.props.toggleSelect(true);
 	        }
 	    }, {
 	        key: 'deselectAllinDB',
@@ -32367,6 +32250,8 @@
 	
 	            this.props.buttonsAvailable.forEach(function (item) {
 	                _this3.props.removeButton(item);
+	                _this3.props.toggleButton(false, item.shortIcon);
+	                _this3.props.toggleSelect(false);
 	            });
 	        }
 	    }, {
@@ -32374,107 +32259,13 @@
 	        value: function handleCheck() {
 	            if (this.props.allButtonsSelected) {
 	                this.deselectAllinDB();
-	                this.props.selectAll(!this.props.allButtonsSelected);
 	            } else {
 	                this.selectAllinDB();
-	                this.props.selectAll(!this.props.allButtonsSelected);
 	            }
-	        }
-	    }, {
-	        key: 'handleClapClick',
-	        value: function handleClapClick() {
-	            if (!this.props.buttonSelected.clap === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.clapClicked(!this.props.buttonSelected.clap);
-	        }
-	    }, {
-	        key: 'handleFrownClick',
-	        value: function handleFrownClick() {
-	            if (!this.props.buttonSelected.frown === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.frownClicked(!this.props.buttonSelected.frown);
-	        }
-	    }, {
-	        key: 'handleEmpireClick',
-	        value: function handleEmpireClick() {
-	            if (!this.props.buttonSelected.empire === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.empireClicked(!this.props.buttonSelected.empire);
-	        }
-	    }, {
-	        key: 'handleHeartClick',
-	        value: function handleHeartClick() {
-	            if (!this.props.buttonSelected.heart === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.heartClicked(!this.props.buttonSelected.heart);
-	        }
-	    }, {
-	        key: 'handleMoneyClick',
-	        value: function handleMoneyClick() {
-	            if (!this.props.buttonSelected.money === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.moneyClicked(!this.props.buttonSelected.money);
-	        }
-	    }, {
-	        key: 'handleSmileClick',
-	        value: function handleSmileClick() {
-	            if (!this.props.buttonSelected.smile === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.smileClicked(!this.props.buttonSelected.smile);
-	        }
-	    }, {
-	        key: 'handleQuestionClick',
-	        value: function handleQuestionClick() {
-	            if (!this.props.buttonSelected.question === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.questionClicked(!this.props.buttonSelected.question);
-	        }
-	    }, {
-	        key: 'handleThumbClick',
-	        value: function handleThumbClick() {
-	            if (!this.props.buttonSelected.thumb === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.thumbClicked(!this.props.buttonSelected.thumb);
-	        }
-	    }, {
-	        key: 'handleResistanceClick',
-	        value: function handleResistanceClick() {
-	            if (!this.props.buttonSelected.resistance === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.resistanceClicked(!this.props.buttonSelected.resistance);
-	        }
-	    }, {
-	        key: 'handleBombClick',
-	        value: function handleBombClick() {
-	            if (!this.props.buttonSelected.bomb === false) {
-	                this.props.toggleSelect(false);
-	            }
-	
-	            this.props.bombClicked(!this.props.buttonSelected.bomb);
 	        }
 	    }, {
 	        key: 'render',
 	        value: function render() {
-	            var _this4 = this;
-	
 	            var buttonSelected = this.props.buttonSelected;
 	
 	            var addRemove = this.handleIconClick;
@@ -32504,7 +32295,7 @@
 	                    _react2.default.createElement(
 	                        'label',
 	                        null,
-	                        _react2.default.createElement('input', { type: 'checkbox', checked: allButtonsOn ? 'checked' : '', onChange: this.handleCheck }),
+	                        _react2.default.createElement('input', { type: 'checkbox', checked: allButtonsOn ? 'checked' : '', onClick: this.handleCheck }),
 	                        ' select all'
 	                    )
 	                ),
@@ -32514,70 +32305,70 @@
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.clap ? clapClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'blue');_this4.handleClapClick();
+	                                addRemove(evt, 'blue', 'clap');
 	                            }, 'data-icon': 'fa fa-sign-language' },
 	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.frown ? frownClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'red');_this4.handleFrownClick();
+	                                addRemove(evt, 'red', 'frown');
 	                            }, 'data-icon': 'fa fa-frown-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.empire ? empireClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'gray');_this4.handleEmpireClick();
+	                                addRemove(evt, 'gray', 'empire');
 	                            }, 'data-icon': 'fa fa-empire' },
 	                        _react2.default.createElement('i', { className: 'fa fa-empire' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.heart ? heartClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'dark-blue');_this4.handleHeartClick();
+	                                addRemove(evt, 'dark-blue', 'heart');
 	                            }, 'data-icon': 'fa fa-heart-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-heart-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.money ? moneyClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'green');_this4.handleMoneyClick();
+	                                addRemove(evt, 'green', 'money');
 	                            }, 'data-icon': 'fa fa-money fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-money' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.smile ? smileClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'pink');_this4.handleSmileClick();
+	                                addRemove(evt, 'pink', 'smile');
 	                            }, 'data-icon': 'fa fa-smile-o' },
 	                        _react2.default.createElement('i', { className: 'fa fa-smile-o' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.question ? questionClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'yellow');_this4.handleQuestionClick();
+	                                addRemove(evt, 'yellow', 'question');
 	                            }, 'data-icon': 'fa fa-question' },
 	                        _react2.default.createElement('i', { className: 'fa fa-question' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'mint-green');_this4.handleThumbClick();
+	                                addRemove(evt, 'mint-green', 'thumb');
 	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
 	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'orange');_this4.handleResistanceClick();
+	                                addRemove(evt, 'orange', 'resistance');
 	                            }, 'data-icon': 'fa fa-rebel' },
 	                        _react2.default.createElement('i', { className: 'fa fa-rebel' })
 	                    ),
 	                    _react2.default.createElement(
 	                        'button',
 	                        { className: buttonSelected.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'purple');_this4.handleBombClick();
+	                                addRemove(evt, 'purple', 'bomb');
 	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
 	                        _react2.default.createElement('i', { className: 'fa fa-bomb' })
 	                    )
@@ -32849,9 +32640,17 @@
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	var Root = function () {
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var Root = function (_React$Component) {
+	    _inherits(Root, _React$Component);
+	
 	    function Root() {
 	        _classCallCheck(this, Root);
+	
+	        return _possibleConstructorReturn(this, (Root.__proto__ || Object.getPrototypeOf(Root)).apply(this, arguments));
 	    }
 	
 	    _createClass(Root, [{
@@ -32866,7 +32665,7 @@
 	    }]);
 	
 	    return Root;
-	}();
+	}(_react2.default.Component);
 	
 	exports.default = Root;
 
