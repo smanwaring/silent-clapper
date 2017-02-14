@@ -36,7 +36,6 @@ router.get('/:boardId', (req, res, next) => {
   } else {
     res.send(foundBoard.path);
   }
-  next();
 });
 
 //get the buttons for a particular board
@@ -58,8 +57,5 @@ router.get('/enter/:boardId', (req, res, next) => {
     .catch(next);
   }
 });
-
-// No API routes matched? 404.
-router.use((req, res) => res.status(404).end());
 
 module.exports = router;

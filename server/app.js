@@ -7,7 +7,6 @@ const http = require('http');
 const express = require('express');
 const app = express(); //invoke router as app
 const server = http.createServer();
-const socketio = require('socket.io');
 const routes = require('./routes') ;
 const db = require('./db');
 
@@ -15,6 +14,7 @@ const db = require('./db');
 require('./db/models');
 
 server.on('request', app);
+const io = require('./socket')(server);
 
 const PATHS = {
   indexHTML: path.join(__dirname, '../public/index.html'),
@@ -23,15 +23,20 @@ const PATHS = {
 
 // init router ('app')
 app
+  .use(morgan('dev'))
   .use(express.static(PATHS.public)) //server up public files
   .use(bodyParser.urlencoded({ extended: true }))
   .use(bodyParser.json())
-  .use(morgan('dev'))
   .use('/api', routes);
 
 // default routing
 app.get('/*', (req, res) => {
   res.sendFile(PATHS.indexHTML);
+});
+
+// No API routes matched? 404.
+app.use((req, res) => {
+  res.status(404).end();
 });
 
 // Error handler
@@ -43,47 +48,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-// creates a new connection server for web sockets and integrates it into our HTTP server 
-// this needs to be below the server.on('request', app) so that our 
-// express app takes precedence over our socket server for typical HTTP requests
-let io = socketio(server);
-
-let roomsToCount = {};
-
-// use socket server as an event emitter in order to listen for new connections
-io.on('connection', (socket) => {
-
-  let newRoom;
-
-  // listens to emit to join room
-  socket.on('wantToJoinRoom', (roomName) => {
-    newRoom = roomName;
-    socket.join(newRoom);
-    socket.currRoom = newRoom;
-    roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
-    io.emit('connectionEvent', roomsToCount[newRoom]);
-  });
-
-  //event that runs anytime a socket disconnects
-  socket.on('disconnect', () => {
-    if (socket.adapter.rooms[newRoom]){
-      roomsToCount[newRoom] = socket.adapter.rooms[newRoom].length;
-      io.emit('connectionEvent', roomsToCount[newRoom]);
-    } else {
-      delete  roomsToCount[newRoom];
-    }
-    socket.disconnect();
-  });
-
-  // server is receiving click data from the client here 
-  // so we want to broadcast that data to all other connected clients 
-  socket.on('registerAction', (icon) => {
-    console.log('I am emitting to', newRoom);
-    io.to(newRoom).emit('showAction', icon);
-  });
-
-});
-
 server.listen(1337, () => {
   console.log('The server is listening on port 1337!');
     db.sync({})
@@ -91,7 +55,6 @@ server.listen(1337, () => {
       console.log('Oh and btw the postgres server is totally connected, too');
   });
 });
-
 
 // export app and socket.io server
 module.exports = app;
