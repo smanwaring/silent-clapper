@@ -2,7 +2,7 @@
 export const TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
 export const PICKED_BUTTON = 'PICKED_BUTTON';
 export const REMOVED_BUTTON = 'REMOVED_BUTTON';
-export const TOGGLE_BUTTON_STATE = 'TOGGLE_BUTTON_STATE';
+export const TOGGLE_BUTTON_SELECTED = 'TOGGLE_BUTTON_SELECTED';
 
 
 /* ------------   ACTION CREATORS     ------------------ */
@@ -28,10 +28,10 @@ export const toggleSelectAll = bool => {
 	};
 };
 
-export const toggleButtonState = (bool, shortIcon) => {
+export const toggleButtonSelected = (bool, index) => {
 	return {
-		type: TOGGLE_BUTTON_STATE,
+		type: TOGGLE_BUTTON_SELECTED,
 		boolean: bool,
-		icon: shortIcon
+		index: index
 	};
 };

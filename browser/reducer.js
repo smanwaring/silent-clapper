@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
-import { TOGGLE_PICK_BUTTON_ERROR, CLEAR_ALL_BUTTONS, CLEAR_ALL_SELECTED_BUTTONS  } from './actions/createboard-actions';
-import { SHOW_CREATE, SHOW_JOIN } from './actions/homeform-actions'; 
+import { TOGGLE_PICK_BUTTON_ERROR, CLEAR_ALL_BUTTONS } from './actions/createboard-actions';
+import { SHOW_CREATE, SHOW_JOIN } from './actions/homeform-actions';
 import { BOARD_NOT_FOUND, SET_CURRENT_BOARD } from './actions/joinboardform-actions' ;
-import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_CLAP, TOGGLE_FROWN, TOGGLE_EMPIRE, TOGGLE_HEART, TOGGLE_MONEY, TOGGLE_SMILE, TOGGLE_QUESTION, TOGGLE_THUMB, TOGGLE_RESISTANCE, TOGGLE_BOMB, TOGGLE_BUTTON_STATE } from './actions/pickbutton-actions';
+import { TOGGLE_SELECT_ALL, PICKED_BUTTON, REMOVED_BUTTON, TOGGLE_BUTTON_SELECTED } from './actions/pickbutton-actions';
 import { LOAD_BUTTONS, SET_BOARDID } from './actions/board-actions';
-import { buttonData, initialButtonState} from './initialstate';
+import { buttonData } from './initialstate';
 
 const boardReducer = (state = '', action) => {
 	switch (action.type){
@@ -85,27 +85,24 @@ const pickButtonErrorReducer = (state = false, action) => {
 
 const buttonsAvailableReducer = (state = buttonData, action) => {
 	switch (action.type){
+		case TOGGLE_BUTTON_SELECTED:
+			let newState = state.map( (obj, i ) => {
+				if (obj.index == action.index) {
+					obj.isSelected = action.boolean;
+				}
+				return obj;
+			});
+			return newState;
 		default: return state;
 	}
 };
-
-const selectButtonReducer = (state = initialButtonState, action) => {
-	switch (action.type) {
-		case TOGGLE_BUTTON_STATE:
-			return Object.assign({}, state, {[action.icon]: action.boolean});
-		default: return state;
-	}
-};
-
-
 
 const rootReducer = combineReducers({
 	generatedBoard: boardReducer,
 	currentBoard: currentBoardReducer,
-	buttonsPicked: iconsPickedReducer,
+	buttonsPicked: iconsPickedReducer, 
 	boardNotFound: foundBoardReducer,
 	buttonsToLoad:  boardButtonsReducer,
-	buttonSelected: selectButtonReducer,
 	showCreateTab: showCreateTabReducer,
 	showJoinTab: showJoinBoardTabReducer,
 	allButtonsSelected: toggleSelectAllReducer,

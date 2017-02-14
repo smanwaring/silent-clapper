@@ -28599,8 +28599,6 @@
 	
 	var _initialstate = __webpack_require__(301);
 	
-	function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-	
 	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 	
 	var boardReducer = function boardReducer() {
@@ -28722,18 +28720,14 @@
 		var action = arguments[1];
 	
 		switch (action.type) {
-			default:
-				return state;
-		}
-	};
-	
-	var selectButtonReducer = function selectButtonReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialstate.initialButtonState;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _pickbuttonActions.TOGGLE_BUTTON_STATE:
-				return Object.assign({}, state, _defineProperty({}, action.icon, action.boolean));
+			case _pickbuttonActions.TOGGLE_BUTTON_SELECTED:
+				var newState = state.map(function (obj, i) {
+					if (obj.index == action.index) {
+						obj.isSelected = action.boolean;
+					}
+					return obj;
+				});
+				return newState;
 			default:
 				return state;
 		}
@@ -28745,7 +28739,6 @@
 		buttonsPicked: iconsPickedReducer,
 		boardNotFound: foundBoardReducer,
 		buttonsToLoad: boardButtonsReducer,
-		buttonSelected: selectButtonReducer,
 		showCreateTab: showCreateTabReducer,
 		showJoinTab: showJoinBoardTabReducer,
 		allButtonsSelected: toggleSelectAllReducer,
@@ -30397,7 +30390,7 @@
 	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
 	var PICKED_BUTTON = exports.PICKED_BUTTON = 'PICKED_BUTTON';
 	var REMOVED_BUTTON = exports.REMOVED_BUTTON = 'REMOVED_BUTTON';
-	var TOGGLE_BUTTON_STATE = exports.TOGGLE_BUTTON_STATE = 'TOGGLE_BUTTON_STATE';
+	var TOGGLE_BUTTON_SELECTED = exports.TOGGLE_BUTTON_SELECTED = 'TOGGLE_BUTTON_SELECTED';
 	
 	/* ------------   ACTION CREATORS     ------------------ */
 	var pickedButton = exports.pickedButton = function pickedButton(data) {
@@ -30421,11 +30414,11 @@
 		};
 	};
 	
-	var toggleButtonState = exports.toggleButtonState = function toggleButtonState(bool, shortIcon) {
+	var toggleButtonSelected = exports.toggleButtonSelected = function toggleButtonSelected(bool, index) {
 		return {
-			type: TOGGLE_BUTTON_STATE,
+			type: TOGGLE_BUTTON_SELECTED,
 			boolean: bool,
-			icon: shortIcon
+			index: index
 		};
 	};
 
@@ -30487,62 +30480,79 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	        value: true
 	});
 	var buttonData = exports.buttonData = [{
-	    color: 'blue',
-	    icon: 'fa fa-sign-language',
-	    shortIcon: 'clap'
+	        color: 'blue',
+	        icon: 'fa fa-sign-language',
+	        shortIcon: 'clap',
+	        isSelected: false,
+	        nickname: 'clap',
+	        index: '0'
 	}, {
-	    color: 'red',
-	    icon: 'fa fa-frown-o',
-	    shortIcon: 'frown'
+	        color: 'red',
+	        icon: 'fa fa-frown-o',
+	        shortIcon: 'frown',
+	        isSelected: false,
+	        nickname: 'frown',
+	        index: '1'
 	}, {
-	    color: 'gray',
-	    icon: 'fa fa-empire',
-	    shortIcon: 'empire'
+	        color: 'gray',
+	        icon: 'fa fa-empire',
+	        shortIcon: 'empire',
+	        isSelected: false,
+	        nickname: 'empire',
+	        index: '2'
 	}, {
-	    color: 'dark-blue',
-	    icon: 'fa fa-heart-o',
-	    shortIcon: 'heart'
+	        color: 'dark-blue',
+	        icon: 'fa fa-heart-o',
+	        shortIcon: 'heart',
+	        isSelected: false,
+	        nickname: 'heart',
+	        index: '3'
 	}, {
-	    color: 'green',
-	    icon: 'fa fa-money fa-spin',
-	    shortIcon: 'money'
+	        color: 'green',
+	        icon: 'fa fa-money fa-spin',
+	        shortIcon: 'money',
+	        isSelected: false,
+	        nickname: 'money',
+	        index: '4'
 	}, {
-	    color: 'pink',
-	    icon: 'fa fa-smile-o',
-	    shortIcon: 'smile'
+	        color: 'pink',
+	        icon: 'fa fa-smile-o',
+	        shortIcon: 'smile',
+	        isSelected: false,
+	        nickname: 'smile',
+	        index: '5'
 	}, {
-	    color: 'yellow',
-	    icon: 'fa fa-question',
-	    shortIcon: 'question'
+	        color: 'yellow',
+	        icon: 'fa fa-question',
+	        shortIcon: 'question',
+	        isSelected: false,
+	        nickname: 'question',
+	        index: '6'
 	}, {
-	    color: 'mint-green',
-	    icon: 'fa fa-thumbs-o-up',
-	    shortIcon: 'thumb'
+	        color: 'mint-green',
+	        icon: 'fa fa-thumbs-o-up',
+	        shortIcon: 'thumb',
+	        isSelected: false,
+	        nickname: 'thumb',
+	        index: '7'
 	}, {
-	    color: 'orange',
-	    icon: 'fa fa-rebel',
-	    shortIcon: 'resistance'
+	        color: 'orange',
+	        icon: 'fa fa-rebel',
+	        shortIcon: 'resistance',
+	        isSelected: false,
+	        nickname: 'resistance',
+	        index: '8'
 	}, {
-	    color: 'purple',
-	    icon: 'fa fa-bomb fa-spin',
-	    shortIcon: 'bomb'
+	        color: 'purple',
+	        icon: 'fa fa-bomb fa-spin',
+	        shortIcon: 'bomb',
+	        isSelected: false,
+	        nickname: 'bomb',
+	        index: '9'
 	}];
-	
-	var initialButtonState = exports.initialButtonState = {
-	    clap: false,
-	    frown: false,
-	    empire: false,
-	    heart: false,
-	    money: false,
-	    smile: false,
-	    question: false,
-	    thumb: false,
-	    resistance: false,
-	    bomb: false
-	};
 
 /***/ },
 /* 302 */
@@ -32132,12 +32142,10 @@
 	var mapStateToProps = function mapStateToProps(_ref) {
 		var buttonsPicked = _ref.buttonsPicked,
 		    allButtonsSelected = _ref.allButtonsSelected,
-		    buttonSelected = _ref.buttonSelected,
 		    buttonsAvailable = _ref.buttonsAvailable;
 	
 		return {
 			buttonsPicked: buttonsPicked,
-			buttonSelected: buttonSelected,
 			allButtonsSelected: allButtonsSelected,
 			buttonsAvailable: buttonsAvailable
 		};
@@ -32154,8 +32162,8 @@
 			toggleSelect: function toggleSelect(bool) {
 				dispatch((0, _pickbuttonActions.toggleSelectAll)(bool));
 			},
-			toggleButton: function toggleButton(bool, shortIcon) {
-				dispatch((0, _pickbuttonActions.toggleButtonState)(bool, shortIcon));
+			toggleButton: function toggleButton(bool, index) {
+				dispatch((0, _pickbuttonActions.toggleButtonSelected)(bool, index));
 			}
 		};
 	};
@@ -32166,7 +32174,7 @@
 /* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -32202,13 +32210,12 @@
 	    }
 	
 	    _createClass(PickButtons, [{
-	        key: 'handleIconClick',
-	        value: function handleIconClick(evt, color, shortIcon) {
+	        key: "handleIconClick",
+	        value: function handleIconClick(evt, color, index) {
 	            evt.preventDefault();
 	            var icon = evt.currentTarget.dataset.icon;
 	            var data = { icon: icon, color: color };
 	
-	            //add to db check
 	            if (this.props.buttonsPicked.map(function (data) {
 	                return data.icon;
 	            }).indexOf(icon) < 0) {
@@ -32216,14 +32223,13 @@
 	            } else {
 	                this.props.removeButton(data);
 	            }
-	            //front end view
-	            if (!this.props.buttonSelected[shortIcon]) {
+	            if (!this.props.buttonsAvailable[index]["isSelected"]) {
 	                this.props.toggleSelect(false);
 	            }
-	            this.props.toggleButton(!this.props.buttonSelected[shortIcon], shortIcon);
+	            this.props.toggleButton(!this.props.buttonsAvailable[index]["isSelected"], index);
 	        }
 	    }, {
-	        key: 'selectAllinDB',
+	        key: "selectAllinDB",
 	        value: function selectAllinDB() {
 	            var _this2 = this;
 	
@@ -32237,25 +32243,25 @@
 	                _this2.props.addButton(item);
 	            });
 	
-	            this.props.buttonsAvailable.forEach(function (item) {
-	                _this2.props.toggleButton(true, item.shortIcon);
+	            this.props.buttonsAvailable.forEach(function (item, i) {
+	                _this2.props.toggleButton(true, i);
 	            });
 	
 	            this.props.toggleSelect(true);
 	        }
 	    }, {
-	        key: 'deselectAllinDB',
+	        key: "deselectAllinDB",
 	        value: function deselectAllinDB() {
 	            var _this3 = this;
 	
-	            this.props.buttonsAvailable.forEach(function (item) {
+	            this.props.buttonsAvailable.forEach(function (item, i) {
 	                _this3.props.removeButton(item);
-	                _this3.props.toggleButton(false, item.shortIcon);
+	                _this3.props.toggleButton(false, i);
 	                _this3.props.toggleSelect(false);
 	            });
 	        }
 	    }, {
-	        key: 'handleCheck',
+	        key: "handleCheck",
 	        value: function handleCheck() {
 	            if (this.props.allButtonsSelected) {
 	                this.deselectAllinDB();
@@ -32264,114 +32270,44 @@
 	            }
 	        }
 	    }, {
-	        key: 'render',
+	        key: "render",
 	        value: function render() {
 	            var buttonSelected = this.props.buttonSelected;
 	
 	            var addRemove = this.handleIconClick;
-	            var basicClass = 'btn btn-circle btn-md btn-hover nuetralbg';
-	            var clapClass = 'btn btn-circle btn-md blue';
-	            var frownClass = 'btn btn-circle btn-md red';
-	            var empireClass = 'btn btn-circle btn-md gray';
-	            var heartClass = 'btn btn-circle btn-md dark-blue';
-	            var moneyClass = 'btn btn-circle btn-md green';
-	            var questionClass = 'btn btn-circle btn-md yellow';
-	            var smileClass = 'btn btn-circle btn-md pink';
-	            var thumbClass = 'btn btn-circle btn-md mint-green';
-	            var resistanceClass = 'btn btn-circle btn-md orange';
-	            var bombClass = 'btn btn-circle btn-md purple';
+	            var baseClass = 'btn btn btn-circle btn-md';
+	            var unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
 	            var allButtonsOn = this.props.buttonsPicked.length === 10;
 	            return _react2.default.createElement(
-	                'div',
+	                "div",
 	                null,
 	                _react2.default.createElement(
-	                    'h4',
-	                    { className: 'pick-no-margin' },
-	                    'Pick your buttons'
+	                    "h4",
+	                    { className: "pick-no-margin" },
+	                    "Pick your buttons"
 	                ),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'checkbox' },
+	                    "div",
+	                    { className: "checkbox" },
 	                    _react2.default.createElement(
-	                        'label',
+	                        "label",
 	                        null,
-	                        _react2.default.createElement('input', { type: 'checkbox', checked: allButtonsOn ? 'checked' : '', onClick: this.handleCheck }),
-	                        ' select all'
+	                        _react2.default.createElement("input", { type: "checkbox", checked: allButtonsOn ? 'checked' : '', onClick: this.handleCheck }),
+	                        " select all"
 	                    )
 	                ),
 	                _react2.default.createElement(
-	                    'div',
-	                    { className: 'button-spacer' },
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.clap ? clapClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'blue', 'clap');
-	                            }, 'data-icon': 'fa fa-sign-language' },
-	                        _react2.default.createElement('i', { className: 'fa fa-sign-language' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.frown ? frownClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'red', 'frown');
-	                            }, 'data-icon': 'fa fa-frown-o' },
-	                        _react2.default.createElement('i', { className: 'fa fa-frown-o' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.empire ? empireClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'gray', 'empire');
-	                            }, 'data-icon': 'fa fa-empire' },
-	                        _react2.default.createElement('i', { className: 'fa fa-empire' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.heart ? heartClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'dark-blue', 'heart');
-	                            }, 'data-icon': 'fa fa-heart-o' },
-	                        _react2.default.createElement('i', { className: 'fa fa-heart-o' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.money ? moneyClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'green', 'money');
-	                            }, 'data-icon': 'fa fa-money fa-spin' },
-	                        _react2.default.createElement('i', { className: 'fa fa-money' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.smile ? smileClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'pink', 'smile');
-	                            }, 'data-icon': 'fa fa-smile-o' },
-	                        _react2.default.createElement('i', { className: 'fa fa-smile-o' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.question ? questionClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'yellow', 'question');
-	                            }, 'data-icon': 'fa fa-question' },
-	                        _react2.default.createElement('i', { className: 'fa fa-question' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.thumb ? thumbClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'mint-green', 'thumb');
-	                            }, 'data-icon': 'fa fa-thumbs-o-up' },
-	                        _react2.default.createElement('i', { className: 'fa fa-thumbs-o-up' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.resistance ? resistanceClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'orange', 'resistance');
-	                            }, 'data-icon': 'fa fa-rebel' },
-	                        _react2.default.createElement('i', { className: 'fa fa-rebel' })
-	                    ),
-	                    _react2.default.createElement(
-	                        'button',
-	                        { className: buttonSelected.bomb ? bombClass : basicClass, onClick: function onClick(evt) {
-	                                addRemove(evt, 'purple', 'bomb');
-	                            }, 'data-icon': 'fa fa-bomb fa-spin' },
-	                        _react2.default.createElement('i', { className: 'fa fa-bomb' })
-	                    )
+	                    "div",
+	                    { className: "button-spacer" },
+	                    this.props && this.props.buttonsAvailable.map(function (btn, i) {
+	                        return _react2.default.createElement(
+	                            "button",
+	                            { key: btn.nickname, className: btn.isSelected ? baseClass + " " + btn.color : unselectedClass, onClick: function onClick(evt) {
+	                                    addRemove(evt, btn.color, i);
+	                                }, "data-icon": btn.icon },
+	                            _react2.default.createElement("i", { className: btn.icon.replace('fa-spin', '') })
+	                        );
+	                    })
 	                )
 	            );
 	        }

@@ -39,7 +39,7 @@ class Homepage extends React.Component {
             </div>
         </div>
         <footer>
-            {buttonsAvailable && buttonsAvailable.map((btn) => {
+            {buttonsAvailable && buttonsAvailable.map( btn => {
                 return (
                     <button key={btn.icon} className={`btn btn-circle btn-xl ${btn.color}`} onClick={this.handleIconClick} data-icon={btn.icon}>
                         <i className={btn.icon.replace('fa-spin', '' )} />
