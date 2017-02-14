@@ -9,10 +9,10 @@ const app = express(); //invoke router as app
 const server = http.createServer();
 const socketio = require('socket.io');
 const routes = require('./routes') ;
-const db = require('../db');
+const db = require('./db');
 
 //require in our models
-require('../db/models');
+require('./db/models');
 
 server.on('request', app);
 
@@ -84,15 +84,13 @@ io.on('connection', (socket) => {
 
 });
 
-
 server.listen(1337, () => {
-    console.log('The server is listening on port 1337!');
+  console.log('The server is listening on port 1337!');
     db.sync({})
       .then( () => {
       console.log('Oh and btw the postgres server is totally connected, too');
   });
 });
-
 
 
 // export app and socket.io server

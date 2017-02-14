@@ -1,8 +1,7 @@
 // init router
 const router = require('express').Router();
-const Board = require('../../db/models').Board;
-const Button = require('../../db/models').Button;
-
+const Board = require('../db/models').Board;
+const Button = require('../db/models').Button;
 
 router.param('boardId', function(req, res, next, theId){
   Board.findOne({
@@ -40,7 +39,6 @@ router.get('/:boardId', (req, res, next) => {
   next();
 });
 
-
 //get the buttons for a particular board
 router.get('/enter/:boardId', (req, res, next) => {
   var objToReturn = {};
@@ -60,7 +58,6 @@ router.get('/enter/:boardId', (req, res, next) => {
     .catch(next);
   }
 });
-
 
 // No API routes matched? 404.
 router.use((req, res) => res.status(404).end());

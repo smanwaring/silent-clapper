@@ -62,27 +62,27 @@
 	
 	var _store2 = _interopRequireDefault(_store);
 	
-	var _Homepage = __webpack_require__(278);
+	var _Homepage = __webpack_require__(314);
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _Board = __webpack_require__(318);
+	var _Board = __webpack_require__(325);
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _Root = __webpack_require__(321);
+	var _Root = __webpack_require__(327);
 	
 	var _Root2 = _interopRequireDefault(_Root);
 	
-	var _EmptyPage = __webpack_require__(322);
+	var _EmptyPage = __webpack_require__(328);
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
-	var _boardActions = __webpack_require__(320);
+	var _boardActions = __webpack_require__(303);
 	
-	var _joinboardformActions = __webpack_require__(284);
+	var _joinboardformActions = __webpack_require__(305);
 	
-	var _createboardActions = __webpack_require__(315);
+	var _createboardActions = __webpack_require__(275);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28561,11 +28561,11 @@
 	
 	var _reducer2 = _interopRequireDefault(_reducer);
 	
-	var _reduxThunk = __webpack_require__(271);
+	var _reduxThunk = __webpack_require__(307);
 	
 	var _reduxThunk2 = _interopRequireDefault(_reduxThunk);
 	
-	var _reduxLogger = __webpack_require__(272);
+	var _reduxLogger = __webpack_require__(308);
 	
 	var _reduxLogger2 = _interopRequireDefault(_reduxLogger);
 	
@@ -28587,15 +28587,15 @@
 	
 	var _redux = __webpack_require__(189);
 	
-	var _homeformReducer = __webpack_require__(329);
+	var _homeformReducer = __webpack_require__(271);
 	
-	var _pickbuttonReducer = __webpack_require__(330);
+	var _pickbuttonReducer = __webpack_require__(273);
 	
-	var _createboardReducer = __webpack_require__(331);
+	var _createboardReducer = __webpack_require__(302);
 	
-	var _boardReducer = __webpack_require__(332);
+	var _boardReducer = __webpack_require__(304);
 	
-	var _joinboardformReducer = __webpack_require__(333);
+	var _joinboardformReducer = __webpack_require__(306);
 	
 	var rootReducer = (0, _redux.combineReducers)({
 		generatedBoard: _createboardReducer.generatedBoard,
@@ -28615,6 +28615,2061 @@
 
 /***/ },
 /* 271 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.showJoinTab = exports.showCreateTab = undefined;
+	
+	var _homeformActions = __webpack_require__(272);
+	
+	var showCreateTab = exports.showCreateTab = function showCreateTab() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _homeformActions.SHOW_CREATE:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
+	var showJoinTab = exports.showJoinTab = function showJoinTab() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _homeformActions.SHOW_JOIN:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+
+/***/ },
+/* 272 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	/* -----------------    ACTIONS     ------------------ */
+	var SHOW_CREATE = exports.SHOW_CREATE = 'SHOW_CREATE';
+	var SHOW_JOIN = exports.SHOW_JOIN = 'SHOW_JOIN';
+	
+	/* ------------   ACTION CREATORS     ------------------ */
+	var showCreate = exports.showCreate = function showCreate(bool) {
+	  return {
+	    type: SHOW_CREATE,
+	    payload: bool
+	  };
+	};
+	
+	var showJoin = exports.showJoin = function showJoin(bool) {
+	  return {
+	    type: SHOW_JOIN,
+	    payload: bool
+	  };
+	};
+
+/***/ },
+/* 273 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.allButtonsSelected = exports.buttonsAvailable = exports.buttonsPicked = undefined;
+	
+	var _pickbuttonActions = __webpack_require__(274);
+	
+	var _createboardActions = __webpack_require__(275);
+	
+	var _initialstate = __webpack_require__(301);
+	
+	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+	
+	var buttonsPicked = exports.buttonsPicked = function buttonsPicked() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _pickbuttonActions.PICKED_BUTTON:
+				return [].concat(_toConsumableArray(state), [action.payload]);
+			case _pickbuttonActions.REMOVED_BUTTON:
+				return state.filter(function (buttonInfo) {
+					return buttonInfo.icon !== action.payload.icon;
+				});
+			case _createboardActions.CLEAR_ALL_BUTTONS:
+				return [];
+			default:
+				return state;
+		}
+	};
+	
+	var buttonsAvailable = exports.buttonsAvailable = function buttonsAvailable() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialstate.buttonData;
+		var action = arguments[1];
+	
+		var newState = void 0;
+		switch (action.type) {
+			case _pickbuttonActions.TOGGLE_BUTTON_SELECTED:
+				newState = state.map(function (obj) {
+					if (obj.index == action.index) {
+						obj.isSelected = action.boolean;
+					}
+					return obj;
+				});
+				return newState;
+			case _pickbuttonActions.TOGGLE_ALL_BUTTONS:
+				newState = state.map(function (obj) {
+					obj.isSelected = action.boolean;
+					return obj;
+				});
+				return newState;
+			default:
+				return state;
+		}
+	};
+	
+	var allButtonsSelected = exports.allButtonsSelected = function allButtonsSelected() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _pickbuttonActions.TOGGLE_SELECT_ALL:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+
+/***/ },
+/* 274 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	/* -----------------    ACTIONS     ------------------ */
+	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
+	var PICKED_BUTTON = exports.PICKED_BUTTON = 'PICKED_BUTTON';
+	var REMOVED_BUTTON = exports.REMOVED_BUTTON = 'REMOVED_BUTTON';
+	var TOGGLE_BUTTON_SELECTED = exports.TOGGLE_BUTTON_SELECTED = 'TOGGLE_BUTTON_SELECTED';
+	var TOGGLE_ALL_BUTTONS = exports.TOGGLE_ALL_BUTTONS = 'TOGGLE_ALL_BUTTONS';
+	
+	/* ------------   ACTION CREATORS     ------------------ */
+	var pickedButton = exports.pickedButton = function pickedButton(data) {
+		return {
+			type: PICKED_BUTTON,
+			payload: data
+		};
+	};
+	
+	var removedButton = exports.removedButton = function removedButton(buttonData) {
+		return {
+			type: REMOVED_BUTTON,
+			payload: buttonData
+		};
+	};
+	
+	var toggleSelectAll = exports.toggleSelectAll = function toggleSelectAll(bool) {
+		return {
+			type: TOGGLE_SELECT_ALL,
+			payload: bool
+		};
+	};
+	
+	var toggleButtonSelected = exports.toggleButtonSelected = function toggleButtonSelected(bool, index) {
+		console.log(index);
+		return {
+			type: TOGGLE_BUTTON_SELECTED,
+			boolean: bool,
+			index: index
+		};
+	};
+	
+	var toggleAllButtons = exports.toggleAllButtons = function toggleAllButtons(bool) {
+		return {
+			type: TOGGLE_ALL_BUTTONS,
+			boolean: bool
+		};
+	};
+
+/***/ },
+/* 275 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.addBoard = exports.clearAllButtons = exports.stateBoardId = exports.pickButtonError = exports.CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_BUTTONS = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
+	
+	var _axios = __webpack_require__(276);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/* -----------------    ACTIONS     ------------------ */
+	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = 'TOGGLE_PICK_BUTTON_ERROR';
+	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
+	var CLEAR_ALL_BUTTONS = exports.CLEAR_ALL_BUTTONS = 'CLEAR_ALL_BUTTONS';
+	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = 'CLEAR_ALL_SELECTED_BUTTONS';
+	
+	/* ------------   ACTION CREATORS     ------------------ */
+	var pickButtonError = exports.pickButtonError = function pickButtonError(bool) {
+		return {
+			type: TOGGLE_PICK_BUTTON_ERROR,
+			payload: bool
+		};
+	};
+	
+	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
+		return {
+			type: SET_BOARDID,
+			payload: boardId
+		};
+	};
+	
+	var clearAllButtons = exports.clearAllButtons = function clearAllButtons() {
+		return {
+			type: CLEAR_ALL_BUTTONS
+		};
+	};
+	
+	/* ------------       ASYNC ACTION CREATORS     ------------------ */
+	var addBoard = exports.addBoard = function addBoard(details) {
+		return function (dispatch) {
+			_axios2.default.post('/api/', details).then(function (res) {
+				return res.data;
+			}).then(function (createdBoard) {
+				return dispatch(stateBoardId(createdBoard.path));
+			}).catch(function (err) {
+				return console.log(err);
+			});
+		};
+	};
+
+/***/ },
+/* 276 */
+/***/ function(module, exports, __webpack_require__) {
+
+	module.exports = __webpack_require__(277);
+
+/***/ },
+/* 277 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	var bind = __webpack_require__(279);
+	var Axios = __webpack_require__(280);
+	var defaults = __webpack_require__(281);
+	
+	/**
+	 * Create an instance of Axios
+	 *
+	 * @param {Object} defaultConfig The default config for the instance
+	 * @return {Axios} A new instance of Axios
+	 */
+	function createInstance(defaultConfig) {
+	  var context = new Axios(defaultConfig);
+	  var instance = bind(Axios.prototype.request, context);
+	
+	  // Copy axios.prototype to instance
+	  utils.extend(instance, Axios.prototype, context);
+	
+	  // Copy context to instance
+	  utils.extend(instance, context);
+	
+	  return instance;
+	}
+	
+	// Create the default instance to be exported
+	var axios = createInstance(defaults);
+	
+	// Expose Axios class to allow class inheritance
+	axios.Axios = Axios;
+	
+	// Factory for creating new instances
+	axios.create = function create(instanceConfig) {
+	  return createInstance(utils.merge(defaults, instanceConfig));
+	};
+	
+	// Expose Cancel & CancelToken
+	axios.Cancel = __webpack_require__(298);
+	axios.CancelToken = __webpack_require__(299);
+	axios.isCancel = __webpack_require__(295);
+	
+	// Expose all/spread
+	axios.all = function all(promises) {
+	  return Promise.all(promises);
+	};
+	axios.spread = __webpack_require__(300);
+	
+	module.exports = axios;
+	
+	// Allow use of default import syntax in TypeScript
+	module.exports.default = axios;
+
+
+/***/ },
+/* 278 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var bind = __webpack_require__(279);
+	
+	/*global toString:true*/
+	
+	// utils is a library of generic helper functions non-specific to axios
+	
+	var toString = Object.prototype.toString;
+	
+	/**
+	 * Determine if a value is an Array
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an Array, otherwise false
+	 */
+	function isArray(val) {
+	  return toString.call(val) === '[object Array]';
+	}
+	
+	/**
+	 * Determine if a value is an ArrayBuffer
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an ArrayBuffer, otherwise false
+	 */
+	function isArrayBuffer(val) {
+	  return toString.call(val) === '[object ArrayBuffer]';
+	}
+	
+	/**
+	 * Determine if a value is a FormData
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an FormData, otherwise false
+	 */
+	function isFormData(val) {
+	  return (typeof FormData !== 'undefined') && (val instanceof FormData);
+	}
+	
+	/**
+	 * Determine if a value is a view on an ArrayBuffer
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
+	 */
+	function isArrayBufferView(val) {
+	  var result;
+	  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
+	    result = ArrayBuffer.isView(val);
+	  } else {
+	    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
+	  }
+	  return result;
+	}
+	
+	/**
+	 * Determine if a value is a String
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a String, otherwise false
+	 */
+	function isString(val) {
+	  return typeof val === 'string';
+	}
+	
+	/**
+	 * Determine if a value is a Number
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Number, otherwise false
+	 */
+	function isNumber(val) {
+	  return typeof val === 'number';
+	}
+	
+	/**
+	 * Determine if a value is undefined
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if the value is undefined, otherwise false
+	 */
+	function isUndefined(val) {
+	  return typeof val === 'undefined';
+	}
+	
+	/**
+	 * Determine if a value is an Object
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is an Object, otherwise false
+	 */
+	function isObject(val) {
+	  return val !== null && typeof val === 'object';
+	}
+	
+	/**
+	 * Determine if a value is a Date
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Date, otherwise false
+	 */
+	function isDate(val) {
+	  return toString.call(val) === '[object Date]';
+	}
+	
+	/**
+	 * Determine if a value is a File
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a File, otherwise false
+	 */
+	function isFile(val) {
+	  return toString.call(val) === '[object File]';
+	}
+	
+	/**
+	 * Determine if a value is a Blob
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Blob, otherwise false
+	 */
+	function isBlob(val) {
+	  return toString.call(val) === '[object Blob]';
+	}
+	
+	/**
+	 * Determine if a value is a Function
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Function, otherwise false
+	 */
+	function isFunction(val) {
+	  return toString.call(val) === '[object Function]';
+	}
+	
+	/**
+	 * Determine if a value is a Stream
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a Stream, otherwise false
+	 */
+	function isStream(val) {
+	  return isObject(val) && isFunction(val.pipe);
+	}
+	
+	/**
+	 * Determine if a value is a URLSearchParams object
+	 *
+	 * @param {Object} val The value to test
+	 * @returns {boolean} True if value is a URLSearchParams object, otherwise false
+	 */
+	function isURLSearchParams(val) {
+	  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
+	}
+	
+	/**
+	 * Trim excess whitespace off the beginning and end of a string
+	 *
+	 * @param {String} str The String to trim
+	 * @returns {String} The String freed of excess whitespace
+	 */
+	function trim(str) {
+	  return str.replace(/^\s*/, '').replace(/\s*$/, '');
+	}
+	
+	/**
+	 * Determine if we're running in a standard browser environment
+	 *
+	 * This allows axios to run in a web worker, and react-native.
+	 * Both environments support XMLHttpRequest, but not fully standard globals.
+	 *
+	 * web workers:
+	 *  typeof window -> undefined
+	 *  typeof document -> undefined
+	 *
+	 * react-native:
+	 *  typeof document.createElement -> undefined
+	 */
+	function isStandardBrowserEnv() {
+	  return (
+	    typeof window !== 'undefined' &&
+	    typeof document !== 'undefined' &&
+	    typeof document.createElement === 'function'
+	  );
+	}
+	
+	/**
+	 * Iterate over an Array or an Object invoking a function for each item.
+	 *
+	 * If `obj` is an Array callback will be called passing
+	 * the value, index, and complete array for each item.
+	 *
+	 * If 'obj' is an Object callback will be called passing
+	 * the value, key, and complete object for each property.
+	 *
+	 * @param {Object|Array} obj The object to iterate
+	 * @param {Function} fn The callback to invoke for each item
+	 */
+	function forEach(obj, fn) {
+	  // Don't bother if no value provided
+	  if (obj === null || typeof obj === 'undefined') {
+	    return;
+	  }
+	
+	  // Force an array if not already something iterable
+	  if (typeof obj !== 'object' && !isArray(obj)) {
+	    /*eslint no-param-reassign:0*/
+	    obj = [obj];
+	  }
+	
+	  if (isArray(obj)) {
+	    // Iterate over array values
+	    for (var i = 0, l = obj.length; i < l; i++) {
+	      fn.call(null, obj[i], i, obj);
+	    }
+	  } else {
+	    // Iterate over object keys
+	    for (var key in obj) {
+	      if (Object.prototype.hasOwnProperty.call(obj, key)) {
+	        fn.call(null, obj[key], key, obj);
+	      }
+	    }
+	  }
+	}
+	
+	/**
+	 * Accepts varargs expecting each argument to be an object, then
+	 * immutably merges the properties of each object and returns result.
+	 *
+	 * When multiple objects contain the same key the later object in
+	 * the arguments list will take precedence.
+	 *
+	 * Example:
+	 *
+	 * ```js
+	 * var result = merge({foo: 123}, {foo: 456});
+	 * console.log(result.foo); // outputs 456
+	 * ```
+	 *
+	 * @param {Object} obj1 Object to merge
+	 * @returns {Object} Result of all merge properties
+	 */
+	function merge(/* obj1, obj2, obj3, ... */) {
+	  var result = {};
+	  function assignValue(val, key) {
+	    if (typeof result[key] === 'object' && typeof val === 'object') {
+	      result[key] = merge(result[key], val);
+	    } else {
+	      result[key] = val;
+	    }
+	  }
+	
+	  for (var i = 0, l = arguments.length; i < l; i++) {
+	    forEach(arguments[i], assignValue);
+	  }
+	  return result;
+	}
+	
+	/**
+	 * Extends object a by mutably adding to it the properties of object b.
+	 *
+	 * @param {Object} a The object to be extended
+	 * @param {Object} b The object to copy properties from
+	 * @param {Object} thisArg The object to bind function to
+	 * @return {Object} The resulting value of object a
+	 */
+	function extend(a, b, thisArg) {
+	  forEach(b, function assignValue(val, key) {
+	    if (thisArg && typeof val === 'function') {
+	      a[key] = bind(val, thisArg);
+	    } else {
+	      a[key] = val;
+	    }
+	  });
+	  return a;
+	}
+	
+	module.exports = {
+	  isArray: isArray,
+	  isArrayBuffer: isArrayBuffer,
+	  isFormData: isFormData,
+	  isArrayBufferView: isArrayBufferView,
+	  isString: isString,
+	  isNumber: isNumber,
+	  isObject: isObject,
+	  isUndefined: isUndefined,
+	  isDate: isDate,
+	  isFile: isFile,
+	  isBlob: isBlob,
+	  isFunction: isFunction,
+	  isStream: isStream,
+	  isURLSearchParams: isURLSearchParams,
+	  isStandardBrowserEnv: isStandardBrowserEnv,
+	  forEach: forEach,
+	  merge: merge,
+	  extend: extend,
+	  trim: trim
+	};
+
+
+/***/ },
+/* 279 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = function bind(fn, thisArg) {
+	  return function wrap() {
+	    var args = new Array(arguments.length);
+	    for (var i = 0; i < args.length; i++) {
+	      args[i] = arguments[i];
+	    }
+	    return fn.apply(thisArg, args);
+	  };
+	};
+
+
+/***/ },
+/* 280 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var defaults = __webpack_require__(281);
+	var utils = __webpack_require__(278);
+	var InterceptorManager = __webpack_require__(292);
+	var dispatchRequest = __webpack_require__(293);
+	var isAbsoluteURL = __webpack_require__(296);
+	var combineURLs = __webpack_require__(297);
+	
+	/**
+	 * Create a new instance of Axios
+	 *
+	 * @param {Object} instanceConfig The default config for the instance
+	 */
+	function Axios(instanceConfig) {
+	  this.defaults = instanceConfig;
+	  this.interceptors = {
+	    request: new InterceptorManager(),
+	    response: new InterceptorManager()
+	  };
+	}
+	
+	/**
+	 * Dispatch a request
+	 *
+	 * @param {Object} config The config specific for this request (merged with this.defaults)
+	 */
+	Axios.prototype.request = function request(config) {
+	  /*eslint no-param-reassign:0*/
+	  // Allow for axios('example/url'[, config]) a la fetch API
+	  if (typeof config === 'string') {
+	    config = utils.merge({
+	      url: arguments[0]
+	    }, arguments[1]);
+	  }
+	
+	  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
+	
+	  // Support baseURL config
+	  if (config.baseURL && !isAbsoluteURL(config.url)) {
+	    config.url = combineURLs(config.baseURL, config.url);
+	  }
+	
+	  // Hook up interceptors middleware
+	  var chain = [dispatchRequest, undefined];
+	  var promise = Promise.resolve(config);
+	
+	  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
+	    chain.unshift(interceptor.fulfilled, interceptor.rejected);
+	  });
+	
+	  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
+	    chain.push(interceptor.fulfilled, interceptor.rejected);
+	  });
+	
+	  while (chain.length) {
+	    promise = promise.then(chain.shift(), chain.shift());
+	  }
+	
+	  return promise;
+	};
+	
+	// Provide aliases for supported request methods
+	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
+	  /*eslint func-names:0*/
+	  Axios.prototype[method] = function(url, config) {
+	    return this.request(utils.merge(config || {}, {
+	      method: method,
+	      url: url
+	    }));
+	  };
+	});
+	
+	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+	  /*eslint func-names:0*/
+	  Axios.prototype[method] = function(url, data, config) {
+	    return this.request(utils.merge(config || {}, {
+	      method: method,
+	      url: url,
+	      data: data
+	    }));
+	  };
+	});
+	
+	module.exports = Axios;
+
+
+/***/ },
+/* 281 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	var utils = __webpack_require__(278);
+	var normalizeHeaderName = __webpack_require__(282);
+	
+	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
+	var DEFAULT_CONTENT_TYPE = {
+	  'Content-Type': 'application/x-www-form-urlencoded'
+	};
+	
+	function setContentTypeIfUnset(headers, value) {
+	  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
+	    headers['Content-Type'] = value;
+	  }
+	}
+	
+	function getDefaultAdapter() {
+	  var adapter;
+	  if (typeof XMLHttpRequest !== 'undefined') {
+	    // For browsers use XHR adapter
+	    adapter = __webpack_require__(283);
+	  } else if (typeof process !== 'undefined') {
+	    // For node use HTTP adapter
+	    adapter = __webpack_require__(283);
+	  }
+	  return adapter;
+	}
+	
+	var defaults = {
+	  adapter: getDefaultAdapter(),
+	
+	  transformRequest: [function transformRequest(data, headers) {
+	    normalizeHeaderName(headers, 'Content-Type');
+	    if (utils.isFormData(data) ||
+	      utils.isArrayBuffer(data) ||
+	      utils.isStream(data) ||
+	      utils.isFile(data) ||
+	      utils.isBlob(data)
+	    ) {
+	      return data;
+	    }
+	    if (utils.isArrayBufferView(data)) {
+	      return data.buffer;
+	    }
+	    if (utils.isURLSearchParams(data)) {
+	      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
+	      return data.toString();
+	    }
+	    if (utils.isObject(data)) {
+	      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
+	      return JSON.stringify(data);
+	    }
+	    return data;
+	  }],
+	
+	  transformResponse: [function transformResponse(data) {
+	    /*eslint no-param-reassign:0*/
+	    if (typeof data === 'string') {
+	      data = data.replace(PROTECTION_PREFIX, '');
+	      try {
+	        data = JSON.parse(data);
+	      } catch (e) { /* Ignore */ }
+	    }
+	    return data;
+	  }],
+	
+	  timeout: 0,
+	
+	  xsrfCookieName: 'XSRF-TOKEN',
+	  xsrfHeaderName: 'X-XSRF-TOKEN',
+	
+	  maxContentLength: -1,
+	
+	  validateStatus: function validateStatus(status) {
+	    return status >= 200 && status < 300;
+	  }
+	};
+	
+	defaults.headers = {
+	  common: {
+	    'Accept': 'application/json, text/plain, */*'
+	  }
+	};
+	
+	utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
+	  defaults.headers[method] = {};
+	});
+	
+	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
+	  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
+	});
+	
+	module.exports = defaults;
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 282 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	
+	module.exports = function normalizeHeaderName(headers, normalizedName) {
+	  utils.forEach(headers, function processHeader(value, name) {
+	    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
+	      headers[normalizedName] = value;
+	      delete headers[name];
+	    }
+	  });
+	};
+
+
+/***/ },
+/* 283 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	
+	var utils = __webpack_require__(278);
+	var settle = __webpack_require__(284);
+	var buildURL = __webpack_require__(287);
+	var parseHeaders = __webpack_require__(288);
+	var isURLSameOrigin = __webpack_require__(289);
+	var createError = __webpack_require__(285);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(290);
+	
+	module.exports = function xhrAdapter(config) {
+	  return new Promise(function dispatchXhrRequest(resolve, reject) {
+	    var requestData = config.data;
+	    var requestHeaders = config.headers;
+	
+	    if (utils.isFormData(requestData)) {
+	      delete requestHeaders['Content-Type']; // Let the browser set it
+	    }
+	
+	    var request = new XMLHttpRequest();
+	    var loadEvent = 'onreadystatechange';
+	    var xDomain = false;
+	
+	    // For IE 8/9 CORS support
+	    // Only supports POST and GET calls and doesn't returns the response headers.
+	    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
+	    if (process.env.NODE_ENV !== 'test' &&
+	        typeof window !== 'undefined' &&
+	        window.XDomainRequest && !('withCredentials' in request) &&
+	        !isURLSameOrigin(config.url)) {
+	      request = new window.XDomainRequest();
+	      loadEvent = 'onload';
+	      xDomain = true;
+	      request.onprogress = function handleProgress() {};
+	      request.ontimeout = function handleTimeout() {};
+	    }
+	
+	    // HTTP basic authentication
+	    if (config.auth) {
+	      var username = config.auth.username || '';
+	      var password = config.auth.password || '';
+	      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
+	    }
+	
+	    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
+	
+	    // Set the request timeout in MS
+	    request.timeout = config.timeout;
+	
+	    // Listen for ready state
+	    request[loadEvent] = function handleLoad() {
+	      if (!request || (request.readyState !== 4 && !xDomain)) {
+	        return;
+	      }
+	
+	      // The request errored out and we didn't get a response, this will be
+	      // handled by onerror instead
+	      // With one exception: request that using file: protocol, most browsers
+	      // will return status as 0 even though it's a successful request
+	      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
+	        return;
+	      }
+	
+	      // Prepare the response
+	      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
+	      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
+	      var response = {
+	        data: responseData,
+	        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
+	        status: request.status === 1223 ? 204 : request.status,
+	        statusText: request.status === 1223 ? 'No Content' : request.statusText,
+	        headers: responseHeaders,
+	        config: config,
+	        request: request
+	      };
+	
+	      settle(resolve, reject, response);
+	
+	      // Clean up request
+	      request = null;
+	    };
+	
+	    // Handle low level network errors
+	    request.onerror = function handleError() {
+	      // Real errors are hidden from us by the browser
+	      // onerror should only fire if it's a network error
+	      reject(createError('Network Error', config));
+	
+	      // Clean up request
+	      request = null;
+	    };
+	
+	    // Handle timeout
+	    request.ontimeout = function handleTimeout() {
+	      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED'));
+	
+	      // Clean up request
+	      request = null;
+	    };
+	
+	    // Add xsrf header
+	    // This is only done if running in a standard browser environment.
+	    // Specifically not if we're in a web worker, or react-native.
+	    if (utils.isStandardBrowserEnv()) {
+	      var cookies = __webpack_require__(291);
+	
+	      // Add xsrf header
+	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
+	          cookies.read(config.xsrfCookieName) :
+	          undefined;
+	
+	      if (xsrfValue) {
+	        requestHeaders[config.xsrfHeaderName] = xsrfValue;
+	      }
+	    }
+	
+	    // Add headers to the request
+	    if ('setRequestHeader' in request) {
+	      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
+	        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
+	          // Remove Content-Type if data is undefined
+	          delete requestHeaders[key];
+	        } else {
+	          // Otherwise add header to the request
+	          request.setRequestHeader(key, val);
+	        }
+	      });
+	    }
+	
+	    // Add withCredentials to request if needed
+	    if (config.withCredentials) {
+	      request.withCredentials = true;
+	    }
+	
+	    // Add responseType to request if needed
+	    if (config.responseType) {
+	      try {
+	        request.responseType = config.responseType;
+	      } catch (e) {
+	        if (request.responseType !== 'json') {
+	          throw e;
+	        }
+	      }
+	    }
+	
+	    // Handle progress if needed
+	    if (typeof config.onDownloadProgress === 'function') {
+	      request.addEventListener('progress', config.onDownloadProgress);
+	    }
+	
+	    // Not all browsers support upload events
+	    if (typeof config.onUploadProgress === 'function' && request.upload) {
+	      request.upload.addEventListener('progress', config.onUploadProgress);
+	    }
+	
+	    if (config.cancelToken) {
+	      // Handle cancellation
+	      config.cancelToken.promise.then(function onCanceled(cancel) {
+	        if (!request) {
+	          return;
+	        }
+	
+	        request.abort();
+	        reject(cancel);
+	        // Clean up request
+	        request = null;
+	      });
+	    }
+	
+	    if (requestData === undefined) {
+	      requestData = null;
+	    }
+	
+	    // Send the request
+	    request.send(requestData);
+	  });
+	};
+	
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 284 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var createError = __webpack_require__(285);
+	
+	/**
+	 * Resolve or reject a Promise based on response status.
+	 *
+	 * @param {Function} resolve A function that resolves the promise.
+	 * @param {Function} reject A function that rejects the promise.
+	 * @param {object} response The response.
+	 */
+	module.exports = function settle(resolve, reject, response) {
+	  var validateStatus = response.config.validateStatus;
+	  // Note: status is not exposed by XDomainRequest
+	  if (!response.status || !validateStatus || validateStatus(response.status)) {
+	    resolve(response);
+	  } else {
+	    reject(createError(
+	      'Request failed with status code ' + response.status,
+	      response.config,
+	      null,
+	      response
+	    ));
+	  }
+	};
+
+
+/***/ },
+/* 285 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var enhanceError = __webpack_require__(286);
+	
+	/**
+	 * Create an Error with the specified message, config, error code, and response.
+	 *
+	 * @param {string} message The error message.
+	 * @param {Object} config The config.
+	 * @param {string} [code] The error code (for example, 'ECONNABORTED').
+	 @ @param {Object} [response] The response.
+	 * @returns {Error} The created error.
+	 */
+	module.exports = function createError(message, config, code, response) {
+	  var error = new Error(message);
+	  return enhanceError(error, config, code, response);
+	};
+
+
+/***/ },
+/* 286 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Update an Error with the specified config, error code, and response.
+	 *
+	 * @param {Error} error The error to update.
+	 * @param {Object} config The config.
+	 * @param {string} [code] The error code (for example, 'ECONNABORTED').
+	 @ @param {Object} [response] The response.
+	 * @returns {Error} The error.
+	 */
+	module.exports = function enhanceError(error, config, code, response) {
+	  error.config = config;
+	  if (code) {
+	    error.code = code;
+	  }
+	  error.response = response;
+	  return error;
+	};
+
+
+/***/ },
+/* 287 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	
+	function encode(val) {
+	  return encodeURIComponent(val).
+	    replace(/%40/gi, '@').
+	    replace(/%3A/gi, ':').
+	    replace(/%24/g, '$').
+	    replace(/%2C/gi, ',').
+	    replace(/%20/g, '+').
+	    replace(/%5B/gi, '[').
+	    replace(/%5D/gi, ']');
+	}
+	
+	/**
+	 * Build a URL by appending params to the end
+	 *
+	 * @param {string} url The base of the url (e.g., http://www.google.com)
+	 * @param {object} [params] The params to be appended
+	 * @returns {string} The formatted url
+	 */
+	module.exports = function buildURL(url, params, paramsSerializer) {
+	  /*eslint no-param-reassign:0*/
+	  if (!params) {
+	    return url;
+	  }
+	
+	  var serializedParams;
+	  if (paramsSerializer) {
+	    serializedParams = paramsSerializer(params);
+	  } else if (utils.isURLSearchParams(params)) {
+	    serializedParams = params.toString();
+	  } else {
+	    var parts = [];
+	
+	    utils.forEach(params, function serialize(val, key) {
+	      if (val === null || typeof val === 'undefined') {
+	        return;
+	      }
+	
+	      if (utils.isArray(val)) {
+	        key = key + '[]';
+	      }
+	
+	      if (!utils.isArray(val)) {
+	        val = [val];
+	      }
+	
+	      utils.forEach(val, function parseValue(v) {
+	        if (utils.isDate(v)) {
+	          v = v.toISOString();
+	        } else if (utils.isObject(v)) {
+	          v = JSON.stringify(v);
+	        }
+	        parts.push(encode(key) + '=' + encode(v));
+	      });
+	    });
+	
+	    serializedParams = parts.join('&');
+	  }
+	
+	  if (serializedParams) {
+	    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
+	  }
+	
+	  return url;
+	};
+
+
+/***/ },
+/* 288 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	
+	/**
+	 * Parse headers into an object
+	 *
+	 * ```
+	 * Date: Wed, 27 Aug 2014 08:58:49 GMT
+	 * Content-Type: application/json
+	 * Connection: keep-alive
+	 * Transfer-Encoding: chunked
+	 * ```
+	 *
+	 * @param {String} headers Headers needing to be parsed
+	 * @returns {Object} Headers parsed into an object
+	 */
+	module.exports = function parseHeaders(headers) {
+	  var parsed = {};
+	  var key;
+	  var val;
+	  var i;
+	
+	  if (!headers) { return parsed; }
+	
+	  utils.forEach(headers.split('\n'), function parser(line) {
+	    i = line.indexOf(':');
+	    key = utils.trim(line.substr(0, i)).toLowerCase();
+	    val = utils.trim(line.substr(i + 1));
+	
+	    if (key) {
+	      parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
+	    }
+	  });
+	
+	  return parsed;
+	};
+
+
+/***/ },
+/* 289 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	
+	module.exports = (
+	  utils.isStandardBrowserEnv() ?
+	
+	  // Standard browser envs have full support of the APIs needed to test
+	  // whether the request URL is of the same origin as current location.
+	  (function standardBrowserEnv() {
+	    var msie = /(msie|trident)/i.test(navigator.userAgent);
+	    var urlParsingNode = document.createElement('a');
+	    var originURL;
+	
+	    /**
+	    * Parse a URL to discover it's components
+	    *
+	    * @param {String} url The URL to be parsed
+	    * @returns {Object}
+	    */
+	    function resolveURL(url) {
+	      var href = url;
+	
+	      if (msie) {
+	        // IE needs attribute set twice to normalize properties
+	        urlParsingNode.setAttribute('href', href);
+	        href = urlParsingNode.href;
+	      }
+	
+	      urlParsingNode.setAttribute('href', href);
+	
+	      // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
+	      return {
+	        href: urlParsingNode.href,
+	        protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
+	        host: urlParsingNode.host,
+	        search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
+	        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
+	        hostname: urlParsingNode.hostname,
+	        port: urlParsingNode.port,
+	        pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
+	                  urlParsingNode.pathname :
+	                  '/' + urlParsingNode.pathname
+	      };
+	    }
+	
+	    originURL = resolveURL(window.location.href);
+	
+	    /**
+	    * Determine if a URL shares the same origin as the current location
+	    *
+	    * @param {String} requestURL The URL to test
+	    * @returns {boolean} True if URL shares the same origin, otherwise false
+	    */
+	    return function isURLSameOrigin(requestURL) {
+	      var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
+	      return (parsed.protocol === originURL.protocol &&
+	            parsed.host === originURL.host);
+	    };
+	  })() :
+	
+	  // Non standard browser envs (web workers, react-native) lack needed support.
+	  (function nonStandardBrowserEnv() {
+	    return function isURLSameOrigin() {
+	      return true;
+	    };
+	  })()
+	);
+
+
+/***/ },
+/* 290 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	// btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
+	
+	var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+	
+	function E() {
+	  this.message = 'String contains an invalid character';
+	}
+	E.prototype = new Error;
+	E.prototype.code = 5;
+	E.prototype.name = 'InvalidCharacterError';
+	
+	function btoa(input) {
+	  var str = String(input);
+	  var output = '';
+	  for (
+	    // initialize result and counter
+	    var block, charCode, idx = 0, map = chars;
+	    // if the next str index does not exist:
+	    //   change the mapping table to "="
+	    //   check if d has no fractional digits
+	    str.charAt(idx | 0) || (map = '=', idx % 1);
+	    // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
+	    output += map.charAt(63 & block >> 8 - idx % 1 * 8)
+	  ) {
+	    charCode = str.charCodeAt(idx += 3 / 4);
+	    if (charCode > 0xFF) {
+	      throw new E();
+	    }
+	    block = block << 8 | charCode;
+	  }
+	  return output;
+	}
+	
+	module.exports = btoa;
+
+
+/***/ },
+/* 291 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	
+	module.exports = (
+	  utils.isStandardBrowserEnv() ?
+	
+	  // Standard browser envs support document.cookie
+	  (function standardBrowserEnv() {
+	    return {
+	      write: function write(name, value, expires, path, domain, secure) {
+	        var cookie = [];
+	        cookie.push(name + '=' + encodeURIComponent(value));
+	
+	        if (utils.isNumber(expires)) {
+	          cookie.push('expires=' + new Date(expires).toGMTString());
+	        }
+	
+	        if (utils.isString(path)) {
+	          cookie.push('path=' + path);
+	        }
+	
+	        if (utils.isString(domain)) {
+	          cookie.push('domain=' + domain);
+	        }
+	
+	        if (secure === true) {
+	          cookie.push('secure');
+	        }
+	
+	        document.cookie = cookie.join('; ');
+	      },
+	
+	      read: function read(name) {
+	        var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
+	        return (match ? decodeURIComponent(match[3]) : null);
+	      },
+	
+	      remove: function remove(name) {
+	        this.write(name, '', Date.now() - 86400000);
+	      }
+	    };
+	  })() :
+	
+	  // Non standard browser env (web workers, react-native) lack needed support.
+	  (function nonStandardBrowserEnv() {
+	    return {
+	      write: function write() {},
+	      read: function read() { return null; },
+	      remove: function remove() {}
+	    };
+	  })()
+	);
+
+
+/***/ },
+/* 292 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	
+	function InterceptorManager() {
+	  this.handlers = [];
+	}
+	
+	/**
+	 * Add a new interceptor to the stack
+	 *
+	 * @param {Function} fulfilled The function to handle `then` for a `Promise`
+	 * @param {Function} rejected The function to handle `reject` for a `Promise`
+	 *
+	 * @return {Number} An ID used to remove interceptor later
+	 */
+	InterceptorManager.prototype.use = function use(fulfilled, rejected) {
+	  this.handlers.push({
+	    fulfilled: fulfilled,
+	    rejected: rejected
+	  });
+	  return this.handlers.length - 1;
+	};
+	
+	/**
+	 * Remove an interceptor from the stack
+	 *
+	 * @param {Number} id The ID that was returned by `use`
+	 */
+	InterceptorManager.prototype.eject = function eject(id) {
+	  if (this.handlers[id]) {
+	    this.handlers[id] = null;
+	  }
+	};
+	
+	/**
+	 * Iterate over all the registered interceptors
+	 *
+	 * This method is particularly useful for skipping over any
+	 * interceptors that may have become `null` calling `eject`.
+	 *
+	 * @param {Function} fn The function to call for each interceptor
+	 */
+	InterceptorManager.prototype.forEach = function forEach(fn) {
+	  utils.forEach(this.handlers, function forEachHandler(h) {
+	    if (h !== null) {
+	      fn(h);
+	    }
+	  });
+	};
+	
+	module.exports = InterceptorManager;
+
+
+/***/ },
+/* 293 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	var transformData = __webpack_require__(294);
+	var isCancel = __webpack_require__(295);
+	var defaults = __webpack_require__(281);
+	
+	/**
+	 * Throws a `Cancel` if cancellation has been requested.
+	 */
+	function throwIfCancellationRequested(config) {
+	  if (config.cancelToken) {
+	    config.cancelToken.throwIfRequested();
+	  }
+	}
+	
+	/**
+	 * Dispatch a request to the server using the configured adapter.
+	 *
+	 * @param {object} config The config that is to be used for the request
+	 * @returns {Promise} The Promise to be fulfilled
+	 */
+	module.exports = function dispatchRequest(config) {
+	  throwIfCancellationRequested(config);
+	
+	  // Ensure headers exist
+	  config.headers = config.headers || {};
+	
+	  // Transform request data
+	  config.data = transformData(
+	    config.data,
+	    config.headers,
+	    config.transformRequest
+	  );
+	
+	  // Flatten headers
+	  config.headers = utils.merge(
+	    config.headers.common || {},
+	    config.headers[config.method] || {},
+	    config.headers || {}
+	  );
+	
+	  utils.forEach(
+	    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
+	    function cleanHeaderConfig(method) {
+	      delete config.headers[method];
+	    }
+	  );
+	
+	  var adapter = config.adapter || defaults.adapter;
+	
+	  return adapter(config).then(function onAdapterResolution(response) {
+	    throwIfCancellationRequested(config);
+	
+	    // Transform response data
+	    response.data = transformData(
+	      response.data,
+	      response.headers,
+	      config.transformResponse
+	    );
+	
+	    return response;
+	  }, function onAdapterRejection(reason) {
+	    if (!isCancel(reason)) {
+	      throwIfCancellationRequested(config);
+	
+	      // Transform response data
+	      if (reason && reason.response) {
+	        reason.response.data = transformData(
+	          reason.response.data,
+	          reason.response.headers,
+	          config.transformResponse
+	        );
+	      }
+	    }
+	
+	    return Promise.reject(reason);
+	  });
+	};
+
+
+/***/ },
+/* 294 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var utils = __webpack_require__(278);
+	
+	/**
+	 * Transform the data for a request or a response
+	 *
+	 * @param {Object|String} data The data to be transformed
+	 * @param {Array} headers The headers for the request or response
+	 * @param {Array|Function} fns A single function or Array of functions
+	 * @returns {*} The resulting transformed data
+	 */
+	module.exports = function transformData(data, headers, fns) {
+	  /*eslint no-param-reassign:0*/
+	  utils.forEach(fns, function transform(fn) {
+	    data = fn(data, headers);
+	  });
+	
+	  return data;
+	};
+
+
+/***/ },
+/* 295 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	module.exports = function isCancel(value) {
+	  return !!(value && value.__CANCEL__);
+	};
+
+
+/***/ },
+/* 296 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Determines whether the specified URL is absolute
+	 *
+	 * @param {string} url The URL to test
+	 * @returns {boolean} True if the specified URL is absolute, otherwise false
+	 */
+	module.exports = function isAbsoluteURL(url) {
+	  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
+	  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
+	  // by any combination of letters, digits, plus, period, or hyphen.
+	  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
+	};
+
+
+/***/ },
+/* 297 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Creates a new URL by combining the specified URLs
+	 *
+	 * @param {string} baseURL The base URL
+	 * @param {string} relativeURL The relative URL
+	 * @returns {string} The combined URL
+	 */
+	module.exports = function combineURLs(baseURL, relativeURL) {
+	  return baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '');
+	};
+
+
+/***/ },
+/* 298 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * A `Cancel` is an object that is thrown when an operation is canceled.
+	 *
+	 * @class
+	 * @param {string=} message The message.
+	 */
+	function Cancel(message) {
+	  this.message = message;
+	}
+	
+	Cancel.prototype.toString = function toString() {
+	  return 'Cancel' + (this.message ? ': ' + this.message : '');
+	};
+	
+	Cancel.prototype.__CANCEL__ = true;
+	
+	module.exports = Cancel;
+
+
+/***/ },
+/* 299 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	var Cancel = __webpack_require__(298);
+	
+	/**
+	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
+	 *
+	 * @class
+	 * @param {Function} executor The executor function.
+	 */
+	function CancelToken(executor) {
+	  if (typeof executor !== 'function') {
+	    throw new TypeError('executor must be a function.');
+	  }
+	
+	  var resolvePromise;
+	  this.promise = new Promise(function promiseExecutor(resolve) {
+	    resolvePromise = resolve;
+	  });
+	
+	  var token = this;
+	  executor(function cancel(message) {
+	    if (token.reason) {
+	      // Cancellation has already been requested
+	      return;
+	    }
+	
+	    token.reason = new Cancel(message);
+	    resolvePromise(token.reason);
+	  });
+	}
+	
+	/**
+	 * Throws a `Cancel` if cancellation has been requested.
+	 */
+	CancelToken.prototype.throwIfRequested = function throwIfRequested() {
+	  if (this.reason) {
+	    throw this.reason;
+	  }
+	};
+	
+	/**
+	 * Returns an object that contains a new `CancelToken` and a function that, when called,
+	 * cancels the `CancelToken`.
+	 */
+	CancelToken.source = function source() {
+	  var cancel;
+	  var token = new CancelToken(function executor(c) {
+	    cancel = c;
+	  });
+	  return {
+	    token: token,
+	    cancel: cancel
+	  };
+	};
+	
+	module.exports = CancelToken;
+
+
+/***/ },
+/* 300 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	/**
+	 * Syntactic sugar for invoking a function and expanding an array for arguments.
+	 *
+	 * Common use case would be to use `Function.prototype.apply`.
+	 *
+	 *  ```js
+	 *  function f(x, y, z) {}
+	 *  var args = [1, 2, 3];
+	 *  f.apply(null, args);
+	 *  ```
+	 *
+	 * With `spread` this example can be re-written.
+	 *
+	 *  ```js
+	 *  spread(function(x, y, z) {})([1, 2, 3]);
+	 *  ```
+	 *
+	 * @param {Function} callback
+	 * @returns {Function}
+	 */
+	module.exports = function spread(callback) {
+	  return function wrap(arr) {
+	    return callback.apply(null, arr);
+	  };
+	};
+
+
+/***/ },
+/* 301 */
+/***/ function(module, exports) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	        value: true
+	});
+	var buttonData = exports.buttonData = [{
+	        color: 'blue',
+	        icon: 'fa fa-sign-language',
+	        shortIcon: 'clap',
+	        isSelected: false,
+	        nickname: 'clap',
+	        index: '0'
+	}, {
+	        color: 'red',
+	        icon: 'fa fa-frown-o',
+	        shortIcon: 'frown',
+	        isSelected: false,
+	        nickname: 'frown',
+	        index: '1'
+	}, {
+	        color: 'gray',
+	        icon: 'fa fa-empire',
+	        shortIcon: 'empire',
+	        isSelected: false,
+	        nickname: 'empire',
+	        index: '2'
+	}, {
+	        color: 'dark-blue',
+	        icon: 'fa fa-heart-o',
+	        shortIcon: 'heart',
+	        isSelected: false,
+	        nickname: 'heart',
+	        index: '3'
+	}, {
+	        color: 'green',
+	        icon: 'fa fa-money fa-spin',
+	        shortIcon: 'money',
+	        isSelected: false,
+	        nickname: 'money',
+	        index: '4'
+	}, {
+	        color: 'pink',
+	        icon: 'fa fa-smile-o',
+	        shortIcon: 'smile',
+	        isSelected: false,
+	        nickname: 'smile',
+	        index: '5'
+	}, {
+	        color: 'yellow',
+	        icon: 'fa fa-question',
+	        shortIcon: 'question',
+	        isSelected: false,
+	        nickname: 'question',
+	        index: '6'
+	}, {
+	        color: 'mint-green',
+	        icon: 'fa fa-thumbs-o-up',
+	        shortIcon: 'thumb',
+	        isSelected: false,
+	        nickname: 'thumb',
+	        index: '7'
+	}, {
+	        color: 'orange',
+	        icon: 'fa fa-rebel',
+	        shortIcon: 'resistance',
+	        isSelected: false,
+	        nickname: 'resistance',
+	        index: '8'
+	}, {
+	        color: 'purple',
+	        icon: 'fa fa-bomb fa-spin',
+	        shortIcon: 'bomb',
+	        isSelected: false,
+	        nickname: 'bomb',
+	        index: '9'
+	}];
+
+/***/ },
+/* 302 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.generatedBoard = exports.showPickButtonError = undefined;
+	
+	var _createboardActions = __webpack_require__(275);
+	
+	var _boardActions = __webpack_require__(303);
+	
+	var showPickButtonError = exports.showPickButtonError = function showPickButtonError() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _createboardActions.TOGGLE_PICK_BUTTON_ERROR:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
+	var generatedBoard = exports.generatedBoard = function generatedBoard() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _boardActions.SET_BOARDID:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+
+/***/ },
+/* 303 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.enterBoard = exports.setAudienceCount = exports.foundBoard = exports.stateBoardId = exports.SET_AUDIENCE_COUNT = exports.SET_BOARDID = exports.LOAD_BUTTONS = undefined;
+	
+	var _axios = __webpack_require__(276);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	var _reactRouter = __webpack_require__(216);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/* -----------------    ACTIONS     ------------------ */
+	var LOAD_BUTTONS = exports.LOAD_BUTTONS = 'LOAD_BUTTONS';
+	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
+	var SET_AUDIENCE_COUNT = exports.SET_AUDIENCE_COUNT = 'SET_AUDIENCE_COUNT';
+	
+	/* -----------------    ACTION CREATORS     ------------------ */
+	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
+	  return {
+	    type: SET_BOARDID,
+	    payload: boardId
+	  };
+	};
+	
+	var foundBoard = exports.foundBoard = function foundBoard(buttons) {
+	  return {
+	    type: LOAD_BUTTONS,
+	    payload: buttons
+	  };
+	};
+	
+	var setAudienceCount = exports.setAudienceCount = function setAudienceCount(audienceString) {
+	  return {
+	    type: SET_AUDIENCE_COUNT,
+	    payload: audienceString
+	  };
+	};
+	
+	/* ------------       REDUCER     ------------------ */
+	var enterBoard = exports.enterBoard = function enterBoard(boardId) {
+	  return function (dispatch) {
+	    _axios2.default.get('/api/enter/' + boardId).then(function (res) {
+	      return res.data;
+	    }).then(function (errorOrButtons) {
+	      errorOrButtons.notFound ? _reactRouter.hashHistory.push('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));
+	    }).catch(function (err) {
+	      return console.log(err);
+	    });
+	  };
+	};
+
+/***/ },
+/* 304 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.audienceCount = exports.buttonsToLoad = exports.boardNotFound = undefined;
+	
+	var _joinboardformActions = __webpack_require__(305);
+	
+	var _boardActions = __webpack_require__(303);
+	
+	var boardNotFound = exports.boardNotFound = function boardNotFound() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _joinboardformActions.BOARD_NOT_FOUND:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
+	var buttonsToLoad = exports.buttonsToLoad = function buttonsToLoad() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _boardActions.LOAD_BUTTONS:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
+	var audienceCount = exports.audienceCount = function audienceCount() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _boardActions.SET_AUDIENCE_COUNT:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+
+/***/ },
+/* 305 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	exports.loadBoard = exports.stateCurrentBoard = exports.showBoardNotFound = exports.SET_CURRENT_BOARD = exports.BOARD_NOT_FOUND = undefined;
+	
+	var _axios = __webpack_require__(276);
+	
+	var _axios2 = _interopRequireDefault(_axios);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	/* -----------------    ACTIONS     ------------------ */
+	var BOARD_NOT_FOUND = exports.BOARD_NOT_FOUND = 'BOARD_NOT_FOUND';
+	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = 'SET_CURRENT_BOARD';
+	
+	/* ------------   ACTION CREATORS     ------------------ */
+	var showBoardNotFound = exports.showBoardNotFound = function showBoardNotFound(bool) {
+	  return {
+	    type: BOARD_NOT_FOUND,
+	    payload: bool
+	  };
+	};
+	
+	var stateCurrentBoard = exports.stateCurrentBoard = function stateCurrentBoard(boardId) {
+	  return {
+	    type: SET_CURRENT_BOARD,
+	    payload: boardId
+	  };
+	};
+	
+	/* ------------       DISPATCHERS     ------------------ */
+	var loadBoard = exports.loadBoard = function loadBoard(boardId) {
+	  return function (dispatch) {
+	    _axios2.default.get('/api/' + boardId).then(function (res) {
+	      return res.data;
+	    }).then(function (board) {
+	      board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board));
+	    }).catch(function (err) {
+	      return console.log(err);
+	    });
+	  };
+	};
+
+/***/ },
+/* 306 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.foundBoardReducer = exports.currentBoard = undefined;
+	
+	var _joinboardformActions = __webpack_require__(305);
+	
+	var currentBoard = exports.currentBoard = function currentBoard() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _joinboardformActions.SET_CURRENT_BOARD:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+	
+	var foundBoardReducer = exports.foundBoardReducer = function foundBoardReducer() {
+		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+		var action = arguments[1];
+	
+		switch (action.type) {
+			case _joinboardformActions.BOARD_NOT_FOUND:
+				return action.payload;
+			default:
+				return state;
+		}
+	};
+
+/***/ },
+/* 307 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -28642,7 +30697,7 @@
 	exports['default'] = thunk;
 
 /***/ },
-/* 272 */
+/* 308 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28653,11 +30708,11 @@
 	  value: true
 	});
 	
-	var _core = __webpack_require__(273);
+	var _core = __webpack_require__(309);
 	
-	var _helpers = __webpack_require__(274);
+	var _helpers = __webpack_require__(310);
 	
-	var _defaults = __webpack_require__(277);
+	var _defaults = __webpack_require__(313);
 	
 	var _defaults2 = _interopRequireDefault(_defaults);
 	
@@ -28760,7 +30815,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 273 */
+/* 309 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28770,9 +30825,9 @@
 	});
 	exports.printBuffer = printBuffer;
 	
-	var _helpers = __webpack_require__(274);
+	var _helpers = __webpack_require__(310);
 	
-	var _diff = __webpack_require__(275);
+	var _diff = __webpack_require__(311);
 	
 	var _diff2 = _interopRequireDefault(_diff);
 	
@@ -28901,7 +30956,7 @@
 	}
 
 /***/ },
-/* 274 */
+/* 310 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -28925,7 +30980,7 @@
 	var timer = exports.timer = typeof performance !== "undefined" && performance !== null && typeof performance.now === "function" ? performance : Date;
 
 /***/ },
-/* 275 */
+/* 311 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -28935,7 +30990,7 @@
 	});
 	exports.default = diffLogger;
 	
-	var _deepDiff = __webpack_require__(276);
+	var _deepDiff = __webpack_require__(312);
 	
 	var _deepDiff2 = _interopRequireDefault(_deepDiff);
 	
@@ -29021,7 +31076,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 276 */
+/* 312 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(global) {/*!
@@ -29450,7 +31505,7 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
-/* 277 */
+/* 313 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -29501,7 +31556,7 @@
 	module.exports = exports['default'];
 
 /***/ },
-/* 278 */
+/* 314 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29512,7 +31567,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Homepage = __webpack_require__(279);
+	var _Homepage = __webpack_require__(315);
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
@@ -29531,7 +31586,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Homepage2.default);
 
 /***/ },
-/* 279 */
+/* 315 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29546,11 +31601,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _HomeForm = __webpack_require__(280);
+	var _HomeForm = __webpack_require__(316);
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
-	var _iconAnimations = __webpack_require__(317);
+	var _iconAnimations = __webpack_require__(324);
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
@@ -29645,50 +31700,50 @@
 	exports.default = Homepage;
 
 /***/ },
-/* 280 */
+/* 316 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _HomeForm = __webpack_require__(281);
+	var _HomeForm = __webpack_require__(317);
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
-	var _homeformActions = __webpack_require__(316);
+	var _homeformActions = __webpack_require__(272);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(_ref) {
-		var showCreateTab = _ref.showCreateTab,
-		    showJoinTab = _ref.showJoinTab;
+	  var showCreateTab = _ref.showCreateTab,
+	      showJoinTab = _ref.showJoinTab;
 	
-		return {
-			showCreateTab: showCreateTab,
-			showJoinTab: showJoinTab
-		};
+	  return {
+	    showCreateTab: showCreateTab,
+	    showJoinTab: showJoinTab
+	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			changeShowCreateTab: function changeShowCreateTab(bool) {
-				dispatch((0, _homeformActions.showCreate)(bool));
-			},
-			changeShowJoinTab: function changeShowJoinTab(bool) {
-				dispatch((0, _homeformActions.showJoin)(bool));
-			}
-		};
+	  return {
+	    changeShowCreateTab: function changeShowCreateTab(bool) {
+	      dispatch((0, _homeformActions.showCreate)(bool));
+	    },
+	    changeShowJoinTab: function changeShowJoinTab(bool) {
+	      dispatch((0, _homeformActions.showJoin)(bool));
+	    }
+	  };
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_HomeForm2.default);
 
 /***/ },
-/* 281 */
+/* 317 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -29703,11 +31758,11 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _JoinBoardForm = __webpack_require__(282);
+	var _JoinBoardForm = __webpack_require__(318);
 	
 	var _JoinBoardForm2 = _interopRequireDefault(_JoinBoardForm);
 	
-	var _CreateBoard = __webpack_require__(310);
+	var _CreateBoard = __webpack_require__(320);
 	
 	var _CreateBoard2 = _interopRequireDefault(_CreateBoard);
 	
@@ -29750,7 +31805,6 @@
 	            var _props = this.props,
 	                showJoinTab = _props.showJoinTab,
 	                showCreateTab = _props.showCreateTab;
-	
 	
 	            return _react2.default.createElement(
 	                'div',
@@ -29821,58 +31875,58 @@
 	exports.default = HomeForm;
 
 /***/ },
-/* 282 */
+/* 318 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _JoinBoardForm = __webpack_require__(283);
+	var _JoinBoardForm = __webpack_require__(319);
 	
 	var _JoinBoardForm2 = _interopRequireDefault(_JoinBoardForm);
 	
-	var _joinboardformActions = __webpack_require__(284);
+	var _joinboardformActions = __webpack_require__(305);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(_ref) {
-		var showJoinTab = _ref.showJoinTab,
-		    boardNotFound = _ref.boardNotFound,
-		    currentBoard = _ref.currentBoard;
+	  var showJoinTab = _ref.showJoinTab,
+	      boardNotFound = _ref.boardNotFound,
+	      currentBoard = _ref.currentBoard;
 	
-		return {
-			showJoinTab: showJoinTab,
-			boardNotFound: boardNotFound,
-			currentBoard: currentBoard
-		};
+	  return {
+	    showJoinTab: showJoinTab,
+	    boardNotFound: boardNotFound,
+	    currentBoard: currentBoard
+	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			confirmBoard: function confirmBoard(boardId) {
-				dispatch((0, _joinboardformActions.loadBoard)(boardId));
-			},
-			clearBoardNotFound: function clearBoardNotFound(bool) {
-				dispatch((0, _joinboardformActions.showBoardNotFound)(bool));
-			}
-		};
+	  return {
+	    confirmBoard: function confirmBoard(boardId) {
+	      dispatch((0, _joinboardformActions.loadBoard)(boardId));
+	    },
+	    clearBoardNotFound: function clearBoardNotFound(bool) {
+	      dispatch((0, _joinboardformActions.showBoardNotFound)(bool));
+	    }
+	  };
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_JoinBoardForm2.default);
 
 /***/ },
-/* 283 */
+/* 319 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -29892,1689 +31946,151 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var JoinBoardForm = function (_React$Component) {
-	    _inherits(JoinBoardForm, _React$Component);
+	  _inherits(JoinBoardForm, _React$Component);
 	
-	    function JoinBoardForm(props) {
-	        _classCallCheck(this, JoinBoardForm);
+	  function JoinBoardForm(props) {
+	    _classCallCheck(this, JoinBoardForm);
 	
-	        var _this = _possibleConstructorReturn(this, (JoinBoardForm.__proto__ || Object.getPrototypeOf(JoinBoardForm)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (JoinBoardForm.__proto__ || Object.getPrototypeOf(JoinBoardForm)).call(this, props));
 	
-	        _this.confirmBoardExists = _this.confirmBoardExists.bind(_this);
-	        return _this;
+	    _this.confirmBoardExists = _this.confirmBoardExists.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(JoinBoardForm, [{
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      var self = this;
+	      if (this.props.boardNotFound) {
+	        setTimeout(function () {
+	          self.props.clearBoardNotFound(false);
+	        }, 2000);
+	      }
+	      if (this.props.currentBoard) {
+	        _reactRouter.hashHistory.push('/' + this.props.currentBoard);
+	      }
 	    }
+	  }, {
+	    key: 'confirmBoardExists',
+	    value: function confirmBoardExists(evt) {
+	      evt.preventDefault();
+	      var boardId = evt.target.boardId.value.toString();
+	      this.props.confirmBoard(boardId);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this2 = this;
 	
-	    _createClass(JoinBoardForm, [{
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            var self = this;
-	            if (this.props.boardNotFound) {
-	                setTimeout(function () {
-	                    self.props.clearBoardNotFound(false);
-	                }, 2000);
-	            }
-	            if (this.props.currentBoard) {
-	                _reactRouter.hashHistory.push('/' + this.props.currentBoard);
-	            }
-	        }
-	    }, {
-	        key: 'confirmBoardExists',
-	        value: function confirmBoardExists(evt) {
-	            evt.preventDefault();
-	            var boardId = evt.target.boardId.value.toString();
-	            this.props.confirmBoard(boardId);
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _this2 = this;
+	      var _props = this.props,
+	          showJoinTab = _props.showJoinTab,
+	          boardNotFound = _props.boardNotFound;
 	
-	            var _props = this.props,
-	                showJoinTab = _props.showJoinTab,
-	                boardNotFound = _props.boardNotFound;
-	
-	            return _react2.default.createElement(
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'form',
+	          { onSubmit: function onSubmit(evt) {
+	              return _this2.confirmBoardExists(evt);
+	            }, role: 'form', style: { display: showJoinTab ? 'block' : 'none' } },
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement('input', { name: 'boardId', type: 'text', tabIndex: '1', className: 'form-control', placeholder: 'Board #' })
+	          ),
+	          boardNotFound ? _react2.default.createElement(
+	            'div',
+	            null,
+	            'Oops! We couldn\'t find that board'
+	          ) : '',
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'form-group' },
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'row' },
+	              _react2.default.createElement(
 	                'div',
-	                null,
+	                { className: 'col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3' },
 	                _react2.default.createElement(
-	                    'form',
-	                    { onSubmit: function onSubmit(evt) {
-	                            return _this2.confirmBoardExists(evt);
-	                        }, role: 'form', style: { display: showJoinTab ? 'block' : 'none' } },
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-group' },
-	                        _react2.default.createElement('input', { name: 'boardId', type: 'text', tabIndex: '1', className: 'form-control', placeholder: 'Board #' })
-	                    ),
-	                    boardNotFound ? _react2.default.createElement(
-	                        'div',
-	                        null,
-	                        'Oops! We couldn\'t find that board'
-	                    ) : '',
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'form-group' },
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'row' },
-	                            _react2.default.createElement(
-	                                'div',
-	                                { className: 'col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3' },
-	                                _react2.default.createElement(
-	                                    'button',
-	                                    { type: 'submit', tabIndex: '4', className: 'form-control btn btn-join' },
-	                                    'Join'
-	                                )
-	                            )
-	                        )
-	                    )
+	                  'button',
+	                  { type: 'submit', tabIndex: '4', className: 'form-control btn btn-join' },
+	                  'Join'
 	                )
-	            );
-	        }
-	    }]);
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
 	
-	    return JoinBoardForm;
+	  return JoinBoardForm;
 	}(_react2.default.Component);
 	
 	exports.default = JoinBoardForm;
 
 /***/ },
-/* 284 */
+/* 320 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.loadBoard = exports.stateCurrentBoard = exports.showBoardNotFound = exports.SET_CURRENT_BOARD = exports.BOARD_NOT_FOUND = undefined;
-	
-	var _axios = __webpack_require__(285);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	/* -----------------    ACTIONS     ------------------ */
-	var BOARD_NOT_FOUND = exports.BOARD_NOT_FOUND = 'BOARD_NOT_FOUND';
-	var SET_CURRENT_BOARD = exports.SET_CURRENT_BOARD = 'SET_CURRENT_BOARD';
-	
-	/* ------------   ACTION CREATORS     ------------------ */
-	var showBoardNotFound = exports.showBoardNotFound = function showBoardNotFound(bool) {
-		return {
-			type: BOARD_NOT_FOUND,
-			payload: bool
-		};
-	};
-	
-	var stateCurrentBoard = exports.stateCurrentBoard = function stateCurrentBoard(boardId) {
-		return {
-			type: SET_CURRENT_BOARD,
-			payload: boardId
-		};
-	};
-	
-	/* ------------       DISPATCHERS     ------------------ */
-	var loadBoard = exports.loadBoard = function loadBoard(boardId) {
-		return function (dispatch) {
-			_axios2.default.get('/api/' + boardId).then(function (res) {
-				return res.data;
-			}).then(function (board) {
-				board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board));
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		};
-	};
-
-/***/ },
-/* 285 */
-/***/ function(module, exports, __webpack_require__) {
-
-	module.exports = __webpack_require__(286);
-
-/***/ },
-/* 286 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	var bind = __webpack_require__(288);
-	var Axios = __webpack_require__(289);
-	var defaults = __webpack_require__(290);
-	
-	/**
-	 * Create an instance of Axios
-	 *
-	 * @param {Object} defaultConfig The default config for the instance
-	 * @return {Axios} A new instance of Axios
-	 */
-	function createInstance(defaultConfig) {
-	  var context = new Axios(defaultConfig);
-	  var instance = bind(Axios.prototype.request, context);
-	
-	  // Copy axios.prototype to instance
-	  utils.extend(instance, Axios.prototype, context);
-	
-	  // Copy context to instance
-	  utils.extend(instance, context);
-	
-	  return instance;
-	}
-	
-	// Create the default instance to be exported
-	var axios = createInstance(defaults);
-	
-	// Expose Axios class to allow class inheritance
-	axios.Axios = Axios;
-	
-	// Factory for creating new instances
-	axios.create = function create(instanceConfig) {
-	  return createInstance(utils.merge(defaults, instanceConfig));
-	};
-	
-	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(307);
-	axios.CancelToken = __webpack_require__(308);
-	axios.isCancel = __webpack_require__(304);
-	
-	// Expose all/spread
-	axios.all = function all(promises) {
-	  return Promise.all(promises);
-	};
-	axios.spread = __webpack_require__(309);
-	
-	module.exports = axios;
-	
-	// Allow use of default import syntax in TypeScript
-	module.exports.default = axios;
-
-
-/***/ },
-/* 287 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var bind = __webpack_require__(288);
-	
-	/*global toString:true*/
-	
-	// utils is a library of generic helper functions non-specific to axios
-	
-	var toString = Object.prototype.toString;
-	
-	/**
-	 * Determine if a value is an Array
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an Array, otherwise false
-	 */
-	function isArray(val) {
-	  return toString.call(val) === '[object Array]';
-	}
-	
-	/**
-	 * Determine if a value is an ArrayBuffer
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an ArrayBuffer, otherwise false
-	 */
-	function isArrayBuffer(val) {
-	  return toString.call(val) === '[object ArrayBuffer]';
-	}
-	
-	/**
-	 * Determine if a value is a FormData
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an FormData, otherwise false
-	 */
-	function isFormData(val) {
-	  return (typeof FormData !== 'undefined') && (val instanceof FormData);
-	}
-	
-	/**
-	 * Determine if a value is a view on an ArrayBuffer
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a view on an ArrayBuffer, otherwise false
-	 */
-	function isArrayBufferView(val) {
-	  var result;
-	  if ((typeof ArrayBuffer !== 'undefined') && (ArrayBuffer.isView)) {
-	    result = ArrayBuffer.isView(val);
-	  } else {
-	    result = (val) && (val.buffer) && (val.buffer instanceof ArrayBuffer);
-	  }
-	  return result;
-	}
-	
-	/**
-	 * Determine if a value is a String
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a String, otherwise false
-	 */
-	function isString(val) {
-	  return typeof val === 'string';
-	}
-	
-	/**
-	 * Determine if a value is a Number
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Number, otherwise false
-	 */
-	function isNumber(val) {
-	  return typeof val === 'number';
-	}
-	
-	/**
-	 * Determine if a value is undefined
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if the value is undefined, otherwise false
-	 */
-	function isUndefined(val) {
-	  return typeof val === 'undefined';
-	}
-	
-	/**
-	 * Determine if a value is an Object
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is an Object, otherwise false
-	 */
-	function isObject(val) {
-	  return val !== null && typeof val === 'object';
-	}
-	
-	/**
-	 * Determine if a value is a Date
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Date, otherwise false
-	 */
-	function isDate(val) {
-	  return toString.call(val) === '[object Date]';
-	}
-	
-	/**
-	 * Determine if a value is a File
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a File, otherwise false
-	 */
-	function isFile(val) {
-	  return toString.call(val) === '[object File]';
-	}
-	
-	/**
-	 * Determine if a value is a Blob
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Blob, otherwise false
-	 */
-	function isBlob(val) {
-	  return toString.call(val) === '[object Blob]';
-	}
-	
-	/**
-	 * Determine if a value is a Function
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Function, otherwise false
-	 */
-	function isFunction(val) {
-	  return toString.call(val) === '[object Function]';
-	}
-	
-	/**
-	 * Determine if a value is a Stream
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a Stream, otherwise false
-	 */
-	function isStream(val) {
-	  return isObject(val) && isFunction(val.pipe);
-	}
-	
-	/**
-	 * Determine if a value is a URLSearchParams object
-	 *
-	 * @param {Object} val The value to test
-	 * @returns {boolean} True if value is a URLSearchParams object, otherwise false
-	 */
-	function isURLSearchParams(val) {
-	  return typeof URLSearchParams !== 'undefined' && val instanceof URLSearchParams;
-	}
-	
-	/**
-	 * Trim excess whitespace off the beginning and end of a string
-	 *
-	 * @param {String} str The String to trim
-	 * @returns {String} The String freed of excess whitespace
-	 */
-	function trim(str) {
-	  return str.replace(/^\s*/, '').replace(/\s*$/, '');
-	}
-	
-	/**
-	 * Determine if we're running in a standard browser environment
-	 *
-	 * This allows axios to run in a web worker, and react-native.
-	 * Both environments support XMLHttpRequest, but not fully standard globals.
-	 *
-	 * web workers:
-	 *  typeof window -> undefined
-	 *  typeof document -> undefined
-	 *
-	 * react-native:
-	 *  typeof document.createElement -> undefined
-	 */
-	function isStandardBrowserEnv() {
-	  return (
-	    typeof window !== 'undefined' &&
-	    typeof document !== 'undefined' &&
-	    typeof document.createElement === 'function'
-	  );
-	}
-	
-	/**
-	 * Iterate over an Array or an Object invoking a function for each item.
-	 *
-	 * If `obj` is an Array callback will be called passing
-	 * the value, index, and complete array for each item.
-	 *
-	 * If 'obj' is an Object callback will be called passing
-	 * the value, key, and complete object for each property.
-	 *
-	 * @param {Object|Array} obj The object to iterate
-	 * @param {Function} fn The callback to invoke for each item
-	 */
-	function forEach(obj, fn) {
-	  // Don't bother if no value provided
-	  if (obj === null || typeof obj === 'undefined') {
-	    return;
-	  }
-	
-	  // Force an array if not already something iterable
-	  if (typeof obj !== 'object' && !isArray(obj)) {
-	    /*eslint no-param-reassign:0*/
-	    obj = [obj];
-	  }
-	
-	  if (isArray(obj)) {
-	    // Iterate over array values
-	    for (var i = 0, l = obj.length; i < l; i++) {
-	      fn.call(null, obj[i], i, obj);
-	    }
-	  } else {
-	    // Iterate over object keys
-	    for (var key in obj) {
-	      if (Object.prototype.hasOwnProperty.call(obj, key)) {
-	        fn.call(null, obj[key], key, obj);
-	      }
-	    }
-	  }
-	}
-	
-	/**
-	 * Accepts varargs expecting each argument to be an object, then
-	 * immutably merges the properties of each object and returns result.
-	 *
-	 * When multiple objects contain the same key the later object in
-	 * the arguments list will take precedence.
-	 *
-	 * Example:
-	 *
-	 * ```js
-	 * var result = merge({foo: 123}, {foo: 456});
-	 * console.log(result.foo); // outputs 456
-	 * ```
-	 *
-	 * @param {Object} obj1 Object to merge
-	 * @returns {Object} Result of all merge properties
-	 */
-	function merge(/* obj1, obj2, obj3, ... */) {
-	  var result = {};
-	  function assignValue(val, key) {
-	    if (typeof result[key] === 'object' && typeof val === 'object') {
-	      result[key] = merge(result[key], val);
-	    } else {
-	      result[key] = val;
-	    }
-	  }
-	
-	  for (var i = 0, l = arguments.length; i < l; i++) {
-	    forEach(arguments[i], assignValue);
-	  }
-	  return result;
-	}
-	
-	/**
-	 * Extends object a by mutably adding to it the properties of object b.
-	 *
-	 * @param {Object} a The object to be extended
-	 * @param {Object} b The object to copy properties from
-	 * @param {Object} thisArg The object to bind function to
-	 * @return {Object} The resulting value of object a
-	 */
-	function extend(a, b, thisArg) {
-	  forEach(b, function assignValue(val, key) {
-	    if (thisArg && typeof val === 'function') {
-	      a[key] = bind(val, thisArg);
-	    } else {
-	      a[key] = val;
-	    }
-	  });
-	  return a;
-	}
-	
-	module.exports = {
-	  isArray: isArray,
-	  isArrayBuffer: isArrayBuffer,
-	  isFormData: isFormData,
-	  isArrayBufferView: isArrayBufferView,
-	  isString: isString,
-	  isNumber: isNumber,
-	  isObject: isObject,
-	  isUndefined: isUndefined,
-	  isDate: isDate,
-	  isFile: isFile,
-	  isBlob: isBlob,
-	  isFunction: isFunction,
-	  isStream: isStream,
-	  isURLSearchParams: isURLSearchParams,
-	  isStandardBrowserEnv: isStandardBrowserEnv,
-	  forEach: forEach,
-	  merge: merge,
-	  extend: extend,
-	  trim: trim
-	};
-
-
-/***/ },
-/* 288 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = function bind(fn, thisArg) {
-	  return function wrap() {
-	    var args = new Array(arguments.length);
-	    for (var i = 0; i < args.length; i++) {
-	      args[i] = arguments[i];
-	    }
-	    return fn.apply(thisArg, args);
-	  };
-	};
-
-
-/***/ },
-/* 289 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var defaults = __webpack_require__(290);
-	var utils = __webpack_require__(287);
-	var InterceptorManager = __webpack_require__(301);
-	var dispatchRequest = __webpack_require__(302);
-	var isAbsoluteURL = __webpack_require__(305);
-	var combineURLs = __webpack_require__(306);
-	
-	/**
-	 * Create a new instance of Axios
-	 *
-	 * @param {Object} instanceConfig The default config for the instance
-	 */
-	function Axios(instanceConfig) {
-	  this.defaults = instanceConfig;
-	  this.interceptors = {
-	    request: new InterceptorManager(),
-	    response: new InterceptorManager()
-	  };
-	}
-	
-	/**
-	 * Dispatch a request
-	 *
-	 * @param {Object} config The config specific for this request (merged with this.defaults)
-	 */
-	Axios.prototype.request = function request(config) {
-	  /*eslint no-param-reassign:0*/
-	  // Allow for axios('example/url'[, config]) a la fetch API
-	  if (typeof config === 'string') {
-	    config = utils.merge({
-	      url: arguments[0]
-	    }, arguments[1]);
-	  }
-	
-	  config = utils.merge(defaults, this.defaults, { method: 'get' }, config);
-	
-	  // Support baseURL config
-	  if (config.baseURL && !isAbsoluteURL(config.url)) {
-	    config.url = combineURLs(config.baseURL, config.url);
-	  }
-	
-	  // Hook up interceptors middleware
-	  var chain = [dispatchRequest, undefined];
-	  var promise = Promise.resolve(config);
-	
-	  this.interceptors.request.forEach(function unshiftRequestInterceptors(interceptor) {
-	    chain.unshift(interceptor.fulfilled, interceptor.rejected);
-	  });
-	
-	  this.interceptors.response.forEach(function pushResponseInterceptors(interceptor) {
-	    chain.push(interceptor.fulfilled, interceptor.rejected);
-	  });
-	
-	  while (chain.length) {
-	    promise = promise.then(chain.shift(), chain.shift());
-	  }
-	
-	  return promise;
-	};
-	
-	// Provide aliases for supported request methods
-	utils.forEach(['delete', 'get', 'head'], function forEachMethodNoData(method) {
-	  /*eslint func-names:0*/
-	  Axios.prototype[method] = function(url, config) {
-	    return this.request(utils.merge(config || {}, {
-	      method: method,
-	      url: url
-	    }));
-	  };
-	});
-	
-	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-	  /*eslint func-names:0*/
-	  Axios.prototype[method] = function(url, data, config) {
-	    return this.request(utils.merge(config || {}, {
-	      method: method,
-	      url: url,
-	      data: data
-	    }));
-	  };
-	});
-	
-	module.exports = Axios;
-
-
-/***/ },
-/* 290 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-	
-	var utils = __webpack_require__(287);
-	var normalizeHeaderName = __webpack_require__(291);
-	
-	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
-	var DEFAULT_CONTENT_TYPE = {
-	  'Content-Type': 'application/x-www-form-urlencoded'
-	};
-	
-	function setContentTypeIfUnset(headers, value) {
-	  if (!utils.isUndefined(headers) && utils.isUndefined(headers['Content-Type'])) {
-	    headers['Content-Type'] = value;
-	  }
-	}
-	
-	function getDefaultAdapter() {
-	  var adapter;
-	  if (typeof XMLHttpRequest !== 'undefined') {
-	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(292);
-	  } else if (typeof process !== 'undefined') {
-	    // For node use HTTP adapter
-	    adapter = __webpack_require__(292);
-	  }
-	  return adapter;
-	}
-	
-	var defaults = {
-	  adapter: getDefaultAdapter(),
-	
-	  transformRequest: [function transformRequest(data, headers) {
-	    normalizeHeaderName(headers, 'Content-Type');
-	    if (utils.isFormData(data) ||
-	      utils.isArrayBuffer(data) ||
-	      utils.isStream(data) ||
-	      utils.isFile(data) ||
-	      utils.isBlob(data)
-	    ) {
-	      return data;
-	    }
-	    if (utils.isArrayBufferView(data)) {
-	      return data.buffer;
-	    }
-	    if (utils.isURLSearchParams(data)) {
-	      setContentTypeIfUnset(headers, 'application/x-www-form-urlencoded;charset=utf-8');
-	      return data.toString();
-	    }
-	    if (utils.isObject(data)) {
-	      setContentTypeIfUnset(headers, 'application/json;charset=utf-8');
-	      return JSON.stringify(data);
-	    }
-	    return data;
-	  }],
-	
-	  transformResponse: [function transformResponse(data) {
-	    /*eslint no-param-reassign:0*/
-	    if (typeof data === 'string') {
-	      data = data.replace(PROTECTION_PREFIX, '');
-	      try {
-	        data = JSON.parse(data);
-	      } catch (e) { /* Ignore */ }
-	    }
-	    return data;
-	  }],
-	
-	  timeout: 0,
-	
-	  xsrfCookieName: 'XSRF-TOKEN',
-	  xsrfHeaderName: 'X-XSRF-TOKEN',
-	
-	  maxContentLength: -1,
-	
-	  validateStatus: function validateStatus(status) {
-	    return status >= 200 && status < 300;
-	  }
-	};
-	
-	defaults.headers = {
-	  common: {
-	    'Accept': 'application/json, text/plain, */*'
-	  }
-	};
-	
-	utils.forEach(['delete', 'get', 'head'], function forEachMehtodNoData(method) {
-	  defaults.headers[method] = {};
-	});
-	
-	utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
-	  defaults.headers[method] = utils.merge(DEFAULT_CONTENT_TYPE);
-	});
-	
-	module.exports = defaults;
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 291 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	
-	module.exports = function normalizeHeaderName(headers, normalizedName) {
-	  utils.forEach(headers, function processHeader(value, name) {
-	    if (name !== normalizedName && name.toUpperCase() === normalizedName.toUpperCase()) {
-	      headers[normalizedName] = value;
-	      delete headers[name];
-	    }
-	  });
-	};
-
-
-/***/ },
-/* 292 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
-	
-	var utils = __webpack_require__(287);
-	var settle = __webpack_require__(293);
-	var buildURL = __webpack_require__(296);
-	var parseHeaders = __webpack_require__(297);
-	var isURLSameOrigin = __webpack_require__(298);
-	var createError = __webpack_require__(294);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(299);
-	
-	module.exports = function xhrAdapter(config) {
-	  return new Promise(function dispatchXhrRequest(resolve, reject) {
-	    var requestData = config.data;
-	    var requestHeaders = config.headers;
-	
-	    if (utils.isFormData(requestData)) {
-	      delete requestHeaders['Content-Type']; // Let the browser set it
-	    }
-	
-	    var request = new XMLHttpRequest();
-	    var loadEvent = 'onreadystatechange';
-	    var xDomain = false;
-	
-	    // For IE 8/9 CORS support
-	    // Only supports POST and GET calls and doesn't returns the response headers.
-	    // DON'T do this for testing b/c XMLHttpRequest is mocked, not XDomainRequest.
-	    if (process.env.NODE_ENV !== 'test' &&
-	        typeof window !== 'undefined' &&
-	        window.XDomainRequest && !('withCredentials' in request) &&
-	        !isURLSameOrigin(config.url)) {
-	      request = new window.XDomainRequest();
-	      loadEvent = 'onload';
-	      xDomain = true;
-	      request.onprogress = function handleProgress() {};
-	      request.ontimeout = function handleTimeout() {};
-	    }
-	
-	    // HTTP basic authentication
-	    if (config.auth) {
-	      var username = config.auth.username || '';
-	      var password = config.auth.password || '';
-	      requestHeaders.Authorization = 'Basic ' + btoa(username + ':' + password);
-	    }
-	
-	    request.open(config.method.toUpperCase(), buildURL(config.url, config.params, config.paramsSerializer), true);
-	
-	    // Set the request timeout in MS
-	    request.timeout = config.timeout;
-	
-	    // Listen for ready state
-	    request[loadEvent] = function handleLoad() {
-	      if (!request || (request.readyState !== 4 && !xDomain)) {
-	        return;
-	      }
-	
-	      // The request errored out and we didn't get a response, this will be
-	      // handled by onerror instead
-	      // With one exception: request that using file: protocol, most browsers
-	      // will return status as 0 even though it's a successful request
-	      if (request.status === 0 && !(request.responseURL && request.responseURL.indexOf('file:') === 0)) {
-	        return;
-	      }
-	
-	      // Prepare the response
-	      var responseHeaders = 'getAllResponseHeaders' in request ? parseHeaders(request.getAllResponseHeaders()) : null;
-	      var responseData = !config.responseType || config.responseType === 'text' ? request.responseText : request.response;
-	      var response = {
-	        data: responseData,
-	        // IE sends 1223 instead of 204 (https://github.com/mzabriskie/axios/issues/201)
-	        status: request.status === 1223 ? 204 : request.status,
-	        statusText: request.status === 1223 ? 'No Content' : request.statusText,
-	        headers: responseHeaders,
-	        config: config,
-	        request: request
-	      };
-	
-	      settle(resolve, reject, response);
-	
-	      // Clean up request
-	      request = null;
-	    };
-	
-	    // Handle low level network errors
-	    request.onerror = function handleError() {
-	      // Real errors are hidden from us by the browser
-	      // onerror should only fire if it's a network error
-	      reject(createError('Network Error', config));
-	
-	      // Clean up request
-	      request = null;
-	    };
-	
-	    // Handle timeout
-	    request.ontimeout = function handleTimeout() {
-	      reject(createError('timeout of ' + config.timeout + 'ms exceeded', config, 'ECONNABORTED'));
-	
-	      // Clean up request
-	      request = null;
-	    };
-	
-	    // Add xsrf header
-	    // This is only done if running in a standard browser environment.
-	    // Specifically not if we're in a web worker, or react-native.
-	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(300);
-	
-	      // Add xsrf header
-	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
-	          cookies.read(config.xsrfCookieName) :
-	          undefined;
-	
-	      if (xsrfValue) {
-	        requestHeaders[config.xsrfHeaderName] = xsrfValue;
-	      }
-	    }
-	
-	    // Add headers to the request
-	    if ('setRequestHeader' in request) {
-	      utils.forEach(requestHeaders, function setRequestHeader(val, key) {
-	        if (typeof requestData === 'undefined' && key.toLowerCase() === 'content-type') {
-	          // Remove Content-Type if data is undefined
-	          delete requestHeaders[key];
-	        } else {
-	          // Otherwise add header to the request
-	          request.setRequestHeader(key, val);
-	        }
-	      });
-	    }
-	
-	    // Add withCredentials to request if needed
-	    if (config.withCredentials) {
-	      request.withCredentials = true;
-	    }
-	
-	    // Add responseType to request if needed
-	    if (config.responseType) {
-	      try {
-	        request.responseType = config.responseType;
-	      } catch (e) {
-	        if (request.responseType !== 'json') {
-	          throw e;
-	        }
-	      }
-	    }
-	
-	    // Handle progress if needed
-	    if (typeof config.onDownloadProgress === 'function') {
-	      request.addEventListener('progress', config.onDownloadProgress);
-	    }
-	
-	    // Not all browsers support upload events
-	    if (typeof config.onUploadProgress === 'function' && request.upload) {
-	      request.upload.addEventListener('progress', config.onUploadProgress);
-	    }
-	
-	    if (config.cancelToken) {
-	      // Handle cancellation
-	      config.cancelToken.promise.then(function onCanceled(cancel) {
-	        if (!request) {
-	          return;
-	        }
-	
-	        request.abort();
-	        reject(cancel);
-	        // Clean up request
-	        request = null;
-	      });
-	    }
-	
-	    if (requestData === undefined) {
-	      requestData = null;
-	    }
-	
-	    // Send the request
-	    request.send(requestData);
-	  });
-	};
-	
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 293 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var createError = __webpack_require__(294);
-	
-	/**
-	 * Resolve or reject a Promise based on response status.
-	 *
-	 * @param {Function} resolve A function that resolves the promise.
-	 * @param {Function} reject A function that rejects the promise.
-	 * @param {object} response The response.
-	 */
-	module.exports = function settle(resolve, reject, response) {
-	  var validateStatus = response.config.validateStatus;
-	  // Note: status is not exposed by XDomainRequest
-	  if (!response.status || !validateStatus || validateStatus(response.status)) {
-	    resolve(response);
-	  } else {
-	    reject(createError(
-	      'Request failed with status code ' + response.status,
-	      response.config,
-	      null,
-	      response
-	    ));
-	  }
-	};
-
-
-/***/ },
-/* 294 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var enhanceError = __webpack_require__(295);
-	
-	/**
-	 * Create an Error with the specified message, config, error code, and response.
-	 *
-	 * @param {string} message The error message.
-	 * @param {Object} config The config.
-	 * @param {string} [code] The error code (for example, 'ECONNABORTED').
-	 @ @param {Object} [response] The response.
-	 * @returns {Error} The created error.
-	 */
-	module.exports = function createError(message, config, code, response) {
-	  var error = new Error(message);
-	  return enhanceError(error, config, code, response);
-	};
-
-
-/***/ },
-/* 295 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	/**
-	 * Update an Error with the specified config, error code, and response.
-	 *
-	 * @param {Error} error The error to update.
-	 * @param {Object} config The config.
-	 * @param {string} [code] The error code (for example, 'ECONNABORTED').
-	 @ @param {Object} [response] The response.
-	 * @returns {Error} The error.
-	 */
-	module.exports = function enhanceError(error, config, code, response) {
-	  error.config = config;
-	  if (code) {
-	    error.code = code;
-	  }
-	  error.response = response;
-	  return error;
-	};
-
-
-/***/ },
-/* 296 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	
-	function encode(val) {
-	  return encodeURIComponent(val).
-	    replace(/%40/gi, '@').
-	    replace(/%3A/gi, ':').
-	    replace(/%24/g, '$').
-	    replace(/%2C/gi, ',').
-	    replace(/%20/g, '+').
-	    replace(/%5B/gi, '[').
-	    replace(/%5D/gi, ']');
-	}
-	
-	/**
-	 * Build a URL by appending params to the end
-	 *
-	 * @param {string} url The base of the url (e.g., http://www.google.com)
-	 * @param {object} [params] The params to be appended
-	 * @returns {string} The formatted url
-	 */
-	module.exports = function buildURL(url, params, paramsSerializer) {
-	  /*eslint no-param-reassign:0*/
-	  if (!params) {
-	    return url;
-	  }
-	
-	  var serializedParams;
-	  if (paramsSerializer) {
-	    serializedParams = paramsSerializer(params);
-	  } else if (utils.isURLSearchParams(params)) {
-	    serializedParams = params.toString();
-	  } else {
-	    var parts = [];
-	
-	    utils.forEach(params, function serialize(val, key) {
-	      if (val === null || typeof val === 'undefined') {
-	        return;
-	      }
-	
-	      if (utils.isArray(val)) {
-	        key = key + '[]';
-	      }
-	
-	      if (!utils.isArray(val)) {
-	        val = [val];
-	      }
-	
-	      utils.forEach(val, function parseValue(v) {
-	        if (utils.isDate(v)) {
-	          v = v.toISOString();
-	        } else if (utils.isObject(v)) {
-	          v = JSON.stringify(v);
-	        }
-	        parts.push(encode(key) + '=' + encode(v));
-	      });
-	    });
-	
-	    serializedParams = parts.join('&');
-	  }
-	
-	  if (serializedParams) {
-	    url += (url.indexOf('?') === -1 ? '?' : '&') + serializedParams;
-	  }
-	
-	  return url;
-	};
-
-
-/***/ },
-/* 297 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	
-	/**
-	 * Parse headers into an object
-	 *
-	 * ```
-	 * Date: Wed, 27 Aug 2014 08:58:49 GMT
-	 * Content-Type: application/json
-	 * Connection: keep-alive
-	 * Transfer-Encoding: chunked
-	 * ```
-	 *
-	 * @param {String} headers Headers needing to be parsed
-	 * @returns {Object} Headers parsed into an object
-	 */
-	module.exports = function parseHeaders(headers) {
-	  var parsed = {};
-	  var key;
-	  var val;
-	  var i;
-	
-	  if (!headers) { return parsed; }
-	
-	  utils.forEach(headers.split('\n'), function parser(line) {
-	    i = line.indexOf(':');
-	    key = utils.trim(line.substr(0, i)).toLowerCase();
-	    val = utils.trim(line.substr(i + 1));
-	
-	    if (key) {
-	      parsed[key] = parsed[key] ? parsed[key] + ', ' + val : val;
-	    }
-	  });
-	
-	  return parsed;
-	};
-
-
-/***/ },
-/* 298 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	
-	module.exports = (
-	  utils.isStandardBrowserEnv() ?
-	
-	  // Standard browser envs have full support of the APIs needed to test
-	  // whether the request URL is of the same origin as current location.
-	  (function standardBrowserEnv() {
-	    var msie = /(msie|trident)/i.test(navigator.userAgent);
-	    var urlParsingNode = document.createElement('a');
-	    var originURL;
-	
-	    /**
-	    * Parse a URL to discover it's components
-	    *
-	    * @param {String} url The URL to be parsed
-	    * @returns {Object}
-	    */
-	    function resolveURL(url) {
-	      var href = url;
-	
-	      if (msie) {
-	        // IE needs attribute set twice to normalize properties
-	        urlParsingNode.setAttribute('href', href);
-	        href = urlParsingNode.href;
-	      }
-	
-	      urlParsingNode.setAttribute('href', href);
-	
-	      // urlParsingNode provides the UrlUtils interface - http://url.spec.whatwg.org/#urlutils
-	      return {
-	        href: urlParsingNode.href,
-	        protocol: urlParsingNode.protocol ? urlParsingNode.protocol.replace(/:$/, '') : '',
-	        host: urlParsingNode.host,
-	        search: urlParsingNode.search ? urlParsingNode.search.replace(/^\?/, '') : '',
-	        hash: urlParsingNode.hash ? urlParsingNode.hash.replace(/^#/, '') : '',
-	        hostname: urlParsingNode.hostname,
-	        port: urlParsingNode.port,
-	        pathname: (urlParsingNode.pathname.charAt(0) === '/') ?
-	                  urlParsingNode.pathname :
-	                  '/' + urlParsingNode.pathname
-	      };
-	    }
-	
-	    originURL = resolveURL(window.location.href);
-	
-	    /**
-	    * Determine if a URL shares the same origin as the current location
-	    *
-	    * @param {String} requestURL The URL to test
-	    * @returns {boolean} True if URL shares the same origin, otherwise false
-	    */
-	    return function isURLSameOrigin(requestURL) {
-	      var parsed = (utils.isString(requestURL)) ? resolveURL(requestURL) : requestURL;
-	      return (parsed.protocol === originURL.protocol &&
-	            parsed.host === originURL.host);
-	    };
-	  })() :
-	
-	  // Non standard browser envs (web workers, react-native) lack needed support.
-	  (function nonStandardBrowserEnv() {
-	    return function isURLSameOrigin() {
-	      return true;
-	    };
-	  })()
-	);
-
-
-/***/ },
-/* 299 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	// btoa polyfill for IE<10 courtesy https://github.com/davidchambers/Base64.js
-	
-	var chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
-	
-	function E() {
-	  this.message = 'String contains an invalid character';
-	}
-	E.prototype = new Error;
-	E.prototype.code = 5;
-	E.prototype.name = 'InvalidCharacterError';
-	
-	function btoa(input) {
-	  var str = String(input);
-	  var output = '';
-	  for (
-	    // initialize result and counter
-	    var block, charCode, idx = 0, map = chars;
-	    // if the next str index does not exist:
-	    //   change the mapping table to "="
-	    //   check if d has no fractional digits
-	    str.charAt(idx | 0) || (map = '=', idx % 1);
-	    // "8 - idx % 1 * 8" generates the sequence 2, 4, 6, 8
-	    output += map.charAt(63 & block >> 8 - idx % 1 * 8)
-	  ) {
-	    charCode = str.charCodeAt(idx += 3 / 4);
-	    if (charCode > 0xFF) {
-	      throw new E();
-	    }
-	    block = block << 8 | charCode;
-	  }
-	  return output;
-	}
-	
-	module.exports = btoa;
-
-
-/***/ },
-/* 300 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	
-	module.exports = (
-	  utils.isStandardBrowserEnv() ?
-	
-	  // Standard browser envs support document.cookie
-	  (function standardBrowserEnv() {
-	    return {
-	      write: function write(name, value, expires, path, domain, secure) {
-	        var cookie = [];
-	        cookie.push(name + '=' + encodeURIComponent(value));
-	
-	        if (utils.isNumber(expires)) {
-	          cookie.push('expires=' + new Date(expires).toGMTString());
-	        }
-	
-	        if (utils.isString(path)) {
-	          cookie.push('path=' + path);
-	        }
-	
-	        if (utils.isString(domain)) {
-	          cookie.push('domain=' + domain);
-	        }
-	
-	        if (secure === true) {
-	          cookie.push('secure');
-	        }
-	
-	        document.cookie = cookie.join('; ');
-	      },
-	
-	      read: function read(name) {
-	        var match = document.cookie.match(new RegExp('(^|;\\s*)(' + name + ')=([^;]*)'));
-	        return (match ? decodeURIComponent(match[3]) : null);
-	      },
-	
-	      remove: function remove(name) {
-	        this.write(name, '', Date.now() - 86400000);
-	      }
-	    };
-	  })() :
-	
-	  // Non standard browser env (web workers, react-native) lack needed support.
-	  (function nonStandardBrowserEnv() {
-	    return {
-	      write: function write() {},
-	      read: function read() { return null; },
-	      remove: function remove() {}
-	    };
-	  })()
-	);
-
-
-/***/ },
-/* 301 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	
-	function InterceptorManager() {
-	  this.handlers = [];
-	}
-	
-	/**
-	 * Add a new interceptor to the stack
-	 *
-	 * @param {Function} fulfilled The function to handle `then` for a `Promise`
-	 * @param {Function} rejected The function to handle `reject` for a `Promise`
-	 *
-	 * @return {Number} An ID used to remove interceptor later
-	 */
-	InterceptorManager.prototype.use = function use(fulfilled, rejected) {
-	  this.handlers.push({
-	    fulfilled: fulfilled,
-	    rejected: rejected
-	  });
-	  return this.handlers.length - 1;
-	};
-	
-	/**
-	 * Remove an interceptor from the stack
-	 *
-	 * @param {Number} id The ID that was returned by `use`
-	 */
-	InterceptorManager.prototype.eject = function eject(id) {
-	  if (this.handlers[id]) {
-	    this.handlers[id] = null;
-	  }
-	};
-	
-	/**
-	 * Iterate over all the registered interceptors
-	 *
-	 * This method is particularly useful for skipping over any
-	 * interceptors that may have become `null` calling `eject`.
-	 *
-	 * @param {Function} fn The function to call for each interceptor
-	 */
-	InterceptorManager.prototype.forEach = function forEach(fn) {
-	  utils.forEach(this.handlers, function forEachHandler(h) {
-	    if (h !== null) {
-	      fn(h);
-	    }
-	  });
-	};
-	
-	module.exports = InterceptorManager;
-
-
-/***/ },
-/* 302 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	var transformData = __webpack_require__(303);
-	var isCancel = __webpack_require__(304);
-	var defaults = __webpack_require__(290);
-	
-	/**
-	 * Throws a `Cancel` if cancellation has been requested.
-	 */
-	function throwIfCancellationRequested(config) {
-	  if (config.cancelToken) {
-	    config.cancelToken.throwIfRequested();
-	  }
-	}
-	
-	/**
-	 * Dispatch a request to the server using the configured adapter.
-	 *
-	 * @param {object} config The config that is to be used for the request
-	 * @returns {Promise} The Promise to be fulfilled
-	 */
-	module.exports = function dispatchRequest(config) {
-	  throwIfCancellationRequested(config);
-	
-	  // Ensure headers exist
-	  config.headers = config.headers || {};
-	
-	  // Transform request data
-	  config.data = transformData(
-	    config.data,
-	    config.headers,
-	    config.transformRequest
-	  );
-	
-	  // Flatten headers
-	  config.headers = utils.merge(
-	    config.headers.common || {},
-	    config.headers[config.method] || {},
-	    config.headers || {}
-	  );
-	
-	  utils.forEach(
-	    ['delete', 'get', 'head', 'post', 'put', 'patch', 'common'],
-	    function cleanHeaderConfig(method) {
-	      delete config.headers[method];
-	    }
-	  );
-	
-	  var adapter = config.adapter || defaults.adapter;
-	
-	  return adapter(config).then(function onAdapterResolution(response) {
-	    throwIfCancellationRequested(config);
-	
-	    // Transform response data
-	    response.data = transformData(
-	      response.data,
-	      response.headers,
-	      config.transformResponse
-	    );
-	
-	    return response;
-	  }, function onAdapterRejection(reason) {
-	    if (!isCancel(reason)) {
-	      throwIfCancellationRequested(config);
-	
-	      // Transform response data
-	      if (reason && reason.response) {
-	        reason.response.data = transformData(
-	          reason.response.data,
-	          reason.response.headers,
-	          config.transformResponse
-	        );
-	      }
-	    }
-	
-	    return Promise.reject(reason);
-	  });
-	};
-
-
-/***/ },
-/* 303 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var utils = __webpack_require__(287);
-	
-	/**
-	 * Transform the data for a request or a response
-	 *
-	 * @param {Object|String} data The data to be transformed
-	 * @param {Array} headers The headers for the request or response
-	 * @param {Array|Function} fns A single function or Array of functions
-	 * @returns {*} The resulting transformed data
-	 */
-	module.exports = function transformData(data, headers, fns) {
-	  /*eslint no-param-reassign:0*/
-	  utils.forEach(fns, function transform(fn) {
-	    data = fn(data, headers);
-	  });
-	
-	  return data;
-	};
-
-
-/***/ },
-/* 304 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	module.exports = function isCancel(value) {
-	  return !!(value && value.__CANCEL__);
-	};
-
-
-/***/ },
-/* 305 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	/**
-	 * Determines whether the specified URL is absolute
-	 *
-	 * @param {string} url The URL to test
-	 * @returns {boolean} True if the specified URL is absolute, otherwise false
-	 */
-	module.exports = function isAbsoluteURL(url) {
-	  // A URL is considered absolute if it begins with "<scheme>://" or "//" (protocol-relative URL).
-	  // RFC 3986 defines scheme name as a sequence of characters beginning with a letter and followed
-	  // by any combination of letters, digits, plus, period, or hyphen.
-	  return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
-	};
-
-
-/***/ },
-/* 306 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	/**
-	 * Creates a new URL by combining the specified URLs
-	 *
-	 * @param {string} baseURL The base URL
-	 * @param {string} relativeURL The relative URL
-	 * @returns {string} The combined URL
-	 */
-	module.exports = function combineURLs(baseURL, relativeURL) {
-	  return baseURL.replace(/\/+$/, '') + '/' + relativeURL.replace(/^\/+/, '');
-	};
-
-
-/***/ },
-/* 307 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	/**
-	 * A `Cancel` is an object that is thrown when an operation is canceled.
-	 *
-	 * @class
-	 * @param {string=} message The message.
-	 */
-	function Cancel(message) {
-	  this.message = message;
-	}
-	
-	Cancel.prototype.toString = function toString() {
-	  return 'Cancel' + (this.message ? ': ' + this.message : '');
-	};
-	
-	Cancel.prototype.__CANCEL__ = true;
-	
-	module.exports = Cancel;
-
-
-/***/ },
-/* 308 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	var Cancel = __webpack_require__(307);
-	
-	/**
-	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
-	 *
-	 * @class
-	 * @param {Function} executor The executor function.
-	 */
-	function CancelToken(executor) {
-	  if (typeof executor !== 'function') {
-	    throw new TypeError('executor must be a function.');
-	  }
-	
-	  var resolvePromise;
-	  this.promise = new Promise(function promiseExecutor(resolve) {
-	    resolvePromise = resolve;
-	  });
-	
-	  var token = this;
-	  executor(function cancel(message) {
-	    if (token.reason) {
-	      // Cancellation has already been requested
-	      return;
-	    }
-	
-	    token.reason = new Cancel(message);
-	    resolvePromise(token.reason);
-	  });
-	}
-	
-	/**
-	 * Throws a `Cancel` if cancellation has been requested.
-	 */
-	CancelToken.prototype.throwIfRequested = function throwIfRequested() {
-	  if (this.reason) {
-	    throw this.reason;
-	  }
-	};
-	
-	/**
-	 * Returns an object that contains a new `CancelToken` and a function that, when called,
-	 * cancels the `CancelToken`.
-	 */
-	CancelToken.source = function source() {
-	  var cancel;
-	  var token = new CancelToken(function executor(c) {
-	    cancel = c;
-	  });
-	  return {
-	    token: token,
-	    cancel: cancel
-	  };
-	};
-	
-	module.exports = CancelToken;
-
-
-/***/ },
-/* 309 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	/**
-	 * Syntactic sugar for invoking a function and expanding an array for arguments.
-	 *
-	 * Common use case would be to use `Function.prototype.apply`.
-	 *
-	 *  ```js
-	 *  function f(x, y, z) {}
-	 *  var args = [1, 2, 3];
-	 *  f.apply(null, args);
-	 *  ```
-	 *
-	 * With `spread` this example can be re-written.
-	 *
-	 *  ```js
-	 *  spread(function(x, y, z) {})([1, 2, 3]);
-	 *  ```
-	 *
-	 * @param {Function} callback
-	 * @returns {Function}
-	 */
-	module.exports = function spread(callback) {
-	  return function wrap(arr) {
-	    return callback.apply(null, arr);
-	  };
-	};
-
-
-/***/ },
-/* 310 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _CreateBoard = __webpack_require__(311);
+	var _CreateBoard = __webpack_require__(321);
 	
 	var _CreateBoard2 = _interopRequireDefault(_CreateBoard);
 	
-	var _createboardActions = __webpack_require__(315);
+	var _createboardActions = __webpack_require__(275);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(_ref) {
-		var buttonsPicked = _ref.buttonsPicked,
-		    generatedBoard = _ref.generatedBoard,
-		    showCreateTab = _ref.showCreateTab,
-		    showPickButtonError = _ref.showPickButtonError;
+	  var buttonsPicked = _ref.buttonsPicked,
+	      generatedBoard = _ref.generatedBoard,
+	      showCreateTab = _ref.showCreateTab,
+	      showPickButtonError = _ref.showPickButtonError;
 	
-		return {
-			buttonsPicked: buttonsPicked,
-			generatedBoard: generatedBoard,
-			showCreateTab: showCreateTab,
-			showPickButtonError: showPickButtonError
-		};
+	  return {
+	    buttonsPicked: buttonsPicked,
+	    generatedBoard: generatedBoard,
+	    showCreateTab: showCreateTab,
+	    showPickButtonError: showPickButtonError
+	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			addBoard: function addBoard(details) {
-				dispatch((0, _createboardActions.addBoard)(details));
-			},
-			pickButtonsError: function pickButtonsError(bool) {
-				dispatch((0, _createboardActions.pickButtonError)(bool));
-			},
-			clearGeneratedboard: function clearGeneratedboard(details) {
-				dispatch((0, _createboardActions.stateBoardId)(details));
-				dispatch((0, _createboardActions.clearAllButtons)());
-				dispatch((0, _createboardActions.clearAllSelectedButtons)());
-			}
-		};
+	  return {
+	    addBoard: function addBoard(details) {
+	      dispatch((0, _createboardActions.addBoard)(details));
+	    },
+	    pickButtonsError: function pickButtonsError(bool) {
+	      dispatch((0, _createboardActions.pickButtonError)(bool));
+	    },
+	    clearGeneratedboard: function clearGeneratedboard(details) {
+	      dispatch((0, _createboardActions.stateBoardId)(details));
+	      dispatch((0, _createboardActions.clearAllButtons)());
+	      dispatch((0, _createboardActions.clearAllSelectedButtons)());
+	    }
+	  };
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_CreateBoard2.default);
 
 /***/ },
-/* 311 */
+/* 321 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -31583,7 +32099,7 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _PickButtons = __webpack_require__(312);
+	var _PickButtons = __webpack_require__(322);
 	
 	var _PickButtons2 = _interopRequireDefault(_PickButtons);
 	
@@ -31598,126 +32114,126 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var CreateBoard = function (_React$Component) {
-	    _inherits(CreateBoard, _React$Component);
+	  _inherits(CreateBoard, _React$Component);
 	
-	    function CreateBoard(props) {
-	        _classCallCheck(this, CreateBoard);
+	  function CreateBoard(props) {
+	    _classCallCheck(this, CreateBoard);
 	
-	        var _this = _possibleConstructorReturn(this, (CreateBoard.__proto__ || Object.getPrototypeOf(CreateBoard)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (CreateBoard.__proto__ || Object.getPrototypeOf(CreateBoard)).call(this, props));
 	
-	        _this.generateBoardId = _this.generateBoardId.bind(_this);
-	        _this.clearGeneratedboard = _this.clearGeneratedboard.bind(_this);
-	        return _this;
+	    _this.generateBoardId = _this.generateBoardId.bind(_this);
+	    _this.clearGeneratedboard = _this.clearGeneratedboard.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(CreateBoard, [{
+	    key: 'componentDidUpdate',
+	    value: function componentDidUpdate() {
+	      var self = this;
+	      if (this.props.showPickButtonError) {
+	        setTimeout(function () {
+	          self.props.pickButtonsError(false);
+	        }, 2000);
+	      }
 	    }
+	  }, {
+	    key: 'generateBoardId',
+	    value: function generateBoardId(evt) {
+	      evt.preventDefault();
+	      if (this.props.buttonsPicked.length < 1) {
+	        this.props.pickButtonsError(true);
+	      } else {
+	        var boardId = Math.floor(Math.random() * 89999 + 10000);
+	        var details = {
+	          path: boardId,
+	          buttons: this.props.buttonsPicked
+	        };
+	        this.props.addBoard(details);
+	      }
+	    }
+	  }, {
+	    key: 'clearGeneratedboard',
+	    value: function clearGeneratedboard(evt) {
+	      evt.preventDefault();
+	      this.props.clearGeneratedboard('');
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _props = this.props,
+	          generatedBoard = _props.generatedBoard,
+	          showPickButtonError = _props.showPickButtonError,
+	          buttonsPicked = _props.buttonsPicked,
+	          showCreateTab = _props.showCreateTab;
 	
-	    _createClass(CreateBoard, [{
-	        key: 'componentDidUpdate',
-	        value: function componentDidUpdate() {
-	            var self = this;
-	            if (this.props.showPickButtonError) {
-	                setTimeout(function () {
-	                    self.props.pickButtonsError(false);
-	                }, 2000);
-	            }
-	        }
-	    }, {
-	        key: 'generateBoardId',
-	        value: function generateBoardId(evt) {
-	            evt.preventDefault();
-	            if (this.props.buttonsPicked.length < 1) {
-	                this.props.pickButtonsError(true);
-	            } else {
-	                var boardId = Math.floor(Math.random() * 89999 + 10000);
-	                var details = {
-	                    path: boardId,
-	                    buttons: this.props.buttonsPicked
-	                };
-	                this.props.addBoard(details);
-	            }
-	        }
-	    }, {
-	        key: 'clearGeneratedboard',
-	        value: function clearGeneratedboard(evt) {
-	            evt.preventDefault();
-	            this.props.clearGeneratedboard('');
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            var _props = this.props,
-	                generatedBoard = _props.generatedBoard,
-	                showPickButtonError = _props.showPickButtonError,
-	                buttonsPicked = _props.buttonsPicked,
-	                showCreateTab = _props.showCreateTab;
+	      return _react2.default.createElement(
+	        'form',
+	        { role: 'form', style: { display: showCreateTab ? 'block' : 'none' } },
+	        this.props && generatedBoard ? _react2.default.createElement(
+	          'div',
+	          null,
+	          _react2.default.createElement(
+	            'h4',
+	            null,
+	            'Here is your board #: ' + generatedBoard
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'col-sm-6 col-sm-offset-3' },
+	            _react2.default.createElement(
+	              _reactRouter.Link,
+	              { to: '/' + generatedBoard },
+	              _react2.default.createElement(
+	                'button',
+	                { type: 'submit', tabIndex: '4', className: 'form-control btn btn-create' },
+	                'GO TO MY BOARD'
+	              )
+	            ),
+	            _react2.default.createElement(
+	              'h5',
+	              null,
+	              'OR'
+	            ),
+	            _react2.default.createElement(
+	              'button',
+	              { tabIndex: '4', onClick: this.clearGeneratedboard, className: 'form-control btn btn-create-new' },
+	              'GENERATE A NEW BOARD'
+	            )
+	          )
+	        ) : _react2.default.createElement(
+	          'div',
+	          { className: 'form-group' },
+	          _react2.default.createElement(_PickButtons2.default, null),
+	          _react2.default.createElement(
+	            'div',
+	            { className: 'row' },
+	            showPickButtonError && buttonsPicked.length < 1 ? _react2.default.createElement(
+	              'div',
+	              null,
+	              'Please select some buttons!'
+	            ) : '',
+	            _react2.default.createElement(
+	              'div',
+	              { className: 'col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2' },
+	              _react2.default.createElement(
+	                'button',
+	                { tabIndex: '4', className: 'form-control btn btn-create generate', onClick: this.generateBoardId },
+	                ' Generate My Board Link '
+	              )
+	            )
+	          )
+	        )
+	      );
+	    }
+	  }]);
 	
-	            return _react2.default.createElement(
-	                'form',
-	                { role: 'form', style: { display: showCreateTab ? 'block' : 'none' } },
-	                this.props && generatedBoard ? _react2.default.createElement(
-	                    'div',
-	                    null,
-	                    _react2.default.createElement(
-	                        'h4',
-	                        null,
-	                        'Here is your board #: ' + generatedBoard
-	                    ),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'col-sm-6 col-sm-offset-3' },
-	                        _react2.default.createElement(
-	                            _reactRouter.Link,
-	                            { to: '/' + generatedBoard },
-	                            _react2.default.createElement(
-	                                'button',
-	                                { type: 'submit', tabIndex: '4', className: 'form-control btn btn-create' },
-	                                'GO TO MY BOARD'
-	                            )
-	                        ),
-	                        _react2.default.createElement(
-	                            'h5',
-	                            null,
-	                            'OR'
-	                        ),
-	                        _react2.default.createElement(
-	                            'button',
-	                            { tabIndex: '4', onClick: this.clearGeneratedboard, className: 'form-control btn btn-create-new' },
-	                            'GENERATE A NEW BOARD'
-	                        )
-	                    )
-	                ) : _react2.default.createElement(
-	                    'div',
-	                    { className: 'form-group' },
-	                    _react2.default.createElement(_PickButtons2.default, null),
-	                    _react2.default.createElement(
-	                        'div',
-	                        { className: 'row' },
-	                        showPickButtonError && buttonsPicked.length < 1 ? _react2.default.createElement(
-	                            'div',
-	                            null,
-	                            'Please select some buttons!'
-	                        ) : '',
-	                        _react2.default.createElement(
-	                            'div',
-	                            { className: 'col-sm-8 col-sm-offset-2 col-xs-8 col-xs-offset-2' },
-	                            _react2.default.createElement(
-	                                'button',
-	                                { tabIndex: '4', className: 'form-control btn btn-create generate', onClick: this.generateBoardId },
-	                                ' Generate My Board Link '
-	                            )
-	                        )
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return CreateBoard;
+	  return CreateBoard;
 	}(_react2.default.Component);
 	
 	exports.default = CreateBoard;
 
 /***/ },
-/* 312 */
+/* 322 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31728,11 +32244,11 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _PickButtons = __webpack_require__(313);
+	var _PickButtons = __webpack_require__(323);
 	
 	var _PickButtons2 = _interopRequireDefault(_PickButtons);
 	
-	var _pickbuttonActions = __webpack_require__(314);
+	var _pickbuttonActions = __webpack_require__(274);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -31771,13 +32287,13 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_PickButtons2.default);
 
 /***/ },
-/* 313 */
+/* 323 */
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -31795,267 +32311,128 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var PickButtons = function (_React$Component) {
-	    _inherits(PickButtons, _React$Component);
+	  _inherits(PickButtons, _React$Component);
 	
-	    function PickButtons(props) {
-	        _classCallCheck(this, PickButtons);
+	  function PickButtons(props) {
+	    _classCallCheck(this, PickButtons);
 	
-	        var _this = _possibleConstructorReturn(this, (PickButtons.__proto__ || Object.getPrototypeOf(PickButtons)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (PickButtons.__proto__ || Object.getPrototypeOf(PickButtons)).call(this, props));
 	
-	        _this.handleIconClick = _this.handleIconClick.bind(_this);
-	        _this.handleCheck = _this.handleCheck.bind(_this);
-	        _this.deselectAllinDB = _this.deselectAllinDB.bind(_this);
-	        _this.selectAllInDB = _this.selectAllinDB.bind(_this);
-	        return _this;
+	    _this.handleIconClick = _this.handleIconClick.bind(_this);
+	    _this.handleCheck = _this.handleCheck.bind(_this);
+	    _this.deselectAllinDB = _this.deselectAllinDB.bind(_this);
+	    _this.selectAllInDB = _this.selectAllinDB.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(PickButtons, [{
+	    key: "handleIconClick",
+	    value: function handleIconClick(evt, color, index) {
+	      evt.preventDefault();
+	      var icon = evt.currentTarget.dataset.icon;
+	      var data = { icon: icon, color: color };
+	
+	      if (this.props.buttonsPicked.map(function (data) {
+	        return data.icon;
+	      }).indexOf(icon) < 0) {
+	        this.props.addButton(data);
+	      } else {
+	        this.props.removeButton(data);
+	      }
+	      if (!this.props.buttonsAvailable[index]["isSelected"]) {
+	        this.props.toggleSelect(false);
+	      }
+	      this.props.toggleButton(!this.props.buttonsAvailable[index]["isSelected"], index);
 	    }
+	  }, {
+	    key: "selectAllinDB",
+	    value: function selectAllinDB() {
+	      var _this2 = this;
 	
-	    _createClass(PickButtons, [{
-	        key: "handleIconClick",
-	        value: function handleIconClick(evt, color, index) {
-	            evt.preventDefault();
-	            var icon = evt.currentTarget.dataset.icon;
-	            var data = { icon: icon, color: color };
+	      var pickedArray = this.props.buttonsPicked.map(function (data) {
+	        return data.icon;
+	      });
+	      var notSelectedArray = this.props.buttonsAvailable.filter(function (item) {
+	        return pickedArray.indexOf(item.icon) < 0;
+	      });
 	
-	            if (this.props.buttonsPicked.map(function (data) {
-	                return data.icon;
-	            }).indexOf(icon) < 0) {
-	                this.props.addButton(data);
-	            } else {
-	                this.props.removeButton(data);
-	            }
-	            if (!this.props.buttonsAvailable[index]["isSelected"]) {
-	                this.props.toggleSelect(false);
-	            }
-	            this.props.toggleButton(!this.props.buttonsAvailable[index]["isSelected"], index);
-	        }
-	    }, {
-	        key: "selectAllinDB",
-	        value: function selectAllinDB() {
-	            var _this2 = this;
+	      notSelectedArray.forEach(function (item) {
+	        _this2.props.addButton(item);
+	      });
+	      this.props.toggleAllButtons(true);
+	      this.props.toggleSelect(true);
+	    }
+	  }, {
+	    key: "deselectAllinDB",
+	    value: function deselectAllinDB() {
+	      var _this3 = this;
 	
-	            var pickedArray = this.props.buttonsPicked.map(function (data) {
-	                return data.icon;
-	            });
-	            var notSelectedArray = this.props.buttonsAvailable.filter(function (item) {
-	                return pickedArray.indexOf(item.icon) < 0;
-	            });
+	      this.props.buttonsAvailable.forEach(function (item, i) {
+	        _this3.props.removeButton(item);
+	        _this3.props.toggleAllButtons(false);
+	        _this3.props.toggleSelect(false);
+	      });
+	    }
+	  }, {
+	    key: "handleCheck",
+	    value: function handleCheck() {
+	      if (this.props.allButtonsSelected) {
+	        this.deselectAllinDB();
+	      } else {
+	        this.selectAllinDB();
+	      }
+	    }
+	  }, {
+	    key: "render",
+	    value: function render() {
+	      var buttonsAvailable = this.props.buttonsAvailable;
 	
-	            notSelectedArray.forEach(function (item) {
-	                _this2.props.addButton(item);
-	            });
-	            this.props.toggleAllButtons(true);
-	            this.props.toggleSelect(true);
-	        }
-	    }, {
-	        key: "deselectAllinDB",
-	        value: function deselectAllinDB() {
-	            var _this3 = this;
-	
-	            this.props.buttonsAvailable.forEach(function (item, i) {
-	                _this3.props.removeButton(item);
-	                _this3.props.toggleAllButtons(false);
-	                _this3.props.toggleSelect(false);
-	            });
-	        }
-	    }, {
-	        key: "handleCheck",
-	        value: function handleCheck() {
-	            if (this.props.allButtonsSelected) {
-	                this.deselectAllinDB();
-	            } else {
-	                this.selectAllinDB();
-	            }
-	        }
-	    }, {
-	        key: "render",
-	        value: function render() {
-	            var buttonsAvailable = this.props.buttonsAvailable;
-	
-	            var addRemove = this.handleIconClick;
-	            var baseClass = 'btn btn btn-circle btn-md';
-	            var unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
-	            var allButtonsOn = this.props.buttonsPicked.length === 10;
+	      var addRemove = this.handleIconClick;
+	      var baseClass = 'btn btn btn-circle btn-md';
+	      var unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
+	      var allButtonsOn = this.props.buttonsPicked.length === 10;
+	      return _react2.default.createElement(
+	        "div",
+	        null,
+	        _react2.default.createElement(
+	          "h4",
+	          { className: "pick-no-margin" },
+	          "Pick your buttons"
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "checkbox" },
+	          _react2.default.createElement(
+	            "label",
+	            null,
+	            _react2.default.createElement("input", { type: "checkbox", checked: allButtonsOn ? 'checked' : '', onClick: this.handleCheck }),
+	            " select all"
+	          )
+	        ),
+	        _react2.default.createElement(
+	          "div",
+	          { className: "button-spacer" },
+	          buttonsAvailable && buttonsAvailable.map(function (btn, i) {
 	            return _react2.default.createElement(
-	                "div",
-	                null,
-	                _react2.default.createElement(
-	                    "h4",
-	                    { className: "pick-no-margin" },
-	                    "Pick your buttons"
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "checkbox" },
-	                    _react2.default.createElement(
-	                        "label",
-	                        null,
-	                        _react2.default.createElement("input", { type: "checkbox", checked: allButtonsOn ? 'checked' : '', onClick: this.handleCheck }),
-	                        " select all"
-	                    )
-	                ),
-	                _react2.default.createElement(
-	                    "div",
-	                    { className: "button-spacer" },
-	                    buttonsAvailable && buttonsAvailable.map(function (btn, i) {
-	                        return _react2.default.createElement(
-	                            "button",
-	                            { key: btn.nickname, className: btn.isSelected ? baseClass + " " + btn.color : unselectedClass, onClick: function onClick(evt) {
-	                                    addRemove(evt, btn.color, i);
-	                                }, "data-icon": btn.icon },
-	                            _react2.default.createElement("i", { className: btn.icon.replace('fa-spin', '') })
-	                        );
-	                    })
-	                )
+	              "button",
+	              { key: btn.nickname, className: btn.isSelected ? baseClass + " " + btn.color : unselectedClass, onClick: function onClick(evt) {
+	                  addRemove(evt, btn.color, i);
+	                }, "data-icon": btn.icon },
+	              _react2.default.createElement("i", { className: btn.icon.replace('fa-spin', '') })
 	            );
-	        }
-	    }]);
+	          })
+	        )
+	      );
+	    }
+	  }]);
 	
-	    return PickButtons;
+	  return PickButtons;
 	}(_react2.default.Component);
 	
 	exports.default = PickButtons;
 
 /***/ },
-/* 314 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	/* -----------------    ACTIONS     ------------------ */
-	var TOGGLE_SELECT_ALL = exports.TOGGLE_SELECT_ALL = 'TOGGLE_SELECT_ALL';
-	var PICKED_BUTTON = exports.PICKED_BUTTON = 'PICKED_BUTTON';
-	var REMOVED_BUTTON = exports.REMOVED_BUTTON = 'REMOVED_BUTTON';
-	var TOGGLE_BUTTON_SELECTED = exports.TOGGLE_BUTTON_SELECTED = 'TOGGLE_BUTTON_SELECTED';
-	var TOGGLE_ALL_BUTTONS = exports.TOGGLE_ALL_BUTTONS = 'TOGGLE_ALL_BUTTONS';
-	
-	/* ------------   ACTION CREATORS     ------------------ */
-	var pickedButton = exports.pickedButton = function pickedButton(data) {
-		return {
-			type: PICKED_BUTTON,
-			payload: data
-		};
-	};
-	
-	var removedButton = exports.removedButton = function removedButton(buttonData) {
-		return {
-			type: REMOVED_BUTTON,
-			payload: buttonData
-		};
-	};
-	
-	var toggleSelectAll = exports.toggleSelectAll = function toggleSelectAll(bool) {
-		return {
-			type: TOGGLE_SELECT_ALL,
-			payload: bool
-		};
-	};
-	
-	var toggleButtonSelected = exports.toggleButtonSelected = function toggleButtonSelected(bool, index) {
-		console.log(index);
-		return {
-			type: TOGGLE_BUTTON_SELECTED,
-			boolean: bool,
-			index: index
-		};
-	};
-	
-	var toggleAllButtons = exports.toggleAllButtons = function toggleAllButtons(bool) {
-		return {
-			type: TOGGLE_ALL_BUTTONS,
-			boolean: bool
-		};
-	};
-
-/***/ },
-/* 315 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.addBoard = exports.clearAllButtons = exports.stateBoardId = exports.pickButtonError = exports.CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_BUTTONS = exports.SET_BOARDID = exports.TOGGLE_PICK_BUTTON_ERROR = undefined;
-	
-	var _axios = __webpack_require__(285);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	/* -----------------    ACTIONS     ------------------ */
-	var TOGGLE_PICK_BUTTON_ERROR = exports.TOGGLE_PICK_BUTTON_ERROR = 'TOGGLE_PICK_BUTTON_ERROR';
-	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
-	var CLEAR_ALL_BUTTONS = exports.CLEAR_ALL_BUTTONS = 'CLEAR_ALL_BUTTONS';
-	var CLEAR_ALL_SELECTED_BUTTONS = exports.CLEAR_ALL_SELECTED_BUTTONS = 'CLEAR_ALL_SELECTED_BUTTONS';
-	
-	/* ------------   ACTION CREATORS     ------------------ */
-	var pickButtonError = exports.pickButtonError = function pickButtonError(bool) {
-		return {
-			type: TOGGLE_PICK_BUTTON_ERROR,
-			payload: bool
-		};
-	};
-	
-	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
-		return {
-			type: SET_BOARDID,
-			payload: boardId
-		};
-	};
-	
-	var clearAllButtons = exports.clearAllButtons = function clearAllButtons() {
-		return {
-			type: CLEAR_ALL_BUTTONS
-		};
-	};
-	
-	/* ------------       ASYNC ACTION CREATORS     ------------------ */
-	var addBoard = exports.addBoard = function addBoard(details) {
-		return function (dispatch) {
-			_axios2.default.post('/api/', details).then(function (res) {
-				return res.data;
-			}).then(function (createdBoard) {
-				return dispatch(stateBoardId(createdBoard.path));
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		};
-	};
-
-/***/ },
-/* 316 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	/* -----------------    ACTIONS     ------------------ */
-	var SHOW_CREATE = exports.SHOW_CREATE = 'SHOW_CREATE';
-	var SHOW_JOIN = exports.SHOW_JOIN = 'SHOW_JOIN';
-	
-	/* ------------   ACTION CREATORS     ------------------ */
-	var showCreate = exports.showCreate = function showCreate(bool) {
-		return {
-			type: SHOW_CREATE,
-			payload: bool
-		};
-	};
-	
-	var showJoin = exports.showJoin = function showJoin(bool) {
-		return {
-			type: SHOW_JOIN,
-			payload: bool
-		};
-	};
-
-/***/ },
-/* 317 */
+/* 324 */
 /***/ function(module, exports) {
 
 	"use strict";
@@ -32115,62 +32492,62 @@
 	exports.default = addIcons;
 
 /***/ },
-/* 318 */
+/* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Board = __webpack_require__(319);
+	var _Board = __webpack_require__(326);
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _boardActions = __webpack_require__(320);
+	var _boardActions = __webpack_require__(303);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var mapStateToProps = function mapStateToProps(_ref) {
-		var generatedBoard = _ref.generatedBoard,
-		    currentBoard = _ref.currentBoard,
-		    buttonsToLoad = _ref.buttonsToLoad,
-		    connectToSocket = _ref.connectToSocket,
-		    audienceCount = _ref.audienceCount;
+	  var generatedBoard = _ref.generatedBoard,
+	      currentBoard = _ref.currentBoard,
+	      buttonsToLoad = _ref.buttonsToLoad,
+	      connectToSocket = _ref.connectToSocket,
+	      audienceCount = _ref.audienceCount;
 	
-		return {
-			generatedBoard: generatedBoard,
-			currentBoard: currentBoard,
-			buttonsToLoad: buttonsToLoad,
-			connectToSocket: connectToSocket,
-			audienceCount: audienceCount
-		};
+	  return {
+	    generatedBoard: generatedBoard,
+	    currentBoard: currentBoard,
+	    buttonsToLoad: buttonsToLoad,
+	    connectToSocket: connectToSocket,
+	    audienceCount: audienceCount
+	  };
 	};
 	
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
-		return {
-			setBoardId: function setBoardId(boardId) {
-				dispatch((0, _boardActions.stateBoardId)(boardId));
-			},
-			updateAudienceCount: function updateAudienceCount(audienceString) {
-				dispatch((0, _boardActions.setAudienceCount)(audienceString));
-			}
-		};
+	  return {
+	    setBoardId: function setBoardId(boardId) {
+	      dispatch((0, _boardActions.stateBoardId)(boardId));
+	    },
+	    updateAudienceCount: function updateAudienceCount(audienceString) {
+	      dispatch((0, _boardActions.setAudienceCount)(audienceString));
+	    }
+	  };
 	};
 	
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Board2.default);
 
 /***/ },
-/* 319 */
+/* 326 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -32181,11 +32558,11 @@
 	
 	var _reactRouter = __webpack_require__(216);
 	
-	var _HomeForm = __webpack_require__(280);
+	var _HomeForm = __webpack_require__(316);
 	
 	var _HomeForm2 = _interopRequireDefault(_HomeForm);
 	
-	var _iconAnimations = __webpack_require__(317);
+	var _iconAnimations = __webpack_require__(324);
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
@@ -32201,168 +32578,109 @@
 	
 	
 	var Board = function (_React$Component) {
-		_inherits(Board, _React$Component);
+	  _inherits(Board, _React$Component);
 	
-		function Board(props) {
-			_classCallCheck(this, Board);
+	  function Board(props) {
+	    _classCallCheck(this, Board);
 	
-			var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (Board.__proto__ || Object.getPrototypeOf(Board)).call(this, props));
 	
-			_this.handleIconClick = _this.handleIconClick.bind(_this);
-			_this.drawAction = _this.drawAction.bind(_this);
-			return _this;
-		}
+	    _this.handleIconClick = _this.handleIconClick.bind(_this);
+	    _this.drawAction = _this.drawAction.bind(_this);
+	    return _this;
+	  }
 	
-		_createClass(Board, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var _this2 = this;
+	  _createClass(Board, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      var _this2 = this;
 	
-				var component = this;
-				// initialize client socket
-				this.socket = io.connect();
-				//join room
-				this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.generatedBoard);
-				// emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
-				this.socket.on('showAction', function (icon) {
-					// hey, someone else clicked an icon and we found out from the server
-					component.drawAction(icon);
-				});
-				//emitted from server, caught here with the current num of people connected
-				this.socket.on('connectionEvent', function (numPeople) {
-					var audience = 'person';
-					if (numPeople > 1) {
-						audience = 'people';
-					}
-					if (numPeople > 0) {
-						_this2.props.updateAudienceCount(numPeople + ' ' + audience + ' connected');
-					}
-				});
-			}
-		}, {
-			key: 'handleIconClick',
-			value: function handleIconClick(evt) {
-				this.socket.emit('registerAction', { icon: evt.currentTarget.dataset.icon });
-			}
-		}, {
-			key: 'drawAction',
-			value: function drawAction(icon) {
-				(0, _iconAnimations2.default)(icon.icon);
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var _this3 = this;
+	      var component = this;
+	      // initialize client socket
+	      this.socket = io.connect();
+	      //join room
+	      this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.generatedBoard);
+	      // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
+	      this.socket.on('showAction', function (icon) {
+	        // hey, someone else clicked an icon and we found out from the server
+	        component.drawAction(icon);
+	      });
+	      //emitted from server, caught here with the current num of people connected
+	      this.socket.on('connectionEvent', function (numPeople) {
+	        var audience = 'person';
+	        if (numPeople > 1) {
+	          audience = 'people';
+	        }
+	        if (numPeople > 0) {
+	          _this2.props.updateAudienceCount(numPeople + ' ' + audience + ' connected');
+	        }
+	      });
+	    }
+	  }, {
+	    key: 'handleIconClick',
+	    value: function handleIconClick(evt) {
+	      this.socket.emit('registerAction', { icon: evt.currentTarget.dataset.icon });
+	    }
+	  }, {
+	    key: 'drawAction',
+	    value: function drawAction(icon) {
+	      (0, _iconAnimations2.default)(icon.icon);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      var _this3 = this;
 	
-				var audienceCount = this.props.audienceCount;
+	      var audienceCount = this.props.audienceCount;
 	
-				return _react2.default.createElement(
-					'div',
-					null,
-					_react2.default.createElement(
-						'div',
-						{ id: 'wrap' },
-						_react2.default.createElement(
-							'h1',
-							null,
-							' Silent Salutations'
-						),
-						_react2.default.createElement(
-							'div',
-							{ id: 'num-people' },
-							_react2.default.createElement(
-								'span',
-								null,
-								audienceCount ? audienceCount : 'audience connecting...'
-							)
-						),
-						_react2.default.createElement('div', { className: 'columns column-0' }),
-						_react2.default.createElement('div', { className: 'columns column-1' }),
-						_react2.default.createElement('div', { className: 'columns column-2' }),
-						_react2.default.createElement('div', { className: 'columns column-3' }),
-						_react2.default.createElement('div', { className: 'columns column-4' })
-					),
-					_react2.default.createElement(
-						'footer',
-						null,
-						this.props.buttonsToLoad && this.props.buttonsToLoad.map(function (button, i) {
-							return _react2.default.createElement(
-								'button',
-								{ key: i, className: 'btn btn-circle btn-xl ' + button.color, onClick: _this3.handleIconClick, 'data-icon': button.icon },
-								_react2.default.createElement('i', { className: button.icon.replace('fa-spin', '') })
-							);
-						})
-					)
-				);
-			}
-		}]);
+	      return _react2.default.createElement(
+	        'div',
+	        null,
+	        _react2.default.createElement(
+	          'div',
+	          { id: 'wrap' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            ' Silent Salutations'
+	          ),
+	          _react2.default.createElement(
+	            'div',
+	            { id: 'num-people' },
+	            _react2.default.createElement(
+	              'span',
+	              null,
+	              audienceCount ? audienceCount : 'audience connecting...'
+	            )
+	          ),
+	          _react2.default.createElement('div', { className: 'columns column-0' }),
+	          _react2.default.createElement('div', { className: 'columns column-1' }),
+	          _react2.default.createElement('div', { className: 'columns column-2' }),
+	          _react2.default.createElement('div', { className: 'columns column-3' }),
+	          _react2.default.createElement('div', { className: 'columns column-4' })
+	        ),
+	        _react2.default.createElement(
+	          'footer',
+	          null,
+	          this.props.buttonsToLoad && this.props.buttonsToLoad.map(function (button, i) {
+	            return _react2.default.createElement(
+	              'button',
+	              { key: i, className: 'btn btn-circle btn-xl ' + button.color, onClick: _this3.handleIconClick, 'data-icon': button.icon },
+	              _react2.default.createElement('i', { className: button.icon.replace('fa-spin', '') })
+	            );
+	          })
+	        )
+	      );
+	    }
+	  }]);
 	
-		return Board;
+	  return Board;
 	}(_react2.default.Component);
 	
 	exports.default = Board;
 
 /***/ },
-/* 320 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.enterBoard = exports.setAudienceCount = exports.foundBoard = exports.stateBoardId = exports.SET_AUDIENCE_COUNT = exports.SET_BOARDID = exports.LOAD_BUTTONS = undefined;
-	
-	var _axios = __webpack_require__(285);
-	
-	var _axios2 = _interopRequireDefault(_axios);
-	
-	var _reactRouter = __webpack_require__(216);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	/* -----------------    ACTIONS     ------------------ */
-	var LOAD_BUTTONS = exports.LOAD_BUTTONS = 'LOAD_BUTTONS';
-	var SET_BOARDID = exports.SET_BOARDID = 'SET_BOARDID';
-	var SET_AUDIENCE_COUNT = exports.SET_AUDIENCE_COUNT = 'SET_AUDIENCE_COUNT';
-	
-	/* -----------------    ACTION CREATORS     ------------------ */
-	var stateBoardId = exports.stateBoardId = function stateBoardId(boardId) {
-		return {
-			type: SET_BOARDID,
-			payload: boardId
-		};
-	};
-	
-	var foundBoard = exports.foundBoard = function foundBoard(buttons) {
-		return {
-			type: LOAD_BUTTONS,
-			payload: buttons
-		};
-	};
-	
-	var setAudienceCount = exports.setAudienceCount = function setAudienceCount(audienceString) {
-		return {
-			type: SET_AUDIENCE_COUNT,
-			payload: audienceString
-		};
-	};
-	
-	/* ------------       REDUCER     ------------------ */
-	var enterBoard = exports.enterBoard = function enterBoard(boardId) {
-		return function (dispatch) {
-			_axios2.default.get('/api/enter/' + boardId).then(function (res) {
-				return res.data;
-			}).then(function (errorOrButtons) {
-				errorOrButtons.notFound ? _reactRouter.hashHistory.push('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));
-			}).catch(function (err) {
-				return console.log(err);
-			});
-		};
-	};
-
-/***/ },
-/* 321 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32411,13 +32729,13 @@
 	exports.default = Root;
 
 /***/ },
-/* 322 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-	    value: true
+	  value: true
 	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -32428,7 +32746,7 @@
 	
 	var _reactRouter = __webpack_require__(216);
 	
-	var _iconAnimations = __webpack_require__(317);
+	var _iconAnimations = __webpack_require__(324);
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
@@ -32441,409 +32759,85 @@
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
 	var EmptyPage = function (_React$Component) {
-	    _inherits(EmptyPage, _React$Component);
+	  _inherits(EmptyPage, _React$Component);
 	
-	    function EmptyPage(props) {
-	        _classCallCheck(this, EmptyPage);
+	  function EmptyPage(props) {
+	    _classCallCheck(this, EmptyPage);
 	
-	        var _this = _possibleConstructorReturn(this, (EmptyPage.__proto__ || Object.getPrototypeOf(EmptyPage)).call(this, props));
+	    var _this = _possibleConstructorReturn(this, (EmptyPage.__proto__ || Object.getPrototypeOf(EmptyPage)).call(this, props));
 	
-	        _this.interval = null;
-	        _this.drawAction = _this.drawAction.bind(_this);
-	        _this.startInterval = _this.startInterval.bind(_this);
-	        return _this;
+	    _this.interval = null;
+	    _this.drawAction = _this.drawAction.bind(_this);
+	    _this.startInterval = _this.startInterval.bind(_this);
+	    return _this;
+	  }
+	
+	  _createClass(EmptyPage, [{
+	    key: 'componentDidMount',
+	    value: function componentDidMount() {
+	      this.interval = setInterval(this.startInterval, 500);
 	    }
+	  }, {
+	    key: 'componentWillUnmount',
+	    value: function componentWillUnmount() {
+	      clearInterval(this.interval);
+	    }
+	  }, {
+	    key: 'startInterval',
+	    value: function startInterval() {
+	      this.drawAction({ icon: 'fa fa-frown-o' });
+	    }
+	  }, {
+	    key: 'drawAction',
+	    value: function drawAction(icon) {
+	      (0, _iconAnimations2.default)(icon.icon);
+	    }
+	  }, {
+	    key: 'render',
+	    value: function render() {
+	      return _react2.default.createElement(
+	        'div',
+	        { id: 'wrap' },
+	        _react2.default.createElement(
+	          'h1',
+	          null,
+	          ' Silent Salutations '
+	        ),
+	        _react2.default.createElement('div', { className: 'columns column-0' }),
+	        _react2.default.createElement('div', { className: 'columns column-1' }),
+	        _react2.default.createElement('div', { className: 'columns column-2' }),
+	        _react2.default.createElement('div', { className: 'columns column-3' }),
+	        _react2.default.createElement('div', { className: 'columns column-4' }),
+	        _react2.default.createElement(
+	          'button',
+	          { className: 'btn red btn-circle btn-xl', 'data-icon': 'fa fa-frown-o' },
+	          _react2.default.createElement('i', { className: 'fa fa-frown-o' })
+	        ),
+	        _react2.default.createElement(
+	          'h1',
+	          { className: 'textbold' },
+	          'Oops! That room doesn\'t exist...'
+	        ),
+	        _react2.default.createElement(
+	          _reactRouter.Link,
+	          { to: '/' },
+	          _react2.default.createElement(
+	            'h1',
+	            null,
+	            ' Go back home'
+	          )
+	        )
+	      );
+	    }
+	  }]);
 	
-	    _createClass(EmptyPage, [{
-	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.interval = setInterval(this.startInterval, 500);
-	        }
-	    }, {
-	        key: 'componentWillUnmount',
-	        value: function componentWillUnmount() {
-	            clearInterval(this.interval);
-	        }
-	    }, {
-	        key: 'startInterval',
-	        value: function startInterval() {
-	            this.drawAction({ icon: 'fa fa-frown-o' });
-	        }
-	    }, {
-	        key: 'drawAction',
-	        value: function drawAction(icon) {
-	            (0, _iconAnimations2.default)(icon.icon);
-	        }
-	    }, {
-	        key: 'render',
-	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                { id: 'wrap' },
-	                _react2.default.createElement(
-	                    'h1',
-	                    null,
-	                    ' Silent Salutations '
-	                ),
-	                _react2.default.createElement('div', { className: 'columns column-0' }),
-	                _react2.default.createElement('div', { className: 'columns column-1' }),
-	                _react2.default.createElement('div', { className: 'columns column-2' }),
-	                _react2.default.createElement('div', { className: 'columns column-3' }),
-	                _react2.default.createElement('div', { className: 'columns column-4' }),
-	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'btn red btn-circle btn-xl', 'data-icon': 'fa fa-frown-o' },
-	                    _react2.default.createElement('i', { className: 'fa fa-frown-o' })
-	                ),
-	                _react2.default.createElement(
-	                    'h1',
-	                    { className: 'textbold' },
-	                    'Oops! That room doesn\'t exist...'
-	                ),
-	                _react2.default.createElement(
-	                    _reactRouter.Link,
-	                    { to: '/' },
-	                    _react2.default.createElement(
-	                        'h1',
-	                        null,
-	                        ' Go back home'
-	                    )
-	                )
-	            );
-	        }
-	    }]);
-	
-	    return EmptyPage;
+	  return EmptyPage;
 	}(_react2.default.Component);
 	
 	exports.default = EmptyPage;
 	
 	
 	module.exports = EmptyPage;
-
-/***/ },
-/* 323 */
-/***/ function(module, exports) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	        value: true
-	});
-	var buttonData = exports.buttonData = [{
-	        color: 'blue',
-	        icon: 'fa fa-sign-language',
-	        shortIcon: 'clap',
-	        isSelected: false,
-	        nickname: 'clap',
-	        index: '0'
-	}, {
-	        color: 'red',
-	        icon: 'fa fa-frown-o',
-	        shortIcon: 'frown',
-	        isSelected: false,
-	        nickname: 'frown',
-	        index: '1'
-	}, {
-	        color: 'gray',
-	        icon: 'fa fa-empire',
-	        shortIcon: 'empire',
-	        isSelected: false,
-	        nickname: 'empire',
-	        index: '2'
-	}, {
-	        color: 'dark-blue',
-	        icon: 'fa fa-heart-o',
-	        shortIcon: 'heart',
-	        isSelected: false,
-	        nickname: 'heart',
-	        index: '3'
-	}, {
-	        color: 'green',
-	        icon: 'fa fa-money fa-spin',
-	        shortIcon: 'money',
-	        isSelected: false,
-	        nickname: 'money',
-	        index: '4'
-	}, {
-	        color: 'pink',
-	        icon: 'fa fa-smile-o',
-	        shortIcon: 'smile',
-	        isSelected: false,
-	        nickname: 'smile',
-	        index: '5'
-	}, {
-	        color: 'yellow',
-	        icon: 'fa fa-question',
-	        shortIcon: 'question',
-	        isSelected: false,
-	        nickname: 'question',
-	        index: '6'
-	}, {
-	        color: 'mint-green',
-	        icon: 'fa fa-thumbs-o-up',
-	        shortIcon: 'thumb',
-	        isSelected: false,
-	        nickname: 'thumb',
-	        index: '7'
-	}, {
-	        color: 'orange',
-	        icon: 'fa fa-rebel',
-	        shortIcon: 'resistance',
-	        isSelected: false,
-	        nickname: 'resistance',
-	        index: '8'
-	}, {
-	        color: 'purple',
-	        icon: 'fa fa-bomb fa-spin',
-	        shortIcon: 'bomb',
-	        isSelected: false,
-	        nickname: 'bomb',
-	        index: '9'
-	}];
-
-/***/ },
-/* 324 */,
-/* 325 */,
-/* 326 */,
-/* 327 */,
-/* 328 */,
-/* 329 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.showJoinTab = exports.showCreateTab = undefined;
-	
-	var _homeformActions = __webpack_require__(316);
-	
-	var showCreateTab = exports.showCreateTab = function showCreateTab() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _homeformActions.SHOW_CREATE:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-	
-	var showJoinTab = exports.showJoinTab = function showJoinTab() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _homeformActions.SHOW_JOIN:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-
-/***/ },
-/* 330 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.allButtonsSelected = exports.buttonsAvailable = exports.buttonsPicked = undefined;
-	
-	var _pickbuttonActions = __webpack_require__(314);
-	
-	var _createboardActions = __webpack_require__(315);
-	
-	var _initialstate = __webpack_require__(323);
-	
-	function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-	
-	var buttonsPicked = exports.buttonsPicked = function buttonsPicked() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _pickbuttonActions.PICKED_BUTTON:
-				return [].concat(_toConsumableArray(state), [action.payload]);
-			case _pickbuttonActions.REMOVED_BUTTON:
-				return state.filter(function (buttonInfo) {
-					return buttonInfo.icon !== action.payload.icon;
-				});
-			case _createboardActions.CLEAR_ALL_BUTTONS:
-				return [];
-			default:
-				return state;
-		}
-	};
-	
-	var buttonsAvailable = exports.buttonsAvailable = function buttonsAvailable() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : _initialstate.buttonData;
-		var action = arguments[1];
-	
-		var newState = void 0;
-		switch (action.type) {
-			case _pickbuttonActions.TOGGLE_BUTTON_SELECTED:
-				newState = state.map(function (obj) {
-					if (obj.index == action.index) {
-						obj.isSelected = action.boolean;
-					}
-					return obj;
-				});
-				return newState;
-			case _pickbuttonActions.TOGGLE_ALL_BUTTONS:
-				newState = state.map(function (obj) {
-					obj.isSelected = action.boolean;
-					return obj;
-				});
-				return newState;
-			default:
-				return state;
-		}
-	};
-	
-	var allButtonsSelected = exports.allButtonsSelected = function allButtonsSelected() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _pickbuttonActions.TOGGLE_SELECT_ALL:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-
-/***/ },
-/* 331 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.generatedBoard = exports.showPickButtonError = undefined;
-	
-	var _createboardActions = __webpack_require__(315);
-	
-	var _boardActions = __webpack_require__(320);
-	
-	var showPickButtonError = exports.showPickButtonError = function showPickButtonError() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _createboardActions.TOGGLE_PICK_BUTTON_ERROR:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-	
-	var generatedBoard = exports.generatedBoard = function generatedBoard() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _boardActions.SET_BOARDID:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-
-/***/ },
-/* 332 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.audienceCount = exports.buttonsToLoad = exports.boardNotFound = undefined;
-	
-	var _joinboardformActions = __webpack_require__(284);
-	
-	var _boardActions = __webpack_require__(320);
-	
-	var boardNotFound = exports.boardNotFound = function boardNotFound() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _joinboardformActions.BOARD_NOT_FOUND:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-	
-	var buttonsToLoad = exports.buttonsToLoad = function buttonsToLoad() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _boardActions.LOAD_BUTTONS:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-	
-	var audienceCount = exports.audienceCount = function audienceCount() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _boardActions.SET_AUDIENCE_COUNT:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-
-/***/ },
-/* 333 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.foundBoardReducer = exports.currentBoard = undefined;
-	
-	var _joinboardformActions = __webpack_require__(284);
-	
-	var currentBoard = exports.currentBoard = function currentBoard() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _joinboardformActions.SET_CURRENT_BOARD:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
-	
-	var foundBoardReducer = exports.foundBoardReducer = function foundBoardReducer() {
-		var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-		var action = arguments[1];
-	
-		switch (action.type) {
-			case _joinboardformActions.BOARD_NOT_FOUND:
-				return action.payload;
-			default:
-				return state;
-		}
-	};
 
 /***/ }
 /******/ ]);
