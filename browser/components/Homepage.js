@@ -3,11 +3,11 @@ import HomeForm from '../containers/HomeForm';
 import addIcons from '../utils/icon-animations';
 
 class Homepage extends React.Component {
-	constructor(props){
-		super(props);
-		this.handleIconClick = this.handleIconClick.bind(this);
-		this.drawAction = this.drawAction.bind(this);
-	}
+  constructor(props){
+    super(props);
+    this.handleIconClick = this.handleIconClick.bind(this);
+    this.drawAction = this.drawAction.bind(this);
+  }
 
   handleIconClick(evt) {
     this.drawAction({icon: evt.currentTarget.dataset.icon});
@@ -15,8 +15,8 @@ class Homepage extends React.Component {
 
   drawAction(icon) {
     addIcons(icon.icon);
-	}
-  
+  }
+
   render () {
     const { buttonsAvailable } = this.props;
     return (
