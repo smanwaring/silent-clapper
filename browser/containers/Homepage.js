@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import Homepage from '../components/Homepage';
 
-const mapStateToProps = ( {buttonsAvailable} ) => {
+const mapStateToProps = ({buttonsAvailable}) => {
 	return {
 		buttonsAvailable
 	};

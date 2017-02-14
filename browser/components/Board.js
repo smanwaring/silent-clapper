@@ -6,57 +6,57 @@ import addIcons from '../utils/icon-animations';
 
 
 class Board extends React.Component {
-	constructor(props){
-		super(props);
-		this.handleIconClick = this.handleIconClick.bind(this);
-		this.drawAction = this.drawAction.bind(this);
-	}
+  constructor(props){
+    super(props);
+    this.handleIconClick = this.handleIconClick.bind(this);
+    this.drawAction = this.drawAction.bind(this);
+  }
 
-	componentDidMount(){
-		let component = this;
-		// initialize client socket
-		this.socket = io.connect();
-		//join room
-		this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.generatedBoard);
-		// emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
-		this.socket.on('showAction', (icon) => {
-		// hey, someone else clicked an icon and we found out from the server
-			component.drawAction(icon);
-		});
-		 //emitted from server, caught here with the current num of people connected
-		this.socket.on('connectionEvent', (numPeople) => {
-			var audience = 'person';
-			if (numPeople > 1)  {
-				audience = 'people';
-			}
-			if (numPeople > 0) {
-				this.props.updateAudienceCount(`${numPeople} ${audience} connected`);
-			}
-		});
-	}
+componentDidMount(){
+  let component = this;
+    // initialize client socket
+  this.socket = io.connect();
+    //join room
+  this.socket.emit('wantToJoinRoom', component.props.currentBoard || component.props.generatedBoard);
+    // emitted from server, caught here with the icon and calls drawAction which initiates CSS animations!
+  this.socket.on('showAction', (icon) => {
+    // hey, someone else clicked an icon and we found out from the server
+    component.drawAction(icon);
+  });
+  //emitted from server, caught here with the current num of people connected
+  this.socket.on('connectionEvent', (numPeople) => {
+    var audience = 'person';
+      if (numPeople > 1)  {
+        audience = 'people';
+      }
+      if (numPeople > 0) {
+        this.props.updateAudienceCount(`${numPeople} ${audience} connected`);
+      }
+    });
+  }
 
-	handleIconClick(evt) {
-		this.socket.emit('registerAction', {icon: evt.currentTarget.dataset.icon});
-	}
+  handleIconClick(evt) {
+    this.socket.emit('registerAction', {icon: evt.currentTarget.dataset.icon});
+  }
 
-	drawAction(icon) {
-		addIcons(icon.icon);
-	}
+  drawAction(icon) {
+    addIcons(icon.icon);
+  }
 
   render () {
-	  const { audienceCount } = this.props;
+    const { audienceCount } = this.props;
     return (
       <div>
         <div id="wrap">
-			<h1> Silent Salutations</h1>
-			<div id="num-people">
-				<span>{ audienceCount ? audienceCount : 'audience connecting...' }</span>
-			</div>
-			<div className="columns column-0"></div>
-			<div className="columns column-1"></div>
-			<div className="columns column-2"></div>
-			<div className="columns column-3"></div>
-			<div className="columns column-4"></div>
+      <h1> Silent Salutations</h1>
+      <div id="num-people">
+        <span>{ audienceCount ? audienceCount : 'audience connecting...' }</span>
+      </div>
+      <div className="columns column-0"></div>
+      <div className="columns column-1"></div>
+      <div className="columns column-2"></div>
+      <div className="columns column-3"></div>
+      <div className="columns column-4"></div>
         </div>
 
         <footer>
@@ -68,7 +68,7 @@ class Board extends React.Component {
                 );
             })}
         </footer>
-	</div>
+  </div>
     );
   }
 }

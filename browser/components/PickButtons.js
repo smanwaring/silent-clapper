@@ -1,65 +1,63 @@
 import React from 'react';
 
 class PickButtons extends React.Component {
-	constructor(props){
-		super(props);
-		this.handleIconClick = this.handleIconClick.bind(this);
-        this.handleCheck = this.handleCheck.bind(this);
-        this.deselectAllinDB = this.deselectAllinDB.bind(this);
-        this.selectAllInDB = this.selectAllinDB.bind(this);
-	}
+  constructor(props){
+    super(props);
+    this.handleIconClick = this.handleIconClick.bind(this);
+    this.handleCheck = this.handleCheck.bind(this);
+    this.deselectAllinDB = this.deselectAllinDB.bind(this);
+    this.selectAllInDB = this.selectAllinDB.bind(this);
+  }
 
 
-    handleIconClick(evt, color, index) {
-        evt.preventDefault();
-        const icon = evt.currentTarget.dataset.icon;
-        const data = {icon: icon, color: color};
+  handleIconClick(evt, color, index) {
+    evt.preventDefault();
+    const icon = evt.currentTarget.dataset.icon;
+    const data = {icon: icon, color: color};
 
-        if (this.props.buttonsPicked.map(data => data.icon).indexOf(icon) < 0) {
-            this.props.addButton(data);
-        } else {
-            this.props.removeButton(data);
-        }
-        if (!this.props.buttonsAvailable[index]["isSelected"]) {
-            this.props.toggleSelect(false);
-        }
-        this.props.toggleButton(!this.props.buttonsAvailable[index]["isSelected"], index);
+    if (this.props.buttonsPicked.map(data => data.icon).indexOf(icon) < 0) {
+      this.props.addButton(data);
+    } else {
+      this.props.removeButton(data);
     }
-
-    selectAllinDB() {
-        const pickedArray = this.props.buttonsPicked.map(data => data.icon);
-        const notSelectedArray = this.props.buttonsAvailable.filter( item => pickedArray.indexOf(item.icon) < 0);
-
-        notSelectedArray.forEach(item => {
-            this.props.addButton(item);
-        });
-        this.props.toggleAllButtons(true);
-        this.props.toggleSelect(true);
+    if (!this.props.buttonsAvailable[index]["isSelected"]) {
+      this.props.toggleSelect(false);
     }
+    this.props.toggleButton(!this.props.buttonsAvailable[index]["isSelected"], index);
+  }
 
-    deselectAllinDB() {
-        this.props.buttonsAvailable.forEach( (item, i) => {
-            this.props.removeButton(item);
-            this.props.toggleAllButtons(false);
-            this.props.toggleSelect(false);
-        });
+  selectAllinDB() {
+    const pickedArray = this.props.buttonsPicked.map(data => data.icon);
+    const notSelectedArray = this.props.buttonsAvailable.filter( item => pickedArray.indexOf(item.icon) < 0);
+
+    notSelectedArray.forEach(item => {this.props.addButton(item);});
+    this.props.toggleAllButtons(true);
+    this.props.toggleSelect(true);
+  }
+
+  deselectAllinDB() {
+    this.props.buttonsAvailable.forEach( (item, i) => {
+      this.props.removeButton(item);
+      this.props.toggleAllButtons(false);
+      this.props.toggleSelect(false);
+     });
+  }
+
+
+  handleCheck(){
+    if (this.props.allButtonsSelected){
+      this.deselectAllinDB();
+    } else {
+      this.selectAllinDB();
     }
-
-
-    handleCheck(){
-        if (this.props.allButtonsSelected){
-            this.deselectAllinDB();
-        } else {
-            this.selectAllinDB();
-        }
-    }
+  }
 
   render () {
-      const { buttonsAvailable } = this.props;
-      const addRemove = this.handleIconClick;
-      const baseClass = 'btn btn btn-circle btn-md';
-      const unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
-      const allButtonsOn = this.props.buttonsPicked.length === 10;
+    const { buttonsAvailable } = this.props;
+    const addRemove = this.handleIconClick;
+    const baseClass = 'btn btn btn-circle btn-md';
+    const unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
+    const allButtonsOn = this.props.buttonsPicked.length === 10;
     return (
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>

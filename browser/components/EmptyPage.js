@@ -3,31 +3,30 @@ import { Link } from 'react-router';
 import addIcons from '../utils/icon-animations';
 
 export default class EmptyPage extends React.Component {
-    constructor(props){
+  constructor(props){
 		super(props);
         this.interval = null;
 		this.drawAction = this.drawAction.bind(this);
         this.startInterval  = this.startInterval.bind(this);
 	}
+  componentDidMount(){
+    this.interval = setInterval(this.startInterval, 500);
+  }
 
-    componentDidMount(){
-        this.interval = setInterval(this.startInterval, 500);
-    }
+  componentWillUnmount(){
+    clearInterval(this.interval);
+  }
 
-    componentWillUnmount(){
-        clearInterval(this.interval);
-    }
+  startInterval(){
+    this.drawAction( {icon: 'fa fa-frown-o'} );
+  }
 
-    startInterval(){
-        this.drawAction( {icon: 'fa fa-frown-o'} );
-    }
-
-	drawAction(icon) {
-	  addIcons(icon.icon);
+  drawAction(icon) {
+    addIcons(icon.icon);
 	}
-
-    render() {
-        return (
+  
+  render() {
+    return (
             <div id="wrap">
                 <h1> Silent Salutations </h1>
                 <div className="columns column-0"></div>

@@ -9,16 +9,16 @@ class Homepage extends React.Component {
 		this.drawAction = this.drawAction.bind(this);
 	}
 
-    handleIconClick(evt) {
-     this.drawAction({icon: evt.currentTarget.dataset.icon});
-    }
+  handleIconClick(evt) {
+    this.drawAction({icon: evt.currentTarget.dataset.icon});
+  }
 
-	drawAction(icon) {
-	  addIcons(icon.icon);
+  drawAction(icon) {
+    addIcons(icon.icon);
 	}
-
+  
   render () {
-      const { buttonsAvailable } = this.props;
+    const { buttonsAvailable } = this.props;
     return (
       <div>
         <div id="wrap">

@@ -3,26 +3,24 @@ import JoinBoardForm from '../containers/JoinBoardForm';
 import CreateBoard from '../containers/CreateBoard';
 
 class HomeForm extends React.Component {
-    constructor(props){
-        super(props);
-        this.handleCreateBoardClick = this.handleCreateBoardClick.bind(this);
-        this.handleJoinBoardClick = this.handleJoinBoardClick.bind(this);
-    }
+  constructor(props){
+    super(props);
+    this.handleCreateBoardClick = this.handleCreateBoardClick.bind(this);
+    this.handleJoinBoardClick = this.handleJoinBoardClick.bind(this);
+  }
 
-    handleCreateBoardClick( ) {
-        this.props.changeShowCreateTab(true);
-        this.props.changeShowJoinTab(false);
-    }
+  handleCreateBoardClick( ) {
+    this.props.changeShowCreateTab(true);
+    this.props.changeShowJoinTab(false);
+  }
 
-    handleJoinBoardClick() {
-        this.props.changeShowJoinTab(true);
-        this.props.changeShowCreateTab(false);
-    }
-
+  handleJoinBoardClick() {
+    this.props.changeShowJoinTab(true);
+    this.props.changeShowCreateTab(false);
+  }
 
   render () {
-      const { showJoinTab, showCreateTab } = this.props;
-
+    const { showJoinTab, showCreateTab } = this.props;
     return (
         <div className="container">
             <div className="row">
