@@ -30,7 +30,7 @@ class Board extends React.Component {
 				audience = 'people';
 			}
 			if (numPeople > 0) {
-				document.querySelector('#num-people span').textContent = `${numPeople} ${audience} connected`;
+				this.props.updateAudienceCount(`${numPeople} ${audience} connected`);
 			}
 		});
 	}
@@ -44,12 +44,13 @@ class Board extends React.Component {
 	}
 
   render () {
+	  const { audienceCount } = this.props;
     return (
       <div>
         <div id="wrap">
 			<h1> Silent Salutations</h1>
 			<div id="num-people">
-				<span>audience connecting...</span>
+				<span>{ audienceCount ? audienceCount : 'audience connecting...' }</span>
 			</div>
 			<div className="columns column-0"></div>
 			<div className="columns column-1"></div>

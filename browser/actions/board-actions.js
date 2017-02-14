@@ -4,6 +4,7 @@ import { hashHistory } from 'react-router';
 /* -----------------    ACTIONS     ------------------ */
 export const LOAD_BUTTONS = 'LOAD_BUTTONS';
 export const SET_BOARDID = 'SET_BOARDID';
+export const SET_AUDIENCE_COUNT = 'SET_AUDIENCE_COUNT';
 
 
 /* -----------------    ACTION CREATORS     ------------------ */
@@ -18,6 +19,13 @@ export const foundBoard = buttons => {
 	return {
 		type: LOAD_BUTTONS,
 		payload: buttons
+	};
+};
+
+export const setAudienceCount = audienceString => {
+	return {
+		type: SET_AUDIENCE_COUNT,
+		payload: audienceString
 	};
 };
 

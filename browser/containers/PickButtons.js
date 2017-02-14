@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import PickButtons from '../components/PickButtons';
-import { pickedButton, removedButton, toggleSelectAll, toggleButtonSelected } from '../actions/pickbutton-actions';
+import { pickedButton, removedButton, toggleSelectAll, toggleButtonSelected, toggleAllButtons } from '../actions/pickbutton-actions';
 
 const  mapStateToProps = ( {buttonsPicked, allButtonsSelected, buttonsAvailable} ) => {
 	return {
@@ -23,6 +23,9 @@ const mapDispatchToProps = dispatch => {
 		},
 		toggleButton: (bool, index) => {
 			dispatch( toggleButtonSelected(bool, index) );
+		},
+		toggleAllButtons: bool => {
+			dispatch( toggleAllButtons(bool) );
 		}
 	};
 };

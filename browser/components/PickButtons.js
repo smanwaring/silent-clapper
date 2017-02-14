@@ -33,17 +33,14 @@ class PickButtons extends React.Component {
         notSelectedArray.forEach(item => {
             this.props.addButton(item);
         });
-        this.props.buttonsAvailable.forEach((item, i) => {
-            this.props.toggleButton(true, i);
-        });
-
+        this.props.toggleAllButtons(true);
         this.props.toggleSelect(true);
     }
 
     deselectAllinDB() {
         this.props.buttonsAvailable.forEach( (item, i) => {
             this.props.removeButton(item);
-            this.props.toggleButton(false, i);
+            this.props.toggleAllButtons(false);
             this.props.toggleSelect(false);
         });
     }
@@ -58,6 +55,7 @@ class PickButtons extends React.Component {
     }
 
   render () {
+      const { buttonsAvailable } = this.props;
       const addRemove = this.handleIconClick;
       const baseClass = 'btn btn btn-circle btn-md';
       const unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
@@ -71,7 +69,7 @@ class PickButtons extends React.Component {
                 </label>
             </div>
             <div className="button-spacer">
-            {this.props && this.props.buttonsAvailable.map((btn, i) => {
+            {buttonsAvailable && buttonsAvailable.map((btn, i) => {
                 return (
                     <button key={btn.nickname} className={ btn.isSelected ? `${baseClass} ${btn.color}` : unselectedClass } onClick={ evt => {addRemove(evt, btn.color, i)}} data-icon={btn.icon}>
                        <i className={btn.icon.replace('fa-spin', '' )} />

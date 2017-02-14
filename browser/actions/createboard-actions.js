@@ -27,12 +27,6 @@ export const clearAllButtons = () => {
 	};
 };
 
-export const clearAllSelectedButtons = () => {
-	return {
-		type: CLEAR_ALL_SELECTED_BUTTONS,
-	};
-};
-
 /* ------------       ASYNC ACTION CREATORS     ------------------ */
 export const addBoard = details => {
     return dispatch => {
