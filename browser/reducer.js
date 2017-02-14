@@ -100,7 +100,7 @@ const buttonsAvailableReducer = (state = buttonData, action) => {
 const rootReducer = combineReducers({
 	generatedBoard: boardReducer,
 	currentBoard: currentBoardReducer,
-	buttonsPicked: iconsPickedReducer, 
+	buttonsPicked: iconsPickedReducer,
 	boardNotFound: foundBoardReducer,
 	buttonsToLoad:  boardButtonsReducer,
 	showCreateTab: showCreateTabReducer,

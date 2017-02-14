@@ -1,4 +1,4 @@
-export default function addIcons(icon) {
+const addIcons = (icon) => {
     let columns = [].slice.call(document.querySelectorAll('.columns'));
     let lowRange = 1.2,
         highRange = 1.6,
@@ -45,4 +45,6 @@ export default function addIcons(icon) {
     setTimeout(function() {
         randomColumn.removeChild(animationDiv);
     }, speed * 900);
-}
+};
+
+export default addIcons;

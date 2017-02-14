@@ -12,8 +12,8 @@ class PickButtons extends React.Component {
 
     handleIconClick(evt, color, index) {
         evt.preventDefault();
-        let icon = evt.currentTarget.dataset.icon;
-        let data = {icon: icon, color: color};
+        const icon = evt.currentTarget.dataset.icon;
+        const data = {icon: icon, color: color};
 
         if (this.props.buttonsPicked.map(data => data.icon).indexOf(icon) < 0) {
             this.props.addButton(data);
@@ -29,10 +29,10 @@ class PickButtons extends React.Component {
     selectAllinDB() {
         const pickedArray = this.props.buttonsPicked.map(data => data.icon);
         const notSelectedArray = this.props.buttonsAvailable.filter( item => pickedArray.indexOf(item.icon) < 0);
+
         notSelectedArray.forEach(item => {
             this.props.addButton(item);
         });
-
         this.props.buttonsAvailable.forEach((item, i) => {
             this.props.toggleButton(true, i);
         });
@@ -58,11 +58,10 @@ class PickButtons extends React.Component {
     }
 
   render () {
-      const { buttonSelected } = this.props;
-      let addRemove = this.handleIconClick;
-      let baseClass = 'btn btn btn-circle btn-md';
-      let unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
-      let allButtonsOn = this.props.buttonsPicked.length === 10;
+      const addRemove = this.handleIconClick;
+      const baseClass = 'btn btn btn-circle btn-md';
+      const unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
+      const allButtonsOn = this.props.buttonsPicked.length === 10;
     return (
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>

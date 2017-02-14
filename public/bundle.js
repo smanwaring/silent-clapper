@@ -32239,10 +32239,10 @@
 	            var notSelectedArray = this.props.buttonsAvailable.filter(function (item) {
 	                return pickedArray.indexOf(item.icon) < 0;
 	            });
+	
 	            notSelectedArray.forEach(function (item) {
 	                _this2.props.addButton(item);
 	            });
-	
 	            this.props.buttonsAvailable.forEach(function (item, i) {
 	                _this2.props.toggleButton(true, i);
 	            });
@@ -32272,8 +32272,6 @@
 	    }, {
 	        key: "render",
 	        value: function render() {
-	            var buttonSelected = this.props.buttonSelected;
-	
 	            var addRemove = this.handleIconClick;
 	            var baseClass = 'btn btn btn-circle btn-md';
 	            var unselectedClass = 'btn btn-circle btn-md btn-hover nuetralbg';
