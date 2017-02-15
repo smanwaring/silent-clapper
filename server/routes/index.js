@@ -24,7 +24,7 @@ router.post('/', (req, res, next) => {
   }, {
     include: [ Button ]
   })
-  .then(createdBoard => res.send(createdBoard))
+  .then(createdBoard => res.status(201).send(createdBoard))
   .catch(next);
 });
 
@@ -53,7 +53,7 @@ router.get('/enter/:boardId', (req, res, next) => {
     })
     .then(foundButtons => {
       objToReturn["buttons"] = foundButtons;
-      res.send(objToReturn);
+      res.status(200).send(objToReturn);
     })
     .catch(next);
   }

@@ -32,7 +32,7 @@ export const addBoard = details => {
     return dispatch => {
         axios.post(`/api/`, details)
 			.then(res => res.data)
-			.then(createdBoard => dispatch( stateBoardId(createdBoard.path) ) )
+			.then(createdBoard => { console.log(createdBoard); dispatch( stateBoardId(createdBoard.path) )} )
             .catch(err => console.log(err));
     };
 };

@@ -28856,7 +28856,7 @@
 			_axios2.default.post('/api/', details).then(function (res) {
 				return res.data;
 			}).then(function (createdBoard) {
-				return dispatch(stateBoardId(createdBoard.path));
+				console.log(createdBoard);dispatch(stateBoardId(createdBoard.path));
 			}).catch(function (err) {
 				return console.log(err);
 			});
