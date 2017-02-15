@@ -28,9 +28,9 @@ export const clearAllButtons = () => {
 };
 
 /* ------------       ASYNC ACTION CREATORS     ------------------ */
-export const addBoard = details => {
+export const addBoard = boardDetails => {
     return dispatch => {
-        axios.post(`/api/`, details)
+        axios.post(`/api/`, boardDetails)
 			.then(res => res.data)
 			.then(createdBoard => { console.log(createdBoard); dispatch( stateBoardId(createdBoard.path) )} )
             .catch(err => console.log(err));

@@ -21,9 +21,9 @@ export const stateCurrentBoard = boardId => {
 };
 
 /* ------------       DISPATCHERS     ------------------ */
-export const loadBoard = boardId => {
+export const loadBoard = pathId => {
   return dispatch => {
-    axios.get(`/api/${boardId}`)
+    axios.get(`/api/${pathId}`)
       .then( res => res.data )
       .then( board => {
         board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board.path));

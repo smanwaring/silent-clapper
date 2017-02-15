@@ -31,9 +31,9 @@ export const setAudienceCount = audienceString => {
 
 
 /* ------------       REDUCER     ------------------ */
-export const enterBoard = boardId => {
+export const enterBoard = pathId => {
   return dispatch => {
-    axios.get(`/api/enter/${boardId}`)
+    axios.get(`/api/enter/${pathId}`)
       .then(res => res.data)
       .then(errorOrButtons => {
         errorOrButtons.notFound ? hashHistory.push('/pageNotFound/error') : dispatch( foundBoard(errorOrButtons.buttons));

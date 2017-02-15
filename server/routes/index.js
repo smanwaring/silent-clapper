@@ -4,9 +4,9 @@ const Board = require('../db/models').Board;
 const Button = require('../db/models').Button;
 
 // Shortcut for grabbing the correct board 
-router.param('boardId', function(req, res, next, theId){
+router.param('pathId', function(req, res, next, thePathId){
   Board.findOne({
-    where: { path: theId }
+    where: { path: thePathId }
   })
   .then(function(foundBoard){
     req.board = foundBoard;
@@ -29,18 +29,18 @@ router.post('/', (req, res, next) => {
 });
 
 //GET the board if it exists
-router.get('/:boardId', (req, res, next) => {
+router.get('/:pathId', (req, res, next) => {
   let data = {message: 'not found'};
   let foundBoard = req.board;
   if (!foundBoard){
-    res.status(404).send(data);
+    res.send(data);
   } else {
     res.status(200).send({path: foundBoard.path});
   }
 });
 
 //Get the buttons for a particular board 
-router.get('/enter/:boardId', (req, res, next) => {
+router.get('/enter/:pathId', (req, res, next) => {
   var objToReturn = {};
   if (!req.board){
     objToReturn["notFound"] = true;

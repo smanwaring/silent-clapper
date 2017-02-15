@@ -28851,9 +28851,9 @@
 	};
 	
 	/* ------------       ASYNC ACTION CREATORS     ------------------ */
-	var addBoard = exports.addBoard = function addBoard(details) {
+	var addBoard = exports.addBoard = function addBoard(boardDetails) {
 		return function (dispatch) {
-			_axios2.default.post('/api/', details).then(function (res) {
+			_axios2.default.post('/api/', boardDetails).then(function (res) {
 				return res.data;
 			}).then(function (createdBoard) {
 				console.log(createdBoard);dispatch(stateBoardId(createdBoard.path));
@@ -30519,9 +30519,9 @@
 	};
 	
 	/* ------------       REDUCER     ------------------ */
-	var enterBoard = exports.enterBoard = function enterBoard(boardId) {
+	var enterBoard = exports.enterBoard = function enterBoard(pathId) {
 	  return function (dispatch) {
-	    _axios2.default.get('/api/enter/' + boardId).then(function (res) {
+	    _axios2.default.get('/api/enter/' + pathId).then(function (res) {
 	      return res.data;
 	    }).then(function (errorOrButtons) {
 	      errorOrButtons.notFound ? _reactRouter.hashHistory.push('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));
@@ -30619,9 +30619,9 @@
 	};
 	
 	/* ------------       DISPATCHERS     ------------------ */
-	var loadBoard = exports.loadBoard = function loadBoard(boardId) {
+	var loadBoard = exports.loadBoard = function loadBoard(pathId) {
 	  return function (dispatch) {
-	    _axios2.default.get('/api/' + boardId).then(function (res) {
+	    _axios2.default.get('/api/' + pathId).then(function (res) {
 	      return res.data;
 	    }).then(function (board) {
 	      board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board.path));
