@@ -57,9 +57,6 @@ describe('Board', () => {
     });
   });
 
-
-
-
   describe('Routes: ', () => {
 
     before('create a fake board', () => {
@@ -123,9 +120,29 @@ describe('Board', () => {
         agent.get('/api/enter/13070')
           .expect(200)
           .end((err, res) => {
-            if (err) return done(err)
+            if (err) return done(err);
             expect(res.body.buttons[0]).to.include({ icon: 'fa fa-money fa-spin' });
             expect(res.body.buttons).to.have.length(2);
+            done();
+          });
+      });
+
+        it('GET /api/:boardPath >> returns a valid board path if a board exists', (done) => {
+          agent.get('/api/13070')
+          .expect(200)
+          .end((err, res) => {
+            if (err) return done(err);
+            expect(res.body.path).to.be.equal('13070');
+            done();
+          });
+      });
+
+        it('GET /api/:boardPath >> returns a res.body with an error message if the board does not exist', (done) => {
+          agent.get('/api/hello')
+          .expect(404)
+          .end((err, res) => {
+            if (err) return done(err);
+            expect(res.body.message).to.be.equal('not found');
             done();
           });
       });

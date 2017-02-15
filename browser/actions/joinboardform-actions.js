@@ -26,7 +26,7 @@ export const loadBoard = boardId => {
     axios.get(`/api/${boardId}`)
       .then( res => res.data )
       .then( board => {
-        board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board));
+        board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board.path));
       })
       .catch(err => console.log(err));
   };

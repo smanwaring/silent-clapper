@@ -30624,7 +30624,7 @@
 	    _axios2.default.get('/api/' + boardId).then(function (res) {
 	      return res.data;
 	    }).then(function (board) {
-	      board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board));
+	      board.message ? dispatch(showBoardNotFound(true)) : dispatch(stateCurrentBoard(board.path));
 	    }).catch(function (err) {
 	      return console.log(err);
 	    });

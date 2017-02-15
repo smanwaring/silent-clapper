@@ -33,9 +33,9 @@ router.get('/:boardId', (req, res, next) => {
   let data = {message: 'not found'};
   let foundBoard = req.board;
   if (!foundBoard){
-    res.send(data);
+    res.status(404).send(data);
   } else {
-    res.send(foundBoard.path);
+    res.status(200).send({path: foundBoard.path});
   }
 });
 
@@ -44,7 +44,7 @@ router.get('/enter/:boardId', (req, res, next) => {
   var objToReturn = {};
   if (!req.board){
     objToReturn["notFound"] = true;
-    res.send(objToReturn).status(404);
+    res.status(400).send(objToReturn);
   } else {
     Button.findAll({
       where: {
