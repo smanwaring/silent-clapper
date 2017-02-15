@@ -31609,6 +31609,10 @@
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
+	var _Columns = __webpack_require__(329);
+	
+	var _Columns2 = _interopRequireDefault(_Columns);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -31672,11 +31676,7 @@
 	                            { className: 'form-container' },
 	                            _react2.default.createElement(_HomeForm2.default, null)
 	                        ),
-	                        _react2.default.createElement('div', { className: 'columns column-0' }),
-	                        _react2.default.createElement('div', { className: 'columns column-1' }),
-	                        _react2.default.createElement('div', { className: 'columns column-2' }),
-	                        _react2.default.createElement('div', { className: 'columns column-3' }),
-	                        _react2.default.createElement('div', { className: 'columns column-4' })
+	                        _react2.default.createElement(_Columns2.default, null)
 	                    )
 	                ),
 	                _react2.default.createElement(
@@ -32566,6 +32566,10 @@
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
+	var _Columns = __webpack_require__(329);
+	
+	var _Columns2 = _interopRequireDefault(_Columns);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32653,11 +32657,7 @@
 	              audienceCount ? audienceCount : 'audience connecting...'
 	            )
 	          ),
-	          _react2.default.createElement('div', { className: 'columns column-0' }),
-	          _react2.default.createElement('div', { className: 'columns column-1' }),
-	          _react2.default.createElement('div', { className: 'columns column-2' }),
-	          _react2.default.createElement('div', { className: 'columns column-3' }),
-	          _react2.default.createElement('div', { className: 'columns column-4' })
+	          _react2.default.createElement(_Columns2.default, null)
 	        ),
 	        _react2.default.createElement(
 	          'footer',
@@ -32750,6 +32750,10 @@
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
+	var _Columns = __webpack_require__(329);
+	
+	var _Columns2 = _interopRequireDefault(_Columns);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -32803,11 +32807,7 @@
 	          null,
 	          ' Silent Salutations '
 	        ),
-	        _react2.default.createElement('div', { className: 'columns column-0' }),
-	        _react2.default.createElement('div', { className: 'columns column-1' }),
-	        _react2.default.createElement('div', { className: 'columns column-2' }),
-	        _react2.default.createElement('div', { className: 'columns column-3' }),
-	        _react2.default.createElement('div', { className: 'columns column-4' }),
+	        _react2.default.createElement(_Columns2.default, null),
 	        _react2.default.createElement(
 	          'button',
 	          { className: 'btn red btn-circle btn-xl', 'data-icon': 'fa fa-frown-o' },
@@ -32838,6 +32838,34 @@
 	
 	
 	module.exports = EmptyPage;
+
+/***/ },
+/* 329 */
+/***/ function(module, exports, __webpack_require__) {
+
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("div", { className: "columns column-0" }),
+	    _react2.default.createElement("div", { className: "columns column-1" }),
+	    _react2.default.createElement("div", { className: "columns column-2" }),
+	    _react2.default.createElement("div", { className: "columns column-3" }),
+	    _react2.default.createElement("div", { className: "columns column-4" })
+	  );
+	};
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }
 /******/ ]);

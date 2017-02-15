@@ -1,6 +1,7 @@
 import React from 'react';
 import HomeForm from '../containers/HomeForm';
 import addIcons from '../utils/icon-animations';
+import Columns from './Columns';
 
 class Homepage extends React.Component {
   constructor(props){
@@ -31,11 +32,7 @@ class Homepage extends React.Component {
                 <div className="form-container">
                     <HomeForm />
                 </div>
-                <div className="columns column-0" />
-                <div className="columns column-1" />
-                <div className="columns column-2" />
-                <div className="columns column-3" />
-                <div className="columns column-4" />
+                <Columns />
             </div>
         </div>
         <footer>

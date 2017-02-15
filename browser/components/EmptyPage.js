@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import addIcons from '../utils/icon-animations';
+import Columns from './Columns';
 
 export default class EmptyPage extends React.Component {
   constructor(props){
@@ -29,11 +30,7 @@ export default class EmptyPage extends React.Component {
     return (
             <div id="wrap">
                 <h1> Silent Salutations </h1>
-                <div className="columns column-0"></div>
-                <div className="columns column-1"></div>
-                <div className="columns column-2"></div>
-                <div className="columns column-3"></div>
-                <div className="columns column-4"></div>
+                <Columns />
                 <button className="btn red btn-circle btn-xl" data-icon="fa fa-frown-o">
                     <i className="fa fa-frown-o" />
                  </button>

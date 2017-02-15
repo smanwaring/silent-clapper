@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import HomeForm from '../containers/HomeForm';
 import addIcons from '../utils/icon-animations';
+import Columns from './Columns';
 // just like require-ish import '../file/..'
 
 
@@ -52,11 +53,7 @@ componentDidMount(){
       <div id="num-people">
         <span>{ audienceCount ? audienceCount : 'audience connecting...' }</span>
       </div>
-      <div className="columns column-0"></div>
-      <div className="columns column-1"></div>
-      <div className="columns column-2"></div>
-      <div className="columns column-3"></div>
-      <div className="columns column-4"></div>
+      <Columns />
         </div>
 
         <footer>
