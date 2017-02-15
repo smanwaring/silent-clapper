@@ -16,8 +16,8 @@ body {
 }
 
 footer {
-    left: 0;
-    width: 100%;
+	left: 0;
+	width: 100%;
 	height: auto;
 	position: fixed;
 	bottom: 0px;
@@ -319,7 +319,7 @@ div.column i {
 
 .yellow:hover {
 	color: #fff;
-    background-color: #EADA42;
+    background-color: #f2d04b;
 }
 
 .dark-blue, .dark-blue:focus {	
@@ -329,7 +329,7 @@ div.column i {
 
 .dark-blue:hover {
 	color: #fff;
-    background-color: #286090;
+    background-color: #235784;
 }
 
 .green, .green:focus {	
@@ -349,7 +349,7 @@ div.column i {
 
 .purple:hover {
 	color: #fff;
-    background-color: #836CD6;
+    background-color: #735ebc;
 }
 
 .pink, .pink:focus {	
