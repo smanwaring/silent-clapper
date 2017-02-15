@@ -139,7 +139,6 @@ describe('Board', () => {
 
         it('GET /api/:boardPath >> returns a res.body with an error message if the board does not exist', (done) => {
           agent.get('/api/hello')
-          .expect(404)
           .end((err, res) => {
             if (err) return done(err);
             expect(res.body.message).to.be.equal('not found');

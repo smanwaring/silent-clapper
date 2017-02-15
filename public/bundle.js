@@ -30521,7 +30521,7 @@
 	/* ------------       REDUCER     ------------------ */
 	var enterBoard = exports.enterBoard = function enterBoard(pathId) {
 	  return function (dispatch) {
-	    _axios2.default.get('/api/enter/' + pathId).then(function (res) {
+	    _axios2.default.get('/api/buttons/' + pathId).then(function (res) {
 	      return res.data;
 	    }).then(function (errorOrButtons) {
 	      errorOrButtons.notFound ? _reactRouter.hashHistory.push('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));

@@ -15,7 +15,7 @@ router.param('pathId', function(req, res, next, thePathId){
 	.catch(next); // error handling
 });
 
-//POST a newly created board and save the buttons to the Buttons table
+//POST a newly created board and save the buttons to the Buttons table with a boardId
 router.post('/', (req, res, next) => {
   let buttons = req.body.buttons;
   Board.create({
@@ -39,8 +39,8 @@ router.get('/:pathId', (req, res, next) => {
   }
 });
 
-//Get the buttons for a particular board 
-router.get('/enter/:pathId', (req, res, next) => {
+//Get the buttons for a particular board
+router.get('/buttons/:pathId', (req, res, next) => {
   var objToReturn = {};
   if (!req.board){
     objToReturn["notFound"] = true;
