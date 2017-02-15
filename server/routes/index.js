@@ -3,6 +3,7 @@ const router = require('express').Router();
 const Board = require('../db/models').Board;
 const Button = require('../db/models').Button;
 
+// Shortcut for grabbing the correct board 
 router.param('boardId', function(req, res, next, theId){
   Board.findOne({
     where: { path: theId }
@@ -14,7 +15,7 @@ router.param('boardId', function(req, res, next, theId){
 	.catch(next); // error handling
 });
 
-//post a newly created board link
+//POST a newly created board and save the buttons to the Buttons table
 router.post('/', (req, res, next) => {
   let buttons = req.body.buttons;
   Board.create({
@@ -27,7 +28,7 @@ router.post('/', (req, res, next) => {
   .catch(next);
 });
 
-//get the board if it exists
+//GET the board if it exists
 router.get('/:boardId', (req, res, next) => {
   let data = {message: 'not found'};
   let foundBoard = req.board;
@@ -38,7 +39,7 @@ router.get('/:boardId', (req, res, next) => {
   }
 });
 
-//get the buttons for a particular board
+//Get the buttons for a particular board 
 router.get('/enter/:boardId', (req, res, next) => {
   var objToReturn = {};
   if (!req.board){

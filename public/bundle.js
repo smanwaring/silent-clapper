@@ -66,15 +66,15 @@
 	
 	var _Homepage2 = _interopRequireDefault(_Homepage);
 	
-	var _Board = __webpack_require__(325);
+	var _Board = __webpack_require__(326);
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
-	var _Root = __webpack_require__(327);
+	var _Root = __webpack_require__(328);
 	
 	var _Root2 = _interopRequireDefault(_Root);
 	
-	var _EmptyPage = __webpack_require__(328);
+	var _EmptyPage = __webpack_require__(329);
 	
 	var _EmptyPage2 = _interopRequireDefault(_EmptyPage);
 	
@@ -31609,7 +31609,7 @@
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
-	var _Columns = __webpack_require__(329);
+	var _Columns = __webpack_require__(325);
 	
 	var _Columns2 = _interopRequireDefault(_Columns);
 	
@@ -32495,6 +32495,34 @@
 /* 325 */
 /***/ function(module, exports, __webpack_require__) {
 
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+	  value: true
+	});
+	
+	exports.default = function (props) {
+	  return _react2.default.createElement(
+	    "div",
+	    null,
+	    _react2.default.createElement("div", { className: "columns column-0" }),
+	    _react2.default.createElement("div", { className: "columns column-1" }),
+	    _react2.default.createElement("div", { className: "columns column-2" }),
+	    _react2.default.createElement("div", { className: "columns column-3" }),
+	    _react2.default.createElement("div", { className: "columns column-4" })
+	  );
+	};
+	
+	var _react = __webpack_require__(1);
+	
+	var _react2 = _interopRequireDefault(_react);
+
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+/***/ },
+/* 326 */
+/***/ function(module, exports, __webpack_require__) {
+
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
@@ -32503,7 +32531,7 @@
 	
 	var _reactRedux = __webpack_require__(178);
 	
-	var _Board = __webpack_require__(326);
+	var _Board = __webpack_require__(327);
 	
 	var _Board2 = _interopRequireDefault(_Board);
 	
@@ -32541,7 +32569,7 @@
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(_Board2.default);
 
 /***/ },
-/* 326 */
+/* 327 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32566,7 +32594,7 @@
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
-	var _Columns = __webpack_require__(329);
+	var _Columns = __webpack_require__(325);
 	
 	var _Columns2 = _interopRequireDefault(_Columns);
 	
@@ -32680,7 +32708,7 @@
 	exports.default = Board;
 
 /***/ },
-/* 327 */
+/* 328 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32729,7 +32757,7 @@
 	exports.default = Root;
 
 /***/ },
-/* 328 */
+/* 329 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32750,7 +32778,7 @@
 	
 	var _iconAnimations2 = _interopRequireDefault(_iconAnimations);
 	
-	var _Columns = __webpack_require__(329);
+	var _Columns = __webpack_require__(325);
 	
 	var _Columns2 = _interopRequireDefault(_Columns);
 	
@@ -32838,34 +32866,6 @@
 	
 	
 	module.exports = EmptyPage;
-
-/***/ },
-/* 329 */
-/***/ function(module, exports, __webpack_require__) {
-
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-	  value: true
-	});
-	
-	exports.default = function (props) {
-	  return _react2.default.createElement(
-	    "div",
-	    null,
-	    _react2.default.createElement("div", { className: "columns column-0" }),
-	    _react2.default.createElement("div", { className: "columns column-1" }),
-	    _react2.default.createElement("div", { className: "columns column-2" }),
-	    _react2.default.createElement("div", { className: "columns column-3" }),
-	    _react2.default.createElement("div", { className: "columns column-4" })
-	  );
-	};
-	
-	var _react = __webpack_require__(1);
-	
-	var _react2 = _interopRequireDefault(_react);
-
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /***/ }
 /******/ ]);
