@@ -30,6 +30,7 @@ router.post('/', (req, res, next) => {
 
 //GET the board if it exists
 router.get('/:pathId', (req, res, next) => {
+  //TODO spacing:  { message: 'Not Found' }
   let data = {message: 'not found'};
   let foundBoard = req.board;
   if (!foundBoard){
@@ -43,10 +44,12 @@ router.get('/:pathId', (req, res, next) => {
 router.get('/buttons/:pathId', (req, res, next) => {
   var objToReturn = {};
   if (!req.board){
+    //TODO consistency with single and double quotes
     objToReturn["notFound"] = true;
     res.status(400).send(objToReturn);
   } else {
     Button.findAll({
+      //TODO reduce to a single line: where: { boardId: req.board.id } - generally i do this when it's an object with a single property
       where: {
         boardId: req.board.id
       }

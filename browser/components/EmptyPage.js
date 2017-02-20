@@ -1,4 +1,5 @@
 import React from 'react';
+//TODO why braces her but not for other imports?
 import { Link } from 'react-router';
 import addIcons from '../utils/icon-animations';
 import Columns from './Columns';
@@ -6,6 +7,7 @@ import Columns from './Columns';
 export default class EmptyPage extends React.Component {
   constructor(props){
 		super(props);
+    //TODO consistent indendation
         this.interval = null;
 		this.drawAction = this.drawAction.bind(this);
         this.startInterval  = this.startInterval.bind(this);

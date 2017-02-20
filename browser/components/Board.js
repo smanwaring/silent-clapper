@@ -47,6 +47,7 @@ componentDidMount(){
   render () {
     const { audienceCount } = this.props;
     return (
+      //TODO would try to format this block like html - show nesting structure better
       <div>
         <div id="wrap">
       <h1> Silent Salutations</h1>

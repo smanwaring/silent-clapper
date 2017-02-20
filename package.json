@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/smanwaring/silent-clapper#readme",
   "dependencies": {
+    //TODO are all of these dependencies needed?  If not clean them up - same for dev dependencies
     "axios": "^0.15.3",
     "babel": "^6.5.2",
     "babel-core": "^6.21.0",
