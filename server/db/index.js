@@ -11,6 +11,7 @@ console.log(chalk.yellow(`Opening database connection to ${url}`));
 
 // init the db
 const db = new Sequelize(url, {
+  //TODO single line property: define: { freezeTableName: true }
   define: {
     freezeTableName: true   // don't go changing my table names
   },

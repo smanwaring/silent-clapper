@@ -1,3 +1,4 @@
+//TODO wouldn't have so many comments here, at most a single comment for the function describing what it does
 const addIcons = (icon) => {
     let columns = [].slice.call(document.querySelectorAll('.columns'));
     let lowRange = 1.2,

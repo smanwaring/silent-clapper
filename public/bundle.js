@@ -1,3 +1,4 @@
+//TODO built files shouldn't be checked into version control - is this a file that you created or is it from webpack?  Same with bundle.js.map
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};

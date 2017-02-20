@@ -10,6 +10,7 @@ const server = http.createServer();
 const routes = require('./routes') ;
 const db = require('./db');
 
+//TODO may want to remove this comment and the other ones like it and just assume that people are familiar with the tools
 //require in our models
 require('./db/models');
 
@@ -22,6 +23,7 @@ const PATHS = {
   public: path.join(__dirname, '../public'),
 };
 
+//TODO remove dead code
 // init router ('app')
 app
   .use(morgan('dev'))
@@ -52,6 +54,7 @@ app.use((err, req, res, next) => {
 server.listen(1337, () => {
   console.log('The server is listening on port 1337!');
     db.sync({})
+    //TODO why do you have a .then if nothing is happening in it?  Can it be removed?
       .then( () => {});
 });
 

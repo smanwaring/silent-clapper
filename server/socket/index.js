@@ -42,6 +42,7 @@ module.exports = (server) => {
     // server is receiving click data from the client here 
     // so we want to broadcast that data to all other connected clients 
     socket.on('registerAction', (icon) => {
+      //TODO be consistent with logging - either do or don't, not just in this function
       console.log('I am emitting to', newRoom);
       io.to(newRoom).emit('showAction', icon);
     });
