@@ -28,23 +28,23 @@ class JoinBoardForm extends React.Component {
   render() {
     const { showJoinTab, boardNotFound } = this.props;
     return (
-            <div>
-              <form onSubmit={(evt) => this.confirmBoardExists(evt)} role="form" style={{display: showJoinTab ? 'block' : 'none' }}>
-                    <div className="form-group">
-                        <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
-                    </div>
-                        {boardNotFound ? <div>Oops! We couldn't find that board</div> : ''}
-                    <div className="form-group">
-                        <div className="row">
-                            <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
-                                <button type="submit" tabIndex="4" className="form-control btn btn-join">Join</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        );
-    }
+      <div>
+        <form onSubmit={(evt) => this.confirmBoardExists(evt)} role="form" style={{display: showJoinTab ? 'block' : 'none' }}>
+              <div className="form-group">
+                  <input name="boardId" type="text" tabIndex="1" className="form-control" placeholder="Board #"/>
+              </div>
+                  {boardNotFound ? <div>Oops! We couldn't find that board</div> : ''}
+              <div className="form-group">
+                  <div className="row">
+                      <div className="col-sm-6 col-sm-offset-3 col-xs-6 col-xs-offset-3">
+                          <button type="submit" tabIndex="4" className="form-control btn btn-join">Join</button>
+                      </div>
+                  </div>
+              </div>
+          </form>
+      </div>
+    );
+  }
 }
 
 export default JoinBoardForm;

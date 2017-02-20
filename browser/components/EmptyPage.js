@@ -25,20 +25,20 @@ export default class EmptyPage extends React.Component {
   drawAction(icon) {
     addIcons(icon.icon);
 	}
-  
+
   render() {
     return (
-            <div id="wrap">
-                <h1> Silent Salutations </h1>
-                <Columns />
-                <button className="btn red btn-circle btn-xl" data-icon="fa fa-frown-o">
-                    <i className="fa fa-frown-o" />
-                 </button>
-                <h1 className="textbold">Oops! That room doesn't exist...</h1>
-                <Link to={'/'}><h1> Go back home</h1></Link>
-            </div>
-        );
-    }
+      <div id="wrap">
+          <h1> Silent Salutations </h1>
+          <Columns />
+          <button className="btn red btn-circle btn-xl" data-icon="fa fa-frown-o">
+              <i className="fa fa-frown-o" />
+            </button>
+          <h1 className="textbold">Oops! That room doesn't exist...</h1>
+          <Link to={'/'}><h1> Go back home</h1></Link>
+      </div>
+    );
+  }
 }
 
 

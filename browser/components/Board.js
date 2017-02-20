@@ -49,23 +49,22 @@ componentDidMount(){
     return (
       <div>
         <div id="wrap">
-      <h1> Silent Salutations</h1>
-      <div id="num-people">
-        <span>{ audienceCount ? audienceCount : 'audience connecting...' }</span>
-      </div>
-      <Columns />
+          <h1> Silent Salutations</h1>
+          <div id="num-people">
+            <span>{ audienceCount ? audienceCount : 'audience connecting...' }</span>
+          </div>
+          <Columns />
         </div>
-
         <footer>
-            {this.props.buttonsToLoad && this.props.buttonsToLoad.map((button, i) => {
-                return (
-                    <button key={i} className={`btn btn-circle btn-xl ${button.color}`} onClick={this.handleIconClick} data-icon={button.icon}>
-                        <i className={button.icon.replace('fa-spin', '')}></i>
-                    </button>
-                );
-            })}
-        </footer>
-  </div>
+          {this.props.buttonsToLoad && this.props.buttonsToLoad.map((button, i) => {
+              return (
+                  <button key={i} className={`btn btn-circle btn-xl ${button.color}`} onClick={this.handleIconClick} data-icon={button.icon}>
+                      <i className={button.icon.replace('fa-spin', '')}></i>
+                  </button>
+              );
+          })}
+      </footer>
+    </div>
     );
   }
 }
