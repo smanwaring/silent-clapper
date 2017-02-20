@@ -16,7 +16,7 @@ Short and sweet:
 npm install
 npm start
 
-Launch the app in your browser.
 ```
+Launch the app in your browser.
 
 
