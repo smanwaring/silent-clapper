@@ -27,7 +27,7 @@ class Homepage extends React.Component {
             <h1 className="top-margin"> Silent Salutations </h1>
               <div className="social-container">
                 <a className="fa fa-github fa-2x" href="https://github.com/smanwaring/silent-clapper" />
-                <a className="fa fa-twitter fa-2x" href="https://twitter.com/intent/tweet?text=Silent+Applauding+%3E+Regular+Applauding.+%F0%9F%91%8F+SilentSalutations.com.+" />
+                <a className="fa fa-twitter fa-2x" href="https://twitter.com/intent/tweet?text=Silent+Applauding+%3E+Regular+Applauding.+%F0%9F%91%8F+silent-salutations.herokuapp.com.+" />
               </div>
             <div className="form-container">
               <HomeForm />
