@@ -2,7 +2,7 @@
 
 Invite your friends from afar or audience members to join your board and react. 
 
-[Visit silent-salutations.herokuapp.com](https://www.silent-salutations.herokuapp.com)
+[Visit silent-salutations.herokuapp.com](https://silent-salutations.herokuapp.com/)
 
 A fun little "silent-clapper" I built during a 24 hour hackathon -- and have since souped-up. Silent Salutations uses sockets to connect people who are watching your presentation remotely and allows them to participate in a visual-applaud (and more...depending on the icons available to them). 
 
