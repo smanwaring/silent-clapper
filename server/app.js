@@ -22,10 +22,6 @@ const PATHS = {
   public: path.join(__dirname, '../public'),
 };
 
-// Local environment variables
-if (process.env.NODE_ENV !== 'production' && process.env.NODE_ENV !== 'testing')
-  require('dotenv').config();
-
 // server constant(s)
 const PORT = process.env.PORT || 1337;
 

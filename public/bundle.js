@@ -111,7 +111,7 @@
 		{ store: _store2.default },
 		_react2.default.createElement(
 			_reactRouter.Router,
-			{ history: _reactRouter.hashHistory },
+			{ history: _reactRouter.browserHistory },
 			_react2.default.createElement(
 				_reactRouter.Route,
 				{ component: _Root2.default },
@@ -30524,7 +30524,7 @@
 	    _axios2.default.get('/api/buttons/' + pathId).then(function (res) {
 	      return res.data;
 	    }).then(function (errorOrButtons) {
-	      errorOrButtons.notFound ? _reactRouter.hashHistory.push('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));
+	      errorOrButtons.notFound ? _reactRouter.browserHistory.replace('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));
 	    }).catch(function (err) {
 	      return console.log(err);
 	    });
@@ -31967,7 +31967,7 @@
 	        }, 2000);
 	      }
 	      if (this.props.currentBoard) {
-	        _reactRouter.hashHistory.push('/' + this.props.currentBoard);
+	        _reactRouter.browserHistory.replace('/' + this.props.currentBoard);
 	      }
 	    }
 	  }, {
