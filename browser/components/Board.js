@@ -57,12 +57,12 @@ componentDidMount(){
         </div>
         <footer>
           {this.props.buttonsToLoad && this.props.buttonsToLoad.map((button, i) => {
-              return (
-                  <button key={i} className={`btn btn-circle btn-xl ${button.color}`} onClick={this.handleIconClick} data-icon={button.icon}>
-                      <i className={button.icon.replace('fa-spin', '')}></i>
-                  </button>
-              );
-          })}
+            return (
+              <button key={i} className={`btn btn-circle btn-xl ${button.color}`} onClick={this.handleIconClick} data-icon={button.icon}>
+                <i className={button.icon.replace('fa-spin', '')}></i>
+              </button>
+            );
+        })}
       </footer>
     </div>
     );

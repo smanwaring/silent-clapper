@@ -33,13 +33,13 @@ function onEnterResetCurrentBoard() {
 
 ReactDOM.render(
   <Provider store={store}>
-	    <Router history={browserHistory}>
+		<Router history={browserHistory}>
 			<Route component={Root}>
 				<Route path="/" component={Homepage} onEnter={onEnterResetCurrentBoard} />
 				<Route path="/:boardId" component={Board} onEnter={onEnterConfirmBoard} />
 				<Route path="/pageNotFound/error" component={EmptyPage} />
 				<IndexRoute component={Homepage} />
 			</Route>
-		</Router>
+	</Router>
   </Provider>,
   document.getElementById('app'));

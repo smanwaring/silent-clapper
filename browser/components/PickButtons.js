@@ -61,18 +61,18 @@ class PickButtons extends React.Component {
     return (
       <div>
         <h4 className="pick-no-margin">Pick your buttons</h4>
-            <div className="checkbox">
-                <label>
-                    <input type="checkbox" checked={allButtonsOn ? 'checked' : '' } onClick={this.handleCheck} /> select all
-                </label>
-            </div>
+          <div className="checkbox">
+            <label>
+              <input type="checkbox" checked={allButtonsOn ? 'checked' : '' } onClick={this.handleCheck} /> select all
+            </label>
+          </div>
             <div className="button-spacer">
             {buttonsAvailable && buttonsAvailable.map((btn, i) => {
-                return (
-                    <button key={btn.nickname} className={ btn.isSelected ? `${baseClass} ${btn.color}` : unselectedClass } onClick={ evt => {addRemove(evt, btn.color, i)}} data-icon={btn.icon}>
-                       <i className={btn.icon.replace('fa-spin', '' )} />
-                    </button>
-                );
+              return (
+                <button key={btn.nickname} className={ btn.isSelected ? `${baseClass} ${btn.color}` : unselectedClass } onClick={ evt => {addRemove(evt, btn.color, i)}} data-icon={btn.icon}>
+                  <i className={btn.icon.replace('fa-spin', '' )} />
+                </button>
+              );
             })}
         </div>
       </div>

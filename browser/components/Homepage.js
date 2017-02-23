@@ -23,26 +23,26 @@ class Homepage extends React.Component {
     return (
       <div>
         <div id="wrap">
-            <div>
-                <h1 className="top-margin"> Silent Salutations </h1>
-                    <div className="social-container">
-                        <a className="fa fa-github fa-2x" href="https://github.com/smanwaring/silent-clapper" />
-                        <a className="fa fa-twitter fa-2x" href="https://twitter.com/intent/tweet?text=Silent+Applauding+%3E+Regular+Applauding.+%F0%9F%91%8F+SilentSalutations.com.+" />
-                    </div>
-                <div className="form-container">
-                    <HomeForm />
-                </div>
-                <Columns />
+          <div>
+            <h1 className="top-margin"> Silent Salutations </h1>
+              <div className="social-container">
+                <a className="fa fa-github fa-2x" href="https://github.com/smanwaring/silent-clapper" />
+                <a className="fa fa-twitter fa-2x" href="https://twitter.com/intent/tweet?text=Silent+Applauding+%3E+Regular+Applauding.+%F0%9F%91%8F+SilentSalutations.com.+" />
+              </div>
+            <div className="form-container">
+              <HomeForm />
             </div>
+            <Columns />
+          </div>
         </div>
         <footer>
-            {buttonsAvailable && buttonsAvailable.map( btn => {
-                return (
-                    <button key={btn.icon} className={`btn btn-circle btn-xl ${btn.color}`} onClick={this.handleIconClick} data-icon={btn.icon}>
-                        <i className={btn.icon.replace('fa-spin', '' )} />
-                    </button>
-                );
-            })}
+          {buttonsAvailable && buttonsAvailable.map( btn => {
+            return (
+              <button key={btn.icon} className={`btn btn-circle btn-xl ${btn.color}`} onClick={this.handleIconClick} data-icon={btn.icon}>
+                <i className={btn.icon.replace('fa-spin', '' )} />
+              </button>
+            );
+          })}
         </footer>
       </div>
     );
