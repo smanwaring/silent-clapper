@@ -22,6 +22,9 @@ const PATHS = {
   public: path.join(__dirname, '../public'),
 };
 
+// server constant(s)
+const PORT = process.env.PORT || 1337;
+
 // init router ('app')
 app
   .use(morgan('dev'))
@@ -49,7 +52,7 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).send(err.message || 'Internal server error.');
 });
 
-server.listen(1337, () => {
+server.listen(PORT, () => {
   console.log('The server is listening on port 1337!');
     db.sync({})
       .then( () => {});
