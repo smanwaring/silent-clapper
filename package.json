@@ -4,7 +4,7 @@
   "description": "",
   "main": "server/app.js",
   "scripts": {
-    "start": "webpack -w & nodemon server/app.js",
+    "start": "webpack -w & server/app.js",
     "test": "mocha tests/button.test.js",
     "test-watch": "mocha --compilers js:babel-register --watch tests/button.test.js"
   },
