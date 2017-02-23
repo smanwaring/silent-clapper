@@ -1,26 +1,52 @@
 ## Welcome the world of Silent Salutations!
 
-Invite your friends from afar or audience members to join your board and react. 
+Invite your friends from afar or audience members to join your board and watch or participate in visual reactions.
 
 [Visit silent-salutations.herokuapp.com](https://silent-salutations.herokuapp.com/)
 
-A fun little "silent-clapper" I built during a 24 hour hackathon -- and have since souped-up. Silent Salutations uses sockets to connect people who are watching your presentation remotely and allows them to participate in a visual-applaud (and more...depending on the icons available to them). 
+A fun little "silent-clapper" I built during a 24 hour hackathon (and have since added to). Silent Salutations uses sockets to connect people who are watching your presentation remotely and allows them to participate in a visual-applaud (and more...depending on the icons available to them). 
 
 
-## Prerequisites
+### Prerequisites
 
-postgres - make sure you have it running!
-make a database locally called silentSalutations
+Make sure you have...
 
-## Get Started
+[Node.js (>6.7) and npm](https://nodejs.org/en/)
+[PostgreSQL](https://www.postgresql.org/)
 
-Short and sweet:
+
+### Running Locally
 
 ```
 npm install
-npm start
 
 ```
-Launch the app in your browser.
+This will install all runtime dependencies, as well as Webpack build and Mocha/Chai/Enzyme testing tools.
+
+Also, make sure to populate the proper environment variables for your local setup!
+
+
+## Running the app
+
+There are two ways to run the app in development mode:
+
+```
+npm run build-watch
+npm run dev
+
+```
+The first command will run Webpack in watch mode, rebuilding the client static files in '/public' every time a change is made to the source files. The second command will run the Node.js server in development mode.
+
+
+### Testing
+To run the test suite, execute the command npm test
+
+
+
+
+
+
+
+
 
 
