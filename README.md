@@ -40,7 +40,7 @@ The first command will run Webpack in watch mode, rebuilding the client static f
 
 
 ### Testing
-To run the test suite, execute the command npm test
+To run the test suite, execute the command **npm test
 
 
 
