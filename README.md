@@ -12,6 +12,7 @@ A fun little "silent-clapper" I built during a 24 hour hackathon (and have since
 Make sure you have...
 
 [Node.js (>6.7) and npm](https://nodejs.org/en/)
+
 [PostgreSQL](https://www.postgresql.org/)
 
 
