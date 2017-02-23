@@ -42,7 +42,7 @@ class CreateBoard extends React.Component {
       <form role="form" style={{ display: showCreateTab ? 'block' : 'none' }}>
         {this.props && generatedBoard ?
           <div>
-            <h4>{`Here is your board #: ${generatedBoard}`}</h4>
+            <h4>Sweet! Here's your board #:</h4><h4 className="textlarge">{generatedBoard}</h4>
             <div className="col-sm-6 col-sm-offset-3">
               <Link to={`/${generatedBoard}`}><button type="submit" tabIndex="4" className="form-control btn btn-create">GO TO MY BOARD</button></Link>
               <h5>OR</h5>

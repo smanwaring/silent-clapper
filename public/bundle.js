@@ -32177,7 +32177,12 @@
 	          _react2.default.createElement(
 	            'h4',
 	            null,
-	            'Here is your board #: ' + generatedBoard
+	            'Sweet! Here\'s your board #:'
+	          ),
+	          _react2.default.createElement(
+	            'h4',
+	            { className: 'textlarge' },
+	            generatedBoard
 	          ),
 	          _react2.default.createElement(
 	            'div',

@@ -490,7 +490,7 @@ div.column i {
 }
 
 
-.form-container{
+.form-container {
 	margin-top: 20px;
 }
 
@@ -498,12 +498,17 @@ div.column i {
 	display: none;
 }
 
-.pick-no-margin{
+.pick-no-margin {
 	margin-top: 0px;
 }
 
-.textbold{
+.textbold {
 	font-weight: bold;
+}
+
+.textlarge {
+	font-weight: bold;
+	font-size: 24px;
 }
 
 .tweet{
