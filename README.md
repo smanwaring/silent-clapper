@@ -6,6 +6,10 @@ Invite your friends from afar or audience members to join your board and watch o
 
 A fun little "silent-clapper" I built during a 24 hour hackathon (and have since added to). Silent Salutations uses sockets to connect people who are watching your presentation remotely and allows them to participate in a visual-applaud (and more...depending on the icons available to them). 
 
+![](/public/img/laptop-screen.png?raw=true)  ![](/public/img/phone-screen.png?raw=true)
+
+
+
 
 ### Prerequisites
 
