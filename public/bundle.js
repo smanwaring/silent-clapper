@@ -30522,9 +30522,11 @@
 	var enterBoard = exports.enterBoard = function enterBoard(pathId) {
 	  return function (dispatch) {
 	    _axios2.default.get('/api/buttons/' + pathId).then(function (res) {
-	      return res.data;
-	    }).then(function (errorOrButtons) {
-	      errorOrButtons.notFound ? _reactRouter.browserHistory.replace('/pageNotFound/error') : dispatch(foundBoard(errorOrButtons.buttons));
+	      if (res.status === 204) {
+	        _reactRouter.browserHistory.replace('/pageNotFound/error');
+	      } else {
+	        dispatch(foundBoard(res.data));
+	      }
 	    }).catch(function (err) {
 	      return console.log(err);
 	    });

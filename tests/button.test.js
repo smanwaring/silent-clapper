@@ -117,12 +117,21 @@ describe('Board', () => {
       });
 
       it('GET /api/enter/:boardPath >> returns all the buttons associated with a specific board', (done) => {
-        agent.get('/api/enter/13070')
+        agent.get('/api/buttons/13070')
           .expect(200)
           .end((err, res) => {
             if (err) return done(err);
-            expect(res.body.buttons[0]).to.include({ icon: 'fa fa-money fa-spin' });
-            expect(res.body.buttons).to.have.length(2);
+            expect(res.body[0]).to.include({ icon: 'fa fa-money fa-spin' });
+            expect(res.body).to.have.length(2);
+            done();
+          });
+      });
+
+      it('GET /api/enter/:boardPath >> sends a 204 if it a non-valid boardId is passed in', (done) => {
+        agent.get('/api/buttons/hello')
+          .expect(204)
+          .end((err, res) => {
+            if (err) return done(err);
             done();
           });
       });

@@ -34,11 +34,14 @@ export const setAudienceCount = audienceString => {
 export const enterBoard = pathId => {
   return dispatch => {
     axios.get(`/api/buttons/${pathId}`)
-      .then(res => res.data)
-      .then(errorOrButtons => {
-        errorOrButtons.notFound ? browserHistory.replace('/pageNotFound/error') : dispatch( foundBoard(errorOrButtons.buttons));
+      .then(res => {
+        if (res.status === 204 ) {
+          browserHistory.replace('/pageNotFound/error');
+        } else {
+          dispatch( foundBoard(res.data) );
+        }
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err))
   };
 };
 
