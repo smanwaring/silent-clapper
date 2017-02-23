@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+import { Router, Route, browserHistory, IndexRoute } from 'react-router';
 import store from './store';
 
 /*------ COMPONENTS/CONTAINERS ------ */
@@ -33,7 +33,7 @@ function onEnterResetCurrentBoard() {
 
 ReactDOM.render(
   <Provider store={store}>
-	    <Router history={hashHistory}>
+	    <Router history={browserHistory}>
 			<Route component={Root}>
 				<Route path="/" component={Homepage} onEnter={onEnterResetCurrentBoard} />
 				<Route path="/:boardId" component={Board} onEnter={onEnterConfirmBoard} />

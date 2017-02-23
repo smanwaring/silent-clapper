@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 
 /* -----------------    ACTIONS     ------------------ */
 export const LOAD_BUTTONS = 'LOAD_BUTTONS';
@@ -9,7 +9,7 @@ export const SET_AUDIENCE_COUNT = 'SET_AUDIENCE_COUNT';
 
 /* -----------------    ACTION CREATORS     ------------------ */
 export const stateBoardId = boardId => {
-    return {
+  return {
     type: SET_BOARDID,
     payload: boardId
   };
@@ -36,7 +36,7 @@ export const enterBoard = pathId => {
     axios.get(`/api/buttons/${pathId}`)
       .then(res => res.data)
       .then(errorOrButtons => {
-        errorOrButtons.notFound ? hashHistory.push('/pageNotFound/error') : dispatch( foundBoard(errorOrButtons.buttons));
+        errorOrButtons.notFound ? browserHistory.replace('/pageNotFound/error') : dispatch( foundBoard(errorOrButtons.buttons));
       })
       .catch(err => console.log(err));
   };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { hashHistory } from 'react-router';
+import { browserHistory } from 'react-router';
 
 class JoinBoardForm extends React.Component {
   constructor(props){
@@ -15,7 +15,7 @@ class JoinBoardForm extends React.Component {
       }, 2000);
     }
     if (this.props.currentBoard) {
-      hashHistory.push(`/${this.props.currentBoard}`);
+      browserHistory.replace(`/${this.props.currentBoard}`);
     }
   }
 
