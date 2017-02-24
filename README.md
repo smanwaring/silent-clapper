@@ -1,7 +1,6 @@
 ## Welcome the world of Silent Salutations!
 
 Invite your friends from afar or audience members to join your board and watch or participate in visual reactions.
-Thanks for visiting!
 
 [Visit silent-salutations.herokuapp.com](https://silent-salutations.herokuapp.com/)
 
