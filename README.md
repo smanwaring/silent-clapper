@@ -9,11 +9,9 @@ A fun little "silent-clapper" I built during a 24 hour hackathon (and have since
 ![](/public/img/laptop-screen.png?raw=true)  ![](/public/img/phone-screen.png?raw=true)
 
 
-
-
 ### Prerequisites
 
-Make sure you have...
+Make sure you have the following:
 
 [Node.js (>6.7) and npm](https://nodejs.org/en/)
 
